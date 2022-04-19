@@ -8,12 +8,15 @@
 
 ![](https://img.shields.io/badge/FRONT-Redux-764ABC?style=for-the-badge&logo=Redux)
 
+![image](https://user-images.githubusercontent.com/95297566/163955908-5946b846-55f3-426a-9ae5-103c2015890b.png)
+
+
 ## BACK
 ![](https://img.shields.io/badge/BACK-Node-3776AB?style=for-the-badge&logo=Node.js)
 
 ![](https://img.shields.io/badge/BACK-Express-092E20?style=for-the-badge)
 
-![image](https://user-images.githubusercontent.com/95297566/163955824-5cfa8f18-7514-48cf-80c5-1729da614939.png)
+
 
 
 # 🔨 Architecture
