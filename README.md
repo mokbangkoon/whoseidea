@@ -8,8 +8,6 @@
 
 ![](https://img.shields.io/badge/FRONT-Redux-764ABC?style=for-the-badge&logo=Redux)
 
-![](https://img.shields.io/badge/FRONT-Redux-764ABC?style=for-the-badge&logo=TypeScript)
-
 ## BACK
 ![](https://img.shields.io/badge/BACK-Node-3776AB?style=for-the-badge&logo=Node.js)
 
