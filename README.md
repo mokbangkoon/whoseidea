@@ -1,4 +1,4 @@
-# whoidea
+# Whose Idea?
 ![Whose Idea (1)](https://user-images.githubusercontent.com/95297566/163955287-9ddb43ad-7796-4f5a-8d17-2f970683c57e.png)
 
 # 🕵🏼 어떤 기술이 사용되었나요?
