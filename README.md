@@ -167,6 +167,21 @@
 
 ![image](https://user-images.githubusercontent.com/95297566/163960060-30428767-045d-4a09-b377-1cad14579ce3.png)
 
+# 사용법
+## 로그인 기능
+
+![image](https://user-images.githubusercontent.com/95297566/163962067-9b980263-aca0-4247-bc0c-f7147c9cc4ad.png)
+
+
+## 랭킹 보기
+
+![image](https://user-images.githubusercontent.com/95297566/163962049-18dd25ee-59fa-41f5-ae88-f4ce9c6ad5ef.png)
+
+
+## 마이페이지, 아이디어 작성 , 아이디어 View , 채팅 기능
+
+![image](https://user-images.githubusercontent.com/95297566/163962022-d53aa559-bc54-434c-aef1-e2079d104d7c.png)
+
 
 # DB 스키마
 
