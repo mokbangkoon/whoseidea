@@ -53,9 +53,9 @@
       </td>
     </tr>
       <td align="center">
-        <a href="https://github.com/VRsoda">
+        <a href="https://github.com/haheon">
           <sub>
-            <b>전용남</b>
+            <b>전하헌</b>
           </sub>
         </a>
         <br>
@@ -83,5 +83,5 @@
 
 
 # 자세한 내용
-<a href="https://github.com/codestates/Butcher-Shop/wiki">링크</a>
+<a href="https://github.com/codestates/whoseidea/wiki">링크</a>
 
