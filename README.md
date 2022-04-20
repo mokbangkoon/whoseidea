@@ -129,7 +129,7 @@
 ### 메인페이지
 
 ![image](https://user-images.githubusercontent.com/95297566/163959024-a0420c43-06bf-4079-a9dd-7941fc790209.png)
-![image](https://user-images.githubusercontent.com/95297566/163959242-4c543d46-49b0-471b-be05-b74af5686701.png)
+![Main2 다시캡쳐](https://user-images.githubusercontent.com/95297566/164154511-dd923fc1-89d1-4295-99bb-ff6991c1f84f.PNG)
 ![image](https://user-images.githubusercontent.com/95297566/163959941-35ab68db-0c68-4c99-af9a-eab60b4a0550.png)
 
 
@@ -145,7 +145,8 @@
 
 ### 로그인 페이지
 
-![image](https://user-images.githubusercontent.com/95297566/163959341-8d257d19-f0e0-4522-b604-7390c4114751.png)
+![로그인창](https://user-images.githubusercontent.com/95297566/164154404-9f152f32-eeab-487a-99d2-8a22ecb00998.PNG)
+
 
 ### 마이페이지
 
