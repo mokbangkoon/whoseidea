@@ -194,7 +194,12 @@
 
 # API 문서
 
-<a href="https://identity.getpostman.com/accounts?cta=join-team&invite_code=211aee6995daeea64bb63e06a6a880e0&target_code=32cf3fa062b9c18010509f9b420cc74d&continue=https%3A%2F%2Fgo.postman.co%2Fworkspace%2FTeam-Workspace~a67f5ba8-36e0-4625-8292-9e9aeae8bdca">링크</a>
+![image](https://user-images.githubusercontent.com/96035912/164153815-0b1bed92-6a63-4610-9676-f0905f0e8b86.png)
+![image](https://user-images.githubusercontent.com/96035912/164153822-20ffa685-1db5-4703-9d24-2ff0c1af1520.png)
+![image](https://user-images.githubusercontent.com/96035912/164153833-4eac3dbf-dc82-4337-a57e-dd9563bf064e.png)
+![image](https://user-images.githubusercontent.com/96035912/164153839-0d2a7eb5-6d39-4fc5-88ca-44a1f7a58e4c.png)
+![image](https://user-images.githubusercontent.com/96035912/164153847-b3fc1185-e5f0-473f-8ad1-23086a67a952.png)
+
 
 # Bare-Minimum
 - 로그인 기능(회원가입, 로그인, 로그아웃, 회원상태 변경
