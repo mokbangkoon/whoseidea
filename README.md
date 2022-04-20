@@ -22,7 +22,7 @@
 
 
 # 🔨 Architecture
-![Web App Reference Architecture (2)](https://user-images.githubusercontent.com/95297566/164141241-6cd6b974-f892-44db-94eb-dfd0b7b9c716.png)
+![architecture](https://user-images.githubusercontent.com/95297566/164141488-af1894b6-e8a9-42d5-b3b2-6024caf712fc.PNG)
 
 # 🗣 우리를 소개합니다.
 
