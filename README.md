@@ -22,7 +22,7 @@
 
 
 # 🔨 Architecture
-![architecture](https://user-images.githubusercontent.com/95297566/164141488-af1894b6-e8a9-42d5-b3b2-6024caf712fc.PNG)
+![소켓io쓸시 아키텍쳐](https://user-images.githubusercontent.com/95297566/164152334-4081509f-c7fb-4124-95a2-6fe35e560f58.PNG)
 
 # 🗣 우리를 소개합니다.
 
