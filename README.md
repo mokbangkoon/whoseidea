@@ -22,7 +22,7 @@
 
 
 # 🔨 Architecture
-![Web_App_Reference_Architecture_1](https://cdn.discordapp.com/attachments/960425551754051594/960866421527687198/Sodanen_Screenshot_22.04_05_20_39-33.png.png)
+![image](https://user-images.githubusercontent.com/95297566/164141142-1859edb4-ced2-4817-abaf-0ebb3cb809bc.png)
 
 # 🗣 우리를 소개합니다.
 
