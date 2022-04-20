@@ -185,11 +185,11 @@
 
 # DB 스키마
 
-![image](https://user-images.githubusercontent.com/96035912/162122112-7f368287-ce1b-4b9a-984a-9f3293af2ce1.png)
+![image](https://user-images.githubusercontent.com/96035912/164127820-61cfffbe-4d83-466b-b764-a58d108c7962.png)
 
 # API 문서
 
-![image](https://user-images.githubusercontent.com/96035912/163101736-d78d56a1-76e8-4a86-a88e-af0b0647b83c.png)
+![image](https://user-images.githubusercontent.com/96035912/164127784-73014bb2-9a1e-439c-9e9e-3070d2c31adc.png)
 
 # Bare-Minimum
 - 로그인 기능(회원가입, 로그인, 로그아웃, 회원상태 변경
