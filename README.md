@@ -203,6 +203,7 @@
 ![image](https://user-images.githubusercontent.com/96035912/164153833-4eac3dbf-dc82-4337-a57e-dd9563bf064e.png)
 ![image](https://user-images.githubusercontent.com/96035912/164153839-0d2a7eb5-6d39-4fc5-88ca-44a1f7a58e4c.png)
 ![image](https://user-images.githubusercontent.com/96035912/164153847-b3fc1185-e5f0-473f-8ad1-23086a67a952.png)
+
 <a href="https://go.postman.co/workspace/Team-Workspace~a67f5ba8-36e0-4625-8292-9e9aeae8bdca/collection/20596660-7b534007-c3bc-41a4-a3ad-edd56c95a41b?action=share&creator=18430618">링크</a>
 
 
