@@ -22,7 +22,8 @@
 
 
 # 🔨 Architecture
-![소켓io쓸시 아키텍쳐](https://user-images.githubusercontent.com/95297566/164152334-4081509f-c7fb-4124-95a2-6fe35e560f58.PNG)
+![최종아키](https://user-images.githubusercontent.com/95297566/165007295-6639b2b0-62e0-4893-a11f-fda9b75f57a1.PNG)
+
 
 # 🗣 우리를 소개합니다.
 
