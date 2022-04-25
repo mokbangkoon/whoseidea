@@ -22,7 +22,7 @@
 
 
 # 🔨 Architecture
-![최종아키](https://user-images.githubusercontent.com/95297566/165007295-6639b2b0-62e0-4893-a11f-fda9b75f57a1.PNG)
+![최종아키](https://user-images.githubusercontent.com/95297566/165010308-6bd2b642-5fdc-4388-b516-e7ba046a995e.PNG)
 
 
 # 🗣 우리를 소개합니다.
