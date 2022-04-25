@@ -11,44 +11,52 @@ datasource db {
 }
 
 model Users {
-  id       Int     @id @default(autoincrement())
-  userId   String
-  email    String
-  posts    Int
-  likes    Int
-  comments Int
-  profile  String
+  id              Int        @id @default(autoincrement())
+  userId          String
+  email           String
+  profile         String
+  UsersToPosts    Posts[]    @relation("UsersToPosts")
+  UsersToLikes    Likes[]    @relation("UsersToLikes")
+  UsersToComments Comments[] @relation("UsersToComments")
+  UsersToMessage  Message[]  @relation("UsersToMessage")
 }
 
 model Posts {
-  id         Int      @id @default(autoincrement())
-  userId     Int
-  caption    String
-  files      Int
-  likes      Int
-  comments   Int
-  view       Int
-  file       String
-  context    String
-  created_at DateTime @default(now())
-  usersId    Int?
+  id               Int        @id @default(autoincrement())
+  userId           Int
+  caption          String
+  files            Int
+  likes            Int
+  view             Int
+  file             String
+  context          String
+  created_at       DateTime   @default(now())
+  usersId          Int?
+  UsersToPosts     Users?     @relation("UsersToPosts", fields: [usersId], references: [id])
+  PostsToLikes     Likes[]    @relation("PostsToLikes")
+  PostsToComments2 Comments[] @relation("PostsToComments")
 }
 
 model Likes {
-  id     Int @id @default(autoincrement())
-  userId Int
-  postId Int
+  id           Int    @id @default(autoincrement())
+  userId       Int
+  postId       Int
+  UsersToLikes Users? @relation("UsersToLikes", fields: [userId], references: [id])
+  PostsToLikes Posts? @relation("PostsToLikes", fields: [postId], references: [id])
 }
 
 model Comments {
-  id     Int    @id @default(autoincrement())
-  text   String
-  userId Int
-  postId Int
+  id               Int    @id @default(autoincrement())
+  text             String
+  userId           Int
+  postId           Int
+  UsersToComments  Users? @relation("UsersToComments", fields: [userId], references: [id])
+  PostsToComments2 Posts? @relation("PostsToComments", fields: [postId], references: [id])
 }
 
 model Message {
-  id     Int    @id @default(autoincrement())
-  userId Int
-  text   String
+  id             Int    @id @default(autoincrement())
+  userId         Int
+  text           String
+  UsersToMessage Users? @relation("UsersToMessage", fields: [userId], references: [id])
 }
