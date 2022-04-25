@@ -1,9 +1,9 @@
-import Main from './pages/Main.js';
+import React from 'react';
+import Main from './pages/Main';
 
 function App() {
-  
   return (
-    <div className="App">
+    <div>
       <Main />
     </div>
   );
