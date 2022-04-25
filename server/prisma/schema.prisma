@@ -6,6 +6,49 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model Users {
+  id       Int     @id @default(autoincrement())
+  userId   String
+  email    String
+  posts    Int
+  likes    Int
+  comments Int
+  profile  String
+}
+
+model Posts {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  caption    String
+  files      Int
+  likes      Int
+  comments   Int
+  view       Int
+  file       String
+  context    String
+  created_at DateTime @default(now())
+  usersId    Int?
+}
+
+model Likes {
+  id     Int @id @default(autoincrement())
+  userId Int
+  postId Int
+}
+
+model Comments {
+  id     Int    @id @default(autoincrement())
+  text   String
+  userId Int
+  postId Int
+}
+
+model Message {
+  id     Int    @id @default(autoincrement())
+  userId Int
+  text   String
 }
