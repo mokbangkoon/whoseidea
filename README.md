@@ -192,7 +192,8 @@
 
 # DB 스키마
 
-![image](https://user-images.githubusercontent.com/96035912/164127820-61cfffbe-4d83-466b-b764-a58d108c7962.png)
+![image](https://user-images.githubusercontent.com/96035912/165007349-c237f009-9b01-431e-bff1-7537dca7a54b.png)
+
 <a href="https://dbdiagram.io/d/624ba1e0d043196e39f60a63">링크</a>
   
 # API 문서
