@@ -166,7 +166,7 @@
 
 ![image](https://user-images.githubusercontent.com/95297566/163959690-52243dba-3645-4f89-a4fb-f24a16b26dde.png)
 
-### 채팅방 페이지
+### 쪽지 페이지
 
 ![image](https://user-images.githubusercontent.com/95297566/163959740-e50d231d-afe1-4bdd-b1c4-aa0a3534f409.png)
 
