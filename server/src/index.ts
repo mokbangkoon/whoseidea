@@ -3,14 +3,18 @@ import cors from 'cors';
 import https from 'https'
 import fs from 'fs'
 import cookieParser from 'cookie-parser'
+import controllers from './controller'
 const app = express();
 
-// const controllers = require('./src/controller')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 app.use(cookieParser())
+
+app.post('/signup', controllers.signup);
+app.post('/login', controllers.login);
+app.post('/logout', controllers.logout);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 8080
 
