@@ -13,6 +13,7 @@ app.use(cors())
 app.use(cookieParser())
 
 app.post('/signup', controllers.signup);
+app.post('/login', controllers.login);
 app.post('/logout', controllers.logout);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 8080

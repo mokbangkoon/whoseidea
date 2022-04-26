@@ -1,6 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../modules';
+import { openModal } from '../modules/modal';
+import Login from '../components/Login';
 
 axios.defaults.withCredentials = true;
 
@@ -45,8 +49,17 @@ const Third = styled.div`
   border: 3px solid orange;
   border-radius: 1rem;
 `;
+const ModalClose = styled.div`
+  display: block;
+`;
+const ModalOpen = styled.div`
+  text-align: center;
+  border: 1px solid red;
+`;
 
 export default function Main() {
+  const check = useSelector((state: RootState) => state.modal.check);
+  console.log(check);
   return (
     <div>
       <Title>
@@ -63,6 +76,7 @@ export default function Main() {
           <div>세상을 바꿀 아이디어</div>
         </Third>
       </MainStyle>
+      {check ? <Login /> : null}
     </div>
   );
 }
