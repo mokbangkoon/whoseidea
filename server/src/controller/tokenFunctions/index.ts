@@ -24,4 +24,4 @@ const tokenFunctions = {
     }
 }
 
-export default tokenFunctions
+export = tokenFunctions
