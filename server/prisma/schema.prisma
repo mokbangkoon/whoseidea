@@ -13,6 +13,7 @@ datasource db {
 model Users {
   id              Int        @id @default(autoincrement())
   userId          String
+  password        String
   email           String
   profile         String
   UsersToPosts    Posts[]    @relation("UsersToPosts")
@@ -25,14 +26,12 @@ model Posts {
   id               Int        @id @default(autoincrement())
   userId           Int
   caption          String
-  files            Int
+  file             String
   likes            Int
   view             Int
-  file             String
   context          String
   created_at       DateTime   @default(now())
-  usersId          Int?
-  UsersToPosts     Users?     @relation("UsersToPosts", fields: [usersId], references: [id])
+  UsersToPosts     Users?     @relation("UsersToPosts", fields: [userId], references: [id])
   PostsToLikes     Likes[]    @relation("PostsToLikes")
   PostsToComments2 Comments[] @relation("PostsToComments")
 }
