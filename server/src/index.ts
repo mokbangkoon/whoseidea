@@ -12,6 +12,8 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cors())
 app.use(cookieParser())
 
+app.get('/user/my-post', controllers.myPost);
+
 app.post('/signup', controllers.signup);
 app.post('/login', controllers.login);
 app.post('/logout', controllers.logout);
