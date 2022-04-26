@@ -1,23 +1,147 @@
 import React from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../modules';
+import { openModal } from '../modules/modal';
+import { Link } from 'react-router-dom';
+import { logindata } from '../modules/login';
 
 axios.defaults.withCredentials = true;
 
+const ModalBackground = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 0;
+`;
+
+const ModalContainer = styled.div`
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-height: 80%;
+  width: 20rem;
+  height: 50%;
+  padding: 16px;
+  background: rgb(25, 31, 44);
+  border-radius: 10px;
+  text-align: center;
+  line-height: 50px;
+  & input {
+    width: 70%;
+    height: 70%;
+    font-size: 20px;
+  }
+
+  & button {
+    border-radius: 1rem;
+    width: 30%;
+    height: 40px;
+    border: none;
+    background-color: #cbe8f0;
+    font-weight: bold;
+    :hover {
+      background-color: #353333;
+      color: white;
+      transition: 0.5s;
+    }
+  }
+`;
+const Google = styled.div`
+  background-color: #f1eeee;
+  color: #504e4e;
+  cursor: pointer;
+  & img {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    left: 10%;
+  }
+`;
+const Github = styled.div`
+  background-color: #020202;
+  color: white;
+  cursor: pointer;
+  & img {
+    width: 50px;
+    height: 40px;
+    position: absolute;
+    left: 10%;
+  }
+`;
+const Signup = styled.div`
+  background-color: yellow;
+  color: black;
+`;
+
 export default function Login() {
+  // 상태를 조회합니다. 상태를 조회 할 때에는 state 의 타입을 RootState 로 지정해야합니다.
+  const login = useSelector((state: RootState) => state.login);
+  const dispatch = useDispatch(); // 디스패치 함수를 가져옵니다
+  const handleInputValue = (key: string, event: any) => {
+    dispatch(logindata({ [key]: event.target.value }));
+  };
+  const handleLogin = () => {
+    console.log(login);
+    if (!login.email || !login.password) {
+      console.log('아이디와 비밀번호를 재입력하세요');
+    } else {
+      console.log('완료');
+    }
+    return axios.post('https://localhost:8080/login', login);
+  };
+  // 각 액션들을 디스패치하는 함수들을 만들어줍니다
+  const handleModal = () => {
+    dispatch(openModal());
+  };
   return (
-    <div>
-      <input placeholder="이메일을 입력하세요"></input>
-      <div>
-        <input placeholder="비밀번호를 입력하세요"></input>
-      </div>
-      <button>로그인</button>
-      <div>구글 아이디로 로그인</div>
-      <div>깃허브 아이디로 로그인</div>
-      <div>
-        아직 회원이 아니신가요?
-        <span>회원가입</span>
-      </div>
-    </div>
+    <ModalBackground>
+      <ModalContainer>
+        <div>
+          <input
+            className="email"
+            type="text"
+            placeholder="이메일을 입력하세요"
+            onChange={event => handleInputValue('email', event)}
+          ></input>
+          <div>
+            <input
+              className="password"
+              placeholder="비밀번호를 입력하세요"
+              type="password"
+              onChange={event => handleInputValue('password', event)}
+            ></input>
+          </div>
+
+          <button onClick={handleLogin}>로그인</button>
+          <Google>
+            <img src="google.png" />
+            구글 아이디로 로그인
+          </Google>
+          <Github>
+            <img src="github.png" />
+            깃허브 아이디로 로그인
+          </Github>
+          <Signup>
+            <div>
+              아직 회원이 아니신가요?
+              <div>
+                <Link to="/signup">
+                  <button>회원가입</button>
+                </Link>
+              </div>
+            </div>
+          </Signup>
+          <div>
+            <button onClick={() => handleModal()}>닫기</button>
+          </div>
+        </div>
+      </ModalContainer>
+    </ModalBackground>
   );
 }
