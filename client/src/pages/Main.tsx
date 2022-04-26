@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import { openModal } from '../modules/modal';
 import Login from '../components/Login';
+import Signup from '../pages/Signup';
+
 
 axios.defaults.withCredentials = true;
 
