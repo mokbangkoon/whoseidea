@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import counter from './counter';
+import modal from './modal';
 
 const rootReducer = combineReducers({
   counter,
+  modal,
 });
 
 // 루트 리듀서를 내보내주세요.
