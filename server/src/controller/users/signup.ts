@@ -2,7 +2,6 @@ import { generateAccessToken } from '../tokenFunctions'
 import { PrismaClient } from '@prisma/client'
 
 export async function signup (req: any, res: any) {
-    console.log(123);
     
     // 값이 들어가지 않은 변수가 있으면 invaild 처리
     if (!Object.entries(req.body).every(item => item[1])) {
