@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../modules';
+import { openModal } from '../modules/modal';
 
 const Sidebar = styled.div`
   display: flex;
@@ -21,19 +24,25 @@ const Button = styled.div`
 `;
 
 export default function Headerbar() {
+  const check = useSelector((state: RootState) => state.modal.check);
+  const dispatch = useDispatch(); // 디스패치 함수를 가져옵니다
+  // 각 액션들을 디스패치하는 함수들을 만들어줍니다
+  const handleModal = () => {
+    dispatch(openModal());
+  };
   return (
     <Sidebar>
       <Button>
-        <div className="home">Home</div>
+        <div>Home</div>
       </Button>
       <Button>
-        <div className="rank">Ranking</div>
+        <div>Ranking</div>
       </Button>
       <Button>
-        <div className="list">Idea List</div>
+        <div>Idea List</div>
       </Button>
       <Button>
-        <div className="login">Login</div>
+        <div onClick={() => handleModal()}>Login</div>
       </Button>
     </Sidebar>
   );
