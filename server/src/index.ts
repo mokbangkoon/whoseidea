@@ -22,6 +22,7 @@ app.get('/user/my-post', controllers.myPost);
 app.get('/user/my-comment', controllers.myComment);
 app.get('/auth', controllers.auth);
 app.get('/post/all', controllers.postAll);
+app.get('/post', controllers.getPostPage);
 app.get('/comment', controllers.getComment);
 
 app.post('/signup', controllers.signup);

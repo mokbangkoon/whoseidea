@@ -7,6 +7,7 @@ import { updatePro } from './users/updatePro'
 import { myPost } from './users/my-post'
 import { myComment } from './users/my-comment'
 import { postAll } from './post/postAll'
+import { getPostPage } from './post/getPostPage'
 import { getComment } from './comment/getComment'
 
 const controllers = {
@@ -19,6 +20,7 @@ const controllers = {
     myPost:myPost,
     myComment:myComment,
     postAll:postAll,
+    getPostPage:getPostPage,
     getComment:getComment,
 }
 
