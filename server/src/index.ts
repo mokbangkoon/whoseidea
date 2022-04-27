@@ -9,12 +9,20 @@ const app = express();
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
-app.use(cors())
+app.use(
+    cors({
+      origin: ['https://localhost:3000'],
+      credentials: true,
+      methods: ['GET', 'POST','PATCH','DELETE']
+    })
+  );
 app.use(cookieParser())
 
 app.post('/signup', controllers.signup);
 app.post('/login', controllers.login);
 app.post('/logout', controllers.logout);
+
+app.patch('/updatepro', controllers.updatePro)
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 8080
 
