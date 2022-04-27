@@ -1,210 +1,51 @@
-/* eslint-disable prettier/prettier */
-import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
+import React from 'react';
 import axios from 'axios';
-import useInput from '../pages/useInput';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
-import { userInfo } from 'os';
 import { Link } from 'react-router-dom';
+import { signdata } from '../modules/signup';
+import { openModal } from '../modules/modal';
+import { sign } from 'crypto';
 
 axios.defaults.withCredentials = true;
 
 function Signup() {
-  const [email, setEamil] = useInput('');
-  const [emailcheck] = useState<{ email: string }>({
-    email: '',
-  });
-  const [password, setPassword] = useState({ password: '' });
-  const [passwordcheck] = useInput('');
-  // eslint-disable-next-line no-empty-pattern
-  const [] = useState<{ email: string }>();
-  // eslint-disable-next-line no-empty-pattern
-  const [] = useState<{ password: string }>();
-  const [missmatcherror, setMissMatchError] = useState(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [signuperror, setSignupError] = useState('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [signupsuccess, setSignUpSuccess] = useState(false);
+  const signup = useSelector((state: RootState) => state.sign);
+  const dispatch = useDispatch();
+  const handleInputValue = (key: string, event: any) => {
+    dispatch(signdata({ [key]: event.target.value }));
+  };
+  const emailCheck = () => {
+    if (!signup.email) {
+      console.log('이메일을 입력해주세요');
+    } else {
+      console.log('사용할 수 있는 이메일입니다.');
+    }
+    return axios.post('/api/users', signup);
+  };
+  const handleSignup = () => {
+    if (!signup.password) {
+      console.log('비밀번호를 입력해주세요');
+    } else {
+      console.log('확인');
+    }
+    return axios.post('/api/users', signup);
+  };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const onChangePassword = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (e: any) => {
-      setPassword(e.target.value);
-      setMissMatchError(e.targe.value !== passwordcheck);
-    },
-    [passwordcheck]
-  );
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const onChangeEmail = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (e: any) => {
-      setEamil(e.target.value);
-      setMissMatchError(e.targe.value !== passwordcheck);
-    },
-    [emailcheck]
-  );
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleSignUp = useCallback(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (e: any) => {
-      e.preventDefault();
-      console.log(email, password, emailcheck, passwordcheck);
-      if (!missmatcherror) {
-        console.log('서버로 회원 가입하기');
-        setSignupError('');
-        setSignUpSuccess(false);
-
-        axios
-          .post('api/users', {
-            email,
-            password,
-          })
-          .then((response: any) => {
-            console.log(response);
-            setSignUpSuccess(true);
-          })
-          .catch((error: any) => {
-            console.log(error.response);
-            setSignupError(error.reponse.data);
-          });
-      }
-    },
-    [passwordcheck, emailcheck]
-  );
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const SignUpStyle = styled.div`
-    background-color: #ffffff;
     position: relative;
+    margin-top: 5%;
+    margin-left: 30%;
     width: 1440px;
     height: 1024px;
+    background: #ffffff;
   `;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const Left = styled.div`
-    position: absolute;
-    width: 726px;
-    height: 1033px;
-    left: 723px;
-    top: -8px;
-    background: rgba(80, 181, 33, 0.08);
-  `;
-  const Logo = styled.div`
-    position: absolute;
-    width: 200px;
-    height: 181px;
-    left: 1013px;
-    top: 27px;
-    background: url('../img/whose로고.png');
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
-      drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
-      drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-    border-radius: 10px;
-  `;
-  const Signup = styled.div`
-    position: absolute;
-    width: 153px;
-    height: 50px;
-    left: 1047px;
-    top: 246px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 30px;
-    line-height: 36px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: #000000;
-  `;
-  const Email = styled.div`
-    position: absolute;
-    width: 400px;
-    height: 50px;
-    left: 868px;
-    top: 336px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-  `;
-  const Check = styled.div`
-    position: absolute;
-    width: 85px;
-    height: 50px;
-    left: 1278px;
-    top: 332px;
-    background: rgba(196, 196, 196, 0.09);
-    border: 1px solid rgba(240, 231, 21, 0.57);
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-  `;
-  const Password1 = styled.div`
-    position: absolute;
-    width: 489px;
-    height: 50px;
-    left: 865px;
-    top: 422px;
-    background: rgba(196, 196, 196, 0.09);
-    border: 1px solid #f7f4ba;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-  `;
-  const Okay = styled.div`
-    position: absolute;
-    width: 227px;
-    height: 44px;
-    left: 1002px;
-    top: 623px;
-    background: linear-gradient(
-      269.14deg,
-      rgba(249, 141, 81, 0.87) 8.29%,
-      rgba(240, 218, 21, 0.3132) 99.69%
-    );
-    border: 1px solid rgba(0, 0, 0, 0.5);
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-  `;
-  const Box1 = styled.div`
-    position: absolute;
-    width: 267px;
-    height: 51px;
-    left: 812px;
-    top: 780px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 24px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    color: #000000;
-  `;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const Login = styled.div`
-    position: absolute;
-    width: 85px;
-    height: 44px;
-    left: 1046px;
-    top: 784px;
-    background: linear-gradient(
-      269.14deg,
-      rgba(249, 212, 81, 0.87) 8.29%,
-      rgba(214, 106, 106, 0.3915) 99.69%
-    );
-    border: 1px solid #000000;
-    box-sizing: border-box;
-    border-radius: 10px;
-  `;
   const Right = styled.div`
     position: absolute;
-    left: 0%;
-    right: 49.38%;
-    top: -0.29%;
+    left: 6%;
+    top: 8%;
     bottom: 0%;
     background: linear-gradient(
         0deg,
@@ -213,150 +54,255 @@ function Signup() {
       ),
       url(.jpg);
   `;
+  const Left = styled.div`
+    position: absolute;
+    width: 600px;
+    height: 800px;
+    right: 10.8%;
+    top: 8%;
+    background: rgba(80, 181, 33, 0.08);
+  `;
   const Outline = styled.div`
     position: absolute;
-    width: 580px;
-    height: 600px;
-    left: 93px;
+    width: 480px;
+    height: 500px;
+    left: 133px;
     top: 245px;
+
     opacity: 0.8;
+
     border: 16px solid #f7f4ba;
     box-sizing: border-box;
   `;
-  const Frame1 = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
+  const Outline2 = styled.div`
     position: absolute;
-    width: 494.58px;
-    height: 295.27px;
-    left: 135.18px;
-    top: 373.65px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
-      drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  `;
-  const Fram1text = styled.div`
-    position: static;
-    width: 429px;
-    height: 240px;
-    left: 10px;
-    top: 10px;
+    width: 480px;
+    height: 530px;
+    left: 63px;
+    top: 140px;
 
-    font-family: 'Quando';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 80px;
-    line-height: 120px;
-    /* or 150% */
-    text-align: center;
-    letter-spacing: 0.5px;
-    /* white */
+    opacity: 0.8;
+
+    border: 16px solid #ffffff;
+    box-sizing: border-box;
+  `;
+  const Innertext = styled.div`
+    font-size: 120px;
     color: #f7f4ba;
-    /* Inside auto layout */
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    margin: 0px 10px;
+    text-align: center;
+    margin-top: 10%;
+    @font-face {
+      font-family: 'LeferiPoint-BlackA';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackA.woff')
+        format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
   `;
-  const Frame2 = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 10px;
+  const Innertext2 = styled.div`
+    font-size: 35px;
+    outline-color: #242423;
+    color: #f7f4ba;
+    text-align: center;
+    margin-top: 15%;
+  `;
+
+  const Innertext3 = styled.div`
+    font-size: 40px;
+    color: #000000;
+    text-align: center;
+    margin-top: 8%;
+    @font-face {
+      font-family: 'LeferiPoint-BlackA';
+      src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackA.woff')
+        format('woff');
+      font-weight: normal;
+      font-style: normal;
+    }
+  `;
+  const Logo = styled.div`
     position: absolute;
-    width: 542.04px;
-    height: 126.55px;
-    left: 111.98px;
-    top: 677.36px;
-    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
-      drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  `;
-  const Frame2text = styled.div`
-    position: static;
-    width: 494px;
+    width: 100px;
     height: 100px;
-    left: 10px;
-    top: 10px;
+    left: 40%;
+    top: 37px;
+    background: url(whose로고.png);
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
+      drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
+      drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 10px;
+  `;
 
-    font-family: 'Quando';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 28px;
-    line-height: 100px;
-    /* identical to box height, or 357% */
+  const Input1 = styled.div`
+    margin-top: 5%;
+    margin-right: 20%;
 
-    text-align: center;
-    letter-spacing: 0.5px;
+    & input {
+      width: 300px;
+      height: 50px;
+      left: 200px;
+      font-size: 20px;
+      text-align: center;
+      background: rgba(196, 196, 196, 0.09);
+      border: 1px solid #f7f4ba;
+      box-sizing: border-box;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+        0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+    }
+  `;
+  const Input2 = styled.div`
+    margin-top: 5%;
+    & input {
+      width: 300px;
+      height: 50px;
+      left: 200px;
+      font-size: 20px;
+      text-align: center;
+      background: rgba(196, 196, 196, 0.09);
+      border: 1px solid #f7f4ba;
+      box-sizing: border-box;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+        0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+    }
+    & button {
+      border-radius: 1rem;
+      width: 30%;
+      height: 40px;
+      border: none;
+      background-color: #cbe8f0;
+      font-weight: bold;
+      :hover {
+        background-color: #353333;
+        color: white;
+        transition: 0.5s;
+      }
+    }
+  `;
+  const Input3 = styled.div`
+    margin-top: 5%;
+    & input {
+      width: 300px;
+      height: 50px;
+      left: 200px;
+      font-size: 20px;
+      text-align: center;
+      background: rgba(196, 196, 196, 0.09);
+      border: 1px solid #f7f4ba;
+      box-sizing: border-box;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+        0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+    }
+    & button {
+      width: 180px;
+      height: 50px;
+      left: 200px;
+      font-size: 20px;
+      text-align: center;
+      background: rgba(196, 196, 196, 0.09);
+      border: 1px solid #f7f4ba;
+      box-sizing: border-box;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+        0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
+      :hover {
+        background-color: #353333;
+        color: white;
+        transition: 0.5s;
+      }
+    }
+  `;
+  const Input4 = styled.div`
+    margin-top: 5%;
+    margin-right: 10%;
 
-    /* white */
+    & button {
+      width: 100px;
+      height: 50px;
+      right: 200px;
+      font-size: 20px;
+      text-align: center;
+      background: rgba(196, 196, 196, 0.09);
+      border: 1px solid #f7f4ba;
+      box-sizing: border-box;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25),
+        0px 4px 4px rgba(0, 0, 0, 0.25);
+      border-radius: 10px;
 
-    color: #f7f4ba;
-
-    /* Inside auto layout */
-
-    flex: none;
-    order: 0;
-    flex-grow: 0;
-    margin: 0px 20px;
+      :hover {
+        background-color: #353333;
+        color: white;
+        transition: 0.5s;
+      }
+    }
+  `;
+  const Text1 = styled.div`
+    font-size: 20px;
+    margin-top: 10%;
+    margin-right: 20%;
   `;
 
   return (
-    <div>
-      <SignUpStyle>
-        <div>
-          <Left></Left>
-          <div></div>
-          <Logo></Logo>
-          <div>
-            <Signup>
-              <div>회원가입</div>
-            </Signup>
-            <Email>
-              <div>이메일을 입력해 주세요</div>
-            </Email>
+    <SignUpStyle>
+      <Right>
+        <img src="idea.png" />
+      </Right>
+      <Outline>
+        <Innertext>Whose idea?</Innertext>
+        <Innertext2>share your ideas with world</Innertext2>
+      </Outline>
+      <Left>
+        <Logo>
+          <img src="whose로고.png" />
+        </Logo>
+        <Outline2>
+          <Innertext3>
+            회 원 가 입
             <div>
-              <Check>
-                <div>중복검사</div>
-              </Check>
-              <Password1>
-                <div> 비밀번호를 입력하세요</div>
-              </Password1>
-              <Password1>
-                <div> 비밀번호를 입력하세요</div>
-              </Password1>
-              <div></div>
-              <Okay>
-                <div> 확인 </div>
-              </Okay>
-              <div></div>
-              <Box1>
-                <div>이미 회원이신가요?</div>
-              </Box1>
-              <div></div>
-              <Login>
-                <div>Login</div>
-              </Login>
-              <div></div>
-              <Right></Right>
-              <div></div>
-              <Outline></Outline>
-              <div></div>
-              <Frame1></Frame1>
-              <div></div>
-              <Fram1text></Fram1text>
-              <div>Whose idea?</div>
-              <Frame2></Frame2>
-              <div></div>
-                <Frame2text>
-                    <div>share your idea with world</div>
-                </Frame2text>
-                <div></div>
+              <Input1>
+                <Input4>
+                  <input
+                    className="email"
+                    placeholder="이메일을 입력하세요"
+                    type="password"
+                  ></input>
+                  <button
+                    className="emailcheck"
+                    type="button"
+                    onClick={emailCheck}
+                  >
+                    중복검사
+                  </button>
+                </Input4>
+              </Input1>
             </div>
-          </div>
-        </div>
-      </SignUpStyle>
-    </div>
+            <Input2>
+              <input
+                className="password"
+                placeholder="비밀번호를 입력하세요"
+                type="password"
+              ></input>
+            </Input2>
+            <Input2>
+              <input
+                className="password"
+                placeholder="비밀번호를 입력하세요"
+                type="password"
+              ></input>
+            </Input2>
+            <Input3>
+              <Link to="/">
+                <button className="submit" type="submit" onClick={handleSignup}>
+                  확인
+                </button>
+              </Link>
+            </Input3>
+          </Innertext3>
+        </Outline2>
+      </Left>
+    </SignUpStyle>
   );
 }
 export default Signup;

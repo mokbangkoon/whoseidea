@@ -5,8 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import { openModal } from '../modules/modal';
 import Login from '../components/Login';
-import Signup from '../pages/Signup';
-
+import { Link } from 'react-router-dom';
 
 axios.defaults.withCredentials = true;
 
@@ -61,7 +60,6 @@ const ModalOpen = styled.div`
 
 export default function Main() {
   const check = useSelector((state: RootState) => state.modal.check);
-  console.log(check);
   return (
     <div>
       <Title>
