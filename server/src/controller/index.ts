@@ -7,6 +7,7 @@ import { updatePro } from './users/updatePro'
 import { myPost } from './users/my-post'
 import { myComment } from './users/my-comment'
 import { postAll } from './post/postAll'
+import { getComment } from './comment/getComment'
 
 const controllers = {
     signup:signup,
@@ -18,6 +19,7 @@ const controllers = {
     myPost:myPost,
     myComment:myComment,
     postAll:postAll,
+    getComment:getComment,
 }
 
 export default controllers
