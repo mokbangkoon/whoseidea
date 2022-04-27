@@ -4,6 +4,7 @@ import { login } from './users/login'
 import { logout } from './users/logout'
 import { auth } from './users/auth'
 import { updatePro } from './users/updatePro'
+import { elseProfile } from './users/elseProfile'
 import { myPost } from './users/my-post'
 import { myComment } from './users/my-comment'
 
@@ -14,6 +15,7 @@ const controllers = {
     logout:logout,
     auth:auth,
     updatePro:updatePro,
+    elseProfile:elseProfile,
     myPost:myPost,
     myComment:myComment
 }
