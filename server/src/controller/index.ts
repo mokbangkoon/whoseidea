@@ -6,6 +6,7 @@ import { auth } from './users/auth'
 import { updatePro } from './users/updatePro'
 import { myPost } from './users/my-post'
 import { myComment } from './users/my-comment'
+import { postAll } from './post/postAll'
 
 const controllers = {
     signup:signup,
@@ -15,7 +16,8 @@ const controllers = {
     auth:auth,
     updatePro:updatePro,
     myPost:myPost,
-    myComment:myComment
+    myComment:myComment,
+    postAll:postAll,
 }
 
 export default controllers
