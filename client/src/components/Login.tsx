@@ -6,6 +6,7 @@ import { RootState } from '../modules';
 import { openModal } from '../modules/modal';
 import { Link } from 'react-router-dom';
 import { logindata } from '../modules/login';
+import { errormessage } from '../modules/errormessage';
 
 axios.defaults.withCredentials = true;
 
@@ -26,7 +27,7 @@ const ModalContainer = styled.div`
   transform: translate(-50%, -50%);
   max-height: 80%;
   width: 20rem;
-  height: 50%;
+  height: 60%;
   padding: 16px;
   background: rgb(25, 31, 44);
   border-radius: 10px;
@@ -78,20 +79,36 @@ const Signup = styled.div`
   background-color: yellow;
   color: black;
 `;
+const Error = styled.div`
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f7d7da;
+  position: relative;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  top: 20px;
+  animation: FadeDown 1s;
+`;
 
 export default function Login() {
   // 상태를 조회합니다. 상태를 조회 할 때에는 state 의 타입을 RootState 로 지정해야합니다.
   const login = useSelector((state: RootState) => state.login);
+  const error = useSelector((state: RootState) => state.error.errormessage);
   const dispatch = useDispatch(); // 디스패치 함수를 가져옵니다
   const handleInputValue = (key: string, event: any) => {
     dispatch(logindata({ [key]: event.target.value }));
   };
+  const handleErrorMessage = (message: string) => {
+    dispatch(errormessage({ errormessage: message }));
+  };
   const handleLogin = () => {
     console.log(login);
     if (!login.email || !login.password) {
-      console.log('아이디와 비밀번호를 재입력하세요');
+      handleErrorMessage('아이디와 비밀번호를 다시 입력해주세요.');
     } else {
-      console.log('완료');
+      handleErrorMessage('');
     }
     return axios.post('https://localhost:8080/login', login);
   };
@@ -117,8 +134,12 @@ export default function Login() {
               onChange={event => handleInputValue('password', event)}
             ></input>
           </div>
-
           <button onClick={handleLogin}>로그인</button>
+          {error !== '' ? (
+            <Error>
+              <div>{error}</div>
+            </Error>
+          ) : null}
           <Google>
             <img src="google.png" />
             구글 아이디로 로그인
@@ -131,14 +152,21 @@ export default function Login() {
             <div>
               아직 회원이 아니신가요?
               <div>
-                <Link to="/signup">
+                <Link to="/ignup">
                   <button>회원가입</button>
                 </Link>
               </div>
             </div>
           </Signup>
           <div>
-            <button onClick={() => handleModal()}>닫기</button>
+            <button
+              onClick={() => {
+                handleModal();
+                handleErrorMessage('');
+              }}
+            >
+              닫기
+            </button>
           </div>
         </div>
       </ModalContainer>

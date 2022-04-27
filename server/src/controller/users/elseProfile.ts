@@ -5,12 +5,12 @@ export async function elseProfile (req: any, res: any) {
     if (!req.query.userId) {
         res.status(423).send('undefined user')
     } else {
-        await prisma.users.findMany({
+        const userInfo: any = await prisma.users.findFirst({
             where: {
-                userId: req.body.userId,
-                email: req.body.email
+                userId: req.query.userId
             }
         })
-        res.status(200).send('send ok')
+        delete userInfo?.password
+        res.status(200).send(userInfo)
     }
 }
