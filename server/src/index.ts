@@ -25,7 +25,8 @@ app.post('/signup', controllers.signup);
 app.post('/login', controllers.login);
 app.post('/logout', controllers.logout);
 
-app.patch('/updatepro', controllers.updatePro)
+app.patch('/updatepro', controllers.updatePro);
+
 app.delete('/signout', controllers.signout);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 8080
