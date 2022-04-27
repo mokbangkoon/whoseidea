@@ -9,7 +9,7 @@ export async function postAll(req: any, res: any) {
         return res.status(406).send('order is empty')
 
     // 인자가 숫자가 아니면 오류 처리
-    if (!Number(req.query.limit))
+    if (!Number.isInteger(Number(req.query.limit)))
         return res.status(406).send('limit is not number')
     // 인자가 desc 또는 asc가 아니면 오류 처리
     if (!['desc','asc'].includes(req.query.order))
