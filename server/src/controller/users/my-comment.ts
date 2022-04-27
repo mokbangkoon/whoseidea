@@ -3,13 +3,13 @@ import { PrismaClient } from '@prisma/client'
 export async function myComment(req: any, res: any) {
 
     // 인자가 없으면 오류 처리
-    if (!req.query.userId) {
-        return res.status(406).send('userId is empty')
+    if (!req.query.nickname) {
+        return res.status(406).send('nickname is empty')
     }
     const prisma = new PrismaClient()
     const userInfo = await prisma.users.findFirst({
         where: {
-            userId: req.query.userId,
+            nickname: req.query.nickname,
         }
     })
 

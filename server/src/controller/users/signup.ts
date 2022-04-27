@@ -9,10 +9,10 @@ export async function signup (req: any, res: any) {
     }
 
     const prisma = new PrismaClient()
-    const {id,email,password} = req.body
+    const {nickname,email,password} = req.body
 
     // 아이디가 있으면 invaild 처리
-    if(await prisma.users.findFirst({ where:{ userId:id } })){
+    if(await prisma.users.findFirst({ where:{ nickname:nickname } })){
         return res.status(422).send('ID exists')
     }
 
@@ -23,7 +23,7 @@ export async function signup (req: any, res: any) {
 
     await prisma.users.create({
         data: {
-            userId:id,
+            nickname:nickname,
             email: email,
             password:password,
             profile:'default_image.png'
