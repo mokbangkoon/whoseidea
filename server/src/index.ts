@@ -18,11 +18,17 @@ app.use(
   );
 app.use(cookieParser())
 
+app.get('/user/my-post', controllers.myPost);
+app.get('/user/my-comment', controllers.myComment);
+app.get('/auth', controllers.auth);
+
 app.post('/signup', controllers.signup);
 app.post('/login', controllers.login);
 app.post('/logout', controllers.logout);
 
-app.patch('/updatepro', controllers.updatePro)
+app.patch('/updatepro', controllers.updatePro);
+
+app.delete('/signout', controllers.signout);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 8080
 
