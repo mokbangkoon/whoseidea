@@ -1,23 +1,26 @@
 import { deprecated, ActionType, createReducer } from 'typesafe-actions';
 const { createStandardAction } = deprecated;
 
-const SIGNUPDATA = 'signup/signupdata';
+const SIGNUPDATA = 'sign/signupdata';
 
-export const signdata = createStandardAction(SIGNUPDATA)<object>();
+export const signupdata = createStandardAction(SIGNUPDATA)<object>();
 
-const actions = { signdata };
+const actions = { signupdata };
 
-type signAction = ActionType<typeof actions>;
+type signupAction = ActionType<typeof actions>;
 
-type signState = { email: string; password: string };
+type signupState = {
+  email: string;
+  password: string;
+};
 
-const initialState: signState = {
+const initialState: signupState = {
   email: '',
   password: '',
 };
 
-const sign = createReducer<signState, signAction>(initialState, {
+const signup = createReducer<signupState, signupAction>(initialState, {
   [SIGNUPDATA]: (state, action) => ({ ...state, ...action.payload }),
 });
 
-export default sign;
+export default signup;

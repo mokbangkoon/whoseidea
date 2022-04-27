@@ -17,7 +17,7 @@ const ModalBackground = styled.div`
   bottom: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  z-index: 0;
+  z-index: 100;
 `;
 
 const ModalContainer = styled.div`
@@ -152,7 +152,7 @@ export default function Login() {
             <div>
               아직 회원이 아니신가요?
               <div>
-                <Link to="/ignup">
+                <Link to="/signup">
                   <button>회원가입</button>
                 </Link>
               </div>
