@@ -2,12 +2,21 @@ import { combineReducers } from 'redux';
 import counter from './counter';
 import modal from './modal';
 import login from './login';
+<<<<<<< HEAD
 import sign from './signup';
+=======
+import error from './errormessage';
+
+>>>>>>> a28667c44331abdb6b56fa55621389bebea2caa4
 const rootReducer = combineReducers({
   counter,
   modal,
   login,
+<<<<<<< HEAD
   sign,
+=======
+  error,
+>>>>>>> a28667c44331abdb6b56fa55621389bebea2caa4
 });
 
 // 루트 리듀서를 내보내주세요.
