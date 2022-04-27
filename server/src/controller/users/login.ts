@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
-import {generateAccessToken} from '../tokenFunctions'
+import { generateAccessToken } from '../tokenFunctions'
 
 export async function login (req: any, res: any) {
     const userInfo = await prisma.users.findFirst({
@@ -11,9 +11,10 @@ export async function login (req: any, res: any) {
     })
     if (!userInfo) {
         res.status(404).send('invaild')
+    } else {
+        await generateAccessToken(userInfo)
+        .then((data) => {
+            res.cookie("jwt", data).status(200).send({message: 'ok'})
+        })
     }
-    await generateAccessToken(userInfo)
-    .then((data) => {
-        res.cookie("jwt", data).status(200).send({message: 'ok'})
-    })
 }
