@@ -30,6 +30,7 @@ const Button = styled.div`
 
 export default function Headerbar() {
   const check = useSelector((state: RootState) => state.modal.check);
+  console.log(check);
   const dispatch = useDispatch(); // 디스패치 함수를 가져옵니다
   // 각 액션들을 디스패치하는 함수들을 만들어줍니다
   const handleModal = () => {
@@ -46,10 +47,14 @@ export default function Headerbar() {
         </Link>
       </Button>
       <Button>
-        <div>Ranking</div>
+        <Link to="/rank" className="link">
+          <div onClick={checkedModal}>Ranking</div>
+        </Link>
       </Button>
       <Button>
-        <div>Idea List</div>
+        <Link to="/idealist" className="link">
+          <div onClick={checkedModal}>Idea List</div>
+        </Link>
       </Button>
       <Button>
         <div onClick={() => handleModal()}>Login</div>
