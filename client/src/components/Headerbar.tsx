@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import { openModal } from '../modules/modal';
+import { Link } from 'react-router-dom';
 
 const Sidebar = styled.div`
   display: flex;
@@ -12,14 +13,18 @@ const Sidebar = styled.div`
   color: white;
   font-weight: bold;
   font-size: 2rem;
+  text-decoration: none;
 `;
 const Button = styled.div`
-  border: 3px solid darkblue;
   border-radius: 1rem;
   :hover {
     background-color: black;
     transition: 0.5s;
     cursor: pointer;
+  }
+  .link {
+    text-decoration: none;
+    color: white;
   }
 `;
 
@@ -30,10 +35,15 @@ export default function Headerbar() {
   const handleModal = () => {
     dispatch(openModal());
   };
+  const checkedModal = () => {
+    check ? dispatch(openModal()) : null;
+  };
   return (
     <Sidebar>
       <Button>
-        <div>Home</div>
+        <Link to="/" className="link">
+          <div onClick={checkedModal}>Home</div>
+        </Link>
       </Button>
       <Button>
         <div>Ranking</div>
