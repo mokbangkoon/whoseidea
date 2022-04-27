@@ -5,12 +5,12 @@ import { isAuthorized } from "../tokenFunctions";
 export async function updatePro (req: any, res: any) {
     if (!req.headers.cookie) {
         res.status(401).send(
-            { data: null, message: 'invaild' }
+            { data: null, message: 'no cookies' }
         )
     }
     if (!isAuthorized(req)) {
         res.status(401).send(
-            { data: null, message: 'are you kidding me' }
+            { data: null, message: 'invaild user' }
         )
     }
 
