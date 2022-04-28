@@ -13,7 +13,7 @@ export async function signup (req: any, res: any) {
 
     // 아이디가 있으면 invaild 처리
     if(await prisma.users.findFirst({ where:{ nickname:nickname } })){
-        return res.status(422).send('ID exists')
+        return res.status(422).send('nickname exists')
     }
 
     // email이 있으면 invaild 처리

@@ -31,6 +31,7 @@ app.get('/nicknameduplication', controllers.nicknameDuplication);
 app.post('/signup', controllers.signup);
 app.post('/login', controllers.login);
 app.post('/logout', controllers.logout);
+app.post('/post', controllers.writePost);
 
 app.patch('/updatepro', controllers.updatePro);
 

@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import { signupdata } from '../modules/signup';
-import { Link } from 'react-router-dom';
 import { emailmessage, passwordmessage } from '../modules/errormessage';
 import Login from '../components/Login';
 import { openModal } from '../modules/modal';
@@ -221,6 +220,8 @@ const Error = styled.div`
   border-radius: 0.25rem;
   top: 20px;
   animation: FadeDown 1s;
+  font-size: large;
+  font-weight: bold;
 `;
 
 function Signup() {
@@ -229,6 +230,9 @@ function Signup() {
   const checkedModal = () => {
     check ? dispatch(openModal()) : null;
   };
+  const nicknameerror = useSelector(
+    (state: RootState) => state.error.nicknamemessage
+  );
   const emailerror = useSelector(
     (state: RootState) => state.error.emailmessage
   );
@@ -247,11 +251,21 @@ function Signup() {
       dispatch(emailmessage({ emailmessage: '' }));
     }
     return axios
-      .post('https://localhost:8080/signup', signup)
+      .post('https://localhost:8080/emailduplication', signup)
+      .then(data => dispatch(emailmessage({ errormessage: String(data) })));
+  };
+  const nicknameCheck = () => {
+    if (!signup.nickname) {
+      dispatch(emailmessage({ nicknamemessage: '닉네임을 입력해주세요.' }));
+    } else {
+      dispatch(emailmessage({ nicknamemessage: '' }));
+    }
+    return axios
+      .post('https://localhost:8080/nicknameduplication', signup)
       .then(data => dispatch(emailmessage({ errormessage: String(data) })));
   };
   const handleSignup = () => {
-    if (!signup.password || !signup.email) {
+    if (!signup.password || !signup.email || signup.nickname) {
       dispatch(
         passwordmessage({ passwordmessage: '모든 항목을 입력해주세요.' })
       );
@@ -294,6 +308,30 @@ function Signup() {
           <Outline2>
             <Innertext3>
               회 원 가 입
+              <div>
+                <Input1>
+                  <Input4>
+                    <input
+                      className="nickname"
+                      placeholder="닉네임을 입력하세요"
+                      type="text"
+                      onChange={event => handleSignupValue('email', event)}
+                    ></input>
+                    <button
+                      className="nicknamecheck"
+                      type="button"
+                      onClick={nicknameCheck}
+                    >
+                      중복검사
+                    </button>
+                  </Input4>
+                  {nicknameerror !== '' ? (
+                    <Error>
+                      <div>{nicknameerror}</div>
+                    </Error>
+                  ) : null}
+                </Input1>
+              </div>
               <div>
                 <Input1>
                   <Input4>
@@ -352,4 +390,3 @@ function Signup() {
   );
 }
 export default Signup;
-git@github.com:haheon/whoseidea.git
