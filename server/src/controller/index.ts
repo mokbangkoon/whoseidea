@@ -12,6 +12,9 @@ import { myComment } from './users/my-comment'
 import { postAll } from './post/postAll'
 import { getPostPage } from './post/getPostPage'
 import { getComment } from './comment/getComment'
+import { writePost } from './post/writePost'
+import { writeComment } from './comment/writeComment'
+
 
 const controllers = {
     signup:signup,
@@ -28,6 +31,8 @@ const controllers = {
     postAll:postAll,
     getPostPage:getPostPage,
     getComment:getComment,
+    writePost:writePost,
+    writeComment:writeComment,
 }
 
 export default controllers
