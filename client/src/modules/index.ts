@@ -3,14 +3,16 @@ import counter from './counter';
 import modal from './modal';
 import login from './login';
 import error from './errormessage';
-import sign from './signup';
+import signup from './signup';
+
 
 const rootReducer = combineReducers({
   counter,
   modal,
   login,
   error,
-  sign,
+  signup,
+
 });
 
 // 루트 리듀서를 내보내주세요.
