@@ -4,6 +4,8 @@ import modal from './modal';
 import login from './login';
 import error from './errormessage';
 import signup from './signup';
+import islogincheck from './islogin';
+import functions from './function';
 
 const rootReducer = combineReducers({
   counter,
@@ -11,6 +13,8 @@ const rootReducer = combineReducers({
   login,
   error,
   signup,
+  islogincheck,
+  functions,
 });
 
 // 루트 리듀서를 내보내주세요.
