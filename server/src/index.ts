@@ -39,6 +39,7 @@ app.patch('/like', controllers.likePost);
 app.patch('/post', controllers.modifyPost);
 
 app.delete('/signout', controllers.signout);
+app.delete('/comment', controllers.deleteComment);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 8080
 
