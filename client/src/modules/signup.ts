@@ -12,11 +12,13 @@ type signupAction = ActionType<typeof actions>;
 type signupState = {
   email: string;
   password: string;
+  nickname: string;
 };
 
 const initialState: signupState = {
   email: '',
   password: '',
+  nickname: '',
 };
 
 const signup = createReducer<signupState, signupAction>(initialState, {
