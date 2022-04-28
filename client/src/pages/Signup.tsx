@@ -315,7 +315,7 @@ function Signup() {
                       className="nickname"
                       placeholder="닉네임을 입력하세요"
                       type="text"
-                      onChange={event => handleSignupValue('email', event)}
+                      onChange={event => handleSignupValue('nickname', event)}
                     ></input>
                     <button
                       className="nicknamecheck"
