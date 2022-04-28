@@ -35,6 +35,7 @@ app.post('/post', controllers.writePost);
 app.post('/comment', controllers.writeComment);
 
 app.patch('/updatepro', controllers.updatePro);
+app.patch('/like', controllers.likePost);
 
 app.delete('/signout', controllers.signout);
 
