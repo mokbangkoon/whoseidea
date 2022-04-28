@@ -97,6 +97,9 @@ export default function Login() {
   // 상태를 조회합니다. 상태를 조회 할 때에는 state 의 타입을 RootState 로 지정해야합니다.
   const login = useSelector((state: RootState) => state.login);
   const error = useSelector((state: RootState) => state.error.errormessage);
+  const auth = useSelector(
+    (state: RootState) => state.functions.isauthenticated
+  );
   const dispatch = useDispatch();
   const handleInputValue = (key: string, event: any) => {
     dispatch(logindata({ [key]: event.target.value }));
@@ -113,7 +116,7 @@ export default function Login() {
     }
     return axios
       .post('https://localhost:8080/login', login)
-      .then(data => dispatch(isauthenticated()));
+      .then(data => auth());
   };
   // 각 액션들을 디스패치하는 함수들을 만들어줍니다
   const handleModal = () => {

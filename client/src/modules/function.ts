@@ -26,8 +26,10 @@ type State = {
 
 const initialState: State = {
   isauthenticated: function A() {
+    console.log('a');
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    console.log('b');
     axios.post('https://localhost:4000/auth').then(res => {
       dispatch(islogin(false));
       console.log(res);
