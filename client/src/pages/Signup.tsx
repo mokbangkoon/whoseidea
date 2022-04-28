@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import { signupdata } from '../modules/signup';
-import { Link } from 'react-router-dom';
 import { emailmessage, passwordmessage } from '../modules/errormessage';
 import Login from '../components/Login';
 import { openModal } from '../modules/modal';
@@ -352,4 +351,3 @@ function Signup() {
   );
 }
 export default Signup;
-git@github.com:haheon/whoseidea.git
