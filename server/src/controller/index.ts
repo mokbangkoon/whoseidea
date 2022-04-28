@@ -15,6 +15,7 @@ import { getComment } from './comment/getComment'
 import { writePost } from './post/writePost'
 import { writeComment } from './comment/writeComment'
 import { likePost } from './post/likePost'
+import { modifyPost } from './post/modifyPost'
 
 
 const controllers = {
@@ -35,6 +36,7 @@ const controllers = {
     writePost:writePost,
     writeComment:writeComment,
     likePost:likePost,
+    modifyPost:modifyPost,
 }
 
 export default controllers
