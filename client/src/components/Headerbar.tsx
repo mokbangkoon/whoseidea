@@ -29,7 +29,7 @@ const Button = styled.div`
   }
 `;
 
-export default function Headerbar() {
+export default function Headerbar({ handleLogout }: any): React.ReactElement {
   const islogincheck = useSelector(
     (state: RootState) => state.islogincheck.islogin
   );
@@ -41,9 +41,6 @@ export default function Headerbar() {
   };
   const checkedModal = () => {
     check ? dispatch(openModal()) : null;
-  };
-  const handleLogout = () => {
-    dispatch(logout());
   };
   return (
     <Sidebar>

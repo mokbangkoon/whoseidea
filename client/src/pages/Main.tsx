@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
@@ -50,7 +50,9 @@ const Third = styled.div`
   border-radius: 1rem;
 `;
 
-export default function Main() {
+export default function Main({
+  handleResponseSuccess,
+}: any): React.ReactElement {
   const check = useSelector((state: RootState) => state.modal.check);
   return (
     <div>
@@ -68,7 +70,7 @@ export default function Main() {
           <div>세상을 바꿀 아이디어</div>
         </Third>
       </MainStyle>
-      {check ? <Login /> : null}
+      {check ? <Login handleResponseSuccess={handleResponseSuccess} /> : null}
     </div>
   );
 }
