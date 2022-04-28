@@ -4,9 +4,14 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import { signupdata } from '../modules/signup';
-import { emailmessage, passwordmessage } from '../modules/errormessage';
+import {
+  emailmessage,
+  passwordmessage,
+  nicknamemessage,
+} from '../modules/errormessage';
 import Login from '../components/Login';
 import { openModal } from '../modules/modal';
+import { useNavigate } from 'react-router-dom';
 
 axios.defaults.withCredentials = true;
 
@@ -225,6 +230,7 @@ const Error = styled.div`
 `;
 
 function Signup() {
+  const navigate = useNavigate();
   const check = useSelector((state: RootState) => state.modal.check);
   const signup = useSelector((state: RootState) => state.signup);
   const checkedModal = () => {
@@ -251,18 +257,27 @@ function Signup() {
       dispatch(emailmessage({ emailmessage: '' }));
     }
     return axios
-      .post('https://localhost:8080/emailduplication', signup)
-      .then(data => dispatch(emailmessage({ errormessage: String(data) })));
+      .get('https://localhost:8080/emailduplication', { params: signup })
+      .then(data => alert(data.data))
+      .catch(error =>
+        dispatch(emailmessage({ emailmessage: '이메일이 이미 존재합니다.' }))
+      );
   };
   const nicknameCheck = () => {
     if (!signup.nickname) {
-      dispatch(emailmessage({ nicknamemessage: '닉네임을 입력해주세요.' }));
+      dispatch(nicknamemessage({ nicknamemessage: '닉네임을 입력해주세요.' }));
     } else {
-      dispatch(emailmessage({ nicknamemessage: '' }));
+      dispatch(nicknamemessage({ nicknamemessage: '' }));
     }
+
     return axios
-      .post('https://localhost:8080/nicknameduplication', signup)
-      .then(data => dispatch(emailmessage({ errormessage: String(data) })));
+      .get('https://localhost:8080/nicknameduplication', { params: signup })
+      .then(data => alert(data.data))
+      .catch(error =>
+        dispatch(
+          nicknamemessage({ nicknamemessage: '닉네임이 이미 존재합니다.' })
+        )
+      );
   };
   const handleSignup = () => {
     if (!signup.password || !signup.email || signup.nickname) {
@@ -274,7 +289,15 @@ function Signup() {
     }
     return axios
       .post('https://localhost:8080/signup', signup)
-      .then(data => console.log(data));
+      .then(data => {
+        data.status === 200 ? alert('회원가입 완료') : alert('회원가입 실패');
+      })
+      .then(() => navigate('/'))
+      .catch(error =>
+        dispatch(
+          passwordmessage({ passwordmessage: '회원가입이 실패했습니다.' })
+        )
+      );
   };
   const checkpassword = (event: any) => {
     if (event.target.value !== password) {

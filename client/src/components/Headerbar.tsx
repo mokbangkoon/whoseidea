@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import { openModal } from '../modules/modal';
 import { Link } from 'react-router-dom';
+import { logout } from '../modules/function';
 
 const Sidebar = styled.div`
   display: flex;
@@ -29,8 +30,10 @@ const Button = styled.div`
 `;
 
 export default function Headerbar() {
+  const islogincheck = useSelector(
+    (state: RootState) => state.islogincheck.islogin
+  );
   const check = useSelector((state: RootState) => state.modal.check);
-  console.log(check);
   const dispatch = useDispatch(); // 디스패치 함수를 가져옵니다
   // 각 액션들을 디스패치하는 함수들을 만들어줍니다
   const handleModal = () => {
@@ -38,6 +41,9 @@ export default function Headerbar() {
   };
   const checkedModal = () => {
     check ? dispatch(openModal()) : null;
+  };
+  const handleLogout = () => {
+    dispatch(logout());
   };
   return (
     <Sidebar>
@@ -57,7 +63,11 @@ export default function Headerbar() {
         </Link>
       </Button>
       <Button>
-        <div onClick={() => handleModal()}>Login</div>
+        {islogincheck ? (
+          <div onClick={() => handleLogout()}>Logout</div>
+        ) : (
+          <div onClick={() => handleModal()}>Login</div>
+        )}
       </Button>
     </Sidebar>
   );

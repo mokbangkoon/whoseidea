@@ -7,6 +7,7 @@ import { openModal } from '../modules/modal';
 import { Link } from 'react-router-dom';
 import { logindata } from '../modules/login';
 import { errormessage } from '../modules/errormessage';
+import { isauthenticated, logout } from '../modules/function';
 
 axios.defaults.withCredentials = true;
 
@@ -96,7 +97,10 @@ export default function Login() {
   // 상태를 조회합니다. 상태를 조회 할 때에는 state 의 타입을 RootState 로 지정해야합니다.
   const login = useSelector((state: RootState) => state.login);
   const error = useSelector((state: RootState) => state.error.errormessage);
-  const dispatch = useDispatch(); // 디스패치 함수를 가져옵니다
+  const auth = useSelector(
+    (state: RootState) => state.functions.isauthenticated
+  );
+  const dispatch = useDispatch();
   const handleInputValue = (key: string, event: any) => {
     dispatch(logindata({ [key]: event.target.value }));
   };
@@ -110,7 +114,9 @@ export default function Login() {
     } else {
       handleErrorMessage('');
     }
-    return axios.post('https://localhost:8080/login', login);
+    return axios
+      .post('https://localhost:8080/login', login)
+      .then(data => auth());
   };
   // 각 액션들을 디스패치하는 함수들을 만들어줍니다
   const handleModal = () => {
