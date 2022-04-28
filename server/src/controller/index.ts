@@ -13,6 +13,7 @@ import { postAll } from './post/postAll'
 import { getPostPage } from './post/getPostPage'
 import { getComment } from './comment/getComment'
 import { writePost } from './post/writePost'
+import { writeComment } from './comment/writeComment'
 
 
 const controllers = {
@@ -31,6 +32,7 @@ const controllers = {
     getPostPage:getPostPage,
     getComment:getComment,
     writePost:writePost,
+    writeComment:writeComment,
 }
 
 export default controllers
