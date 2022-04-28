@@ -5,12 +5,14 @@ import login from './login';
 import error from './errormessage';
 import signup from './signup';
 
+
 const rootReducer = combineReducers({
   counter,
   modal,
   login,
   error,
   signup,
+
 });
 
 // 루트 리듀서를 내보내주세요.
