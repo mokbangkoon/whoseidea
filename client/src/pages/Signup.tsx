@@ -5,8 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import { Link } from 'react-router-dom';
 import { signdata } from '../modules/signup';
-import { openModal } from '../modules/modal';
-import { sign } from 'crypto';
 
 axios.defaults.withCredentials = true;
 
@@ -17,20 +15,18 @@ function Signup() {
     dispatch(signdata({ [key]: event.target.value }));
   };
   const emailCheck = () => {
-    if (!signup.email) {
-      console.log('이메일을 입력해주세요');
-    } else {
-      console.log('사용할 수 있는 이메일입니다.');
-    }
-    return axios.post('/api/users', signup);
-  };
+    if(signup.email){
+      console.log('사용할수 있는 이메일입니다.');
+    
+    } 
   const handleSignup = () => {
-    if (!signup.password) {
-      console.log('비밀번호를 입력해주세요');
+    
+    if (!signup.email || !signup.password) {
+      console.log('이메일과 비밀번호를 입력해주세요');
     } else {
       console.log('확인');
     }
-    return axios.post('/api/users', signup);
+    return axios.post('api/users', signup);
   };
 
   const SignUpStyle = styled.div`
@@ -267,14 +263,8 @@ function Signup() {
                     className="email"
                     placeholder="이메일을 입력하세요"
                     type="password"
+                    onChange={event => handleInputValue('email', event)}
                   ></input>
-                  <button
-                    className="emailcheck"
-                    type="button"
-                    onClick={emailCheck}
-                  >
-                    중복검사
-                  </button>
                 </Input4>
               </Input1>
             </div>
@@ -283,6 +273,7 @@ function Signup() {
                 className="password"
                 placeholder="비밀번호를 입력하세요"
                 type="password"
+                onChange={event => handleInputValue('password', event)}
               ></input>
             </Input2>
             <Input2>
@@ -290,15 +281,18 @@ function Signup() {
                 className="password"
                 placeholder="비밀번호를 입력하세요"
                 type="password"
+                onChange={event => handleInputValue('password', event)}
               ></input>
             </Input2>
             <Input3>
               <Link to="/">
                 <button className="submit" type="submit" onClick={handleSignup}>
-                  확인
-                </button>
+                >확인</button>
               </Link>
             </Input3>
+            <Text1>
+              <Input3>이미 회원이신가요?</Input3>
+            </Text1>
           </Innertext3>
         </Outline2>
       </Left>
@@ -306,4 +300,3 @@ function Signup() {
   );
 }
 export default Signup;
-git@github.com:haheon/whoseidea.git
