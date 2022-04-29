@@ -3,7 +3,7 @@ const prisma = new PrismaClient()
 import { isAuthorized } from "../tokenFunctions";
 
 export async function messanger (req :any, res: any) {
-    if (!isAuthorized) {
+    if (!isAuthorized(req)) {
         res.status(422).send('invaild')
     }
     const accsessTokenData: any = isAuthorized(req)
