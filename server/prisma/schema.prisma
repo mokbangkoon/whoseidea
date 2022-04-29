@@ -57,5 +57,6 @@ model Message {
   id             Int    @id @default(autoincrement())
   nickname         Int
   text           String
+  target          Int
   UsersToMessage Users? @relation("UsersToMessage", fields: [nickname], references: [id])
 }
