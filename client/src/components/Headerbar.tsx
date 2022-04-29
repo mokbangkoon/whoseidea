@@ -4,13 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import { openModal } from '../modules/modal';
 import { Link } from 'react-router-dom';
-import { logout } from '../modules/function';
 
 const Sidebar = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: gray;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   color: white;
   font-weight: bold;
   font-size: 2rem;
@@ -59,6 +58,14 @@ export default function Headerbar({ handleLogout }: any): React.ReactElement {
           <div onClick={checkedModal}>Idea List</div>
         </Link>
       </Button>
+      {islogincheck ? (
+        <Button>
+          <Link to="/mypage" className="link">
+            <div onClick={checkedModal}>Mypage</div>
+          </Link>
+        </Button>
+      ) : null}
+
       <Button>
         {islogincheck ? (
           <div onClick={() => handleLogout()}>Logout</div>

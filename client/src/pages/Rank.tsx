@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
-import { openModal } from '../modules/modal';
 import Login from '../components/Login';
 
 export default function Rank() {

@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './modules';
+import Mypage from './pages/Mypage';
 
 import { isauthenticated } from './modules/function';
 import { islogin } from './modules/islogin';
@@ -28,7 +29,6 @@ function App() {
 
   const handleLogout = () => {
     axios.post('https://localhost:8080/logout').then(res => {
-      console.log(res);
       dispatch(islogin(false));
       navigate('/');
     });
@@ -49,6 +49,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/rank" element={<Rank />} />
         <Route path="/idealist" element={<IdeaList />} />
+        <Route path="/mypage" element={<Mypage />} />
       </Routes>
     </div>
   );
