@@ -98,9 +98,6 @@ export default function Login({
   // 상태를 조회합니다. 상태를 조회 할 때에는 state 의 타입을 RootState 로 지정해야합니다.
   const login = useSelector((state: RootState) => state.login);
   const error = useSelector((state: RootState) => state.error.errormessage);
-  const auth = useSelector(
-    (state: RootState) => state.functions.isauthenticated
-  );
   const dispatch = useDispatch();
   const handleInputValue = (key: string, event: any) => {
     dispatch(logindata({ [key]: event.target.value }));
