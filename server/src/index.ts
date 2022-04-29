@@ -31,10 +31,16 @@ app.get('/nicknameduplication', controllers.nicknameDuplication);
 app.post('/signup', controllers.signup);
 app.post('/login', controllers.login);
 app.post('/logout', controllers.logout);
+app.post('/post', controllers.writePost);
+app.post('/comment', controllers.writeComment);
+app.post('/message', controllers.messanger);
 
 app.patch('/updatepro', controllers.updatePro);
+app.patch('/like', controllers.likePost);
+app.patch('/post', controllers.modifyPost);
 
 app.delete('/signout', controllers.signout);
+app.delete('/comment', controllers.deleteComment);
 
 const HTTPS_PORT = process.env.HTTPS_PORT || 8080
 
