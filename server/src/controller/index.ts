@@ -17,6 +17,7 @@ import { writeComment } from './comment/writeComment'
 import { deleteComment } from './comment/deleteComment'
 import { likePost } from './post/likePost'
 import { modifyPost } from './post/modifyPost'
+import { messanger } from './message/message'
 
 
 const controllers = {
@@ -39,6 +40,7 @@ const controllers = {
     deleteComment:deleteComment,
     likePost:likePost,
     modifyPost:modifyPost,
+    messanger:messanger
 }
 
 export default controllers

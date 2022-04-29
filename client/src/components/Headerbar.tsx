@@ -9,7 +9,7 @@ const Sidebar = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: gray;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   color: white;
   font-weight: bold;
   font-size: 2rem;
@@ -28,9 +28,11 @@ const Button = styled.div`
   }
 `;
 
-export default function Headerbar() {
+export default function Headerbar({ handleLogout }: any): React.ReactElement {
+  const islogincheck = useSelector(
+    (state: RootState) => state.islogincheck.islogin
+  );
   const check = useSelector((state: RootState) => state.modal.check);
-  console.log(check);
   const dispatch = useDispatch(); // 디스패치 함수를 가져옵니다
   // 각 액션들을 디스패치하는 함수들을 만들어줍니다
   const handleModal = () => {
@@ -56,8 +58,20 @@ export default function Headerbar() {
           <div onClick={checkedModal}>Idea List</div>
         </Link>
       </Button>
+      {islogincheck ? (
+        <Button>
+          <Link to="/mypage" className="link">
+            <div onClick={checkedModal}>Mypage</div>
+          </Link>
+        </Button>
+      ) : null}
+
       <Button>
-        <div onClick={() => handleModal()}>Login</div>
+        {islogincheck ? (
+          <div onClick={() => handleLogout()}>Logout</div>
+        ) : (
+          <div onClick={() => handleModal()}>Login</div>
+        )}
       </Button>
     </Sidebar>
   );
