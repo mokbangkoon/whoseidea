@@ -33,6 +33,7 @@ app.post('/login', controllers.login);
 app.post('/logout', controllers.logout);
 app.post('/post', controllers.writePost);
 app.post('/comment', controllers.writeComment);
+app.post('/message', controllers.messanger);
 
 app.patch('/updatepro', controllers.updatePro);
 app.patch('/like', controllers.likePost);
