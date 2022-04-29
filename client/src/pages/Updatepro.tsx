@@ -90,7 +90,7 @@ const Btn = styled.div`
 export default function Updatepro() {
   const check = useSelector((state: RootState) => state.modal.check);
   const handleUpdatepro = () => {
-    // axios.patch('https://localhost:8080/updatapro',data)
+    // axios.patch('https://localhost:8080/updatapro',data).then((data)=>console.log(data))
   };
 
   return (
