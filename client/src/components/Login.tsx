@@ -7,7 +7,6 @@ import { openModal } from '../modules/modal';
 import { Link } from 'react-router-dom';
 import { logindata } from '../modules/login';
 import { errormessage } from '../modules/errormessage';
-import { isauthenticated, logout } from '../modules/function';
 
 axios.defaults.withCredentials = true;
 
@@ -110,7 +109,6 @@ export default function Login({
     dispatch(errormessage({ errormessage: message }));
   };
   const handleLogin = () => {
-    console.log(login);
     if (!login.email || !login.password) {
       handleErrorMessage('아이디와 비밀번호를 다시 입력해주세요.');
     } else {
@@ -122,7 +120,10 @@ export default function Login({
         handleErrorMessage(data.data.message);
         handleResponseSuccess();
       })
-      .then(data => handleModal());
+      .then(data => {
+        handleModal();
+        handleErrorMessage('');
+      });
   };
   // 각 액션들을 디스패치하는 함수들을 만들어줍니다
   const handleModal = () => {
