@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const RankContainer = styled.div`
   width: 80%;
   height: 100vh;
-  background-color: #cff074;
+  background-color: #ffffff;
   position: absolute;
   left: 10%;
   top: 30%;
@@ -24,7 +24,7 @@ const RankContainer = styled.div`
 
 const Line = styled.div`
   width: 99%;
-  border: 1px solid #cff074;
+  border: 1px solid #000000;
 `;
 
 export default function RankList() {
@@ -35,7 +35,9 @@ export default function RankList() {
         <div>
           <img src="1등.png"></img>
         </div>
-
+        <Line>
+          <div></div>
+        </Line>
         <div>
           <img src="2등.png"></img>
         </div>
