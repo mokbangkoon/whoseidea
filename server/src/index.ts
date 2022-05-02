@@ -6,7 +6,6 @@ import cookieParser from 'cookie-parser'
 import controllers from './controller'
 const app = express();
 
-
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(
@@ -34,6 +33,7 @@ app.post('/logout', controllers.logout);
 app.post('/post', controllers.writePost);
 app.post('/comment', controllers.writeComment);
 app.post('/message', controllers.messanger);
+app.post('/post/image', controllers.fileUploader(), controllers.uploadPostImage);
 
 app.patch('/updatepro', controllers.updatePro);
 app.patch('/like', controllers.likePost);

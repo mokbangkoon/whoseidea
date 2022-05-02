@@ -23,7 +23,7 @@ export async function writePost (req: any, res: any) {
             nickname:userInfo?.id,
             likes:0,
             view:0,
-            file:'',
+            file:0,
             caption:req.body.caption,
             context:req.body.context
         }
