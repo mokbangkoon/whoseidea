@@ -7,6 +7,7 @@ import signup from './signup';
 import islogincheck from './islogin';
 import functions from './function';
 
+
 const rootReducer = combineReducers({
   counter,
   modal,
