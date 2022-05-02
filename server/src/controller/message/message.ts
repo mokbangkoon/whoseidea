@@ -9,7 +9,7 @@ export async function messanger (req :any, res: any) {
     const accsessTokenData: any = isAuthorized(req)
     const userInfo = await prisma.users.findFirst({
         where: {
-            nickname: accsessTokenData.nickname
+            nickname: accsessTokenData?.nickname
         }
     })
     if (!userInfo) {
