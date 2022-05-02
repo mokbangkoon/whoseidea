@@ -10,16 +10,21 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './modules';
 import Mypage from './pages/Mypage';
+import Updatepro from './pages/Updatepro';
 
 import { isauthenticated } from './modules/function';
 import { islogin } from './modules/islogin';
+import Signout from './pages/Signout';
+import Mypost from './pages/Mypost';
 
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [usernickname, setusernickname] = useState('');
   const isAuthenticated = () => {
     axios.get('https://localhost:8080/auth').then(data => {
-      dispatch(islogin(data.data));
+      dispatch(islogin(true));
+      console.log(data);
       navigate('/');
     });
   };
@@ -29,6 +34,7 @@ function App() {
 
   const handleLogout = () => {
     axios.post('https://localhost:8080/logout').then(res => {
+      console.log(res.data);
       dispatch(islogin(false));
       navigate('/');
     });
@@ -50,6 +56,9 @@ function App() {
         <Route path="/rank" element={<Rank />} />
         <Route path="/idealist" element={<IdeaList />} />
         <Route path="/mypage" element={<Mypage />} />
+        <Route path="/updatepro" element={<Updatepro />} />
+        <Route path="/signout" element={<Signout />} />
+        <Route path="/mypost" element={<Mypost />} />
       </Routes>
     </div>
   );

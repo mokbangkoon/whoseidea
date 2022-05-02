@@ -1,0 +1,169 @@
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../modules';
+import Login from '../components/Login';
+import styled from 'styled-components';
+import { useState } from 'react';
+import axios from 'axios';
+
+const Title = styled.div`
+  font-weight: bold;
+  font-size: 100px;
+  text-align: center;
+  position: absolute;
+  color: black;
+  border-radius: 1rem;
+  left: 25%;
+  font-family: 'Courier New', Courier, monospace;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
+    drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
+    drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 10px;
+`;
+const Input1 = styled.div`
+  position: absolute;
+  top: 30%;
+  left: 35%;
+  & input {
+    width: 300px;
+    height: 50px;
+    left: 200px;
+    font-size: 20px;
+    text-align: center;
+    background: rgba(196, 196, 196, 0.09);
+    border: 1px solid #f7f4ba;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+  }
+`;
+const Input2 = styled.div`
+  position: absolute;
+  top: 40%;
+  left: 35%;
+  & input {
+    width: 300px;
+    height: 50px;
+    left: 200px;
+    font-size: 20px;
+    text-align: center;
+    background: rgba(196, 196, 196, 0.09);
+    border: 1px solid #f7f4ba;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+  }
+`;
+const Input3 = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  & input {
+    width: 300px;
+    height: 50px;
+    left: 200px;
+    font-size: 20px;
+    text-align: center;
+    background: rgba(196, 196, 196, 0.09);
+    border: 1px solid #f7f4ba;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+  }
+`;
+const Btn = styled.div`
+  & button {
+    position: absolute;
+    top: 60%;
+    left: 40%;
+    border-radius: 1rem;
+    width: 10%;
+    height: 40px;
+    border: none;
+    background-color: #fae467;
+    font-weight: bold;
+    :hover {
+      background-color: #353333;
+      color: white;
+      transition: 0.5s;
+    }
+  }
+`;
+const Error = styled.div`
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f7d7da;
+  position: absolute;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  top: 70%;
+  left: 38%;
+  animation: FadeDown 1s;
+  font-size: large;
+  font-weight: bold;
+`;
+
+export default function Updatepro() {
+  const [userinfo, setuserinfo] = useState({
+    nickname: '',
+    oldPassword: '',
+    newPassword: '',
+  });
+  const check = useSelector((state: RootState) => state.modal.check);
+  const [errorMessage, setErrorMessage] = useState('');
+  const handleInputValue = (key: any, e: any) => {
+    setuserinfo({ ...userinfo, [key]: e.target.value });
+  };
+
+  const handleUpdatepro = () => {
+    const { nickname, oldPassword, newPassword } = userinfo;
+    if (!oldPassword || !newPassword) {
+      return setErrorMessage('모든 항목은 필수입니다');
+    }
+    setErrorMessage('');
+
+    axios
+      .patch('https://localhost:8080/updatapro', userinfo)
+      .then(data => console.log(data));
+  };
+
+  return (
+    <div>
+      <Title>
+        <div> 정보수정 페이지</div>
+      </Title>
+      <div>
+        <Input1>
+          <input
+            type="text"
+            placeholder="변경할 닉네임"
+            onChange={e => handleInputValue('nickname', e)}
+          ></input>
+        </Input1>
+        <Input2>
+          <input
+            type="password"
+            placeholder="현재 비밀번호"
+            onChange={e => handleInputValue('oldPassword', e)}
+          ></input>
+        </Input2>
+        <Input3>
+          <input
+            type="password"
+            placeholder="변경할 비밀번호"
+            onChange={e => handleInputValue('newPassword', e)}
+          ></input>
+        </Input3>
+        <Btn>
+          <div>
+            <button onClick={() => handleUpdatepro()}>확인</button>
+          </div>
+        </Btn>
+        <Error>{errorMessage}</Error>
+      </div>
+
+      {check ? <Login /> : null}
+    </div>
+  );
+}
