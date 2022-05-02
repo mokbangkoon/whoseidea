@@ -30,10 +30,10 @@ const MainStyle = styled.div`
   position: absolute;
   left: 10%;
   top: 120%;
-  line-height: 300px;
   font-size: 1rem;
   border-radius: 1rem;
   grid-column-gap: 2rem;
+  line-height: 300px;
 `;
 const Title = styled.div`
   background-image: url('ㅇㅇ.png');

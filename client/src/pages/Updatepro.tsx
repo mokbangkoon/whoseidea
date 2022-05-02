@@ -2,7 +2,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import styled from 'styled-components';
-
+import { useState } from 'react';
+import axios from 'axios';
+import { any } from 'prop-types';
+import { errormessage } from '../modules/errormessage';
 const Title = styled.div`
   font-weight: bold;
   font-size: 100px;
@@ -86,11 +89,44 @@ const Btn = styled.div`
     }
   }
 `;
+const Error = styled.div`
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f7d7da;
+  position: absolute;
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 1rem;
+  border: 1px solid transparent;
+  border-radius: 0.25rem;
+  top: 70%;
+  left: 38%;
+  animation: FadeDown 1s;
+  font-size: large;
+  font-weight: bold;
+`;
 
 export default function Updatepro() {
+  const [userinfo, setuserinfo] = useState({
+    nickname: '',
+    oldPassword: '',
+    newPassword: '',
+  });
   const check = useSelector((state: RootState) => state.modal.check);
+  const [errorMessage, setErrorMessage] = useState('');
+  const handleInputValue = (key: any, e: any) => {
+    setuserinfo({ ...userinfo, [key]: e.target.value });
+  };
+
   const handleUpdatepro = () => {
-    // axios.patch('https://localhost:8080/updatapro',data).then((data)=>console.log(data))
+    const { nickname, oldPassword, newPassword } = userinfo;
+    if (!oldPassword || !newPassword) {
+      return setErrorMessage('모든 항목은 필수입니다');
+    }
+    setErrorMessage('');
+
+    axios
+      .patch('https://localhost:8080/updatapro', userinfo)
+      .then(data => console.log(data));
   };
 
   return (
@@ -100,19 +136,32 @@ export default function Updatepro() {
       </Title>
       <div>
         <Input1>
-          <input type="text" placeholder="변경할 닉네임"></input>
+          <input
+            type="text"
+            placeholder="변경할 닉네임"
+            onChange={e => handleInputValue('nickname', e)}
+          ></input>
         </Input1>
         <Input2>
-          <input type="password" placeholder="현재 비밀번호"></input>
+          <input
+            type="password"
+            placeholder="현재 비밀번호"
+            onChange={e => handleInputValue('oldPassword', e)}
+          ></input>
         </Input2>
         <Input3>
-          <input type="password" placeholder="변경할 비밀번호"></input>
+          <input
+            type="password"
+            placeholder="변경할 비밀번호"
+            onChange={e => handleInputValue('newPassword', e)}
+          ></input>
         </Input3>
         <Btn>
           <div>
             <button onClick={() => handleUpdatepro()}>확인</button>
           </div>
         </Btn>
+        <Error>{errorMessage}</Error>
       </div>
 
       {check ? <Login /> : null}
