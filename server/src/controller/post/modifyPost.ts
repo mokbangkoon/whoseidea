@@ -11,11 +11,6 @@ export async function modifyPost (req: any, res: any) {
     // 닉네임으로 users 테이블에서 id값을 가져온다.
     const accsessTokenData: any = isAuthorized(req)
     const prisma = new PrismaClient();
-    const userInfo = await prisma.users.findFirst({
-        where:{
-            nickname:accsessTokenData.nickname
-        }
-    })
 
     // posts 테이블에서 가져온값으로 수정한다.
     await prisma.posts.update({
