@@ -19,7 +19,7 @@ model Users {
   UsersToPosts    Posts[]    @relation("UsersToPosts")
   UsersToLikes    Likes[]    @relation("UsersToLikes")
   UsersToComments Comments[] @relation("UsersToComments")
-  UsersToMessage  Message[]  @relation("UsersToMessage")
+  UsersToMessage  Messages[] @relation("UsersToMessage")
 }
 
 model Posts {
@@ -53,16 +53,16 @@ model Comments {
   PostsToComments2 Posts? @relation("PostsToComments", fields: [postId], references: [id])
 }
 
-model Message {
+model Messages {
   id             Int    @id @default(autoincrement())
   nickname       Int
   text           String
-  target          Int
+  target         Int
   UsersToMessage Users? @relation("UsersToMessage", fields: [nickname], references: [id])
 }
 
 model Files {
-  id     Int @id @default(autoincrement())
+  id     Int    @id @default(autoincrement())
   postId Int
   url    String
 }
