@@ -4,7 +4,7 @@ import { isAuthorized } from "../tokenFunctions";
 
 export async function messanger (req :any, res: any) {
     if (!isAuthorized(req)) {
-        res.status(422).send('invaild')
+        return res.status(422).send('invaild')
     }
     const accsessTokenData: any = isAuthorized(req)
     const userInfo = await prisma.users.findFirst({
@@ -13,12 +13,12 @@ export async function messanger (req :any, res: any) {
         }
     })
     if (!userInfo) {
-        res.status(425).send('not user')
+        return res.status(425).send('not user')
     }
     if (!await prisma.users.findFirst({
         where: {nickname: req.body.userId}
     })) {
-        res.status(426).send('not find user')
+        return res.status(426).send('not find user')
     }
     await prisma.message.create({
         data: {
@@ -27,5 +27,5 @@ export async function messanger (req :any, res: any) {
             target: req.body.target
         }
     })
-    res.status(200).send('send ok')
+    return res.status(200).send('send ok')
 }

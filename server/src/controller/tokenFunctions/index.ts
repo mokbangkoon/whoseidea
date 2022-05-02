@@ -2,11 +2,7 @@ require('dotenv').config()
 import { sign, verify } from 'jsonwebtoken'
 
 export async function generateAccessToken (data: any) {
-    let token = await sign({ data }, process.env.ACCESS_SECRET as any)
-    return token
-}
-export function sendAccessToken (res: any, accessToken: any) {
-    res.json({ message: 'ok' })
+    return await sign(data, process.env.ACCESS_SECRET as any)
 }
 export function isAuthorized (req: any) {
     if (!req.headers.cookie) {
