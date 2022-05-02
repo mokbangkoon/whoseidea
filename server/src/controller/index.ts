@@ -1,3 +1,4 @@
+import { fileUploader } from './fileUploadFunctions'
 import { signup } from './users/signup'
 import { emailDuplication } from './users/emailDuplication'
 import { nicknameDuplication } from './users/nicknameDuplication'
@@ -18,9 +19,11 @@ import { deleteComment } from './comment/deleteComment'
 import { likePost } from './post/likePost'
 import { modifyPost } from './post/modifyPost'
 import { messanger } from './message/message'
+import { uploadPostImage } from './post/uploadPostImage'
 
 
 const controllers = {
+    fileUploader:fileUploader,
     signup:signup,
     emailDuplication:emailDuplication,
     nicknameDuplication:nicknameDuplication,
@@ -40,7 +43,8 @@ const controllers = {
     deleteComment:deleteComment,
     likePost:likePost,
     modifyPost:modifyPost,
-    messanger:messanger
+    messanger:messanger,
+    uploadPostImage:uploadPostImage
 }
 
 export default controllers
