@@ -12,9 +12,7 @@ export async function login (req: any, res: any) {
     if (!userInfo) {
         res.status(404).send('invaild')
     } else {
-        await generateAccessToken(userInfo)
-        .then((data) => {
-            res.cookie("jwt", data).status(200).send({message: 'ok'})
-        })
+        const data = await generateAccessToken(userInfo)
+        return res.cookie("jwt", data).status(200).send('ok')
     }
 }
