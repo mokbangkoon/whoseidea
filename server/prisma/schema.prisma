@@ -12,7 +12,7 @@ datasource db {
 
 model Users {
   id              Int        @id @default(autoincrement())
-  nickname          String
+  nickname        String
   password        String
   email           String
   profile         String
@@ -24,9 +24,9 @@ model Users {
 
 model Posts {
   id               Int        @id @default(autoincrement())
-  nickname           Int
+  nickname         Int
   caption          String
-  file             String
+  file             Int
   likes            Int
   view             Int
   context          String
@@ -38,7 +38,7 @@ model Posts {
 
 model Likes {
   id           Int    @id @default(autoincrement())
-  nickname       Int
+  nickname     Int
   postId       Int
   UsersToLikes Users? @relation("UsersToLikes", fields: [nickname], references: [id])
   PostsToLikes Posts? @relation("PostsToLikes", fields: [postId], references: [id])
@@ -47,7 +47,7 @@ model Likes {
 model Comments {
   id               Int    @id @default(autoincrement())
   text             String
-  nickname           Int
+  nickname         Int
   postId           Int
   UsersToComments  Users? @relation("UsersToComments", fields: [nickname], references: [id])
   PostsToComments2 Posts? @relation("PostsToComments", fields: [postId], references: [id])
@@ -55,8 +55,14 @@ model Comments {
 
 model Message {
   id             Int    @id @default(autoincrement())
-  nickname         Int
+  nickname       Int
   text           String
   target          Int
   UsersToMessage Users? @relation("UsersToMessage", fields: [nickname], references: [id])
+}
+
+model Files {
+  id     Int @id @default(autoincrement())
+  postId Int
+  url    String
 }

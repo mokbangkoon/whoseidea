@@ -34,6 +34,7 @@ const MainStyle = styled.div`
   font-size: 1rem;
   border-radius: 1rem;
   grid-column-gap: 2rem;
+  line-height: 300px;
 `;
 const Title = styled.div`
   background-image: url('ㅇㅇ.png');
