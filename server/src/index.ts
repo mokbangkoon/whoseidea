@@ -38,6 +38,7 @@ app.post('/post/image', controllers.fileUploader(), controllers.uploadPostImage)
 app.patch('/updatepro', controllers.updatePro);
 app.patch('/like', controllers.likePost);
 app.patch('/post', controllers.modifyPost);
+app.patch('/user/image', controllers.fileUploader(), controllers.uploadUserImage);
 
 app.delete('/signout', controllers.signout);
 app.delete('/comment', controllers.deleteComment);

@@ -26,7 +26,7 @@ export async function signup (req: any, res: any) {
             nickname:nickname,
             email: email,
             password:password,
-            profile:'default_image.png'
+            profile:'https://whoseidea-image.s3.ap-northeast-2.amazonaws.com/default_user_image.png'
         },
     })
     const token = await generateAccessToken(req.body);
