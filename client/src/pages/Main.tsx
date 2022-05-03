@@ -23,29 +23,29 @@ const MainStyle = styled.div`
   background-color: #000000;
   font-weight: bold;
   text-align: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  height: 300px;
-  width: 80%;
-  position: absolute;
+  display: flex;
+  height: 10%;
+  width: 100%;
+  position: relative;
   left: 10%;
-  top: 120%;
-  line-height: 300px;
+  top: 2%;
+
   font-size: 1rem;
   border-radius: 1rem;
   grid-column-gap: 2rem;
-  line-height: 300px;
 `;
 const Title = styled.div`
   background-image: url('ㅇㅇ.png');
-  background-size: 100%;
-  background-color: #879eb3;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  background-color: #151516;
   border-radius: 1rem;
   font-weight: bold;
   border: 3px solid black;
   width: 60%;
   left: 20%;
-  height: 850px;
+  height: 28%;
   text-align: center;
   font-size: 5rem;
   color: #f7f8fc;
@@ -71,6 +71,7 @@ const PositionContainer = styled.div`
   position: absolute;
   top: 180%;
   left: 10%;
+  background-repeat: no-repeat;
 `;
 const Container = styled.div`
   width: 60%;
