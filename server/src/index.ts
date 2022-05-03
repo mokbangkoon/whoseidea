@@ -36,7 +36,8 @@ app.post('/comment', controllers.writeComment);
 app.post('/message', controllers.messanger);
 app.post('/post/image', controllers.fileUploader(), controllers.uploadPostImage);
 
-app.patch('/updatepro', controllers.updatePro);
+app.patch('/user', controllers.updatePro);
+app.patch('/changepassword', controllers.changePassword)
 app.patch('/like', controllers.likePost);
 app.patch('/post', controllers.modifyPost);
 app.patch('/user/image', controllers.fileUploader(), controllers.uploadUserImage);
