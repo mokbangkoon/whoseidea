@@ -115,7 +115,7 @@ export default function Updatepro() {
     setuserinfo({ ...userinfo, [key]: e.target.value });
   };
 
-  const handleUpdatepro = () => {
+  const handleUpdatepassword = () => {
     const { oldPassword, newPassword } = userinfo;
     if (!oldPassword || !newPassword) {
       return setErrorMessage('모든 항목은 필수입니다');
@@ -123,8 +123,9 @@ export default function Updatepro() {
     setErrorMessage('');
 
     axios
-      .patch('https://localhost:8080/chnagepassword', userinfo)
-      .then(data => console.log(data));
+      .patch('https://localhost:8080/changepassword', userinfo)
+      .then(data => setErrorMessage(data.data))
+      .catch(data => setErrorMessage('비밀번호를 올바르게 입력해주세요.'));
   };
 
   return (
@@ -149,7 +150,7 @@ export default function Updatepro() {
         </Input2>
         <Btn>
           <div>
-            <button onClick={() => handleUpdatepro()}>확인</button>
+            <button onClick={() => handleUpdatepassword()}>확인</button>
           </div>
         </Btn>
         <Error>{errorMessage}</Error>

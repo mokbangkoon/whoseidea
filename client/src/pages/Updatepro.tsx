@@ -41,7 +41,7 @@ const Btn = styled.div`
   & button {
     position: absolute;
     top: 40%;
-    left: 33%;
+    left: 37%;
     border-radius: 1rem;
     width: 10%;
     height: 40px;
@@ -59,7 +59,7 @@ const Btn2 = styled.div`
   & button {
     position: absolute;
     top: 40%;
-    left: 50%;
+    left: 48%;
     border-radius: 1rem;
     width: 10%;
     height: 40px;
@@ -82,8 +82,8 @@ const Error = styled.div`
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: 0.25rem;
-  top: 70%;
-  left: 38%;
+  top: 50%;
+  left: 40%;
   animation: FadeDown 1s;
   font-size: large;
   font-weight: bold;
@@ -107,8 +107,9 @@ export default function Updatepro() {
     setErrorMessage('');
 
     axios
-      .patch('https://localhost:8080/updatepro', userinfo)
-      .then(data => console.log(data)); // setErrorMessage(data.data.message)
+      .patch('https://localhost:8080/user', userinfo)
+      .then(data => setErrorMessage(data.data))
+      .catch(data => setErrorMessage('닉네임이 이미 존재합니다.'));
   };
 
   return (
