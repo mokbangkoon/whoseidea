@@ -4,7 +4,7 @@ import { isAuthorized } from "../tokenFunctions";
 
 export async function deleteComment (req: any, res: any) {
     if (!isAuthorized(req)) {
-        res.status(422).send('invaild')
+        return res.status(422).send('invaild')
     }
     const accsessTokenData: any = isAuthorized(req)
     const userInfo = await prisma.users.findFirst({
@@ -13,11 +13,11 @@ export async function deleteComment (req: any, res: any) {
         }
     })
     if (!userInfo) {
-        res.status(425).send('not the user')
+        return res.status(425).send('not the user')
     }
 
     if(!await prisma.comments.findFirst({where: {id: req.body.commentId}})) {
-        res.status(426).send('no comments')
+        return res.status(426).send('no comments')
     } else {
         await prisma.comments.deleteMany({
             where: {
@@ -25,6 +25,6 @@ export async function deleteComment (req: any, res: any) {
                 id: req.body.commentId
             } 
         })
-        res.status(205).send('ok')
+        return res.status(205).send('ok')
     }
 }

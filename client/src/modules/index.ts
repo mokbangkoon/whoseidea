@@ -5,6 +5,7 @@ import login from './login';
 import error from './errormessage';
 import signup from './signup';
 import islogincheck from './islogin';
+import idealist from './idealist';
 
 const rootReducer = combineReducers({
   counter,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   error,
   signup,
   islogincheck,
+  idealist,
 });
 
 // 루트 리듀서를 내보내주세요.
