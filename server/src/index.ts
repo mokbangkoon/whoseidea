@@ -26,6 +26,7 @@ app.get('/post', controllers.getPostPage);
 app.get('/comment', controllers.getComment);
 app.get('/emailduplication', controllers.emailDuplication);
 app.get('/nicknameduplication', controllers.nicknameDuplication);
+app.get('/post/image', controllers.transmissionUrl);
 
 app.post('/signup', controllers.signup);
 app.post('/login', controllers.login);
@@ -38,6 +39,7 @@ app.post('/post/image', controllers.fileUploader(), controllers.uploadPostImage)
 app.patch('/updatepro', controllers.updatePro);
 app.patch('/like', controllers.likePost);
 app.patch('/post', controllers.modifyPost);
+app.patch('/user/image', controllers.fileUploader(), controllers.uploadUserImage);
 
 app.delete('/signout', controllers.signout);
 app.delete('/comment', controllers.deleteComment);
