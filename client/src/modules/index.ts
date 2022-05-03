@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-import counter from './counter';
 import modal from './modal';
 import login from './login';
 import error from './errormessage';
@@ -8,7 +7,6 @@ import islogincheck from './islogin';
 import idealist from './idealist';
 
 const rootReducer = combineReducers({
-  counter,
   modal,
   login,
   error,

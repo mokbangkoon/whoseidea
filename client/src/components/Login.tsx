@@ -120,7 +120,8 @@ export default function Login({
       .then(data => {
         handleModal();
         handleErrorMessage('');
-      });
+      })
+      .catch(data => handleErrorMessage('잘못된 사용자 정보입니다.'));
   };
   // 각 액션들을 디스패치하는 함수들을 만들어줍니다
   const handleModal = () => {
