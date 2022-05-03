@@ -20,7 +20,7 @@ export async function messanger (req :any, res: any) {
     })) {
         return res.status(426).send('not find user')
     }
-    await prisma.messages.create({
+    await prisma.message.create({
         data: {
             nickname: userInfo?.id,
             text: req.body.context,

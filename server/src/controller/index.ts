@@ -7,6 +7,7 @@ import { login } from './users/login'
 import { logout } from './users/logout'
 import { auth } from './users/auth'
 import { updatePro } from './users/updatePro'
+import { changePassword } from './users/changePassword'
 import { elseProfile } from './users/elseProfile'
 import { myPost } from './users/my-post'
 import { myComment } from './users/my-comment'
@@ -34,6 +35,7 @@ const controllers = {
     logout:logout,
     auth:auth,
     updatePro:updatePro,
+    changePassword:changePassword,
     elseProfile:elseProfile,
     myPost:myPost,
     myComment:myComment,

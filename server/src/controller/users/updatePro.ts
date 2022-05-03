@@ -9,7 +9,9 @@ export async function updatePro (req: any, res: any) {
     if (!isAuthorized(req)) {
         return res.status(401).send('invaild user')
     }
-
+    if (await prisma.users.findFirst({where: {nickname: req.body.nickname}})) {
+        return res.status(403).send('nickname exists')
+    }
     const accsessTokenData: any = isAuthorized(req)
     const userInfo = Object.assign({}, req.body)
     await prisma.users.update({
