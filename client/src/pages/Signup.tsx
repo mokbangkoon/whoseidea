@@ -271,7 +271,7 @@ function Signup() {
     }
 
     return axios
-      .get('hhttps://whoseidea.ml:8080/nicknameduplication', { params: signup })
+      .get('https://whoseidea.ml:8080/nicknameduplication', { params: signup })
       .then(data => alert(data.data))
       .catch(error =>
         dispatch(
