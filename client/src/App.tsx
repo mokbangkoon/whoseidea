@@ -16,6 +16,7 @@ import { isauthenticated } from './modules/function';
 import { islogin } from './modules/islogin';
 import Signout from './pages/Signout';
 import Mypost from './pages/Mypost';
+import ChangePassword from './pages/ChangePassword';
 
 function App() {
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ function App() {
         <Route path="/updatepro" element={<Updatepro />} />
         <Route path="/signout" element={<Signout />} />
         <Route path="/mypost" element={<Mypost />} />
+        <Route path="/changepassword" element={<ChangePassword />} />
       </Routes>
     </div>
   );
