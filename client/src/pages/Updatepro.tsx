@@ -4,6 +4,7 @@ import Login from '../components/Login';
 import styled from 'styled-components';
 import { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Title = styled.div`
   font-weight: bold;
@@ -22,41 +23,7 @@ const Title = styled.div`
 const Input1 = styled.div`
   position: absolute;
   top: 30%;
-  left: 35%;
-  & input {
-    width: 300px;
-    height: 50px;
-    left: 200px;
-    font-size: 20px;
-    text-align: center;
-    background: rgba(196, 196, 196, 0.09);
-    border: 1px solid #f7f4ba;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-  }
-`;
-const Input2 = styled.div`
-  position: absolute;
-  top: 40%;
-  left: 35%;
-  & input {
-    width: 300px;
-    height: 50px;
-    left: 200px;
-    font-size: 20px;
-    text-align: center;
-    background: rgba(196, 196, 196, 0.09);
-    border: 1px solid #f7f4ba;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-  }
-`;
-const Input3 = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 35%;
+  left: 37%;
   & input {
     width: 300px;
     height: 50px;
@@ -73,8 +40,26 @@ const Input3 = styled.div`
 const Btn = styled.div`
   & button {
     position: absolute;
-    top: 60%;
-    left: 40%;
+    top: 40%;
+    left: 33%;
+    border-radius: 1rem;
+    width: 10%;
+    height: 40px;
+    border: none;
+    background-color: #fae467;
+    font-weight: bold;
+    :hover {
+      background-color: #353333;
+      color: white;
+      transition: 0.5s;
+    }
+  }
+`;
+const Btn2 = styled.div`
+  & button {
+    position: absolute;
+    top: 40%;
+    left: 50%;
     border-radius: 1rem;
     width: 10%;
     height: 40px;
@@ -107,8 +92,6 @@ const Error = styled.div`
 export default function Updatepro() {
   const [userinfo, setuserinfo] = useState({
     nickname: '',
-    oldPassword: '',
-    newPassword: '',
   });
   const check = useSelector((state: RootState) => state.modal.check);
   const [errorMessage, setErrorMessage] = useState('');
@@ -117,15 +100,15 @@ export default function Updatepro() {
   };
 
   const handleUpdatepro = () => {
-    const { nickname, oldPassword, newPassword } = userinfo;
-    if (!oldPassword || !newPassword) {
+    const { nickname } = userinfo;
+    if (!nickname) {
       return setErrorMessage('모든 항목은 필수입니다');
     }
     setErrorMessage('');
 
     axios
-      .patch('https://localhost:8080/updatapro', userinfo)
-      .then(data => console.log(data));
+      .patch('https://localhost:8080/updatepro', userinfo)
+      .then(data => console.log(data)); // setErrorMessage(data.data.message)
   };
 
   return (
@@ -141,25 +124,18 @@ export default function Updatepro() {
             onChange={e => handleInputValue('nickname', e)}
           ></input>
         </Input1>
-        <Input2>
-          <input
-            type="password"
-            placeholder="현재 비밀번호"
-            onChange={e => handleInputValue('oldPassword', e)}
-          ></input>
-        </Input2>
-        <Input3>
-          <input
-            type="password"
-            placeholder="변경할 비밀번호"
-            onChange={e => handleInputValue('newPassword', e)}
-          ></input>
-        </Input3>
         <Btn>
           <div>
             <button onClick={() => handleUpdatepro()}>확인</button>
           </div>
         </Btn>
+        <Btn2>
+          <div>
+            <Link to="/changepassword">
+              <button>비밀번호 변경하기</button>
+            </Link>
+          </div>
+        </Btn2>
         <Error>{errorMessage}</Error>
       </div>
 

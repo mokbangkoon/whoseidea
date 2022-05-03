@@ -2,10 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import styled from 'styled-components';
-import axios from 'axios';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { islogin } from '../modules/islogin';
+import axios from 'axios';
 
 const Title = styled.div`
   font-weight: bold;
@@ -14,7 +12,7 @@ const Title = styled.div`
   position: absolute;
   color: black;
   border-radius: 1rem;
-  left: 25%;
+  left: 20%;
   font-family: 'Courier New', Courier, monospace;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
     drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
@@ -55,6 +53,23 @@ const Input2 = styled.div`
     border-radius: 10px;
   }
 `;
+const Input3 = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 35%;
+  & input {
+    width: 300px;
+    height: 50px;
+    left: 200px;
+    font-size: 20px;
+    text-align: center;
+    background: rgba(196, 196, 196, 0.09);
+    border: 1px solid #f7f4ba;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+  }
+`;
 const Btn = styled.div`
   & button {
     position: absolute;
@@ -64,7 +79,7 @@ const Btn = styled.div`
     width: 10%;
     height: 40px;
     border: none;
-    background-color: #e5f056;
+    background-color: #fae467;
     font-weight: bold;
     :hover {
       background-color: #353333;
@@ -89,58 +104,52 @@ const Error = styled.div`
   font-weight: bold;
 `;
 
-export default function Signout() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+export default function Updatepro() {
   const [userinfo, setuserinfo] = useState({
-    email: '',
-    password: '',
+    oldPassword: '',
+    newPassword: '',
   });
-  const [errorMessage, setErrorMessage] = useState('');
   const check = useSelector((state: RootState) => state.modal.check);
+  const [errorMessage, setErrorMessage] = useState('');
   const handleInputValue = (key: any, e: any) => {
     setuserinfo({ ...userinfo, [key]: e.target.value });
   };
-  const handleSignout = () => {
-    const { email, password } = userinfo;
-    if (!email || !password) {
+
+  const handleUpdatepro = () => {
+    const { oldPassword, newPassword } = userinfo;
+    if (!oldPassword || !newPassword) {
       return setErrorMessage('모든 항목은 필수입니다');
     }
     setErrorMessage('');
-    const params = { data: userinfo };
 
     axios
-      .delete('https://localhost:8080/signout', params)
-      .then(data => alert(data.data))
-      .then(data => navigate('/'))
-      .then(data => dispatch(islogin(false)))
-      .catch(data => setErrorMessage('잘못된 정보를 입력하셨습니다.'));
+      .patch('https://localhost:8080/chnagepassword', userinfo)
+      .then(data => console.log(data));
   };
 
   return (
     <div>
       <Title>
-        <div> 회원탈퇴 페이지</div>
+        <div> 비밀번호 변경 페이지</div>
       </Title>
       <div>
         <Input1>
           <input
-            type="text"
-            placeholder="현재 아이디"
-            onChange={e => handleInputValue('email', e)}
+            type="password"
+            placeholder="현재 비밀번호"
+            onChange={e => handleInputValue('oldPassword', e)}
           ></input>
         </Input1>
         <Input2>
           <input
             type="password"
-            placeholder="현재 비밀번호"
-            onChange={e => handleInputValue('password', e)}
+            placeholder="변경할 비밀번호"
+            onChange={e => handleInputValue('newPassword', e)}
           ></input>
         </Input2>
-
         <Btn>
           <div>
-            <button onClick={() => handleSignout()}>확인</button>
+            <button onClick={() => handleUpdatepro()}>확인</button>
           </div>
         </Btn>
         <Error>{errorMessage}</Error>
