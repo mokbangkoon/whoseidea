@@ -21,6 +21,7 @@ import { modifyPost } from './post/modifyPost'
 import { messanger } from './message/message'
 import { uploadPostImage } from './post/uploadPostImage'
 import { uploadUserImage } from './users/uploadUserImage'
+import { transmissionUrl } from './post/transmissionUrl'
 
 
 const controllers = {
@@ -46,7 +47,8 @@ const controllers = {
     modifyPost:modifyPost,
     messanger:messanger,
     uploadPostImage:uploadPostImage,
-    uploadUserImage:uploadUserImage
+    uploadUserImage:uploadUserImage,
+    transmissionUrl:transmissionUrl
 }
 
 export default controllers
