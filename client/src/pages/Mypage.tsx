@@ -87,13 +87,12 @@ const UserImage = styled.div`
 
 export default function Mypage() {
   const check = useSelector((state: RootState) => state.modal.check);
-  const signup = useSelector((state: RootState) => state.signup);
+  const login = useSelector((state: RootState) => state.login);
   const [nickname, setnickname] = useState('');
   const [profile, setprofile] = useState('');
 
-  console.log(signup);
   useEffect(() => {
-    axios.get('https://localhost:8080/user', { params: signup }).then(data => {
+    axios.get('https://localhost:8080/auth').then(data => {
       setnickname(data.data.nickname);
       setprofile(data.data.profile);
     });

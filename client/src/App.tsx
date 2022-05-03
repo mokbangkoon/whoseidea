@@ -23,7 +23,8 @@ function App() {
   const [usernickname, setusernickname] = useState('');
   const isAuthenticated = () => {
     axios.get('https://localhost:8080/auth').then(data => {
-      dispatch(islogin(data.data));
+      dispatch(islogin(true));
+      console.log(data);
       navigate('/');
     });
   };
@@ -33,6 +34,7 @@ function App() {
 
   const handleLogout = () => {
     axios.post('https://localhost:8080/logout').then(res => {
+      console.log(res.data);
       dispatch(islogin(false));
       navigate('/');
     });
