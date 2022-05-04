@@ -136,7 +136,7 @@ const File = styled.div`
   }
 `;
 
-export default function Mypage({ handleMypost }: any) {
+export default function Mypage({ handleMypost, handleMycomment }: any) {
   const check = useSelector((state: RootState) => state.modal.check);
   const login = useSelector((state: RootState) => state.login);
   const [selectedFile, setselectedFile] = useState('');
@@ -242,7 +242,14 @@ export default function Mypage({ handleMypost }: any) {
           <Button>
             <div>
               <Link to="/mypost" className="text">
-                <div onClick={() => handleMypost()}>내가 쓴 게시글 보기</div>
+                <div
+                  onClick={() => {
+                    handleMypost();
+                    handleMycomment();
+                  }}
+                >
+                  내가 쓴 게시글 보기
+                </div>
               </Link>
             </div>
           </Button>

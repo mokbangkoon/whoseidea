@@ -23,6 +23,9 @@ function App() {
   const navigate = useNavigate();
   const [usernickname, setusernickname] = useState('');
   const [postData, setpostData] = useState<AxiosResponse | null | void>(null);
+  const [commentData, setcommentData] = useState<AxiosResponse | null | void>(
+    null
+  );
   const isAuthenticated = () => {
     axios.get('https://localhost:8080/auth').then(data => {
       setusernickname(data.data.nickname);
@@ -38,6 +41,11 @@ function App() {
     axios
       .get(`https://localhost:8080/user/my-post?nickname=${usernickname}`)
       .then(data => setpostData(data));
+  };
+  const handleMycomment = () => {
+    axios
+      .get(`https://localhost:8080/user/my-comment?nickname=${usernickname}`)
+      .then(data => setcommentData(data));
   };
   const handleLogout = () => {
     axios.post('https://localhost:8080/logout').then(res => {
@@ -64,11 +72,19 @@ function App() {
         <Route path="/idealist" element={<IdeaList />} />
         <Route
           path="/mypage"
-          element={<Mypage handleMypost={handleMypost} />}
+          element={
+            <Mypage
+              handleMypost={handleMypost}
+              handleMycomment={handleMycomment}
+            />
+          }
         />
         <Route path="/updatepro" element={<Updatepro />} />
         <Route path="/signout" element={<Signout />} />
-        <Route path="/mypost" element={<Mypost postData={postData} />} />
+        <Route
+          path="/mypost"
+          element={<Mypost postData={postData} commentData={commentData} />}
+        />
         <Route path="/changepassword" element={<ChangePassword />} />
       </Routes>
     </div>
