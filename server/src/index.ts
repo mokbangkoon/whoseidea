@@ -33,7 +33,7 @@ app.post('/login', controllers.login);
 app.post('/logout', controllers.logout);
 app.post('/post', controllers.writePost);
 app.post('/comment', controllers.writeComment);
-app.post('/message', controllers.messanger);
+app.post('/message', controllers.message);
 app.post('/post/image', controllers.fileUploader(), controllers.uploadPostImage);
 
 app.patch('/user', controllers.updatePro);
