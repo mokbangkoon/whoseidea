@@ -131,7 +131,7 @@ export default function IdeaList() {
 
   useEffect(() => {
     axios
-      .get('https://whoseidea.ml:8080/user', { params: idealist })
+      .get('https://localhost:8080/user', { params: idealist })
       .then(data => {
         console.log(data);
         setNickname(data.data.nickname);
@@ -140,7 +140,7 @@ export default function IdeaList() {
 
   useEffect(() => {
     axios
-      .get('https://whoseidea.ml:8080/post', { params: idealist })
+      .get('https://localhost:8080/post', { params: idealist })
       .then(data => {
         console.log(data);
         setPost(data.data.post);
@@ -149,7 +149,7 @@ export default function IdeaList() {
 
   useEffect(() => {
     axios
-      .patch('https://whoseidea.ml:8080/like', { params: idealist })
+      .patch('https://localhost:8080/like', { params: idealist })
       .then(data => {
         console.log(data);
         setLikes(data.data.likes);
@@ -157,7 +157,7 @@ export default function IdeaList() {
   });
   useEffect(() => {
     axios
-      .patch('https://whoseidea.ml:8080/image?postId=1', { params: idealist })
+      .patch('https://localhost:8080/image?postId=1', { params: idealist })
       .then(data => {
         console.log(data);
         setLikes(data.data.image);
