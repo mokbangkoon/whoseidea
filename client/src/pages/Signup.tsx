@@ -257,7 +257,7 @@ function Signup() {
       dispatch(emailmessage({ emailmessage: '' }));
     }
     return axios
-      .get('https://whoseidea.ml:8080/emailduplication', { params: signup })
+      .get('https://localhost:8080/emailduplication', { params: signup })
       .then(data => alert(data.data))
       .catch(error =>
         dispatch(emailmessage({ emailmessage: '이메일이 이미 존재합니다.' }))
@@ -271,7 +271,7 @@ function Signup() {
     }
 
     return axios
-      .get('https://whoseidea.ml:8080/nicknameduplication', { params: signup })
+      .get('https://localhost:8080/nicknameduplication', { params: signup })
       .then(data => alert(data.data))
       .catch(error =>
         dispatch(
@@ -288,7 +288,7 @@ function Signup() {
       dispatch(passwordmessage({ passwordmessage: '' }));
     }
     return axios
-      .post('https://whoseidea.ml:8080/signup', signup)
+      .post('https://localhost:8080/signup', signup)
       .then(data => {
         data.status === 200 ? alert('회원가입 완료') : alert('회원가입 실패');
       })
