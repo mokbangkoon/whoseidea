@@ -19,7 +19,7 @@ import { writeComment } from './comment/writeComment'
 import { deleteComment } from './comment/deleteComment'
 import { likePost } from './post/likePost'
 import { modifyPost } from './post/modifyPost'
-import { messanger } from './message/message'
+import { message } from './message/message'
 import { uploadPostImage } from './post/uploadPostImage'
 import { uploadUserImage } from './users/uploadUserImage'
 import { transmissionUrl } from './post/transmissionUrl'
@@ -47,7 +47,7 @@ const controllers = {
     deleteComment:deleteComment,
     likePost:likePost,
     modifyPost:modifyPost,
-    messanger:messanger,
+    message:message,
     uploadPostImage:uploadPostImage,
     uploadUserImage:uploadUserImage,
     transmissionUrl:transmissionUrl
