@@ -54,11 +54,11 @@ const Img = styled.div`
 const UserContainer = styled.div`
   font-weight: bold;
   position: absolute;
-  top: 50%;
+  top: 60%;
   width: 30vh;
   margin: 10px;
   padding: 10px;
-  font-size: xx-large;
+  font-size: x-large;
 `;
 
 const Line = styled.div`
@@ -81,13 +81,66 @@ const Button = styled.div`
 
 const UserImage = styled.div`
   position: absolute;
-  top: 30%;
+  top: 20%;
   width: 30vh;
 `;
 
-export default function Mypage() {
+const File = styled.div`
+  img {
+    position: relative;
+    left: 8%;
+    width: 50%;
+    height: 50%;
+  }
+  label {
+    margin: 20px;
+    padding: 6px 25px;
+    background-color: #ff6600;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+  }
+  .name {
+    margin: 20px;
+    display: inline-block;
+    height: 40px;
+    padding: 0 50px;
+    vertical-align: middle;
+    border: 1px solid #dddddd;
+    width: 90%;
+    color: #999999;
+  }
+  input[type='file'] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+  button {
+    margin: 20px;
+    background-color: #ffae00;
+    border-radius: 1rem;
+    font-weight: bold;
+    width: 120px;
+    height: 30px;
+    border: none;
+    :hover {
+      background-color: #d17812;
+      transition: 0.5s;
+      cursor: pointer;
+    }
+  }
+`;
+
+export default function Mypage({ handleMypost }: any) {
   const check = useSelector((state: RootState) => state.modal.check);
   const login = useSelector((state: RootState) => state.login);
+  const [selectedFile, setselectedFile] = useState('');
+  const [filename, setfilename] = useState('');
   const [nickname, setnickname] = useState('');
   const [profile, setprofile] = useState('');
 
@@ -97,6 +150,28 @@ export default function Mypage() {
       setprofile(data.data.profile);
     });
   }, []);
+
+  const handleFileInput = (event: any) => {
+    setselectedFile(event.target.files[0]);
+    setfilename(event.target.files[0].name);
+  };
+  const handlePost = () => {
+    const formData = new FormData();
+    formData.append('file', selectedFile);
+    axios
+      .patch(`https://localhost:8080/user/image?nickname=${nickname}`, formData)
+      .then(res => {
+        handleUserProfile();
+        alert('프로필 변경 성공');
+      });
+  };
+
+  const handleUserProfile = () => {
+    axios
+      .get(`https://localhost:8080/user?nickname=${nickname}`)
+      .then(data => setprofile(data.data.profile));
+  };
+
   return (
     <div>
       <Left>
@@ -112,7 +187,28 @@ export default function Mypage() {
           <div>Mypage</div>
         </Title>
         <UserImage>
-          <img src={profile} />
+          <File>
+            <img src={profile} />
+            <div>
+              <input
+                className="name"
+                readOnly
+                value={filename}
+                placeholder="첨부파일"
+              />
+              <label htmlFor="inputfile">파일선택</label>
+              <input
+                type="file"
+                name="file"
+                id="inputfile"
+                accept="image/*"
+                onChange={event => handleFileInput(event)}
+              />
+              <div>
+                <button onClick={() => handlePost()}>프로필 변경하기</button>
+              </div>
+            </div>
+          </File>
         </UserImage>
         <UserContainer>
           <Line>
@@ -145,8 +241,8 @@ export default function Mypage() {
           </Line>
           <Button>
             <div>
-              <Link to="/mypost" className="text ">
-                <div>내가 쓴 게시글 보기</div>
+              <Link to="/mypost" className="text">
+                <div onClick={() => handleMypost()}>내가 쓴 게시글 보기</div>
               </Link>
             </div>
           </Button>
