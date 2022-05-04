@@ -64,20 +64,20 @@ const Google = styled.div`
     left: 10%;
   }
 `;
-const Github = styled.div`
-  background-color: #020202;
-  color: white;
+const Kakao = styled.div`
+  background-color: #ffe600;
+  color: #000000;
   cursor: pointer;
   & img {
     width: 50px;
-    height: 40px;
+    height: 50px;
     position: absolute;
     left: 10%;
   }
 `;
 const Signup = styled.div`
-  background-color: yellow;
-  color: black;
+  background-color: #000000;
+  color: #ffffff;
 `;
 const Error = styled.div`
   color: #721c24;
@@ -155,10 +155,10 @@ export default function Login({
             <img src="google.png" />
             구글 아이디로 로그인
           </Google>
-          <Github>
-            <img src="github.png" />
-            깃허브 아이디로 로그인
-          </Github>
+          <Kakao>
+            <img src="카카오톡.png" />
+            카카오톡 아이디로 로그인
+          </Kakao>
           <Signup>
             <div>
               아직 회원이 아니신가요?
