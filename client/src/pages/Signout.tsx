@@ -110,7 +110,7 @@ export default function Signout() {
     const params = { data: userinfo };
 
     axios
-      .delete('https://whoseidea.ml:8080/signout', params)
+      .delete('https://localhost:8080/signout', params)
       .then(data => alert(data.data))
       .then(data => navigate('/'))
       .then(data => dispatch(islogin(false)))
