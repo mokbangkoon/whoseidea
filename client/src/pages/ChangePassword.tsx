@@ -123,7 +123,7 @@ export default function Updatepro() {
     setErrorMessage('');
 
     axios
-      .patch('https://localhost:8080/changepassword', userinfo)
+      .patch('https://whoseidea.ml:8080/changepassword', userinfo)
       .then(data => setErrorMessage(data.data))
       .catch(data => setErrorMessage('비밀번호를 올바르게 입력해주세요.'));
   };

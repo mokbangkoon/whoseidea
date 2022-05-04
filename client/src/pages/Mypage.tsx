@@ -145,7 +145,7 @@ export default function Mypage({ handleMypost }: any) {
   const [profile, setprofile] = useState('');
 
   useEffect(() => {
-    axios.get('https://localhost:8080/auth').then(data => {
+    axios.get('https://whoseidea.ml:8080/auth').then(data => {
       setnickname(data.data.nickname);
       setprofile(data.data.profile);
     });

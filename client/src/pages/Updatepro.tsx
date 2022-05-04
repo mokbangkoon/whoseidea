@@ -107,7 +107,7 @@ export default function Updatepro() {
     setErrorMessage('');
 
     axios
-      .patch('https://localhost:8080/user', userinfo)
+      .patch('https://whoseidea.ml:8080/user', userinfo)
       .then(data => setErrorMessage(data.data))
       .catch(data => setErrorMessage('닉네임이 이미 존재합니다.'));
   };
