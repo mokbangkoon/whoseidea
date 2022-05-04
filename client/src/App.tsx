@@ -11,12 +11,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './modules';
 import Mypage from './pages/Mypage';
 import Updatepro from './pages/Updatepro';
-
 import { isauthenticated } from './modules/function';
 import { islogin } from './modules/islogin';
 import Signout from './pages/Signout';
 import Mypost from './pages/Mypost';
 import ChangePassword from './pages/ChangePassword';
+import WriteIdea from './pages/WriteIdea';
 
 function App() {
   const dispatch = useDispatch();
@@ -61,6 +61,7 @@ function App() {
         <Route path="/signout" element={<Signout />} />
         <Route path="/mypost" element={<Mypost />} />
         <Route path="/changepassword" element={<ChangePassword />} />
+        <Route path="/changepassword" element={<WriteIdea />} />
       </Routes>
     </div>
   );

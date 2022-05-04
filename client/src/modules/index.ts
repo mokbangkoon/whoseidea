@@ -5,6 +5,7 @@ import error from './errormessage';
 import signup from './signup';
 import islogincheck from './islogin';
 import idealist from './idealist';
+import writeidea from './writeidea';
 
 const rootReducer = combineReducers({
   modal,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   signup,
   islogincheck,
   idealist,
+  writeidea,
 });
 
 // 루트 리듀서를 내보내주세요.

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { check } from 'prettier';
 import { Link, useNavigationType } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
+import writeidea from './WriteIdea';
 
 axios.defaults.withCredentials = true;
 
@@ -68,6 +69,12 @@ const Title2 = styled.div`
   margin-bottom: 0.5%;
   align-items: stretch;
   font-size: 20px;
+
+  @media only screen and (max-width: 768px) {
+    margin-left: 15%;
+    font-size: 20px;
+    position: absolute;
+  }
 `;
 
 const MainStyle = styled.div`
@@ -79,7 +86,7 @@ const MainStyle = styled.div`
 `;
 
 const Ideabox = styled.div`
-  position: flex;
+  position: relative;
   width: 350px;
   height: 450px;
   top: 8%;
@@ -91,16 +98,16 @@ const Ideabox = styled.div`
   text-align: center;
 
   & img {
-    height: 200px;
+    height: 220px;
     width: 100%;
     right: 5px;
     left: 5px;
-    margin-top: 10px;
     text-align: center;
     display: flex;
     flex-flow: row wrap;
     position: relative;
     overflow: hidden;
+    object-fit: cover;
   }
 
   & button {
