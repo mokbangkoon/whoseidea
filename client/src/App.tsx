@@ -18,12 +18,14 @@ import Signout from './pages/Signout';
 import Mypost from './pages/Mypost';
 import ChangePassword from './pages/ChangePassword';
 
+axios.defaults.withCredentials = true;
+
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [usernickname, setusernickname] = useState('');
   const isAuthenticated = () => {
-    axios.get('https://whoseidea.ml:8080/auth').then(data => {
+    axios.get('https://localhost:8080/auth').then(data => {
       dispatch(islogin(true));
       console.log(data);
       navigate('/');
@@ -34,7 +36,7 @@ function App() {
   };
 
   const handleLogout = () => {
-    axios.post('https://whoseidea.ml:8080/logout').then(res => {
+    axios.post('https://localhost:8080/logout').then(res => {
       console.log(res.data);
       dispatch(islogin(false));
       navigate('/');
