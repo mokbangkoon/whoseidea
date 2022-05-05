@@ -9,6 +9,7 @@ import writeidea from '../modules/writeidea';
 import { findAllByAltText } from '@testing-library/react';
 import IdeaList from './IdeaList';
 import idealist from '../modules/idealist';
+import { action } from 'typesafe-actions';
 axios.defaults.withCredentials = true;
 
 const MainStyle = styled.div`
@@ -139,7 +140,7 @@ export default function WriteIdea() {
     });
     console.log(newpost);
   };
-  const [viewcontent, setViewContent] = useState({});
+  const [viewcontent, setViewContent] = useState([]);
 
   return (
     <div>
@@ -191,7 +192,7 @@ export default function WriteIdea() {
                   <button className="find"></button>
                   <div className="footer">
                     <div className="footer-post">
-                      <button>확인</button>
+                      <button onClick={() => setNewpost}>확인</button>
                       <button className="post1" placeholder="목록으로">
                         목록으로
                       </button>
