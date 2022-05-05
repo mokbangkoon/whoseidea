@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import { openModal } from '../modules/modal';
 import { Link } from 'react-router-dom';
+import Googlelogout from './Googlelogout';
 
 const Sidebar = styled.div`
   display: flex;
@@ -31,6 +32,9 @@ const Button = styled.div`
 export default function Headerbar({ handleLogout }: any): React.ReactElement {
   const islogincheck = useSelector(
     (state: RootState) => state.islogincheck.islogin
+  );
+  const isgooglelogin = useSelector(
+    (state: RootState) => state.isgooglelogin.isgooglelogin
   );
   const check = useSelector((state: RootState) => state.modal.check);
   const dispatch = useDispatch(); // 디스패치 함수를 가져옵니다
@@ -67,8 +71,12 @@ export default function Headerbar({ handleLogout }: any): React.ReactElement {
       ) : null}
 
       <Button>
-        {islogincheck ? (
-          <div onClick={() => handleLogout()}>Logout</div>
+        {isgooglelogin ? (
+          <Googlelogout />
+        ) : islogincheck ? (
+          <div>
+            <div onClick={() => handleLogout()}>Logout</div>
+          </div>
         ) : (
           <div onClick={() => handleModal()}>Login</div>
         )}
