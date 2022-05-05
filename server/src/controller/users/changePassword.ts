@@ -12,7 +12,7 @@ export async function changePassword (req: any, res: any) {
     const accsessTokenData: any = isAuthorized(req)
     const userInfo = await prisma.users.findFirst({
         where: {
-            id: accsessTokenData.id,
+            email: accsessTokenData.email,
             password: req.body.oldPassword
         }
     })

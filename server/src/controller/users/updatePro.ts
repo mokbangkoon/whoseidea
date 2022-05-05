@@ -14,8 +14,8 @@ export async function updatePro (req: any, res: any) {
     }
     const accsessTokenData: any = isAuthorized(req)
     const userInfo = Object.assign({}, req.body)
-    await prisma.users.update({
-        where: {id: accsessTokenData.id},
+    await prisma.users.updateMany({
+        where: {email: accsessTokenData.email},
         data: userInfo
     })
     return res.status(200).send(`${userInfo.nickname} change ok`)
