@@ -63,7 +63,7 @@ function App() {
         <Route path="/signout" element={<Signout />} />
         <Route path="/mypost" element={<Mypost />} />
         <Route path="/changepassword" element={<ChangePassword />} />
-        <Route path="/changepassword" element={<WriteIdea />} />
+        <Route path="/writeidea" element={<WriteIdea />} />
       </Routes>
     </div>
   );

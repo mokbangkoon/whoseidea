@@ -137,17 +137,15 @@ export default function IdeaList() {
   const [post, setPost] = useState<string>('');
 
   useEffect(() => {
-    axios
-      .get('https://localhost:8080/user', { params: idealist })
-      .then(data => {
-        console.log(data);
-        setNickname(data.data.nickname);
-      });
-  });
+    axios.get('https://localhost:8080/auth').then(data => {
+      setNickname(data.data.nickname);
+      setImg(data.data.profile);
+    });
+  }, []);
 
   useEffect(() => {
     axios
-      .get('https://localhost:8080/post', { params: idealist })
+      .get('https://localhost:8080/post?page=1', { params: idealist })
       .then(data => {
         console.log(data);
         setPost(data.data.post);
@@ -164,7 +162,7 @@ export default function IdeaList() {
   });
   useEffect(() => {
     axios
-      .patch('https://localhost:8080/image?postId=1', { params: idealist })
+      .get(`https://localhost:8080/user/image?nickname=${nickname}`)
       .then(data => {
         console.log(data);
         setLikes(data.data.image);
@@ -200,7 +198,7 @@ export default function IdeaList() {
       <div>
         <Title2>
           <div className="container">
-            <Link to="/Writeidea">
+            <Link to="/writeidea">
               <img src="add.png"></img>
             </Link>
           </div>

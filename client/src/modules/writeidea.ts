@@ -13,16 +13,16 @@ type WriteideaState = {
   title: string;
   nickname: string;
   context: string;
-  find: string;
-  post: string;
+  file: string;
+  correct: string;
 };
 
 const initialState: WriteideaState = {
   title: '',
   nickname: '',
   context: '',
-  find: '',
-  post: '',
+  file: '',
+  correct: '',
 };
 
 const writeidea = createReducer<WriteideaState, WriteideaAction>(initialState, {
