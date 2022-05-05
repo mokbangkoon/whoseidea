@@ -47,7 +47,6 @@ function App() {
   };
   const handleLogout = () => {
     axios.post('https://localhost:8080/logout').then(res => {
-      console.log(res.data);
       dispatch(islogin(false));
       navigate('/');
     });
