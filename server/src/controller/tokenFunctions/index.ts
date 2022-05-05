@@ -8,10 +8,6 @@ export function isAuthorized (req: any) {
     if (!req.headers.cookie) {
         return;
     } else {
-console.log(
-
-req.cookies
-);
         let decodeData
         verify(req.cookies.jwt, process.env.ACCESS_SECRET as any, (err: any, decoded: any) => {
             decodeData = decoded

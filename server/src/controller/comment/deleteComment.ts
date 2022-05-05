@@ -9,7 +9,7 @@ export async function deleteComment (req: any, res: any) {
     const accsessTokenData: any = isAuthorized(req)
     const userInfo = await prisma.users.findFirst({
         where: {
-            nickname: accsessTokenData.nickname
+            email: accsessTokenData.email
         }
     })
     if (!userInfo) {

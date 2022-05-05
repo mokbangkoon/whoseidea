@@ -13,7 +13,7 @@ export async function writeComment (req: any, res: any) {
     const prisma = new PrismaClient();
     const userInfo = await prisma.users.findFirst({
         where:{
-            nickname:accsessTokenData.nickname
+            email:accsessTokenData.email
         }
     })
     
