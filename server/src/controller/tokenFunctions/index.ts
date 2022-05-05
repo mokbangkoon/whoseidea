@@ -8,11 +8,12 @@ export function isAuthorized (req: any) {
     if (!req.headers.cookie) {
         return;
     } else {
-        let authToken = req.headers.cookie.split('=')[1].split(' ')[0]
-        let cloneToken = authToken.slice(0, authToken.length)
-        let decodeData
+console.log(
 
-        verify(cloneToken, process.env.ACCESS_SECRET as any, (err: any, decoded: any) => {
+req.cookies
+);
+        let decodeData
+        verify(req.cookies.jwt, process.env.ACCESS_SECRET as any, (err: any, decoded: any) => {
             decodeData = decoded
         })
         return decodeData
