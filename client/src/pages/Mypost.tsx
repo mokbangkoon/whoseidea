@@ -20,14 +20,16 @@ const Title = styled.div`
   border-radius: 10px;
 `;
 
-export default function Mypost({ postData }: any) {
+export default function Mypost({ postData, commentData }: any) {
+  console.log(commentData);
   const check = useSelector((state: RootState) => state.modal.check);
   return (
     <div>
       <Title>
         <div> 내가 쓴 게시물</div>
       </Title>
-      <div>{postData.statusText}</div>
+      {postData === null ? null : <div>{postData.statusText}</div>}
+      {commentData === null ? null : <div>{commentData.statusText}</div>}
 
       {check ? <Login /> : null}
     </div>
