@@ -7,6 +7,7 @@ import { googlelogin } from '../modules/isgooglelogin';
 import { RootState } from '../modules';
 import { openModal } from '../modules/modal';
 import { googledata } from '../modules/googledata';
+import axios from 'axios';
 
 export default function Googlelogin() {
   //클라이언트 ID (환경변수)
@@ -28,6 +29,7 @@ export default function Googlelogin() {
     dispatch(googlelogin(true));
     dispatch(islogin(true));
     navigate('/');
+    axios.post('https://localhost:8080/signup', googledatas);
   };
 
   return (
