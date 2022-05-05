@@ -3,7 +3,7 @@ const prisma = new PrismaClient()
 import { isAuthorized } from '../tokenFunctions'
 
 export async function auth (req: any, res: any) {
-    
+    console.log(req.headers.cookie)
     if (!req.headers.cookie) {
         return res.status(401).send('not authorized')
     }
