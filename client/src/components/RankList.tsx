@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import { openModal } from '../modules/modal';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 const RankContainer = styled.div`
   width: 80%;
@@ -29,13 +29,15 @@ const Line = styled.div`
 `;
 
 export default function RankList() {
+  const [rankData, setrankData] = useState<AxiosResponse | null | void>(null);
   useEffect(() => {
     axios
       .get('https://localhost:8080/post/all?limit=10&order=desc')
-      .then(data => console.log(data));
+      .then(data => setrankData(data));
   }, []);
   return (
     <div>
+      <div>{rankData?.statusText}</div>
       <RankContainer>
         <div>
           <img src="1등.png"></img>

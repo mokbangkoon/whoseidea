@@ -2,7 +2,6 @@ import { isAuthorized } from '../tokenFunctions'
 import { PrismaClient } from '@prisma/client'
 
 export async function uploadUserImage(req:any,res:any) {
-
     // 인자가 없으면 오류 처리
     if (!req.query.nickname)
         return res.status(406).send('postId is empty')

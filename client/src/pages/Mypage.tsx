@@ -137,6 +137,9 @@ const File = styled.div`
 `;
 
 export default function Mypage({ handleMypost, handleMycomment }: any) {
+  const isgooglelogin = useSelector(
+    (state: RootState) => state.isgooglelogin.isgooglelogin
+  );
   const check = useSelector((state: RootState) => state.modal.check);
   const login = useSelector((state: RootState) => state.login);
   const [selectedFile, setselectedFile] = useState('');
@@ -229,13 +232,15 @@ export default function Mypage({ handleMypost, handleMycomment }: any) {
           <Line>
             <div>ㅤ</div>
           </Line>
-          <Button>
-            <div>
-              <Link to="/signout" className="text ">
-                <div>회원 탈퇴</div>
-              </Link>
-            </div>
-          </Button>
+          {isgooglelogin ? null : (
+            <Button>
+              <div>
+                <Link to="/signout" className="text ">
+                  <div>회원 탈퇴</div>
+                </Link>
+              </div>
+            </Button>
+          )}
           <Line>
             <div>ㅤ</div>
           </Line>

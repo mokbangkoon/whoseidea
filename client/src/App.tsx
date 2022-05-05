@@ -11,7 +11,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './modules';
 import Mypage from './pages/Mypage';
 import Updatepro from './pages/Updatepro';
+<<<<<<< HEAD
 import { isauthenticated } from './modules/function';
+=======
+>>>>>>> 48f569f4b1cbb06a15cea017e8f4cebabee79a1a
 import { islogin } from './modules/islogin';
 import Signout from './pages/Signout';
 import Mypost from './pages/Mypost';
@@ -49,7 +52,6 @@ function App() {
   };
   const handleLogout = () => {
     axios.post('https://localhost:8080/logout').then(res => {
-      console.log(res.data);
       dispatch(islogin(false));
       navigate('/');
     });
