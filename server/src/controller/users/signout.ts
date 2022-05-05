@@ -9,8 +9,7 @@ export async function signout(req: any, res: any) {
     const prisma = new PrismaClient()
     const userInfo = await prisma.users.findFirst({
         where: {
-            email: req.body.email,
-            password: req.body.password
+            email: req.body.email
         }
     })
 
@@ -19,8 +18,7 @@ export async function signout(req: any, res: any) {
     }
     await prisma.users.deleteMany({
         where: {
-            email: req.body.email,
-            password: req.body.password
+            email: req.body.email
         }
     })
     return res.status(206).clearCookie('jwt').send('good bye')

@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import { openModal } from '../modules/modal';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const RankContainer = styled.div`
   width: 80%;
@@ -28,7 +29,11 @@ const Line = styled.div`
 `;
 
 export default function RankList() {
-  // 각 액션들을 디스패치하는 함수들을 만들어줍니다
+  useEffect(() => {
+    axios
+      .get('https://localhost:8080/post/all?limit=10&order=desc')
+      .then(data => console.log(data));
+  }, []);
   return (
     <div>
       <RankContainer>
@@ -63,6 +68,18 @@ export default function RankList() {
           <div></div>
         </Line>
         <div>7등</div>
+        <Line>
+          <div></div>
+        </Line>
+        <div>8등</div>
+        <Line>
+          <div></div>
+        </Line>
+        <div>9등</div>
+        <Line>
+          <div></div>
+        </Line>
+        <div>10등</div>
         <Line>
           <div></div>
         </Line>

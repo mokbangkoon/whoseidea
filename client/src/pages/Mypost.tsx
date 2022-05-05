@@ -2,6 +2,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import styled from 'styled-components';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Title = styled.div`
   font-weight: bold;
@@ -18,15 +20,16 @@ const Title = styled.div`
   border-radius: 10px;
 `;
 
-export default function Mypost() {
+export default function Mypost({ postData, commentData }: any) {
+  console.log(commentData);
   const check = useSelector((state: RootState) => state.modal.check);
-
   return (
     <div>
       <Title>
         <div> 내가 쓴 게시물</div>
       </Title>
-      <div>게시물 올리는 곳</div>
+      {postData === null ? null : <div>{postData.statusText}</div>}
+      {commentData === null ? null : <div>{commentData.statusText}</div>}
 
       {check ? <Login /> : null}
     </div>
