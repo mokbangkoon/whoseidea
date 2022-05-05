@@ -64,17 +64,6 @@ const Google = styled.div`
     height: 50px;
   }
 `;
-const Kakao = styled.div`
-  background-color: #ffe600;
-  color: #000000;
-  cursor: pointer;
-  & img {
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    left: 10%;
-  }
-`;
 const Signup = styled.div`
   background-color: #000000;
   color: #ffffff;
@@ -154,10 +143,7 @@ export default function Login({
           <Google>
             <Googlelogin />
           </Google>
-          <Kakao>
-            <img src="카카오톡.png" />
-            카카오톡 아이디로 로그인
-          </Kakao>
+
           <Signup>
             <div>
               아직 회원이 아니신가요?
