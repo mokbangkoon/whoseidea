@@ -90,6 +90,9 @@ const Error = styled.div`
 `;
 
 export default function Updatepro() {
+  const isgooglelogin = useSelector(
+    (state: RootState) => state.isgooglelogin.isgooglelogin
+  );
   const [userinfo, setuserinfo] = useState({
     nickname: '',
   });
@@ -130,13 +133,15 @@ export default function Updatepro() {
             <button onClick={() => handleUpdatepro()}>확인</button>
           </div>
         </Btn>
-        <Btn2>
-          <div>
-            <Link to="/changepassword">
-              <button>비밀번호 변경하기</button>
-            </Link>
-          </div>
-        </Btn2>
+        {isgooglelogin ? null : (
+          <Btn2>
+            <div>
+              <Link to="/changepassword">
+                <button>비밀번호 변경하기</button>
+              </Link>
+            </div>
+          </Btn2>
+        )}
         <Error>{errorMessage}</Error>
       </div>
 
