@@ -11,8 +11,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './modules';
 import Mypage from './pages/Mypage';
 import Updatepro from './pages/Updatepro';
-
-import { isauthenticated } from './modules/function';
 import { islogin } from './modules/islogin';
 import Signout from './pages/Signout';
 import Mypost from './pages/Mypost';
