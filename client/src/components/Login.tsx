@@ -7,6 +7,7 @@ import { openModal } from '../modules/modal';
 import { Link } from 'react-router-dom';
 import { logindata } from '../modules/login';
 import { errormessage } from '../modules/errormessage';
+import Googlelogin from './Googlelogin';
 
 axios.defaults.withCredentials = true;
 
@@ -56,12 +57,11 @@ const ModalContainer = styled.div`
 const Google = styled.div`
   background-color: #f1eeee;
   color: #504e4e;
+  height: 50px;
   cursor: pointer;
   & img {
-    width: 50px;
+    width: 100%;
     height: 50px;
-    position: absolute;
-    left: 10%;
   }
 `;
 const Kakao = styled.div`
@@ -152,8 +152,7 @@ export default function Login({
             </Error>
           ) : null}
           <Google>
-            <img src="google.png" />
-            구글 아이디로 로그인
+            <Googlelogin />
           </Google>
           <Kakao>
             <img src="카카오톡.png" />
