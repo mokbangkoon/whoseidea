@@ -15,12 +15,8 @@ import { islogin } from './modules/islogin';
 import Signout from './pages/Signout';
 import Mypost from './pages/Mypost';
 import ChangePassword from './pages/ChangePassword';
-<<<<<<< HEAD
-import WriteIdea from './pages/WriteIdea';
-=======
 import Chat from './pages/Chat';
 import Mychat from './pages/Mychat';
->>>>>>> bc85c41598e4b3e3ece33f0f9e603a7047da35e6
 
 function App() {
   const dispatch = useDispatch();
@@ -96,12 +92,8 @@ function App() {
           element={<Mypost postData={postData} commentData={commentData} />}
         />
         <Route path="/changepassword" element={<ChangePassword />} />
-<<<<<<< HEAD
-        <Route path="/writeidea" element={<WriteIdea />} />
-=======
         <Route path="/chat" element={<Chat />} />
         <Route path="/mychat" element={<Mychat chatData={chatData} />} />
->>>>>>> bc85c41598e4b3e3ece33f0f9e603a7047da35e6
       </Routes>
     </div>
   );
