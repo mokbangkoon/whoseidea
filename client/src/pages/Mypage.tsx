@@ -136,7 +136,11 @@ const File = styled.div`
   }
 `;
 
-export default function Mypage({ handleMypost, handleMycomment }: any) {
+export default function Mypage({
+  handleMypost,
+  handleMycomment,
+  handleMychat,
+}: any) {
   const isgooglelogin = useSelector(
     (state: RootState) => state.isgooglelogin.isgooglelogin
   );
@@ -255,6 +259,16 @@ export default function Mypage({ handleMypost, handleMycomment }: any) {
                 >
                   내가 쓴 게시글 보기
                 </div>
+              </Link>
+            </div>
+          </Button>
+          <Line>
+            <div>ㅤ</div>
+          </Line>
+          <Button>
+            <div>
+              <Link to="/mychat" className="text ">
+                <div onClick={() => handleMychat()}>쪽지 보관함</div>
               </Link>
             </div>
           </Button>

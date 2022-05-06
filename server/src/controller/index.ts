@@ -19,10 +19,11 @@ import { writeComment } from './comment/writeComment'
 import { deleteComment } from './comment/deleteComment'
 import { likePost } from './post/likePost'
 import { modifyPost } from './post/modifyPost'
-import { message } from './message/message'
+import { writeMessage } from './message/writeMessage'
 import { uploadPostImage } from './post/uploadPostImage'
 import { uploadUserImage } from './users/uploadUserImage'
 import { transmissionUrl } from './post/transmissionUrl'
+import { getMessage } from './message/getMessage'
 
 
 const controllers = {
@@ -47,10 +48,11 @@ const controllers = {
     deleteComment:deleteComment,
     likePost:likePost,
     modifyPost:modifyPost,
-    message:message,
+    writeMessage:writeMessage,
     uploadPostImage:uploadPostImage,
     uploadUserImage:uploadUserImage,
-    transmissionUrl:transmissionUrl
+    transmissionUrl:transmissionUrl,
+    getMessage:getMessage
 }
 
 export default controllers

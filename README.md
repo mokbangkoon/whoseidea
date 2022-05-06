@@ -212,11 +212,14 @@
   
 # API 문서
 
-![image](https://user-images.githubusercontent.com/96035912/164153815-0b1bed92-6a63-4610-9676-f0905f0e8b86.png)
-![image](https://user-images.githubusercontent.com/96035912/164153822-20ffa685-1db5-4703-9d24-2ff0c1af1520.png)
-![image](https://user-images.githubusercontent.com/96035912/164153833-4eac3dbf-dc82-4337-a57e-dd9563bf064e.png)
-![image](https://user-images.githubusercontent.com/96035912/164153839-0d2a7eb5-6d39-4fc5-88ca-44a1f7a58e4c.png)
-![image](https://user-images.githubusercontent.com/96035912/164153847-b3fc1185-e5f0-473f-8ad1-23086a67a952.png)
+![image](https://user-images.githubusercontent.com/91464005/167088286-e4f8be03-1100-4b73-a1f0-26cb4ae1c787.png)
+![image](https://user-images.githubusercontent.com/91464005/167088354-6fa9146a-3a63-42a0-b912-50614ac2110b.png)
+![image](https://user-images.githubusercontent.com/91464005/167088391-a23f63e6-d368-40ef-950b-6ca994a2405d.png)
+![image](https://user-images.githubusercontent.com/91464005/167088412-7b71eea9-46ca-4b50-97cf-c0b07b29c667.png)
+![image](https://user-images.githubusercontent.com/91464005/167088430-c9efbfe1-8ad2-4685-b150-b4a876b6a8ee.png)
+![image](https://user-images.githubusercontent.com/91464005/167088446-13c8288b-3775-4062-8ea7-0b051c78a442.png)
+![image](https://user-images.githubusercontent.com/91464005/167088475-93b39e74-7a0b-4e92-a0a2-4008789205cb.png)
+![image](https://user-images.githubusercontent.com/91464005/167088512-6143aa8a-7a0e-4e7e-b03f-ac92039325b5.png)
 
 <a href="https://go.postman.co/workspace/Team-Workspace~a67f5ba8-36e0-4625-8292-9e9aeae8bdca/collection/20596660-7b534007-c3bc-41a4-a3ad-edd56c95a41b?action=share&creator=18430618">링크</a>
 
