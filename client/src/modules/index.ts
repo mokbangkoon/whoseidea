@@ -5,13 +5,9 @@ import error from './errormessage';
 import signup from './signup';
 import islogincheck from './islogin';
 import idealist from './idealist';
-<<<<<<< HEAD
-import writeidea from './writeidea';
-=======
 import isgooglelogin from './isgooglelogin';
 import googledatas from './googledata';
->>>>>>> 48f569f4b1cbb06a15cea017e8f4cebabee79a1a
-
+import writeidea from './writeidea';
 const rootReducer = combineReducers({
   modal,
   login,
@@ -19,12 +15,9 @@ const rootReducer = combineReducers({
   signup,
   islogincheck,
   idealist,
-<<<<<<< HEAD
-  writeidea,
-=======
   isgooglelogin,
   googledatas,
->>>>>>> 48f569f4b1cbb06a15cea017e8f4cebabee79a1a
+  writeidea,
 });
 
 // 루트 리듀서를 내보내주세요.

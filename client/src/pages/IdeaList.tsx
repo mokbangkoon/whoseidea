@@ -130,44 +130,22 @@ const Ideabox = styled.div`
 `;
 
 export default function IdeaList() {
+  const [offset, setOffset] = useState(0);
+  const [posts, setPosts] = useState([]);
   const idealist = useSelector((state: RootState) => state.idealist);
   const [img, setImg] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
   const [likes, setLikes] = useState<number>(0);
   const [post, setPost] = useState<string>('');
+  const [context, setContext] = useState('');
 
   useEffect(() => {
     axios.get('https://localhost:8080/auth').then(data => {
       setNickname(data.data.nickname);
       setImg(data.data.profile);
+      setContext(data.data.context);
     });
   }, []);
-
-  useEffect(() => {
-    axios
-      .get('https://localhost:8080/post?page=1', { params: idealist })
-      .then(data => {
-        console.log(data);
-        setPost(data.data.post);
-      });
-  });
-
-  useEffect(() => {
-    axios
-      .patch('https://localhost:8080/like', { params: idealist })
-      .then(data => {
-        console.log(data);
-        setLikes(data.data.likes);
-      });
-  });
-  useEffect(() => {
-    axios
-      .get(`https://localhost:8080/user/image?nickname=${nickname}`)
-      .then(data => {
-        console.log(data);
-        setLikes(data.data.image);
-      });
-  });
 
   const dummy = {
     nickname: '박펠레',
