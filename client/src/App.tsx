@@ -15,6 +15,8 @@ import { islogin } from './modules/islogin';
 import Signout from './pages/Signout';
 import Mypost from './pages/Mypost';
 import ChangePassword from './pages/ChangePassword';
+import Chat from './pages/Chat';
+import Mychat from './pages/Mychat';
 
 function App() {
   const dispatch = useDispatch();
@@ -24,6 +26,7 @@ function App() {
   const [commentData, setcommentData] = useState<AxiosResponse | null | void>(
     null
   );
+  const [chatData, setchatData] = useState<AxiosResponse | null | void>(null);
   const isAuthenticated = () => {
     axios.get('https://localhost:8080/auth').then(data => {
       setusernickname(data.data.nickname);
@@ -44,6 +47,11 @@ function App() {
     axios
       .get(`https://localhost:8080/user/my-comment?nickname=${usernickname}`)
       .then(data => setcommentData(data));
+  };
+  const handleMychat = () => {
+    axios
+      .get(`https://localhost:8080/user/my-post?nickname=${usernickname}`)
+      .then(data => setchatData(data));
   };
   const handleLogout = () => {
     axios.post('https://localhost:8080/logout').then(res => {
@@ -73,6 +81,7 @@ function App() {
             <Mypage
               handleMypost={handleMypost}
               handleMycomment={handleMycomment}
+              handleMychat={handleMychat}
             />
           }
         />
@@ -83,6 +92,8 @@ function App() {
           element={<Mypost postData={postData} commentData={commentData} />}
         />
         <Route path="/changepassword" element={<ChangePassword />} />
+        <Route path="/chat" element={<Chat />} />
+        <Route path="/mychat" element={<Mychat chatData={chatData} />} />
       </Routes>
     </div>
   );
