@@ -7,6 +7,7 @@ import { openModal } from '../modules/modal';
 import { Link } from 'react-router-dom';
 import { logindata } from '../modules/login';
 import { errormessage } from '../modules/errormessage';
+import Googlelogin from './Googlelogin';
 
 axios.defaults.withCredentials = true;
 
@@ -56,28 +57,16 @@ const ModalContainer = styled.div`
 const Google = styled.div`
   background-color: #f1eeee;
   color: #504e4e;
+  height: 50px;
   cursor: pointer;
   & img {
-    width: 50px;
+    width: 100%;
     height: 50px;
-    position: absolute;
-    left: 10%;
-  }
-`;
-const Github = styled.div`
-  background-color: #020202;
-  color: white;
-  cursor: pointer;
-  & img {
-    width: 50px;
-    height: 40px;
-    position: absolute;
-    left: 10%;
   }
 `;
 const Signup = styled.div`
-  background-color: yellow;
-  color: black;
+  background-color: #000000;
+  color: #ffffff;
 `;
 const Error = styled.div`
   color: #721c24;
@@ -152,13 +141,9 @@ export default function Login({
             </Error>
           ) : null}
           <Google>
-            <img src="google.png" />
-            구글 아이디로 로그인
+            <Googlelogin />
           </Google>
-          <Github>
-            <img src="github.png" />
-            깃허브 아이디로 로그인
-          </Github>
+
           <Signup>
             <div>
               아직 회원이 아니신가요?

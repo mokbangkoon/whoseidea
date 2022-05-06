@@ -7,10 +7,9 @@ import Login from '../components/Login';
 import { Link } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import Slide from '../components/Slidebar';
-const IMG = styled.img`
-  width: 100%;
-  height: 70vh;
-`;
+import { useMediaQuery } from 'react-responsive';
+import Introduction from '../components/Introduction';
+import Footer from '../components/Footer';
 
 axios.defaults.withCredentials = true;
 
@@ -56,16 +55,40 @@ const First = styled.div`
   border: 3px solid red;
   border-radius: 1rem;
   color: white;
+  background-image: url('아인슈타인.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  :hover {
+    transform: scale(1.2, 1.2);
+    transition: 0.5s;
+    background-color: blue;
+  }
 `;
 const Second = styled.div`
   border: 3px solid blue;
   border-radius: 1rem;
-  color: white;
+  color: #ffffff;
+  background-image: url('햇빛.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  :hover {
+    transform: scale(1.2, 1.2);
+    transition: 0.5s;
+    background-color: blue;
+  }
 `;
 const Third = styled.div`
   border: 3px solid orange;
   border-radius: 1rem;
-  color: white;
+  color: #0f1a11;
+  background-image: url('공유.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  :hover {
+    transform: scale(1.2, 1.2);
+    transition: 0.5s;
+    background-color: blue;
+  }
 `;
 const PositionContainer = styled.div`
   position: absolute;
@@ -126,6 +149,43 @@ const TextContainer = styled.div`
     }
   }
 `;
+const MobileContainer = styled.div`
+  position: absolute;
+  top: 107%;
+  left: 65%;
+  background-color: #000000;
+  width: 25%;
+  height: 70%;
+  color: white;
+  font-weight: bold;
+  font-size: x-large;
+  margin: 10px;
+  padding: 10px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
+    'Lucida Sans', Arial, sans-serif;
+  text-shadow: 2px 2px 0px #bdbdbd;
+
+  & button {
+    position: relative;
+    left: 10%;
+    width: 70%;
+    height: 100px;
+    border-radius: 1rem;
+    font-size: xx-large;
+    font-weight: bold;
+    background-color: #e0d424;
+    :hover {
+      background-color: #c72121;
+      transition: 0.5s;
+      cursor: pointer;
+    }
+  }
+`;
+const Line = styled.div`
+  background-color: #000000;
+  width: 100%;
+  height: 10px;
+`;
 
 export default function Main({
   handleResponseSuccess,
@@ -148,6 +208,9 @@ export default function Main({
       setCurrentSlide(currentSlide - 1);
     }
   };
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
 
   const check = useSelector((state: RootState) => state.modal.check);
 
@@ -157,65 +220,141 @@ export default function Main({
   }, [currentSlide]);
   return (
     <div>
-      <All>
-        <Title></Title>
-        <MainStyle>
-          <First>
-            <h1>세상의 모든 아이디어 모음</h1>
-          </First>
-          <Second>
-            <h1>당신의 아이디어를 알려주세요!</h1>
-          </Second>
-          <Third>
-            <h1>세상을 바꿀 단 하나의 아이디어</h1>
-          </Third>
-        </MainStyle>
-        <PositionContainer>
-          <Container>
-            <SliderContainer ref={slideRef}>
-              <Slide img={'전구.png'} />
-              <Slide img={'랭킹.jpg'} />
-              <Slide img={'독창적인아이디어.jpg'} />
-            </SliderContainer>
-            <Button onClick={prevSlide}>Prev</Button>
-            <Button onClick={nextSlide}>Next</Button>
-          </Container>
-        </PositionContainer>
-        {currentSlide === 0 ? (
-          <TextContainer>
-            <h2>갑자기 생각난 독특한 아이디어가 있으신가요?</h2>
+      {isPc ? (
+        <All>
+          <Title></Title>
+          <MainStyle>
+            <First>
+              <h1>세상의 모든 아인슈타인분들에게..</h1>
+              <p>
+                <div>지금 무슨 생각을 하고 계신가요?</div>
+              </p>
+            </First>
+            <Second>
+              <h1>한숨 푹 자고 일어난 아침..</h1>
+              <p>
+                <div>머리속에 번쩍 아이디어가 떠오르신적 있으신가요?</div>
+              </p>
+            </Second>
+            <Third>
+              <h1>세상을 바꿀 단 하나의 아이디어</h1>
+              <p>
+                <div>그 소중한 아이디어를 그냥 지나쳐서 잊어먹지 마시고</div>
+                <div>저희 Whose Idea 에 공유해주세요!</div>
+              </p>
+            </Third>
+          </MainStyle>
+          <PositionContainer>
+            <Container>
+              <SliderContainer ref={slideRef}>
+                <Slide img={'전구.png'} />
+                <Slide img={'랭킹.jpg'} />
+                <Slide img={'독창적인아이디어.jpg'} />
+              </SliderContainer>
+              <Button onClick={prevSlide}>Prev</Button>
+              <Button onClick={nextSlide}>Next</Button>
+            </Container>
+          </PositionContainer>
+          {currentSlide === 0 ? (
+            <TextContainer>
+              <h2>갑자기 생각난 독특한 아이디어가 있으신가요?</h2>
 
-            <ul>당신도 최고의 아이디어가 될 수 있습니다!</ul>
-            <ul>하나밖에 없는 당신의 아이디어를 써보세요!</ul>
-            <Link to="/idealist">
-              <button>시작하기</button>
-            </Link>
-          </TextContainer>
-        ) : null}
-        {currentSlide === 1 ? (
-          <TextContainer>
-            <h2>최고의 아이디어를 보고 싶으신가요?</h2>
+              <ul>당신도 최고의 아이디어가 될 수 있습니다!</ul>
+              <ul>하나밖에 없는 당신의 아이디어를 써보세요!</ul>
+              <Link to="/idealist">
+                <button>시작하기</button>
+              </Link>
+            </TextContainer>
+          ) : null}
+          {currentSlide === 1 ? (
+            <TextContainer>
+              <h2>최고의 아이디어를 보고 싶으신가요?</h2>
 
-            <ul>가장 인기있는 아이디어를 볼 수 있습니다!</ul>
-            <ul>유저들의 기발한 아이디어를 구경해보세요!</ul>
-            <Link to="/rank">
-              <button>구경하기</button>
-            </Link>
-          </TextContainer>
-        ) : null}
-        {currentSlide === 2 ? (
-          <TextContainer>
-            <h2>아이디어를 활용하고 싶으신가요?</h2>
-            <ul>해당 유저에게 쪽지를 보내보세요!</ul>
-            <ul>당신의 쪽지를 수많은 사람들이 기다립니다!</ul>
-            <ul>일단 아이디어를 구경하러 가볼까요?</ul>
-            <Link to="/idealist">
-              <button>구경하기</button>
-            </Link>
-          </TextContainer>
-        ) : null}
-        {check ? <Login handleResponseSuccess={handleResponseSuccess} /> : null}
-      </All>
+              <ul>가장 인기있는 아이디어를 볼 수 있습니다!</ul>
+              <ul>유저들의 기발한 아이디어를 구경해보세요!</ul>
+              <Link to="/rank">
+                <button>구경하기</button>
+              </Link>
+            </TextContainer>
+          ) : null}
+          {currentSlide === 2 ? (
+            <TextContainer>
+              <h2>아이디어를 활용하고 싶으신가요?</h2>
+              <ul>해당 유저에게 쪽지를 보내보세요!</ul>
+              <ul>당신의 쪽지를 수많은 사람들이 기다립니다!</ul>
+              <ul>일단 아이디어를 구경하러 가볼까요?</ul>
+              <Link to="/idealist">
+                <button>구경하기</button>
+              </Link>
+            </TextContainer>
+          ) : null}
+          <Footer />
+          {check ? (
+            <Login handleResponseSuccess={handleResponseSuccess} />
+          ) : null}
+        </All>
+      ) : (
+        <div>
+          <All>
+            <Title></Title>
+            <First>
+              <h1>세상의 모든 아이디어 모음</h1>
+            </First>
+            <Second>
+              <h1>당신의 아이디어를 알려주세요!</h1>
+            </Second>
+            <Third>
+              <h1>세상을 바꿀 단 하나의 아이디어</h1>
+            </Third>
+            <Line></Line>
+            <Container>
+              <SliderContainer ref={slideRef}>
+                <Slide img={'전구.png'} />
+                <Slide img={'랭킹.jpg'} />
+                <Slide img={'독창적인아이디어.jpg'} />
+              </SliderContainer>
+              <Button onClick={prevSlide}>Prev</Button>
+              <Button onClick={nextSlide}>Next</Button>
+            </Container>
+            {currentSlide === 0 ? (
+              <MobileContainer>
+                <h2>갑자기 생각난 독특한 아이디어가 있으신가요?</h2>
+
+                <ul>당신도 최고의 아이디어가 될 수 있습니다!</ul>
+                <ul>하나밖에 없는 당신의 아이디어를 써보세요!</ul>
+                <Link to="/idealist">
+                  <button>시작하기</button>
+                </Link>
+              </MobileContainer>
+            ) : null}
+            {currentSlide === 1 ? (
+              <MobileContainer>
+                <h2>최고의 아이디어를 보고 싶으신가요?</h2>
+
+                <ul>가장 인기있는 아이디어를 볼 수 있습니다!</ul>
+                <ul>유저들의 기발한 아이디어를 구경해보세요!</ul>
+                <Link to="/rank">
+                  <button>구경하기</button>
+                </Link>
+              </MobileContainer>
+            ) : null}
+            {currentSlide === 2 ? (
+              <MobileContainer>
+                <h2>아이디어를 활용하고 싶으신가요?</h2>
+                <ul>해당 유저에게 쪽지를 보내보세요!</ul>
+                <ul>당신의 쪽지를 수많은 사람들이 기다립니다!</ul>
+                <ul>일단 아이디어를 구경하러 가볼까요?</ul>
+                <Link to="/idealist">
+                  <button>구경하기</button>
+                </Link>
+              </MobileContainer>
+            ) : null}
+            {check ? (
+              <Login handleResponseSuccess={handleResponseSuccess} />
+            ) : null}
+          </All>
+        </div>
+      )}
     </div>
   );
 }
