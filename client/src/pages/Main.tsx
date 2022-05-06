@@ -8,10 +8,8 @@ import { Link } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import Slide from '../components/Slidebar';
 import { useMediaQuery } from 'react-responsive';
-const IMG = styled.img`
-  width: 100%;
-  height: 70vh;
-`;
+import Introduction from '../components/Introduction';
+import Footer from '../components/Footer';
 
 axios.defaults.withCredentials = true;
 
@@ -57,16 +55,40 @@ const First = styled.div`
   border: 3px solid red;
   border-radius: 1rem;
   color: white;
+  background-image: url('아인슈타인.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  :hover {
+    transform: scale(1.2, 1.2);
+    transition: 0.5s;
+    background-color: blue;
+  }
 `;
 const Second = styled.div`
   border: 3px solid blue;
   border-radius: 1rem;
-  color: white;
+  color: #ffffff;
+  background-image: url('햇빛.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  :hover {
+    transform: scale(1.2, 1.2);
+    transition: 0.5s;
+    background-color: blue;
+  }
 `;
 const Third = styled.div`
   border: 3px solid orange;
   border-radius: 1rem;
-  color: white;
+  color: #0f1a11;
+  background-image: url('공유.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  :hover {
+    transform: scale(1.2, 1.2);
+    transition: 0.5s;
+    background-color: blue;
+  }
 `;
 const PositionContainer = styled.div`
   position: absolute;
@@ -129,7 +151,7 @@ const TextContainer = styled.div`
 `;
 const MobileContainer = styled.div`
   position: absolute;
-  top: 100%;
+  top: 107%;
   left: 65%;
   background-color: #000000;
   width: 25%;
@@ -203,13 +225,23 @@ export default function Main({
           <Title></Title>
           <MainStyle>
             <First>
-              <h1>세상의 모든 아이디어 모음</h1>
+              <h1>세상의 모든 아인슈타인분들에게..</h1>
+              <p>
+                <div>지금 무슨 생각을 하고 계신가요?</div>
+              </p>
             </First>
             <Second>
-              <h1>당신의 아이디어를 알려주세요!</h1>
+              <h1>한숨 푹 자고 일어난 아침..</h1>
+              <p>
+                <div>머리속에 번쩍 아이디어가 떠오르신적 있으신가요?</div>
+              </p>
             </Second>
             <Third>
               <h1>세상을 바꿀 단 하나의 아이디어</h1>
+              <p>
+                <div>그 소중한 아이디어를 그냥 지나쳐서 잊어먹지 마시고</div>
+                <div>저희 Whose Idea 에 공유해주세요!</div>
+              </p>
             </Third>
           </MainStyle>
           <PositionContainer>
@@ -256,6 +288,7 @@ export default function Main({
               </Link>
             </TextContainer>
           ) : null}
+          <Footer />
           {check ? (
             <Login handleResponseSuccess={handleResponseSuccess} />
           ) : null}
