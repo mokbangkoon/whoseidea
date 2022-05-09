@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 export default function FeatureChat() {
-  return <div></div>;
+  return <div>채팅시연기능</div>;
 }
