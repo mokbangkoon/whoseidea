@@ -1,7 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 import { isAuthorized } from "../tokenFunctions";
+import { Request, Response } from 'express'
 
-export async function writeComment (req: any, res: any) {
+export async function writeComment (req: Request, res: Response) {
 
     // 쿠키가 없거나 맞지 않으면 오류 처리
     if (!isAuthorized(req)) {

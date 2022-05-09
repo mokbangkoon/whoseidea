@@ -1,7 +1,8 @@
 import { generateAccessToken } from '../tokenFunctions'
 import { PrismaClient } from '@prisma/client'
+import { Request, Response } from 'express'
 
-export async function signup (req: any, res: any) {
+export async function signup (req: Request, res: Response) {
 
     const prisma = new PrismaClient()
 
