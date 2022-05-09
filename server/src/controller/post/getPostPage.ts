@@ -21,6 +21,9 @@ export async function getPostPage(req: Request, res: Response) {
     const posts = await prisma.posts.findMany({
         skip:(page-1)*9,
         take:8+(page-1)*9,
+        orderBy:{
+            id:'desc'
+        }
     })
 
     // 검색 결과가 없으면 빈 배열 보냄
