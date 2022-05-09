@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { useMediaQuery } from 'react-responsive';
 
 const Title = styled.div`
   font-weight: bold;
@@ -135,6 +136,17 @@ const File = styled.div`
     }
   }
 `;
+const Mobileimg = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  font-weight: bold;
+  color: #bd1569;
+  & img {
+    width: 300px;
+    height: 300px;
+  }
+`;
 
 export default function Mypage({
   handleMypost,
@@ -150,6 +162,9 @@ export default function Mypage({
   const [filename, setfilename] = useState('');
   const [nickname, setnickname] = useState('');
   const [profile, setprofile] = useState('');
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
 
   useEffect(() => {
     axios.get('https://localhost:8080/auth').then(data => {
@@ -181,99 +196,202 @@ export default function Mypage({
 
   return (
     <div>
-      <Left>
-        <Img>
-          <div>당신의 아이디어가 세상을 바꿉니다</div>
-
-          <img src="mypage.png" />
-        </Img>
-      </Left>
-      {check ? <Login /> : null}
-      <Right>
-        <Title>
-          <div>Mypage</div>
-        </Title>
-        <UserImage>
-          <File>
-            <img src={profile} />
-            <div>
-              <input
-                className="name"
-                readOnly
-                value={filename}
-                placeholder="첨부파일"
-              />
-              <label htmlFor="inputfile">파일선택</label>
-              <input
-                type="file"
-                name="file"
-                id="inputfile"
-                accept="image/*"
-                onChange={event => handleFileInput(event)}
-              />
-              <div>
-                <button onClick={() => handlePost()}>프로필 변경하기</button>
-              </div>
-            </div>
-          </File>
-        </UserImage>
-        <UserContainer>
-          <Line>
-            <div></div>
-          </Line>
-          <div>회원 닉네임 </div>
-          <div>{nickname}</div>
-          <Line>
-            <div>ㅤ</div>
-          </Line>
-          <Button>
-            <div>
-              <Link to="/updatepro" className="text ">
-                <div>회원정보 수정</div>
-              </Link>
-            </div>
-          </Button>
-          <Line>
-            <div>ㅤ</div>
-          </Line>
-          {isgooglelogin ? null : (
-            <Button>
-              <div>
-                <Link to="/signout" className="text ">
-                  <div>회원 탈퇴</div>
-                </Link>
-              </div>
-            </Button>
-          )}
-          <Line>
-            <div>ㅤ</div>
-          </Line>
-          <Button>
-            <div>
-              <Link to="/mypost" className="text">
-                <div
-                  onClick={() => {
-                    handleMypost();
-                    handleMycomment();
-                  }}
-                >
-                  내가 쓴 게시글 보기
-                </div>
-              </Link>
-            </div>
-          </Button>
-          <Line>
-            <div>ㅤ</div>
-          </Line>
-          <Button>
-            <div>
-              <Link to="/mychat" className="text ">
-                <div onClick={() => handleMychat()}>쪽지 보관함</div>
-              </Link>
-            </div>
-          </Button>
-        </UserContainer>
-      </Right>
+      <div>{check ? <Login /> : null}</div>
+      <div>
+        {isPc ? (
+          <div>
+            <Left>
+              <Img>
+                <div>당신의 아이디어가 세상을 바꿉니다</div>
+                <img src="mypage.png" />
+              </Img>
+            </Left>
+            <Right>
+              <Title>
+                <div>Mypage</div>
+              </Title>
+              <UserImage>
+                <File>
+                  <img src={profile} />
+                  <div>
+                    <input
+                      className="name"
+                      readOnly
+                      value={filename}
+                      placeholder="첨부파일"
+                    />
+                    <label htmlFor="inputfile">파일선택</label>
+                    <input
+                      type="file"
+                      name="file"
+                      id="inputfile"
+                      accept="image/*"
+                      onChange={event => handleFileInput(event)}
+                    />
+                    <div>
+                      <button onClick={() => handlePost()}>
+                        프로필 변경하기
+                      </button>
+                    </div>
+                  </div>
+                </File>
+              </UserImage>
+              <UserContainer>
+                <Line>
+                  <div></div>
+                </Line>
+                <div>회원 닉네임 </div>
+                <div>{nickname}</div>
+                <Line>
+                  <div>ㅤ</div>
+                </Line>
+                <Button>
+                  <div>
+                    <Link to="/updatepro" className="text ">
+                      <div>회원정보 수정</div>
+                    </Link>
+                  </div>
+                </Button>
+                <Line>
+                  <div>ㅤ</div>
+                </Line>
+                {isgooglelogin ? null : (
+                  <Button>
+                    <div>
+                      <Link to="/signout" className="text ">
+                        <div>회원 탈퇴</div>
+                      </Link>
+                    </div>
+                  </Button>
+                )}
+                <Line>
+                  <div>ㅤ</div>
+                </Line>
+                <Button>
+                  <div>
+                    <Link to="/mypost" className="text">
+                      <div
+                        onClick={() => {
+                          handleMypost();
+                          handleMycomment();
+                        }}
+                      >
+                        내가 쓴 게시글 보기
+                      </div>
+                    </Link>
+                  </div>
+                </Button>
+                <Line>
+                  <div>ㅤ</div>
+                </Line>
+                <Button>
+                  <div>
+                    <Link to="/mychat" className="text ">
+                      <div onClick={() => handleMychat()}>쪽지 보관함</div>
+                    </Link>
+                  </div>
+                </Button>
+              </UserContainer>
+            </Right>
+          </div>
+        ) : (
+          <div>
+            <Left>
+              <Mobileimg>
+                <div>당신의 아이디어가 세상을 바꿉니다</div>
+                <img src="mypage.png" />
+              </Mobileimg>
+              <Right>
+                <Title>
+                  <div>Mypage</div>
+                </Title>
+                <UserImage>
+                  <File>
+                    <img src={profile} />
+                    <div>
+                      <input
+                        className="name"
+                        readOnly
+                        value={filename}
+                        placeholder="첨부파일"
+                      />
+                      <label htmlFor="inputfile">파일선택</label>
+                      <input
+                        type="file"
+                        name="file"
+                        id="inputfile"
+                        accept="image/*"
+                        onChange={event => handleFileInput(event)}
+                      />
+                      <div>
+                        <button onClick={() => handlePost()}>
+                          프로필 변경하기
+                        </button>
+                      </div>
+                    </div>
+                  </File>
+                </UserImage>
+                <UserContainer>
+                  <Line>
+                    <div></div>
+                  </Line>
+                  <div>회원 닉네임 </div>
+                  <div>{nickname}</div>
+                  <Line>
+                    <div>ㅤ</div>
+                  </Line>
+                  <Button>
+                    <div>
+                      <Link to="/updatepro" className="text ">
+                        <div>회원정보 수정</div>
+                      </Link>
+                    </div>
+                  </Button>
+                  <Line>
+                    <div>ㅤ</div>
+                  </Line>
+                  {isgooglelogin ? null : (
+                    <Button>
+                      <div>
+                        <Link to="/signout" className="text ">
+                          <div>회원 탈퇴</div>
+                        </Link>
+                      </div>
+                    </Button>
+                  )}
+                  <Line>
+                    <div>ㅤ</div>
+                  </Line>
+                  <Button>
+                    <div>
+                      <Link to="/mypost" className="text">
+                        <div
+                          onClick={() => {
+                            handleMypost();
+                            handleMycomment();
+                          }}
+                        >
+                          내가 쓴 게시글 보기
+                        </div>
+                      </Link>
+                    </div>
+                  </Button>
+                  <Line>
+                    <div>ㅤ</div>
+                  </Line>
+                  <Button>
+                    <div>
+                      <Link to="/mychat" className="text ">
+                        <div onClick={() => handleMychat()}>쪽지 보관함</div>
+                      </Link>
+                    </div>
+                  </Button>
+                </UserContainer>
+              </Right>
+            </Left>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

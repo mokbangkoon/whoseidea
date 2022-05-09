@@ -151,7 +151,7 @@ const TextContainer = styled.div`
 `;
 const MobileContainer = styled.div`
   position: absolute;
-  top: 107%;
+  top: 108%;
   left: 65%;
   background-color: #000000;
   width: 25%;
@@ -168,7 +168,7 @@ const MobileContainer = styled.div`
   & button {
     position: relative;
     left: 10%;
-    width: 70%;
+    width: 80%;
     height: 100px;
     border-radius: 1rem;
     font-size: xx-large;
@@ -186,7 +186,42 @@ const Line = styled.div`
   width: 100%;
   height: 10px;
 `;
+const FirstM = styled.div`
+  border: 3px solid red;
+  border-radius: 1rem;
+  color: white;
 
+  :hover {
+    transition: 0.5s;
+    background-color: blue;
+  }
+`;
+const SecondM = styled.div`
+  border: 3px solid blue;
+  border-radius: 1rem;
+  color: #ffffff;
+
+  :hover {
+    transition: 0.5s;
+    background-color: blue;
+  }
+`;
+const ThirdM = styled.div`
+  border: 3px solid orange;
+  border-radius: 1rem;
+  color: #ffffff;
+
+  :hover {
+    transition: 0.5s;
+    background-color: blue;
+  }
+`;
+const PositionContainerM = styled.div`
+  position: absolute;
+  top: 110%;
+  left: 10%;
+  background-repeat: no-repeat;
+`;
 export default function Main({
   handleResponseSuccess,
 }: any): React.ReactElement {
@@ -297,28 +332,30 @@ export default function Main({
         <div>
           <All>
             <Title></Title>
-            <First>
+            <FirstM>
               <h1>세상의 모든 아이디어 모음</h1>
-            </First>
-            <Second>
+            </FirstM>
+            <SecondM>
               <h1>당신의 아이디어를 알려주세요!</h1>
-            </Second>
-            <Third>
+            </SecondM>
+            <ThirdM>
               <h1>세상을 바꿀 단 하나의 아이디어</h1>
-            </Third>
+            </ThirdM>
             <Line></Line>
-            <Container>
-              <SliderContainer ref={slideRef}>
-                <Slide img={'전구.png'} />
-                <Slide img={'랭킹.jpg'} />
-                <Slide img={'독창적인아이디어.jpg'} />
-              </SliderContainer>
-              <Button onClick={prevSlide}>Prev</Button>
-              <Button onClick={nextSlide}>Next</Button>
-            </Container>
+            <PositionContainerM>
+              <Container>
+                <SliderContainer ref={slideRef}>
+                  <Slide img={'전구.png'} />
+                  <Slide img={'랭킹.jpg'} />
+                  <Slide img={'독창적인아이디어.jpg'} />
+                </SliderContainer>
+                <Button onClick={prevSlide}>Prev</Button>
+                <Button onClick={nextSlide}>Next</Button>
+              </Container>
+            </PositionContainerM>
             {currentSlide === 0 ? (
               <MobileContainer>
-                <h2>갑자기 생각난 독특한 아이디어가 있으신가요?</h2>
+                <h3>갑자기 생각난 독특한 아이디어가 있으신가요?</h3>
 
                 <ul>당신도 최고의 아이디어가 될 수 있습니다!</ul>
                 <ul>하나밖에 없는 당신의 아이디어를 써보세요!</ul>
@@ -329,8 +366,7 @@ export default function Main({
             ) : null}
             {currentSlide === 1 ? (
               <MobileContainer>
-                <h2>최고의 아이디어를 보고 싶으신가요?</h2>
-
+                <h3>최고의 아이디어를 보고 싶으신가요?</h3>
                 <ul>가장 인기있는 아이디어를 볼 수 있습니다!</ul>
                 <ul>유저들의 기발한 아이디어를 구경해보세요!</ul>
                 <Link to="/rank">
@@ -340,15 +376,16 @@ export default function Main({
             ) : null}
             {currentSlide === 2 ? (
               <MobileContainer>
-                <h2>아이디어를 활용하고 싶으신가요?</h2>
+                <h3>아이디어를 활용하고 싶으신가요?</h3>
                 <ul>해당 유저에게 쪽지를 보내보세요!</ul>
-                <ul>당신의 쪽지를 수많은 사람들이 기다립니다!</ul>
+
                 <ul>일단 아이디어를 구경하러 가볼까요?</ul>
                 <Link to="/idealist">
                   <button>구경하기</button>
                 </Link>
               </MobileContainer>
             ) : null}
+            <Footer />
             {check ? (
               <Login handleResponseSuccess={handleResponseSuccess} />
             ) : null}
