@@ -1,7 +1,7 @@
 import { isAuthorized } from '../tokenFunctions'
 import { PrismaClient } from '@prisma/client'
 
-export async function uploadUserImage(req:any,res:any) {
+export async function uploadUserImage(req: any, res: any) {
     // 인자가 없으면 오류 처리
     if (!req.query.nickname)
         return res.status(406).send('postId is empty')
@@ -14,7 +14,7 @@ export async function uploadUserImage(req:any,res:any) {
         const prisma = new PrismaClient()
         await prisma.users.updateMany({
             where: {
-                nickname:req.query.nickname
+                nickname:req.query.nickname as any
             },
             data: {
                 profile: `https://whoseidea-image.s3.ap-northeast-2.amazonaws.com/${req.file.key}`

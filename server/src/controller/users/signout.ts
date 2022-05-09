@@ -1,7 +1,8 @@
 import { isAuthorized } from '../tokenFunctions'
 import { PrismaClient } from '@prisma/client'
+import { Request, Response } from 'express'
 
-export async function signout(req: any, res: any) {
+export async function signout(req: Request, res: Response) {
     
     if (!isAuthorized(req)) {
         return res.status(405).send('Mismatched Cookies')

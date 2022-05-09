@@ -1,13 +1,14 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
+import { Request, Response } from 'express'
 
-export async function elseProfile (req: any, res: any) {
+export async function elseProfile (req: Request, res: Response) {
     if (!req.query.nickname) {
         res.status(423).send('undefined user')
     } else {
         const userInfo: any = await prisma.users.findFirst({
             where: {
-                nickname: req.query.nickname
+                nickname: req.query.nickname as any
             }
         })
         delete userInfo?.password

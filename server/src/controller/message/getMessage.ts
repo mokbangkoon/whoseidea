@@ -1,7 +1,9 @@
 import { PrismaClient } from '@prisma/client'
 import { isAuthorized } from '../tokenFunctions'
+import { Request, Response } from 'express'
 
-export async function getMessage(req: any, res: any) {
+
+export async function getMessage(req: Request, res: Response) {
 
     // 인자가 없으면 오류 처리
     if (!req.query.target)
@@ -34,7 +36,7 @@ export async function getMessage(req: any, res: any) {
     // 상대방 아이디 가져오기
     const [ user2Info ]:any = await prisma.users.findMany({
         where:{
-            nickname:req.query.nickname
+            nickname:req.query.nickname as any
         }
     })
     

@@ -1,7 +1,8 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
+import { Request, Response } from 'express'
 
-export async function transmissionUrl (req: any, res: any) {
+export async function transmissionUrl (req: Request, res: Response) {
     if (!req.query.postId) {
         res.status(420).send('invaild postId')
     } else {
