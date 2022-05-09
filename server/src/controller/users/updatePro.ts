@@ -1,8 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 import { isAuthorized } from "../tokenFunctions";
+import { Request, Response } from 'express'
 
-export async function updatePro (req: any, res: any) {
+export async function updatePro (req: Request, res: Response) {
     if (!req.headers.cookie) {
         return res.status(401).send('no cookies')
     }

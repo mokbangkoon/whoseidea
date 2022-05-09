@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
+import { Request, Response } from 'express'
 
-export async function getPostPage(req: any, res: any) {
+export async function getPostPage(req: Request, res: Response) {
 
     // 인자가 없으면 오류 처리
     if (!req.query.page)
@@ -18,8 +19,11 @@ export async function getPostPage(req: any, res: any) {
     const prisma = new PrismaClient()
 
     const posts = await prisma.posts.findMany({
-        skip:1+(page-1)*9,
-        take:8+(page-1)*9,
+        skip: (page - 1) * 9,
+        take: 9,
+        orderBy:{
+            id:'desc'
+        }
     })
 
     // 검색 결과가 없으면 빈 배열 보냄

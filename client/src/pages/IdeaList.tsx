@@ -133,7 +133,7 @@ const Ideabox = styled.div`
 
 export default function IdeaList() {
   const idealist = useSelector((state: RootState) => state.idealist);
-  const [file, setFile] = useState<string>('');
+  const [file, setFile] = useState('');
   const [nickname, setNickname] = useState<string>('');
   const [caption, setCaption] = useState('');
   const [context, setContext] = useState('');
@@ -232,6 +232,7 @@ export default function IdeaList() {
               axios
                 .get(`https://localhost:8080/post/image?postId=${post.id}`)
                 .then(data1 => {
+                  console.log(data1.data[0]);
                   setFile(data1.data[0].url);
                 });
               return (
