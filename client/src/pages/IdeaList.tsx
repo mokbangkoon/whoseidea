@@ -6,6 +6,8 @@ import { check } from 'prettier';
 import { Link, useNavigationType } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import writeidea from './WriteIdea';
+import { userInfo } from 'os';
+import { text } from 'express';
 
 axios.defaults.withCredentials = true;
 
@@ -81,7 +83,7 @@ const MainStyle = styled.div`
   margin-left: 8%;
   width: 90%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 500px 500px 500px;
 `;
 
@@ -130,131 +132,124 @@ const Ideabox = styled.div`
 `;
 
 export default function IdeaList() {
-  const [offset, setOffset] = useState(0);
-  const [posts, setPosts] = useState([]);
   const idealist = useSelector((state: RootState) => state.idealist);
-  const [img, setImg] = useState<string>('');
+  const [file, setFile] = useState<string>('');
   const [nickname, setNickname] = useState<string>('');
-  const [likes, setLikes] = useState<number>(0);
-  const [post, setPost] = useState<string>('');
+  const [caption, setCaption] = useState('');
   const [context, setContext] = useState('');
+  const [likes, setLikes] = useState<number>(0);
+  const [profile, setProfile] = useState('');
+  const [offset, setOffset] = useState(0);
+  const [hasnext, sethasnext] = useState(false);
+  const [post, setPost] = useState([]);
+  const [pagenum, setPageNum] = useState(1);
 
   useEffect(() => {
-    axios.get('https://localhost:8080/auth').then(data => {
-      setNickname(data.data.nickname);
-      setImg(data.data.profile);
-      setContext(data.data.context);
+    axios.get(`https://localhost:8080/post?page=${pagenum}`).then(data => {
+      console.log(data.data);
+      setPost(data.data);
+      sethasnext(data.data);
     });
-  }, []);
+  }, [pagenum]);
 
-  const dummy = {
-    nickname: '박펠레',
-    title: '아이디어 작성 테스트',
-    img: '/whose로고.png',
-    likes: 10,
+  const Newpost = (key: any, e: any) => {
+    setPost(e.target.value);
   };
 
+  function handleNewPost() {
+    axios.get(`https://localhost:8080/post?page=${pagenum}`).then(data => {
+      setFile(data.data.img);
+      setCaption(data.data.title);
+      setContext(data.data.context);
+      alert('성공');
+    });
+  }
+  const handlePageBack = () => {
+    setPageNum(pagenum - 1);
+  };
+  const handlePagefront = () => {
+    setPageNum(pagenum + 1);
+  };
+  const handleback = () => {
+    setOffset(offset - 9);
+    setPageNum(pagenum - 1);
+  };
+  const handlefront = () => {
+    setOffset(offset + 9);
+    setPageNum(pagenum + 1);
+  };
   return (
-    <div>
-      <Title>
-        <div>
-          <h1>Newest</h1>
-        </div>
-      </Title>
-      <Container>
-        <div className="search">
-          <input type="text" placeholder="search" className="input"></input>
-          <img src="search.png" />
-        </div>
-      </Container>
+    <>
       <div>
-        <HeaderContainer>
-          <div className="header-container" />
-          <div className="container" />
-        </HeaderContainer>
-      </div>
-      <div>
-        <Title2>
-          <div className="container">
-            <Link to="/writeidea">
-              <img src="add.png"></img>
-            </Link>
+        <Title>
+          <div>
+            <h1>Newest</h1>
           </div>
-        </Title2>
+        </Title>
+        <Container>
+          <div className="search">
+            <input type="text" placeholder="search" className="input"></input>
+            <img src="search.png" />
+          </div>
+        </Container>
+        <div>
+          <HeaderContainer>
+            <div className="header-container" />
+            <div className="container" />
+          </HeaderContainer>
+        </div>
+        <div>
+          <Title2>
+            <div className="container">
+              <Link to="/writeidea">
+                <img src="add.png"></img>
+              </Link>
+            </div>
+          </Title2>
+        </div>
+        <div className="row">
+          <div className="follow-buttons">
+            {offset === 0 ? null : (
+              <button className="follow" onClick={handleback}>
+                이전
+              </button>
+            )}
+            {hasnext ? (
+              <button
+                className="follow follow-option active"
+                onClick={handlefront}
+              >
+                다음
+              </button>
+            ) : null}
+          </div>
+        </div>
       </div>
       <MainStyle>
         <Ideabox>
           <div className="container">
-            <img src={dummy.img} />
-            <h3>제목 : {dummy.title}</h3>
+            {post.map((post: any) => {
+              axios
+                .get(`https://localhost:8080/post/image?postId=${post.id}`)
+                .then(data1 => {
+                  setFile(data1.data[0].url);
+                });
+              return (
+                <>
+                  <img src={post?.file} />
+                  <h3>제목: {post?.caption}</h3>
+                  <p>닉네임: {post?.nickname}</p>
+                  <p>내용: {post?.context}</p>
+                  <p>Like: {post?.likes}</p>
+                  <Link to="/ideaView" className="text">
+                    <button>Read more</button>
+                  </Link>
+                </>
+              );
+            })}
           </div>
-          <p>닉네임 : {dummy.nickname}</p>
-          <p>Like : {dummy.likes}</p>
-          <Link to="/ideaView" className="text">
-            <button>Read more</button>
-          </Link>
-        </Ideabox>
-        <Ideabox>
-          <div className="container">
-            <img src={img} />
-            <h3>제목:{post}</h3>
-          </div>
-          <p>닉네임 :{nickname}</p>
-          <p>Like:{likes}</p>
-          <p>context:{post}</p>
-          <Link to="/ideaView" className="text">
-            <button>Read more</button>
-          </Link>
-        </Ideabox>
-        <Ideabox>
-          <div className="container">
-            <img src={img} />
-            <h3>제목:{post}</h3>
-          </div>
-          <p>닉네임 :{nickname}</p>
-          <p>Like:{likes}</p>
-          <p>context:{post}</p>
-          <Link to="/ideaView" className="text">
-            <button>Read more</button>
-          </Link>
-        </Ideabox>
-        <Ideabox>
-          <div className="container">
-            <img src={img} />
-            <h3>제목:{post}</h3>
-          </div>
-          <p>닉네임 :{nickname}</p>
-          <p>Like:{likes}</p>
-          <p>context:{post}</p>
-          <Link to="/ideaView" className="text">
-            <button>Read more</button>
-          </Link>
-        </Ideabox>
-        <Ideabox>
-          <div className="container">
-            <img src={img} />
-            <h3>제목:{post}</h3>
-          </div>
-          <p>닉네임 :{nickname}</p>
-          <p>Like:{likes}</p>
-          <p>context:{post}</p>
-          <Link to="/ideaView" className="text">
-            <button>Read more</button>
-          </Link>
-        </Ideabox>
-        <Ideabox>
-          <div className="container">
-            <img src={img} />
-            <h3>제목:{post}</h3>
-          </div>
-          <p>닉네임 :{nickname}</p>
-          <p>Like:{likes}</p>
-          <p>context:{post}</p>
-          <Link to="/ideaView" className="text">
-            <button>Read more</button>
-          </Link>
         </Ideabox>
       </MainStyle>
-    </div>
+    </>
   );
 }

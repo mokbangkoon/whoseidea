@@ -17,6 +17,7 @@ import Mypost from './pages/Mypost';
 import ChangePassword from './pages/ChangePassword';
 import Chat from './pages/Chat';
 import Mychat from './pages/Mychat';
+import WriteIdea from './pages/WriteIdea';
 
 function App() {
   const dispatch = useDispatch();
@@ -75,6 +76,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/rank" element={<Rank />} />
         <Route path="/idealist" element={<IdeaList />} />
+        <Route path="/writeidea" element={<WriteIdea />} />
         <Route
           path="/mypage"
           element={

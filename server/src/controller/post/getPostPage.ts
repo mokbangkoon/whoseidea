@@ -18,7 +18,7 @@ export async function getPostPage(req: any, res: any) {
     const prisma = new PrismaClient()
 
     const posts = await prisma.posts.findMany({
-        skip:(page-1)*9,
+        skip:1+(page-1)*9,
         take:8+(page-1)*9,
     })
 

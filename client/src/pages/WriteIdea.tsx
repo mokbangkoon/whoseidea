@@ -2,7 +2,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import axios from 'axios';
 import styled from 'styled-components';
-import { check } from 'prettier';
 import { Link, Navigate, useNavigationType } from 'react-router-dom';
 import React, { Component, MouseEvent, useEffect, useState } from 'react';
 import writeidea from '../modules/writeidea';
@@ -125,35 +124,29 @@ const BodyStyle = styled.div`
 export default function WriteIdea() {
   const writeidea = useSelector((state: RootState) => state.writeidea);
   const [filename, setFileName] = useState('');
+  const [id, setId] = useState([]);
   const [title, setTitle] = useState('');
   const [nickname, setNickname] = useState('');
+  const [postid, setPostId] = useState([]);
   const [context, setContext] = useState('');
   const [file, setFile] = useState('');
-  const [submit, setSubmit] = useState('');
   const [alertmessage, setAlertmessage] = useState('');
   const [selectedFile, setselectedFile] = useState('');
   const [viewcontent, setViewContent] = useState([]);
-  const [data, setData] = useState([]);
-  const [post, setPost] = useState({
-    title: '',
-    nickname: '',
+  const UploadReference = React.createRef();
+  const [post, setPost] = useState([]);
+  const [data, setData] = useState({
+    caption: '',
     context: '',
   });
-  useEffect(() => {
-    axios.post('https://localhost:8080/post').then(({ data }) => setPost(data));
-  }, []);
 
-  const getValue = (e: any) => {
-    const { title, value } = e.target;
-    setPost({
-      ...post,
-      [title]: value,
-      [nickname]: value,
-      [context]: value,
+  const handleInputValue = (key: any, e: any) => {
+    setData({
+      ...data,
+      [key]: e.target.value,
     });
-    console.log(post);
+    console.log(data);
   };
-
   const newPost = (e: any) => {
     setPost(e.target.value);
   };
@@ -164,13 +157,31 @@ export default function WriteIdea() {
   };
 
   const handlePost = () => {
+    console.log(data);
+    const formData = new FormData();
+    formData.append('file', selectedFile);
     axios
-      .post('https://localhost:8080/post', data)
+      .post('https://localhost:8080/post', data, {
+        headers: {
+          'Content-Type': `application/json`,
+          withCredentials: true,
+        },
+      })
       .then(res => {
         alert('성공');
       })
-      .catch(err => {
+      .catch(res => {
         alert('실패');
+      });
+    axios
+      .post(`https://localhost:8080/post/image?postId=${postid}`, formData, {
+        headers: {
+          'Content-Type': `multipart/form-data`,
+          withCredentials: true,
+        },
+      })
+      .then(res => {
+        console.log(res);
       });
   };
   return (
@@ -188,7 +199,7 @@ export default function WriteIdea() {
                   type="text"
                   className="title"
                   placeholder="제목을 입력해주세요"
-                  onChange={getValue}
+                  onChange={e => handleInputValue('caption', e)}
                   name="title"
                 ></input>
               </span>
@@ -199,14 +210,7 @@ export default function WriteIdea() {
                   <input
                     type="text"
                     className="write-text"
-                    placeholder="닉네임을 입력해주세요"
-                    onChange={getValue}
-                  ></input>
-                  <input
-                    type="text"
-                    className="write-text"
-                    placeholder="닉네임을 입력해주세요"
-                    onChange={getValue}
+                    value={'nickname'}
                   ></input>
                 </span>
               </div>
@@ -215,14 +219,9 @@ export default function WriteIdea() {
                   <textarea
                     className="maintext"
                     placeholder="내용을 입력해 주세요"
-                    onChange={getValue}
+                    onChange={e => handleInputValue('context', e)}
                   ></textarea>
-                  <input
-                    className="write-text1"
-                    readOnly
-                    value={filename}
-                    placeholder="첨부파일"
-                  ></input>
+                  <input className="write-text1" placeholder="첨부파일"></input>
                   <div>
                     <button
                       className="button"

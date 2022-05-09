@@ -14,7 +14,6 @@ type WriteideaState = {
   nickname: string;
   context: string;
   file: string;
-  correct: string;
 };
 
 const initialState: WriteideaState = {
@@ -22,7 +21,6 @@ const initialState: WriteideaState = {
   nickname: '',
   context: '',
   file: '',
-  correct: '',
 };
 
 const writeidea = createReducer<WriteideaState, WriteideaAction>(initialState, {

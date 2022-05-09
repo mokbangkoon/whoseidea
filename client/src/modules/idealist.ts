@@ -10,17 +10,19 @@ const actions = { idealistdata };
 type idealistAction = ActionType<typeof actions>;
 
 type idealistState = {
-  image: any;
+  file: any;
   nickname: string;
-  post: string;
+  caption: string;
+  context: string;
   likes: number;
 };
 
 const initialState: idealistState = {
-  image: '',
+  file: '',
   nickname: '',
   likes: 0,
-  post: '',
+  caption: '',
+  context: '',
 };
 
 const idealist = createReducer<idealistState, idealistAction>(initialState, {
