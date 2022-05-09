@@ -27,13 +27,14 @@ app.get('/comment', controllers.getComment);
 app.get('/emailduplication', controllers.emailDuplication);
 app.get('/nicknameduplication', controllers.nicknameDuplication);
 app.get('/post/image', controllers.transmissionUrl);
+app.get('/message', controllers.getMessage);
 
 app.post('/signup', controllers.signup);
 app.post('/login', controllers.login);
 app.post('/logout', controllers.logout);
 app.post('/post', controllers.writePost);
 app.post('/comment', controllers.writeComment);
-app.post('/message', controllers.message);
+app.post('/message', controllers.writeMessage);
 app.post('/post/image', controllers.fileUploader(), controllers.uploadPostImage);
 
 app.patch('/user', controllers.updatePro);
