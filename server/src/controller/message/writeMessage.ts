@@ -1,8 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 import { isAuthorized } from "../tokenFunctions";
+import { Request, Response } from 'express'
 
-export async function writeMessage (req :any, res: any) {
+export async function writeMessage (req :Request, res: Response) {
     if (!isAuthorized(req)) {
         return res.status(422).send('invaild')
     }

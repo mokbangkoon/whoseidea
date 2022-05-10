@@ -7,7 +7,7 @@ import islogincheck from './islogin';
 import idealist from './idealist';
 import isgooglelogin from './isgooglelogin';
 import googledatas from './googledata';
-
+import writeidea from './writeidea';
 const rootReducer = combineReducers({
   modal,
   login,
@@ -17,6 +17,7 @@ const rootReducer = combineReducers({
   idealist,
   isgooglelogin,
   googledatas,
+  writeidea,
 });
 
 // 루트 리듀서를 내보내주세요.

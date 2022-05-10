@@ -5,6 +5,9 @@ import styled from 'styled-components';
 import { check } from 'prettier';
 import { Link, useNavigationType } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
+import writeidea from './WriteIdea';
+import { userInfo } from 'os';
+import { text } from 'express';
 
 axios.defaults.withCredentials = true;
 
@@ -68,42 +71,62 @@ const Title2 = styled.div`
   margin-bottom: 0.5%;
   align-items: stretch;
   font-size: 20px;
+
+  @media only screen and (max-width: 768px) {
+    margin-left: 15%;
+    font-size: 20px;
+    position: absolute;
+  }
 `;
 
 const MainStyle = styled.div`
+  max-width: 60%;
   margin-left: 8%;
   width: 90%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: 500px 500px 500px;
+
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const Ideabox = styled.div`
-  position: flex;
-  width: 350px;
-  height: 450px;
-  top: 8%;
-  left: 5%;
-  background-color: #f6f7f2;
-  line-height: 10px;
-  border-radius: 10px 10px 10px 10px;
-  font-size: 20px;
-  text-align: center;
+  box-sizing: border-box;
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+
+  position: absolute;
+  width: 320px;
+  height: 419px;
+  left: 1359px;
+  top: 252px;
+
+  border: 1px solid #000000;
+  border-radius: 16px;
 
   & img {
+    position: static;
+    width: 320px;
     height: 200px;
-    width: 100%;
-    right: 5px;
-    left: 5px;
-    margin-top: 10px;
-    text-align: center;
-    display: flex;
-    flex-flow: row wrap;
-    position: relative;
-    overflow: hidden;
+    left: 0px;
+    top: 0px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 0px 0px;
   }
 
   & button {
+    display: block;
+    margin: auto;
     width: 50%;
     height: 50px;
     background: black;
@@ -121,56 +144,118 @@ const Ideabox = styled.div`
     color: black;
   }
 `;
+const Box1 = styled.div`
+  :root {
+    --primary-light: #8abdff;
+    --primary: #6d5dfc;
+    --primary-dark: #5b0eeb;
+
+    --white: #ffffff;
+    --greyLight-1: #e4ebf5;
+    --greyLight-2: #c8d0e7;
+    --greyLight-3: #bec8e4;
+    --greyDark: #9baacf;
+  }
+
+  $shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2),
+    -0.2rem -0.2rem 0.5rem var(--white);
+  $inner-shadow: inset 0.2rem 0.2rem 0.5rem var(--greyLight-2),
+    inset -0.2rem -0.2rem 0.5rem var(--white);
+
+  .button {
+    width: 15rem;
+    height: 4rem;
+    border-radius: 1rem;
+    box-shadow: $shadow;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  .button .buton-primary {
+    grid-column: 1 / 2;
+    grid-row: 4 / 5;
+    background: var(--primary);
+    box-shadow: inset 0.2rem 0.2rem 1rem var(--primary-light),
+      inset -0.2rem -0.2rem 1rem var(--primary-dark), $shadow;
+    color: var(--greyLight-1);
+
+    &:hover {
+      color: var(--white);
+    }
+    &:active {
+      box-shadow: inset 0.2rem 0.2rem 1rem var(--primary-dark),
+        inset -0.2rem -0.2rem 1rem var(--primary-light);
+    }
+  }
+  .button .button-secondary {
+    &__secondary {
+      grid-column: 1 / 2;
+      grid-row: 5 / 6;
+      color: var(--greyDark);
+      &:hover {
+        color: var(--primary);
+      }
+      &:active {
+        box-shadow: $inner-shadow;
+      }
+    }
+
+    p {
+      font-size: 1.6rem;
+    }
+  }
+`;
 
 export default function IdeaList() {
   const idealist = useSelector((state: RootState) => state.idealist);
-  const [img, setImg] = useState<string>('');
+  const [file, setFile] = useState('');
   const [nickname, setNickname] = useState<string>('');
+  const [caption, setCaption] = useState('');
+  const [context, setContext] = useState('');
   const [likes, setLikes] = useState<number>(0);
-  const [post, setPost] = useState<string>('');
+  const [profile, setProfile] = useState('');
+  const [offset, setOffset] = useState(0);
+  const [hasnext, sethasnext] = useState(false);
+  const [post, setPost] = useState([]);
+  const [pagenum, setPageNum] = useState(1);
 
   useEffect(() => {
-    axios
-      .get('https://localhost:8080/user', { params: idealist })
-      .then(data => {
-        console.log(data);
-        setNickname(data.data.nickname);
-      });
-  });
+    axios.get(`https://localhost:8080/post?page=${pagenum}`).then(data => {
+      console.log(data.data);
+      setPost(data.data);
+      sethasnext(data.data);
+    });
+  }, [pagenum]);
 
-  useEffect(() => {
-    axios
-      .get('https://localhost:8080/post', { params: idealist })
-      .then(data => {
-        console.log(data);
-        setPost(data.data.post);
-      });
-  });
-
-  useEffect(() => {
-    axios
-      .patch('https://localhost:8080/like', { params: idealist })
-      .then(data => {
-        console.log(data);
-        setLikes(data.data.likes);
-      });
-  });
-  useEffect(() => {
-    axios
-      .patch('https://localhost:8080/image?postId=1', { params: idealist })
-      .then(data => {
-        console.log(data);
-        setLikes(data.data.image);
-      });
-  });
-
-  const dummy = {
-    nickname: '박펠레',
-    title: '아이디어 작성 테스트',
-    img: '/whose로고.png',
-    likes: 10,
+  const Newpost = (key: any, e: any) => {
+    setPost(e.target.value);
   };
 
+  function handleNewPost() {
+    axios.get(`https://localhost:8080/post?page=${pagenum}`).then(data => {
+      setFile(data.data.img);
+      setCaption(data.data.title);
+      setContext(data.data.context);
+      alert('성공');
+    });
+  }
+  const handlePageBack = () => {
+    setPageNum(pagenum - 1);
+  };
+  const handlePagefront = () => {
+    setPageNum(pagenum + 1);
+  };
+  const handleback = () => {
+    setOffset(offset - 9);
+    setPageNum(pagenum - 1);
+  };
+  const handlefront = () => {
+    setOffset(offset + 9);
+    setPageNum(pagenum + 1);
+  };
   return (
     <div>
       <Title>
@@ -193,83 +278,52 @@ export default function IdeaList() {
       <div>
         <Title2>
           <div className="container">
-            <Link to="/Writeidea">
+            <Link to="/writeidea">
               <img src="add.png"></img>
             </Link>
           </div>
         </Title2>
       </div>
+      <div className="row">
+        <Box1>
+          <div className="button">
+            {offset === 0 ? null : (
+              <button className="button-primary" onClick={handleback}>
+                이전
+              </button>
+            )}
+            {hasnext ? (
+              <button className="button-secondary" onClick={handlefront}>
+                다음
+              </button>
+            ) : null}
+          </div>
+        </Box1>
+      </div>
       <MainStyle>
         <Ideabox>
           <div className="container">
-            <img src={dummy.img} />
-            <h3>제목 : {dummy.title}</h3>
+            {post.map((post: any) => {
+              axios
+                .get(`https://localhost:8080/post/image?postId=${post.id}`)
+                .then(data1 => {
+                  console.log(data1.data[0]);
+                  setFile(data1.data[0].url);
+                });
+              return (
+                <>
+                  <img src={post?.file} />
+                  <h3>제목: {post?.caption}</h3>
+                  <p>닉네임: {post?.nickname}</p>
+                  <p>내용: {post?.context}</p>
+                  <p>Like: {post?.likes}</p>
+                  <Link to="/ideaView" className="text">
+                    <button>Read more</button>
+                  </Link>
+                </>
+              );
+            })}
           </div>
-          <p>닉네임 : {dummy.nickname}</p>
-          <p>Like : {dummy.likes}</p>
-          <Link to="/ideaView" className="text">
-            <button>Read more</button>
-          </Link>
-        </Ideabox>
-        <Ideabox>
-          <div className="container">
-            <img src={img} />
-            <h3>제목:{post}</h3>
-          </div>
-          <p>닉네임 :{nickname}</p>
-          <p>Like:{likes}</p>
-          <p>context:{post}</p>
-          <Link to="/ideaView" className="text">
-            <button>Read more</button>
-          </Link>
-        </Ideabox>
-        <Ideabox>
-          <div className="container">
-            <img src={img} />
-            <h3>제목:{post}</h3>
-          </div>
-          <p>닉네임 :{nickname}</p>
-          <p>Like:{likes}</p>
-          <p>context:{post}</p>
-          <Link to="/ideaView" className="text">
-            <button>Read more</button>
-          </Link>
-        </Ideabox>
-        <Ideabox>
-          <div className="container">
-            <img src={img} />
-            <h3>제목:{post}</h3>
-          </div>
-          <p>닉네임 :{nickname}</p>
-          <p>Like:{likes}</p>
-          <p>context:{post}</p>
-          <Link to="/ideaView" className="text">
-            <button>Read more</button>
-          </Link>
-        </Ideabox>
-        <Ideabox>
-          <div className="container">
-            <img src={img} />
-            <h3>제목:{post}</h3>
-          </div>
-          <p>닉네임 :{nickname}</p>
-          <p>Like:{likes}</p>
-          <p>context:{post}</p>
-          <Link to="/ideaView" className="text">
-            <button>Read more</button>
-          </Link>
-        </Ideabox>
-        <Ideabox>
-          <div className="container">
-            <img src={img} />
-            <h3>제목:{post}</h3>
-          </div>
-          <p>닉네임 :{nickname}</p>
-          <p>Like:{likes}</p>
-          <p>context:{post}</p>
-          <Link to="/ideaView" className="text">
-            <button>Read more</button>
-          </Link>
         </Ideabox>
       </MainStyle>
     </div>
