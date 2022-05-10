@@ -23,6 +23,16 @@ export async function viewPost(req: Request, res: Response) {
             id:Number(req.query.postId)
         }
     })
+    await prisma.posts.update({
+        where:{
+            id:Number(req.query.postId)
+        },
+        data:{
+            view:{
+                increment:1
+            }
+        }
+    })
 
     // 검색 결과가 없으면 빈 객체를 보냄
     if(!post)
