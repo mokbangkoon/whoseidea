@@ -18,11 +18,7 @@ export async function viewPost(req: Request, res: Response) {
 
     const prisma = new PrismaClient()
 
-    const post = await prisma.posts.findFirst({
-        where:{
-            id:Number(req.query.postId)
-        }
-    })
+    // 조회수 증가
     await prisma.posts.update({
         where:{
             id:Number(req.query.postId)
@@ -31,6 +27,11 @@ export async function viewPost(req: Request, res: Response) {
             view:{
                 increment:1
             }
+        }
+    })
+    const post = await prisma.posts.findFirst({
+        where:{
+            id:Number(req.query.postId)
         }
     })
 
