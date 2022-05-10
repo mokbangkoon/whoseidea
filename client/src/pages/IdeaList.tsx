@@ -209,13 +209,17 @@ const Box1 = styled.div`
   }
 `;
 
-export default function IdeaList() {
+export default function IdeaList({ handleToView }: any) {
   const idealist = useSelector((state: RootState) => state.idealist);
   const [file, setFile] = useState('');
   const [offset, setOffset] = useState(0);
   const [hasnext, sethasnext] = useState(false);
   const [post, setPost] = useState<any[]>([]);
   const [pagenum, setPageNum] = useState(1);
+
+  const handleIdealist = (post: any) => {
+    handleToView(post);
+  };
 
   useEffect(() => {
     axios.get(`https://localhost:8080/post?page=${pagenum}`).then(data => {
@@ -231,12 +235,14 @@ export default function IdeaList() {
         });
 
         const items = [];
+
         for (let i = 0; i < data.data.length; i++) {
           items.push({
             ...data.data[i],
             url: urls[i],
           });
         }
+        console.log(items);
         setPost(items);
         sethasnext(!!items);
       });
@@ -250,6 +256,7 @@ export default function IdeaList() {
     setOffset(offset + 9);
     setPageNum(pagenum + 1);
   };
+
   return (
     <div>
       <Title>
@@ -303,10 +310,12 @@ export default function IdeaList() {
                   <img src={post?.url} />
                   <h3>제목: {post?.caption}</h3>
                   <p>닉네임: {post?.nickname}</p>
-                  <p>내용: {post?.context}</p>
+
                   <p>Like: {post?.likes}</p>
-                  <Link to="/ideaView" className="text">
-                    <button>Read more</button>
+                  <Link to={`/ideaview/${post?.id}`} className="text">
+                    <button onClick={() => handleIdealist(post)}>
+                      Read more
+                    </button>
                   </Link>
                 </>
               );
