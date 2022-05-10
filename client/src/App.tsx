@@ -17,6 +17,9 @@ import Mypost from './pages/Mypost';
 import ChangePassword from './pages/ChangePassword';
 import Chat from './pages/Chat';
 import Mychat from './pages/Mychat';
+
+import IdeaView from './pages/IdeaVIew';
+
 import WriteIdea from './pages/WriteIdea';
 
 function App() {
@@ -28,6 +31,7 @@ function App() {
     null
   );
   const [chatData, setchatData] = useState<AxiosResponse | null | void>(null);
+  const [writerdata, serwriterdata] = useState('');
   const isAuthenticated = () => {
     axios.get('https://localhost:8080/auth').then(data => {
       setusernickname(data.data.nickname);
@@ -59,6 +63,10 @@ function App() {
       dispatch(islogin(false));
       navigate('/');
     });
+  };
+
+  const handleIdeaView = (name: string) => {
+    serwriterdata(name);
   };
 
   useEffect(() => {
@@ -94,8 +102,12 @@ function App() {
           element={<Mypost postData={postData} commentData={commentData} />}
         />
         <Route path="/changepassword" element={<ChangePassword />} />
-        <Route path="/chat" element={<Chat />} />
+        <Route path="/chat" element={<Chat writerdata={writerdata} />} />
         <Route path="/mychat" element={<Mychat chatData={chatData} />} />
+        <Route
+          path="/ideaview/:id"
+          element={<IdeaView handleIdeaView={handleIdeaView} />}
+        />
       </Routes>
     </div>
   );
