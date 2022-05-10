@@ -80,15 +80,9 @@ const Title2 = styled.div`
 `;
 
 const MainStyle = styled.div`
-  max-width: 60%;
+  max-width: 80%;
   margin-left: 8%;
   width: 90%;
-
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 `;
 
 const Ideabox = styled.div`
@@ -98,13 +92,16 @@ const Ideabox = styled.div`
   flex-direction: column;
   align-items: flex-start;
   padding: 0px;
-
-  position: absolute;
+  position: relative;
   width: 320px;
   height: 419px;
   left: 1359px;
   top: 252px;
-
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border: 1px solid #000000;
   border-radius: 16px;
 
@@ -114,9 +111,6 @@ const Ideabox = styled.div`
     height: 200px;
     left: 0px;
     top: 0px;
-
-    /* Inside auto layout */
-
     flex: none;
     order: 0;
     align-self: stretch;
@@ -191,7 +185,6 @@ const Box1 = styled.div`
     }
   }
   .button .button-secondary {
-    &__secondary {
       grid-column: 1 / 2;
       grid-row: 5 / 6;
       color: var(--greyDark);
