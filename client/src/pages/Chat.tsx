@@ -62,7 +62,7 @@ const Innertext = styled.div`
   left: 4%;
   color: white;
 `;
-export default function Chat() {
+export default function Chat({ writerdata }: any) {
   const [userinfo, setuserinfo] = useState({
     nickname: '',
     context: '',
@@ -90,7 +90,7 @@ export default function Chat() {
             <div> 받는 사람 </div>
           </RecieveUser>
           <RecieveUserId>
-            <div>props로 받은 받는사람 아이디</div>
+            <div>{writerdata}</div>
           </RecieveUserId>
           <div>내용</div>
           <Inputtext>
