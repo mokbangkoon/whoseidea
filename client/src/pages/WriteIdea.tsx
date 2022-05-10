@@ -1,15 +1,8 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import axios from 'axios';
 import styled from 'styled-components';
-import { Link, Navigate, useNavigationType } from 'react-router-dom';
-import React, { Component, MouseEvent, useEffect, useState } from 'react';
-import writeidea from '../modules/writeidea';
-import { findAllByAltText } from '@testing-library/react';
-import IdeaList from './IdeaList';
-import idealist from '../modules/idealist';
-import { action } from 'typesafe-actions';
-import e from 'express';
+import React, { useState } from 'react';
 axios.defaults.withCredentials = true;
 
 const MainStyle = styled.div`
@@ -122,18 +115,9 @@ const BodyStyle = styled.div`
   }
 `;
 export default function WriteIdea() {
-  const writeidea = useSelector((state: RootState) => state.writeidea);
   const [filename, setFileName] = useState('');
-  const [id, setId] = useState([]);
-  const [title, setTitle] = useState('');
-  const [nickname, setNickname] = useState('');
   const [postid, setPostId] = useState([]);
-  const [context, setContext] = useState('');
-  const [file, setFile] = useState('');
-  const [alertmessage, setAlertmessage] = useState('');
   const [selectedFile, setselectedFile] = useState('');
-  const [viewcontent, setViewContent] = useState([]);
-  const UploadReference = React.createRef();
   const [post, setPost] = useState([]);
   const [data, setData] = useState({
     caption: '',
@@ -147,17 +131,12 @@ export default function WriteIdea() {
     });
     console.log(data);
   };
-  const newPost = (e: any) => {
-    setPost(e.target.value);
-  };
-
   const handleFileInput = (event: any) => {
     setselectedFile(event.target.files[0]);
     setFileName(event.target.files[0].name);
   };
 
   const handlePost = () => {
-    console.log(data);
     const formData = new FormData();
     formData.append('file', selectedFile);
     axios
@@ -167,22 +146,28 @@ export default function WriteIdea() {
           withCredentials: true,
         },
       })
-      .then(res => {
+      .then(() => {
         alert('성공');
       })
-      .catch(res => {
+      .catch(() => {
         alert('실패');
       });
-    axios
-      .post(`https://localhost:8080/post/image?postId=${postid}`, formData, {
-        headers: {
-          'Content-Type': `multipart/form-data`,
-          withCredentials: true,
-        },
-      })
-      .then(res => {
-        console.log(res);
-      });
+    axios.get('https://localhost:8080/post/last').then((lastPost: any) => {
+      axios
+        .post(
+          `https://localhost:8080/post/image?postId=${lastPost.data.id + 1}`,
+          formData,
+          {
+            headers: {
+              'Content-Type': `multipart/form-data`,
+              withCredentials: true,
+            },
+          }
+        )
+        .then(res => {
+          console.log(res);
+        });
+    });
   };
   return (
     <div>
