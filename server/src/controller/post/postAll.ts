@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
+import { Request, Response } from 'express'
 
-export async function postAll(req: any, res: any) {
+export async function postAll(req: Request, res: Response) {
 
     // 인자가 없으면 오류 처리
     if (!req.query.limit)
@@ -12,14 +13,14 @@ export async function postAll(req: any, res: any) {
     if (!Number.isInteger(Number(req.query.limit)))
         return res.status(406).send('limit is not number')
     // 인자가 desc 또는 asc가 아니면 오류 처리
-    if (!['desc','asc'].includes(req.query.order))
+    if (!['desc','asc'].includes(req.query.order as string))
         return res.status(406).send('order is not "desc" or "asc"')
 
     const prisma = new PrismaClient()
     const posts = await prisma.posts.findMany({
         take: Number(req.query.limit),
         orderBy: {
-            likes:req.query.order
+            likes:req.query.order as any
         },
     })
 

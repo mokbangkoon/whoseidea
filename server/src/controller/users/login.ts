@@ -1,8 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient()
 import { generateAccessToken } from '../tokenFunctions'
+import { Request, Response } from 'express'
 
-export async function login (req: any, res: any) {
+export async function login (req: Request, res: Response) {
     const userInfo = await prisma.users.findFirst({
         where: {
             email: req.body.email,

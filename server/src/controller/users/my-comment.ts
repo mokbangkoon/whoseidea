@@ -1,6 +1,7 @@
 import { PrismaClient } from '@prisma/client'
+import { Request, Response } from 'express'
 
-export async function myComment(req: any, res: any) {
+export async function myComment(req: Request, res: Response) {
 
     // 인자가 없으면 오류 처리
     if (!req.query.nickname) {
@@ -9,7 +10,7 @@ export async function myComment(req: any, res: any) {
     const prisma = new PrismaClient()
     const userInfo = await prisma.users.findFirst({
         where: {
-            nickname: req.query.nickname,
+            nickname: req.query.nickname as any,
         }
     })
 

@@ -1,7 +1,7 @@
 import { isAuthorized } from '../tokenFunctions'
 import { PrismaClient } from '@prisma/client'
 
-export async function uploadPostImage(req:any,res:any) {
+export async function uploadPostImage(req: any, res: any) {
 
     // 인자가 없으면 오류 처리
     if (!req.query.postId)
