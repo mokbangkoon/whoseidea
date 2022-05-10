@@ -27,6 +27,7 @@ app.get('/comment', controllers.getComment);
 app.get('/emailduplication', controllers.emailDuplication);
 app.get('/nicknameduplication', controllers.nicknameDuplication);
 app.get('/post/image', controllers.transmissionUrl);
+app.get('/post/last', controllers.lastPost);
 app.get('/message', controllers.getMessage);
 
 app.post('/signup', controllers.signup);
