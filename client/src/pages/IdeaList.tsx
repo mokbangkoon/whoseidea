@@ -122,7 +122,7 @@ const Ideabox = styled.div`
     display: block;
     margin: auto;
     width: 50%;
-    height: 50px;
+    height: 40px;
     background: black;
     color: white;
     border: 2px solid #ffff;
@@ -139,66 +139,33 @@ const Ideabox = styled.div`
   }
 `;
 const Box1 = styled.div`
-  :root {
-    --primary-light: #8abdff;
-    --primary: #6d5dfc;
-    --primary-dark: #5b0eeb;
-
-    --white: #ffffff;
-    --greyLight-1: #e4ebf5;
-    --greyLight-2: #c8d0e7;
-    --greyLight-3: #bec8e4;
-    --greyDark: #9baacf;
-  }
-
-  $shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2),
-    -0.2rem -0.2rem 0.5rem var(--white);
-  $inner-shadow: inset 0.2rem 0.2rem 0.5rem var(--greyLight-2),
-    inset -0.2rem -0.2rem 0.5rem var(--white);
-
-  .button {
-    width: 15rem;
-    height: 4rem;
-    border-radius: 1rem;
-    box-shadow: $shadow;
-    justify-self: center;
+  --border-color: #efefef;
+  .follow-buttons {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: 0.3s ease;
   }
-  .button .buton-primary {
-    grid-column: 1 / 2;
-    grid-row: 4 / 5;
-    background: var(--primary);
-    box-shadow: inset 0.2rem 0.2rem 1rem var(--primary-light),
-      inset -0.2rem -0.2rem 1rem var(--primary-dark), $shadow;
-    color: var(--greyLight-1);
+
+  .follow {
+    border: 2px solid var(--border-color);
+    border-radius: 25px 0 0 25px;
+    color: var(--body-color);
+    padding: 8px 16px;
+    font-weight: 600;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: transparent;
+    width: 100px;
+    left: calc(20%);
+    top: calc(30%);
 
     &:hover {
-      color: var(--white);
-    }
-    &:active {
-      box-shadow: inset 0.2rem 0.2rem 1rem var(--primary-dark),
-        inset -0.2rem -0.2rem 1rem var(--primary-light);
+      background-color: var(--header-bg-color);
     }
   }
-  .button .button-secondary {
-      grid-column: 1 / 2;
-      grid-row: 5 / 6;
-      color: var(--greyDark);
-      &:hover {
-        color: var(--primary);
-      }
-      &:active {
-        box-shadow: $inner-shadow;
-      }
-    }
 
-    p {
-      font-size: 1.6rem;
-    }
+  .follow-option {
+    border-radius: 0 25px 25px 0;
+    margin-left: -2px;
+    width: 100px;
   }
 `;
 
@@ -271,16 +238,19 @@ export default function IdeaList() {
           </div>
         </Title2>
       </div>
-      <div className="row">
+      <div className="button">
         <Box1>
-          <div className="button">
+          <div className="follow-buttons">
             {offset === 0 ? null : (
-              <button className="button-primary" onClick={handleback}>
+              <button className="follow" onClick={handleback}>
                 이전
               </button>
             )}
             {hasnext ? (
-              <button className="button-secondary" onClick={handlefront}>
+              <button
+                className="follow follow-option active"
+                onClick={handlefront}
+              >
                 다음
               </button>
             ) : null}
