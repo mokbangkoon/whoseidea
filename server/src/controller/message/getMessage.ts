@@ -17,7 +17,7 @@ export async function getMessage(req: Request, res: Response) {
             email: tokenInfo.email
         }
     })
-    const [ messages ] = await prisma.messages.findMany({
+    const messages = await prisma.messages.findMany({
         where: {
             target: user1Info.id
         }
