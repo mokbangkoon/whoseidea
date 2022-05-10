@@ -19,6 +19,7 @@ import { writeComment } from './comment/writeComment'
 import { deleteComment } from './comment/deleteComment'
 import { likePost } from './post/likePost'
 import { modifyPost } from './post/modifyPost'
+import { lastPost } from './post/lastPost'
 import { writeMessage } from './message/writeMessage'
 import { uploadPostImage } from './post/uploadPostImage'
 import { uploadUserImage } from './users/uploadUserImage'
@@ -48,6 +49,7 @@ const controllers = {
     deleteComment:deleteComment,
     likePost:likePost,
     modifyPost:modifyPost,
+    lastPost:lastPost,
     writeMessage:writeMessage,
     uploadPostImage:uploadPostImage,
     uploadUserImage:uploadUserImage,
