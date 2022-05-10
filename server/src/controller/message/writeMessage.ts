@@ -3,29 +3,30 @@ const prisma = new PrismaClient()
 import { isAuthorized } from "../tokenFunctions";
 import { Request, Response } from 'express'
 
-export async function writeMessage (req :Request, res: Response) {
+export async function writeMessage (req: Request, res: Response) {
     if (!isAuthorized(req)) {
         return res.status(422).send('invaild')
     }
     const accsessTokenData: any = isAuthorized(req)
-    const userInfo = await prisma.users.findFirst({
+    const user1Info = await prisma.users.findFirst({
         where: {
             email: accsessTokenData?.email
         }
     })
-    if (!userInfo) {
+    if (!user1Info) {
         return res.status(425).send('not user')
     }
-    if (!await prisma.users.findFirst({
-        where: {nickname: req.body.nickname}
-    })) {
+    const user2Info = await prisma.users.findFirst({
+        where: {nickname: req.body.target}
+    })
+    if (!user2Info) {
         return res.status(426).send('not find user')
     }
     await prisma.messages.create({
         data: {
-            nickname: userInfo?.id,
+            nickname: user1Info.id,
             text: req.body.context,
-            target: req.body.target
+            target: user2Info.id
         }
     })
     return res.status(200).send('send ok')
