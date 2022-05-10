@@ -1,26 +1,62 @@
 import { PrismaClient } from '@prisma/client'
 import { isAuthorized } from '../tokenFunctions'
 import { Request, Response } from 'express'
-const prisma = new PrismaClient()
-
 
 export async function getMessage(req: Request, res: Response) {
 
-    // 인자가 없으면 오류 처리
     if (!isAuthorized(req))
         return res.status(405).send('Mismatched Cookies')
 
-    // 내 아이디 가져오기
-    const tokenInfo: any = isAuthorized(req)
-    const [ user1Info ]: any = await prisma.users.findMany({
+    const prisma = new PrismaClient()
+
+    // 내 정보 가져오기
+    const tokenInfo:any = isAuthorized(req)
+    const [ userInfo ]:any = await prisma.users.findMany({
         where:{
-            email: tokenInfo.email
+            email:tokenInfo.email
         }
     })
+    
+    // 나에게로 온 메시지와, 내가 쓴 메시지를 가져온다.
     const messages = await prisma.messages.findMany({
-        where: {
-            target: user1Info.id
+        where:{
+            OR:[
+                // 나에게 온 메시지
+                { target: userInfo.id },
+                // 내가 쓴 메시지
+                { nickname: userInfo.id },
+            ]
+        },
+        include:{
+            UsersToMessage:true
         }
     })
-    return res.status(200).json(messages)
+
+    // 검색 결과가 없으면 빈 배열 보냄
+    if(!messages)
+        return res.status(200).json([])
+
+
+    // 아이디를 닉네임으로 변환해서 보냄
+    const nicknameAndMessages:any[] = []
+
+    for(let item of messages){
+        const target = await prisma.users.findFirst({
+            where:{
+                id:item.target
+            }
+        })
+        const nickname = await prisma.users.findFirst({
+            where:{
+                id:item.nickname
+            }
+        })
+        nicknameAndMessages.push({
+            destination:target?.nickname,
+            source:nickname?.nickname,
+            text:item.text,
+        })
+    }
+    // 검색 결과 전달
+    return res.status(200).json(nicknameAndMessages)
 }
