@@ -25,11 +25,7 @@ export async function likePost (req: Request, res: Response) {
             postId:req.body.postId
         }
     })
-    const liked = await prisma.posts.findFirst({
-        where: {
-            id: req.body.postId
-        }
-    })
+    
 
     // 만약 like가 되어있다면 라이크를 뺀다.
     if (isLiked) {
@@ -58,7 +54,7 @@ export async function likePost (req: Request, res: Response) {
                 id: req.body.postId
             }
         })
-        return res.status(200).send({likes: liked?.likes})
+        return res.status(200).send({data: {likes: liked?.likes}, Boolean: false})
     }
     // 만약 like가 되어있지 않다면 라이크를 추가한다.
 
@@ -87,6 +83,6 @@ export async function likePost (req: Request, res: Response) {
                 id: req.body.postId
             }
         })
-        return res.status(200).send({likes: liked?.likes})
+        return res.status(200).send({data: {likes: liked?.likes}, Boolean: true})
     }
 }
