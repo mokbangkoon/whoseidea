@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import { Request, Response } from 'express'
+import { isAuthorized } from '../tokenFunctions'
 
 export async function viewPost(req: Request, res: Response) {
 
@@ -17,6 +18,12 @@ export async function viewPost(req: Request, res: Response) {
         return res.status(406).send('postId is zero or less.')
 
     const prisma = new PrismaClient()
+    const accsessTokenData: any = isAuthorized(req)
+    const userInfo = await prisma.users.findFirst({
+        where:{
+            email:accsessTokenData.email
+        }
+    }) 
 
     // 조회수 증가
     await prisma.posts.update({
@@ -34,6 +41,14 @@ export async function viewPost(req: Request, res: Response) {
             id:Number(req.query.postId)
         }
     })
+    if (isAuthorized(req) && await prisma.likes.findFirst({
+        where:{
+            nickname:userInfo?.id,
+            postId:req.body.postId
+        }
+    })) {
+        return res.status(200).json({data: post, Boolean: true})
+    }
 
     // 검색 결과가 없으면 빈 객체를 보냄
     if(!post)
