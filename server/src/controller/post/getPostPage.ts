@@ -23,13 +23,28 @@ export async function getPostPage(req: Request, res: Response) {
         take: 9,
         orderBy:{
             id:'desc'
-        }
+        },
+        include: {
+            UsersToPosts:true
+        },
     })
 
     // 검색 결과가 없으면 빈 배열 보냄
     if(!posts)
         return res.status(200).json([])
 
+    const postsWithNickname = posts.map(post=>(
+        {
+            id:post.id,
+            nickname:post.UsersToPosts?.nickname,
+            caption:post.caption,
+            likes:post.likes,
+            view:post.view,
+            context:post.context,
+            create_at:post.created_at,
+        }
+    ))
+
     // 검색 결과 전달
-    return res.status(200).json(posts)
+    return res.status(200).json(postsWithNickname)
 }

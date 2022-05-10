@@ -62,7 +62,7 @@ const Innertext = styled.div`
   left: 4%;
   color: white;
 `;
-export default function Chat({ writerdata }: any) {
+export default function Chat({ writerdata, postDatas }: any) {
   const [userinfo, setuserinfo] = useState({
     nickname: '',
     context: '',
@@ -71,12 +71,16 @@ export default function Chat({ writerdata }: any) {
   const handleInputValue = (key: any, e: any) => {
     setuserinfo({
       ...userinfo,
-      nickname: 'props로 받은 아이디',
+      nickname: String(writerdata),
       [key]: e.target.value,
+      target: postDatas.nickname,
     });
   };
   const handleChat = () => {
     console.log(userinfo);
+    axios
+      .post('https://localhost:8080/message', userinfo)
+      .then(data => alert(data.data));
   };
 
   return (
@@ -90,7 +94,7 @@ export default function Chat({ writerdata }: any) {
             <div> 받는 사람 </div>
           </RecieveUser>
           <RecieveUserId>
-            <div>{writerdata}</div>
+            <div>{postDatas.nickname}</div>
           </RecieveUserId>
           <div>내용</div>
           <Inputtext>

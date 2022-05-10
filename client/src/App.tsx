@@ -22,7 +22,6 @@ import IdeaView from './pages/IdeaVIew';
 
 import WriteIdea from './pages/WriteIdea';
 
-
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,6 +32,7 @@ function App() {
   );
   const [chatData, setchatData] = useState<AxiosResponse | null | void>(null);
   const [writerdata, serwriterdata] = useState('');
+  const [postDatas, setpostDatas] = useState({});
   const isAuthenticated = () => {
     axios.get('https://localhost:8080/auth').then(data => {
       setusernickname(data.data.nickname);
@@ -55,9 +55,7 @@ function App() {
       .then(data => setcommentData(data));
   };
   const handleMychat = () => {
-    axios
-      .get(`https://localhost:8080/user/my-post?nickname=${usernickname}`)
-      .then(data => setchatData(data));
+    axios.get(`https://localhost:8080/message`).then(data => setchatData(data));
   };
   const handleLogout = () => {
     axios.post('https://localhost:8080/logout').then(res => {
@@ -68,6 +66,9 @@ function App() {
 
   const handleIdeaView = (name: string) => {
     serwriterdata(name);
+  };
+  const handleToView = (post: any) => {
+    setpostDatas(post);
   };
 
   useEffect(() => {
@@ -84,7 +85,10 @@ function App() {
         />
         <Route path="/signup" element={<Signup />} />
         <Route path="/rank" element={<Rank />} />
-        <Route path="/idealist" element={<IdeaList />} />
+        <Route
+          path="/idealist"
+          element={<IdeaList handleToView={handleToView} />}
+        />
         <Route path="/writeidea" element={<WriteIdea />} />
         <Route
           path="/mypage"
@@ -103,11 +107,20 @@ function App() {
           element={<Mypost postData={postData} commentData={commentData} />}
         />
         <Route path="/changepassword" element={<ChangePassword />} />
-        <Route path="/chat" element={<Chat writerdata={writerdata} />} />
+        <Route
+          path="/chat"
+          element={<Chat writerdata={writerdata} postDatas={postDatas} />}
+        />
         <Route path="/mychat" element={<Mychat chatData={chatData} />} />
         <Route
           path="/ideaview/:id"
-          element={<IdeaView handleIdeaView={handleIdeaView} />}
+          element={
+            <IdeaView
+              handleIdeaView={handleIdeaView}
+              postDatas={postDatas}
+              usernickname={usernickname}
+            />
+          }
         />
       </Routes>
     </div>
