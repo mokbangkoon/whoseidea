@@ -2,7 +2,6 @@ import { PrismaClient } from '@prisma/client'
 import { isAuthorized } from '../tokenFunctions'
 import { Request, Response } from 'express'
 
-
 export async function getMessage(req: Request, res: Response) {
 
     if (!isAuthorized(req))
