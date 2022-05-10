@@ -22,7 +22,6 @@ import IdeaView from './pages/IdeaVIew';
 
 import WriteIdea from './pages/WriteIdea';
 
-
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
