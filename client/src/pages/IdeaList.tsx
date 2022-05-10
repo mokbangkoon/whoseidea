@@ -212,42 +212,36 @@ const Box1 = styled.div`
 export default function IdeaList() {
   const idealist = useSelector((state: RootState) => state.idealist);
   const [file, setFile] = useState('');
-  const [nickname, setNickname] = useState<string>('');
-  const [caption, setCaption] = useState('');
-  const [context, setContext] = useState('');
-  const [likes, setLikes] = useState<number>(0);
-  const [profile, setProfile] = useState('');
   const [offset, setOffset] = useState(0);
   const [hasnext, sethasnext] = useState(false);
-  const [post, setPost] = useState([]);
+  const [post, setPost] = useState<any[]>([]);
   const [pagenum, setPageNum] = useState(1);
 
   useEffect(() => {
     axios.get(`https://localhost:8080/post?page=${pagenum}`).then(data => {
-      console.log(data.data);
-      setPost(data.data);
-      sethasnext(data.data);
+      Promise.all(
+        data.data.map((item: any) =>
+          axios.get(`https://localhost:8080/post/image?postId=${item.id}`)
+        )
+      ).then(requests => {
+        const urls = requests.map(item => {
+          return item.data[0]
+            ? item.data[0]
+            : 'https://whoseidea-image.s3.ap-northeast-2.amazonaws.com/post_default_image.png';
+        });
+
+        const items = [];
+        for (let i = 0; i < data.data.length; i++) {
+          items.push({
+            ...data.data[i],
+            url: urls[i],
+          });
+        }
+        setPost(items);
+        sethasnext(!!items);
+      });
     });
   }, [pagenum]);
-
-  const Newpost = (key: any, e: any) => {
-    setPost(e.target.value);
-  };
-
-  function handleNewPost() {
-    axios.get(`https://localhost:8080/post?page=${pagenum}`).then(data => {
-      setFile(data.data.img);
-      setCaption(data.data.title);
-      setContext(data.data.context);
-      alert('성공');
-    });
-  }
-  const handlePageBack = () => {
-    setPageNum(pagenum - 1);
-  };
-  const handlePagefront = () => {
-    setPageNum(pagenum + 1);
-  };
   const handleback = () => {
     setOffset(offset - 9);
     setPageNum(pagenum - 1);
@@ -304,15 +298,9 @@ export default function IdeaList() {
         <Ideabox>
           <div className="container">
             {post.map((post: any) => {
-              axios
-                .get(`https://localhost:8080/post/image?postId=${post.id}`)
-                .then(data1 => {
-                  console.log(data1.data[0]);
-                  setFile(data1.data[0].url);
-                });
               return (
                 <>
-                  <img src={post?.file} />
+                  <img src={post?.url} />
                   <h3>제목: {post?.caption}</h3>
                   <p>닉네임: {post?.nickname}</p>
                   <p>내용: {post?.context}</p>
