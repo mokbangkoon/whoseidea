@@ -25,6 +25,7 @@ import { uploadPostImage } from './post/uploadPostImage'
 import { uploadUserImage } from './users/uploadUserImage'
 import { transmissionUrl } from './post/transmissionUrl'
 import { getMessage } from './message/getMessage'
+import { viewPost } from './post/viewPost'
 
 
 const controllers = {
@@ -54,7 +55,8 @@ const controllers = {
     uploadPostImage:uploadPostImage,
     uploadUserImage:uploadUserImage,
     transmissionUrl:transmissionUrl,
-    getMessage:getMessage
+    getMessage:getMessage,
+    viewPost:viewPost,
 }
 
 export default controllers
