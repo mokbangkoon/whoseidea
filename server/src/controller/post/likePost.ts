@@ -19,12 +19,13 @@ export async function likePost (req: Request, res: Response) {
     })
     
     // 이미 like가 되어 있는지 확인한다.
-    const isLiked=await prisma.likes.findFirst({
+    const isLiked = await prisma.likes.findFirst({
         where:{
             nickname:userInfo?.id,
             postId:req.body.postId
         }
     })
+    
 
     // 만약 like가 되어있다면 라이크를 뺀다.
     if (isLiked) {
@@ -48,28 +49,40 @@ export async function likePost (req: Request, res: Response) {
                 }
             }
         })
-        return res.status(200).send('like minus ok')
+        const liked = await prisma.posts.findFirst({
+            where: {
+                id: req.body.postId
+            }
+        })
+        return res.status(200).send({likes: liked?.likes})
     }
     // 만약 like가 되어있지 않다면 라이크를 추가한다.
 
     // 가져온 id값과 body에 들어있는 값을 삽입한다.
-    await prisma.likes.create({
-        data: {
-            nickname:userInfo?.id,
-            postId:req.body.postId
-        }
-    })
-
-    // posts 테이블에서 like를 하나 추가한다.
-    await prisma.posts.update({
-        where: {
-            id: req.body.postId
-        },
-        data: {
-            likes: {
-                increment: 1
+    else {
+        await prisma.likes.create({
+            data: {
+                nickname:userInfo?.id,
+                postId:req.body.postId
             }
-        }
-    })
-    return res.status(200).send('like plus ok')
+        })
+
+        // posts 테이블에서 like를 하나 추가한다.
+        await prisma.posts.update({
+            where: {
+                id: req.body.postId
+            },
+            data: {
+                likes: {
+                    increment: 1
+                }
+            }
+        })
+        const liked = await prisma.posts.findFirst({
+            where: {
+                id: req.body.postId
+            }
+        })
+        return res.status(200).send({likes: liked?.likes})
+    }
 }
