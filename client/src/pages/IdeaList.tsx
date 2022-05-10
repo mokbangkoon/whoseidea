@@ -80,39 +80,53 @@ const Title2 = styled.div`
 `;
 
 const MainStyle = styled.div`
+  max-width: 60%;
   margin-left: 8%;
   width: 90%;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 500px 500px 500px;
+
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 const Ideabox = styled.div`
-  position: relative;
-  width: 350px;
-  height: 450px;
-  top: 8%;
-  left: 5%;
-  background-color: #f6f7f2;
-  line-height: 10px;
-  border-radius: 10px 10px 10px 10px;
-  font-size: 20px;
-  text-align: center;
+  box-sizing: border-box;
+  /* Auto layout */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0px;
+
+  position: absolute;
+  width: 320px;
+  height: 419px;
+  left: 1359px;
+  top: 252px;
+
+  border: 1px solid #000000;
+  border-radius: 16px;
 
   & img {
-    height: 220px;
-    width: 100%;
-    right: 5px;
-    left: 5px;
-    text-align: center;
-    display: flex;
-    flex-flow: row wrap;
-    position: relative;
-    overflow: hidden;
-    object-fit: cover;
+    position: static;
+    width: 320px;
+    height: 200px;
+    left: 0px;
+    top: 0px;
+
+    /* Inside auto layout */
+
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 0px 0px;
   }
 
   & button {
+    display: block;
+    margin: auto;
     width: 50%;
     height: 50px;
     background: black;
@@ -128,6 +142,70 @@ const Ideabox = styled.div`
     border: 2px solid #0000;
     background: transparent;
     color: black;
+  }
+`;
+const Box1 = styled.div`
+  :root {
+    --primary-light: #8abdff;
+    --primary: #6d5dfc;
+    --primary-dark: #5b0eeb;
+
+    --white: #ffffff;
+    --greyLight-1: #e4ebf5;
+    --greyLight-2: #c8d0e7;
+    --greyLight-3: #bec8e4;
+    --greyDark: #9baacf;
+  }
+
+  $shadow: 0.3rem 0.3rem 0.6rem var(--greyLight-2),
+    -0.2rem -0.2rem 0.5rem var(--white);
+  $inner-shadow: inset 0.2rem 0.2rem 0.5rem var(--greyLight-2),
+    inset -0.2rem -0.2rem 0.5rem var(--white);
+
+  .button {
+    width: 15rem;
+    height: 4rem;
+    border-radius: 1rem;
+    box-shadow: $shadow;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s ease;
+  }
+  .button .buton-primary {
+    grid-column: 1 / 2;
+    grid-row: 4 / 5;
+    background: var(--primary);
+    box-shadow: inset 0.2rem 0.2rem 1rem var(--primary-light),
+      inset -0.2rem -0.2rem 1rem var(--primary-dark), $shadow;
+    color: var(--greyLight-1);
+
+    &:hover {
+      color: var(--white);
+    }
+    &:active {
+      box-shadow: inset 0.2rem 0.2rem 1rem var(--primary-dark),
+        inset -0.2rem -0.2rem 1rem var(--primary-light);
+    }
+  }
+  .button .button-secondary {
+    &__secondary {
+      grid-column: 1 / 2;
+      grid-row: 5 / 6;
+      color: var(--greyDark);
+      &:hover {
+        color: var(--primary);
+      }
+      &:active {
+        box-shadow: $inner-shadow;
+      }
+    }
+
+    p {
+      font-size: 1.6rem;
+    }
   }
 `;
 
@@ -179,51 +257,48 @@ export default function IdeaList() {
     setPageNum(pagenum + 1);
   };
   return (
-    <>
+    <div>
+      <Title>
+        <div>
+          <h1>Newest</h1>
+        </div>
+      </Title>
+      <Container>
+        <div className="search">
+          <input type="text" placeholder="search" className="input"></input>
+          <img src="search.png" />
+        </div>
+      </Container>
       <div>
-        <Title>
-          <div>
-            <h1>Newest</h1>
+        <HeaderContainer>
+          <div className="header-container" />
+          <div className="container" />
+        </HeaderContainer>
+      </div>
+      <div>
+        <Title2>
+          <div className="container">
+            <Link to="/writeidea">
+              <img src="add.png"></img>
+            </Link>
           </div>
-        </Title>
-        <Container>
-          <div className="search">
-            <input type="text" placeholder="search" className="input"></input>
-            <img src="search.png" />
-          </div>
-        </Container>
-        <div>
-          <HeaderContainer>
-            <div className="header-container" />
-            <div className="container" />
-          </HeaderContainer>
-        </div>
-        <div>
-          <Title2>
-            <div className="container">
-              <Link to="/writeidea">
-                <img src="add.png"></img>
-              </Link>
-            </div>
-          </Title2>
-        </div>
-        <div className="row">
-          <div className="follow-buttons">
+        </Title2>
+      </div>
+      <div className="row">
+        <Box1>
+          <div className="button">
             {offset === 0 ? null : (
-              <button className="follow" onClick={handleback}>
+              <button className="button-primary" onClick={handleback}>
                 이전
               </button>
             )}
             {hasnext ? (
-              <button
-                className="follow follow-option active"
-                onClick={handlefront}
-              >
+              <button className="button-secondary" onClick={handlefront}>
                 다음
               </button>
             ) : null}
           </div>
-        </div>
+        </Box1>
       </div>
       <MainStyle>
         <Ideabox>
@@ -251,6 +326,6 @@ export default function IdeaList() {
           </div>
         </Ideabox>
       </MainStyle>
-    </>
+    </div>
   );
 }
