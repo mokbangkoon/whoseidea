@@ -273,10 +273,25 @@ export default function Mypage({
                       <div
                         onClick={() => {
                           handleMypost();
-                          handleMycomment();
                         }}
                       >
                         내가 쓴 게시글 보기
+                      </div>
+                    </Link>
+                  </div>
+                </Button>
+                <Line>
+                  <div>ㅤ</div>
+                </Line>
+                <Button>
+                  <div>
+                    <Link to="/mycomment" className="text">
+                      <div
+                        onClick={() => {
+                          handleMycomment();
+                        }}
+                      >
+                        내가 쓴 댓글 보기
                       </div>
                     </Link>
                   </div>

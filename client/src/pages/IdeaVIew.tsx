@@ -4,8 +4,9 @@ import Login from '../components/Login';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { AxiosResponse } from 'axios';
 
 const Title = styled.div`
   font-weight: bold;
@@ -41,7 +42,7 @@ const Writer = styled.div`
   & img {
     width: 300px;
     height: 300px;
-    position: relative;
+    position: absolute;
     left: 900px;
   }
   & span {
@@ -51,19 +52,19 @@ const Writer = styled.div`
 `;
 
 const View = styled.div`
-  position: relative;
+  position: absolute;
   left: 40%;
-  top: 390px;
+  top: 750px;
   background-color: green;
   width: 100px;
 `;
 const Like = styled.div`
-  position: relative;
-  top: 355px;
-  left: 81%;
+  position: absolute;
+  top: 750px;
+  left: 79%;
   background-color: #f89c51;
   width: 80px;
-  height: 35px;
+  height: 30px;
 
   & img {
     width: 40px;
@@ -99,8 +100,8 @@ const Comment = styled.div`
   }
 `;
 const Chat = styled.span`
-  position: relative;
-  top: 415px;
+  position: absolute;
+  top: 750px;
   & button {
     width: 150px;
     height: 30px;
@@ -115,6 +116,10 @@ const Chat = styled.span`
     }
   }
 `;
+const Context = styled.span`
+  position: absolute;
+  top: 30%;
+`;
 export default function IdeaView({
   handleIdeaView,
   postDatas,
@@ -125,23 +130,35 @@ export default function IdeaView({
   const [isHeart, setisHeart] = useState(false);
   const [view, setView] = useState(0);
   const [likes, setLikes] = useState(0);
+  const [caption, setCaption] = useState('');
+  const [context, setContext] = useState('');
+  const [url, setUrl] = useState('');
+  const [nickname, setNickname] = useState('');
   const [userinfo, setuserinfo] = useState({
-    postId: '',
+    postId: 0,
     context: '',
   });
+  const [allComment, setallComment] = useState<any[]>([]);
 
   useEffect(() => {
-    axios
-      .get(`https://localhost:8080/post/view?postId=${postDatas.id}`)
-      .then(data => {
-        setView(data.data.data.view);
-        setLikes(data.data.data.likes);
-        setisHeart(data.data.Boolean);
-      });
+    axios.get(`https://localhost:8080/post/view?postId=${id}`).then(data => {
+      setView(data.data.data[0].view);
+      setLikes(data.data.data[0].likes);
+      setisHeart(data.data.Boolean);
+      setCaption(data.data.data[0].caption);
+      setContext(data.data.data[0].context);
+      setNickname(data.data.data[0].nickname);
+
+      console.log(data);
+    });
 
     axios
-      .get(`https://localhost:8080/comment?postId=${postDatas.id}`)
-      .then(data => console.log(data));
+      .get(`https://localhost:8080/comment?postId=${id}`)
+      .then(data => setallComment(data.data));
+
+    axios
+      .get(`https://localhost:8080/post/image?postId=${id}`)
+      .then(data => setUrl(data.data[0]));
   }, []);
 
   const handleWriter = () => {
@@ -150,64 +167,85 @@ export default function IdeaView({
   const handleHeart = () => {
     setisHeart(!isHeart);
     axios
-      .patch('https://localhost:8080/like', { postId: postDatas.id })
+      .patch('https://localhost:8080/like', { postId: id })
       .then(data => setLikes(data.data.likes));
   };
   const handleComment = () => {
-    console.log(userinfo);
     axios
       .post('https://localhost:8080/comment', userinfo)
-      .then(data => console.log(data));
+      .then(() =>
+        axios
+          .get(`https://localhost:8080/comment?postId=${Number(id)}`)
+          .then(data => setallComment(data.data))
+      );
   };
   const handleInputValue = (key: any, e: any) => {
-    setuserinfo({ ...userinfo, postId: postDatas.id, [key]: e.target.value });
+    setuserinfo({ ...userinfo, postId: Number(id), [key]: e.target.value });
   };
   return (
     <div>
       <div>{check ? <Login /> : null}</div>
       <div>{id}번째 아이디어</div>
-
-      <Title>
-        <h1>{postDatas.caption}</h1>
-      </Title>
-      <SubTitle>
-        <div>글쓴이 : {postDatas.nickname}</div>
-        <Writer>
+      <div>
+        <Title>
+          <h1>{caption}</h1>
+        </Title>
+        <SubTitle>
+          <div>글쓴이 : {nickname}</div>
+          <Writer>
+            {url === undefined || url.length === 0 ? null : (
+              <div>
+                <div>
+                  <img src={url} />
+                </div>
+              </div>
+            )}
+          </Writer>
+          <Context>
+            <span>{context}</span>
+          </Context>
+          <Menu>
+            <Chat>
+              <Link to="/chat">
+                <button onClick={handleWriter}>쪽지보내기</button>
+              </Link>
+            </Chat>
+            <View>
+              <span>조회수 : {view}</span>
+            </View>
+            <Like>
+              <div>
+                <span>좋아요 : {likes}</span>
+                {isHeart ? (
+                  <img src="/images/하트.png" onClick={handleHeart} />
+                ) : (
+                  <img src="/images/빈하트.png" onClick={handleHeart} />
+                )}
+              </div>
+            </Like>
+          </Menu>
+        </SubTitle>
+        <Comment>
+          <input
+            type="text"
+            placeholder="댓글을 입력하세요"
+            onChange={e => handleInputValue('context', e)}
+          ></input>
+          <button onClick={handleComment}>댓글달기</button>
           <div>
-            <img src={postDatas.url} />
+            {allComment.length === 0 ? null : (
+              <div>
+                {allComment.map(el => (
+                  <div>
+                    <div>{el.nickname}</div>
+                    <div>{el.text}</div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-          <span>{postDatas.context}</span>
-        </Writer>
-        <Menu>
-          <Chat>
-            <Link to="/chat">
-              <button onClick={handleWriter}>쪽지보내기</button>
-            </Link>
-          </Chat>
-          <View>
-            <span>조회수 : {view}</span>
-          </View>
-          <Like>
-            <div>
-              <span>좋아요 : {likes}</span>
-              {isHeart ? (
-                <img src="/images/하트.png" onClick={handleHeart} />
-              ) : (
-                <img src="/images/빈하트.png" onClick={handleHeart} />
-              )}
-            </div>
-          </Like>
-        </Menu>
-      </SubTitle>
-
-      <Comment>
-        <input
-          type="text"
-          placeholder="댓글을 입력하세요"
-          onChange={e => handleInputValue('context', e)}
-        ></input>
-        <button onClick={handleComment}>댓글달기</button>
-      </Comment>
+        </Comment>
+      </div>
     </div>
   );
 }
