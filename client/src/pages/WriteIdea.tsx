@@ -2,7 +2,8 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import axios from 'axios';
 import styled from 'styled-components';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+
 axios.defaults.withCredentials = true;
 
 const MainStyle = styled.div`
@@ -123,6 +124,12 @@ export default function WriteIdea() {
     caption: '',
     context: '',
   });
+  const [nickname, setNickname] = useState('');
+  useEffect(() => {
+    axios
+      .get('https://localhost:8080/auth')
+      .then(data => setNickname(data.data.nickname));
+  }, []);
 
   const handleInputValue = (key: any, e: any) => {
     setData({
@@ -195,7 +202,7 @@ export default function WriteIdea() {
                   <input
                     type="text"
                     className="write-text"
-                    value={'nickname'}
+                    value={nickname}
                   ></input>
                 </span>
               </div>
