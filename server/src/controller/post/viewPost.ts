@@ -23,7 +23,17 @@ export async function viewPost(req: Request, res: Response) {
         where:{
             email:accsessTokenData.email
         }
-    }) 
+    })
+
+    const posts = await prisma.posts.findFirst({
+        where:{
+            id:Number(req.query.postId)
+        }
+    })
+
+    // 검색 결과가 없으면 빈 객체를 보냄
+    if(!posts)
+        return res.status(200).json({})
 
     // 조회수 증가
     await prisma.posts.update({
@@ -36,24 +46,34 @@ export async function viewPost(req: Request, res: Response) {
             }
         }
     })
-    const post = await prisma.posts.findFirst({
-        where:{
-            id:Number(req.query.postId)
+
+    const nicknameAndViewPosts: any[] = []
+    const nickname = await prisma.users.findFirst({
+        where: {
+            id: posts.nickname
         }
     })
+    nicknameAndViewPosts.push({
+        nickname: nickname?.nickname,
+        id: posts.id,
+        caption: posts.caption,
+        file: posts.file,
+        likes: posts.likes,
+        view: posts.view,
+        context: posts.context,
+        created_at: posts.created_at
+    })
+
     if (isAuthorized(req) && await prisma.likes.findFirst({
         where:{
             nickname:userInfo?.id,
             postId:req.body.postId
         }
     })) {
-        return res.status(200).json({data: post, Boolean: true})
+        return res.status(200).json({data: nicknameAndViewPosts, Boolean: true})
     }
 
-    // 검색 결과가 없으면 빈 객체를 보냄
-    if(!post)
-        return res.status(200).json({})
 
     // 검색 결과 전달
-    return res.status(200).json({data: post , Boolean:false})
+    return res.status(200).json({data: nicknameAndViewPosts , Boolean:false})
 }
