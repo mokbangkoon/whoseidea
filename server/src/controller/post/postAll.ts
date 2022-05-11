@@ -38,7 +38,8 @@ export async function postAll(req: Request, res: Response) {
         nicknameAndPosts.push({
             nickname: nickname?.nickname,
             caption: item.caption,
-            likes: item.likes
+            likes: item.likes,
+            id: item.id
         })
     }
     // 검색 결과 전달
