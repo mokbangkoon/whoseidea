@@ -4,6 +4,7 @@ import Login from '../components/Login';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Title = styled.div`
   font-weight: bold;
@@ -20,18 +21,26 @@ const Title = styled.div`
   border-radius: 10px;
 `;
 
-export default function Mypost({ postData, commentData }: any) {
+export default function Mypost({ postData }: any) {
   console.log(postData);
-  console.log(commentData);
   const check = useSelector((state: RootState) => state.modal.check);
   return (
     <div>
       <Title>
-        <div> 내가 쓴 게시물</div>
+        <div> 내가 쓴 게시글</div>
       </Title>
-      {postData === null ? null : <div>{postData.statusText}</div>}
-      {commentData === null ? null : <div>{commentData.statusText}</div>}
-
+      {postData === null || postData.data.length === 0 ? null : (
+        <div>
+          <div>작성자 : {postData.data[0].nickname}</div>
+          <div>
+            {postData.data.map((el: any) => (
+              <Link to={`/ideaview/${el.id}`}>
+                <div>{el.caption}</div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
       {check ? <Login /> : null}
     </div>
   );

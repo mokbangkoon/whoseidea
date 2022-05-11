@@ -37,7 +37,8 @@ export async function myPost(req: Request, res: Response) {
         })
         nicknameAndPosts.push({
             nickname: nickname?.nickname,
-            context: item.context,
+            caption: item.caption,
+            id: item.id
         })
     }
     // 검색 결과 전달
