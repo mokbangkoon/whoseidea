@@ -28,6 +28,19 @@ export async function postAll(req: Request, res: Response) {
     if(!posts)
         return res.status(200).json([])
 
+    const nicknameAndPosts: any[] = []
+    for(let item of posts){
+        const nickname = await prisma.users.findFirst({
+            where:{
+                id: item.nickname
+            }
+        })
+        nicknameAndPosts.push({
+            nickname: nickname?.nickname,
+            caption: item.caption,
+            likes: item.likes
+        })
+    }
     // 검색 결과 전달
-    return res.status(200).json(posts)
+    return res.status(200).json(nicknameAndPosts)
 }
