@@ -5,15 +5,25 @@ import styled from 'styled-components';
 import React, { useState } from 'react';
 axios.defaults.withCredentials = true;
 
+const Main = styled.div`
+  .wrap {
+    width: 100%;
+    height: 100%;
+    background-image: url(백4.png);
+    background-size: cover;
+    position: absolute;
+  }
+`;
 const MainStyle = styled.div`
   width: 99.3%;
   height: 250px;
   padding: 10px 10px 10px 10px;
-  background: url(대문3.png);
+  background: url(백4.png);
   font-size: 80px;
   color: #ffff;
   text-align: center;
   align-items: center;
+  margin-left: 3%;
 `;
 const Containerbox = styled.div`
   .container .container-box {
@@ -31,7 +41,7 @@ const BodyStyle = styled.div`
   width: 1700px;
   height: 750px;
   left: calc(45% - 1198px / 2 + 11px);
-  top: calc(45% - 650px / 2 + 150px);
+  top: calc(40% - 650px / 2 + 150px);
   background: url(백3.png);
   border: 1px solid #000000;
   box-sizing: border-box;
@@ -46,7 +56,7 @@ const BodyStyle = styled.div`
     border: 1px solid #000000;
     box-sizing: border-box;
     left: calc(92% - 1198px / 2 + 11px);
-    top: calc(30% - 650px / 2 + 150px);
+    top: calc(28% - 650px / 2 + 150px);
   }
   .body-write .write-text {
     position: absolute;
@@ -59,7 +69,7 @@ const BodyStyle = styled.div`
     border: 1px solid #000000;
     box-sizing: border-box;
     left: calc(92% - 1198px / 2 + 11px);
-    top: calc(40% - 650px / 2 + 150px);
+    top: calc(38% - 650px / 2 + 150px);
   }
   .body-write .write-text1 {
     position: absolute;
@@ -73,7 +83,7 @@ const BodyStyle = styled.div`
     border: 1px solid #000000;
     box-sizing: border-box;
     left: calc(92% - 1198px / 2 + 11px);
-    top: calc(100% - 650px / 2 + 150px);
+    top: calc(98% - 650px / 2 + 150px);
   }
   .file {
     position: absolute;
@@ -100,7 +110,7 @@ const BodyStyle = styled.div`
       border: 0;
     }
     left: calc(114% - 1198px / 2 + 11px);
-    top: calc(100% - 650px / 2 + 150px);
+    top: calc(98% - 650px / 2 + 150px);
   }
   .main-text .maintext {
     position: absolute;
@@ -110,7 +120,7 @@ const BodyStyle = styled.div`
     top: 484px;
     font-size: 20px;
     left: calc(92% - 1198px / 2 + 11px);
-    top: calc(50% - 650px / 2 + 150px);
+    top: calc(48% - 650px / 2 + 150px);
     background: #ffffff;
     border: 1px solid #000000;
     box-sizing: border-box;
@@ -122,7 +132,7 @@ const BodyStyle = styled.div`
     background-color: #ffff;
     font-size: 20px;
     left: calc(100% - 1198px / 2 + 11px);
-    top: calc(110% - 650px / 2 + 150px);
+    top: calc(108% - 650px / 2 + 150px);
   }
 `;
 export default function WriteIdea() {
@@ -183,70 +193,77 @@ export default function WriteIdea() {
     });
   };
   return (
-    <div>
-      <MainStyle>
-        <div className="head-container">
-          <div className="container-text">
-            <h2>아이디어를 작성해 주세요</h2>
-          </div>
-          <BodyStyle>
-            <div className="body" />
-            <div className="body-title">
-              <span>
-                <Containerbox>
-                  <div className="container">
-                    <div className="contianer-box"></div>
-                    <img src="백6.png" className="container-box"></img>
-                  </div>
-                </Containerbox>
-                <input
-                  type="text"
-                  className="title"
-                  placeholder="제목을 입력해주세요"
-                  onChange={e => handleInputValue('caption', e)}
-                  name="title"
-                ></input>
-              </span>
-            </div>
-            <div className="body-write">
-              <div className="writer">
-                <span>
-                  <input
-                    type="text"
-                    className="write-text"
-                    value={'nickname'}
-                  ></input>
-                </span>
+    <Main>
+      <div className="main">
+        <div className="wrap">
+          <MainStyle>
+            <div className="head-container">
+              <div className="container-text">
+                <h2>아이디어를 작성해 주세요</h2>
               </div>
-              <div className="main-text">
-                <span>
-                  <textarea
-                    className="maintext"
-                    placeholder="내용을 입력해 주세요"
-                    onChange={e => handleInputValue('context', e)}
-                  ></textarea>
-                  <input className="write-text1" placeholder="첨부파일"></input>
-                  <div>
-                    <button
-                      className="button"
-                      type="button"
-                      onClick={() => handlePost()}
-                    >
-                      확인
-                    </button>
+              <BodyStyle>
+                <div className="body" />
+                <div className="body-title">
+                  <span>
+                    <Containerbox>
+                      <div className="container">
+                        <div className="contianer-box"></div>
+                        <img src="백6.png" className="container-box"></img>
+                      </div>
+                    </Containerbox>
+                    <input
+                      type="text"
+                      className="title"
+                      placeholder="제목을 입력해주세요"
+                      onChange={e => handleInputValue('caption', e)}
+                      name="title"
+                    ></input>
+                  </span>
+                </div>
+                <div className="body-write">
+                  <div className="writer">
+                    <span>
+                      <input
+                        type="text"
+                        className="write-text"
+                        value={'nickname'}
+                      ></input>
+                    </span>
                   </div>
-                  <input
-                    type="file"
-                    className="file"
-                    accept="image/*"
-                    onChange={event => handleFileInput(event)}
-                  />
-                </span>
-              </div>
+                  <div className="main-text">
+                    <span>
+                      <textarea
+                        className="maintext"
+                        placeholder="내용을 입력해 주세요"
+                        onChange={e => handleInputValue('context', e)}
+                      ></textarea>
+                      <input
+                        className="write-text1"
+                        placeholder="첨부파일"
+                      ></input>
+                      <div>
+                        <button
+                          className="button"
+                          type="button"
+                          onClick={() => handlePost()}
+                        >
+                          확인
+                        </button>
+                      </div>
+                      <input
+                        type="file"
+                        className="file"
+                        accept="image/*"
+                        onChange={event => handleFileInput(event)}
+                      />
+                    </span>
+                  </div>
+                </div>
+              </BodyStyle>
             </div>
-          </BodyStyle>
+          </MainStyle>
         </div>
-      </MainStyle>
-    </div>
+      </div>
+    </Main>
   );
 }
