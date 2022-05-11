@@ -119,9 +119,11 @@ export default function WriteIdea() {
   const [postid, setPostId] = useState([]);
   const [selectedFile, setselectedFile] = useState('');
   const [post, setPost] = useState([]);
+  const [profile, setprofile] = useState('');
   const [data, setData] = useState({
     caption: '',
     context: '',
+    nickname: '',
   });
 
   const handleInputValue = (key: any, e: any) => {

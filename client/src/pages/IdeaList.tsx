@@ -12,7 +12,7 @@ import { text } from 'express';
 axios.defaults.withCredentials = true;
 
 const Main = styled.div`
-  background: blue;
+  background-color: blue;
   .cover {
     height: 100vh;
   }
@@ -22,14 +22,6 @@ const Title = styled.div`
   display: flex;
   top: 20%;
   left: 7%;
-  right: 2%;
-  align-items: center;
-  font-size: 25px;
-`;
-const Title1 = styled.div`
-  position: absolute;
-  top: 19%;
-  left: 70%;
   right: 2%;
   align-items: center;
   font-size: 25px;
@@ -52,7 +44,6 @@ const Container = styled.div`
     padding: 10px 12px;
     font-size: 14px;
   }
-
   img {
     position: absolute;
     width: 17px;
@@ -263,6 +254,7 @@ export default function IdeaList() {
       });
     });
   }, [pagenum]);
+
   const handleback = () => {
     setOffset(offset - 9);
     setPageNum(pagenum - 1);
