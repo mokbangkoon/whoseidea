@@ -167,7 +167,7 @@ export default function IdeaView({
   const handleHeart = () => {
     setisHeart(!isHeart);
     axios
-      .patch('https://localhost:8080/like', { postId: id })
+      .patch('https://localhost:8080/like', { postId: Number(id) })
       .then(data => setLikes(data.data.likes));
   };
   const handleComment = () => {
