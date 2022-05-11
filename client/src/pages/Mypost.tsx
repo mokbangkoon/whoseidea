@@ -35,7 +35,21 @@ const Data = styled.div`
   font-weight: bold;
   font-family: sans-serif;
   font-size: xx-large;
-  text-decoration: none;
+
+  & a {
+    color: #f00101;
+    text-decoration: none;
+  }
+`;
+
+const OnlyData = styled.div`
+  :hover {
+    background-color: yellow;
+    transition: 0.5s;
+    width: 500px;
+    color: Black;
+    cursor: pointer;
+  }
 `;
 
 export default function Mypost({ postData }: any) {
@@ -55,7 +69,9 @@ export default function Mypost({ postData }: any) {
             <div>
               {postData.data.map((el: any) => (
                 <Link to={`/ideaview/${el.id}`}>
-                  <div>{el.caption}</div>
+                  <OnlyData>
+                    <div>{el.caption}</div>
+                  </OnlyData>
                 </Link>
               ))}
             </div>
