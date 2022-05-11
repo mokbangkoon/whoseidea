@@ -18,9 +18,9 @@ export async function myComment(req: Request, res: Response) {
     if(!userInfo)
         return res.status(406).send('user id not exist')
 
-    const comments=await prisma.comments.findMany({
+    const comments = await prisma.comments.findMany({
         where: {
-            id: userInfo.id
+            nickname: userInfo.id
         }
     })
 

@@ -20,14 +20,14 @@ export async function myPost(req: Request, res: Response) {
 
     const posts = await prisma.posts.findMany({
         where: {
-            id: userInfo.id
+            nickname: userInfo.id
         }
     })
 
     // 검색 결과가 없으면 빈 배열 보냄
     if(!posts)
         return res.status(200).json([])
-        
+
     const nicknameAndPosts: any[] = []
     for(let item of posts){
         const nickname = await prisma.users.findFirst({
