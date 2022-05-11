@@ -28,6 +28,19 @@ export async function myComment(req: Request, res: Response) {
     if(!comments)
         return res.status(200).json([])
 
+        
+    const nicknameAndComments: any[] = []
+    for(let item of comments){
+        const nickname = await prisma.users.findFirst({
+            where:{
+                id: item.nickname
+            }
+        })
+        nicknameAndComments.push({
+            nickname: nickname?.nickname,
+            text: item.text,
+        })
+    }
     // 검색 결과 전달
-    return res.status(200).json(comments)
+    return res.status(200).json(nicknameAndComments)
 }
