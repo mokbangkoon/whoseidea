@@ -20,6 +20,23 @@ const Title = styled.div`
     drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 10px;
 `;
+const Writer = styled.div`
+  position: relative;
+  top: 150px;
+  left: 20%;
+  font-weight: bold;
+  font-family: sans-serif;
+`;
+
+const Data = styled.div`
+  position: relative;
+  top: 170px;
+  left: 20%;
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: xx-large;
+  text-decoration: none;
+`;
 
 export default function Mypost({ postData }: any) {
   console.log(postData);
@@ -31,14 +48,18 @@ export default function Mypost({ postData }: any) {
       </Title>
       {postData === null || postData.data.length === 0 ? null : (
         <div>
-          <div>작성자 : {postData.data[0].nickname}</div>
-          <div>
-            {postData.data.map((el: any) => (
-              <Link to={`/ideaview/${el.id}`}>
-                <div>{el.caption}</div>
-              </Link>
-            ))}
-          </div>
+          <Writer>
+            <div>작성자 : {postData.data[0].nickname}</div>
+          </Writer>
+          <Data>
+            <div>
+              {postData.data.map((el: any) => (
+                <Link to={`/ideaview/${el.id}`}>
+                  <div>{el.caption}</div>
+                </Link>
+              ))}
+            </div>
+          </Data>
         </div>
       )}
       {check ? <Login /> : null}

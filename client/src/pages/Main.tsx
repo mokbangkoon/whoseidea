@@ -225,6 +225,12 @@ const PositionContainerM = styled.div`
 export default function Main({
   handleResponseSuccess,
 }: any): React.ReactElement {
+  const islogincheck = useSelector(
+    (state: RootState) => state.islogincheck.islogin
+  );
+  const isgooglelogin = useSelector(
+    (state: RootState) => state.isgooglelogin.isgooglelogin
+  );
   const TOTAL_SLIDES = 2;
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef<HTMLDivElement>(null);
@@ -246,6 +252,9 @@ export default function Main({
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
+  const loginalert = () => {
+    alert('로그인을 먼저 해주세요!');
+  };
 
   const check = useSelector((state: RootState) => state.modal.check);
 
@@ -296,9 +305,15 @@ export default function Main({
 
               <ul>당신도 최고의 아이디어가 될 수 있습니다!</ul>
               <ul>하나밖에 없는 당신의 아이디어를 써보세요!</ul>
-              <Link to="/idealist">
-                <button>시작하기</button>
-              </Link>
+              {isgooglelogin || islogincheck ? (
+                <Link to="/idealist">
+                  <button>시작하기</button>
+                </Link>
+              ) : (
+                <Link to="/">
+                  <button onClick={loginalert}>시작하기</button>
+                </Link>
+              )}
             </TextContainer>
           ) : null}
           {currentSlide === 1 ? (
@@ -307,9 +322,15 @@ export default function Main({
 
               <ul>가장 인기있는 아이디어를 볼 수 있습니다!</ul>
               <ul>유저들의 기발한 아이디어를 구경해보세요!</ul>
-              <Link to="/rank">
-                <button>구경하기</button>
-              </Link>
+              {isgooglelogin || islogincheck ? (
+                <Link to="/rank">
+                  <button>구경하기</button>
+                </Link>
+              ) : (
+                <Link to="/">
+                  <button onClick={loginalert}>구경하기</button>
+                </Link>
+              )}
             </TextContainer>
           ) : null}
           {currentSlide === 2 ? (
@@ -318,9 +339,15 @@ export default function Main({
               <ul>해당 유저에게 쪽지를 보내보세요!</ul>
               <ul>당신의 쪽지를 수많은 사람들이 기다립니다!</ul>
               <ul>일단 아이디어를 구경하러 가볼까요?</ul>
-              <Link to="/idealist">
-                <button>구경하기</button>
-              </Link>
+              {isgooglelogin || islogincheck ? (
+                <Link to="/idealist">
+                  <button>구경하기</button>
+                </Link>
+              ) : (
+                <Link to="/">
+                  <button onClick={loginalert}>구경하기</button>
+                </Link>
+              )}
             </TextContainer>
           ) : null}
           <Footer />
@@ -359,9 +386,15 @@ export default function Main({
 
                 <ul>당신도 최고의 아이디어가 될 수 있습니다!</ul>
                 <ul>하나밖에 없는 당신의 아이디어를 써보세요!</ul>
-                <Link to="/idealist">
-                  <button>시작하기</button>
-                </Link>
+                {isgooglelogin || islogincheck ? (
+                  <Link to="/idealist">
+                    <button>시작하기</button>
+                  </Link>
+                ) : (
+                  <Link to="/">
+                    <button onClick={loginalert}>시작하기</button>
+                  </Link>
+                )}
               </MobileContainer>
             ) : null}
             {currentSlide === 1 ? (
@@ -369,9 +402,15 @@ export default function Main({
                 <h3>최고의 아이디어를 보고 싶으신가요?</h3>
                 <ul>가장 인기있는 아이디어를 볼 수 있습니다!</ul>
                 <ul>유저들의 기발한 아이디어를 구경해보세요!</ul>
-                <Link to="/rank">
-                  <button>구경하기</button>
-                </Link>
+                {isgooglelogin || islogincheck ? (
+                  <Link to="/rank">
+                    <button>구경하기</button>
+                  </Link>
+                ) : (
+                  <Link to="/">
+                    <button onClick={loginalert}>구경하기</button>
+                  </Link>
+                )}
               </MobileContainer>
             ) : null}
             {currentSlide === 2 ? (
@@ -380,9 +419,15 @@ export default function Main({
                 <ul>해당 유저에게 쪽지를 보내보세요!</ul>
 
                 <ul>일단 아이디어를 구경하러 가볼까요?</ul>
-                <Link to="/idealist">
-                  <button>구경하기</button>
-                </Link>
+                {isgooglelogin || islogincheck ? (
+                  <Link to="/idealist">
+                    <button>구경하기</button>
+                  </Link>
+                ) : (
+                  <Link to="/">
+                    <button onClick={loginalert}>구경하기</button>
+                  </Link>
+                )}
               </MobileContainer>
             ) : null}
             <Footer />
