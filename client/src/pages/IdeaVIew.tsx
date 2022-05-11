@@ -137,11 +137,10 @@ export default function IdeaView({
         setView(data.data.data.view);
         setLikes(data.data.data.likes);
         setisHeart(data.data.Boolean);
-        console.log(data);
       });
 
     axios
-      .get(`https://localhost:8080/comment?${postDatas.id}`)
+      .get(`https://localhost:8080/comment?postId=${postDatas.id}`)
       .then(data => console.log(data));
   }, []);
 
@@ -155,7 +154,10 @@ export default function IdeaView({
       .then(data => setLikes(data.data.likes));
   };
   const handleComment = () => {
-    axios.post('https://localhost:8080/comment');
+    console.log(userinfo);
+    axios
+      .post('https://localhost:8080/comment', userinfo)
+      .then(data => console.log(data));
   };
   const handleInputValue = (key: any, e: any) => {
     setuserinfo({ ...userinfo, postId: postDatas.id, [key]: e.target.value });

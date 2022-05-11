@@ -18,9 +18,9 @@ export async function myPost(req: Request, res: Response) {
     if(!userInfo)
         return res.status(406).send('user id not exist')
 
-    const posts=await prisma.posts.findMany({
+    const posts = await prisma.posts.findMany({
         where: {
-            id: userInfo.id
+            nickname: userInfo.id
         }
     })
 
@@ -28,6 +28,18 @@ export async function myPost(req: Request, res: Response) {
     if(!posts)
         return res.status(200).json([])
 
+    const nicknameAndPosts: any[] = []
+    for(let item of posts){
+        const nickname = await prisma.users.findFirst({
+            where:{
+                id: item.nickname
+            }
+        })
+        nicknameAndPosts.push({
+            nickname: nickname?.nickname,
+            context: item.context,
+        })
+    }
     // 검색 결과 전달
-    return res.status(200).json(posts)
+    return res.status(200).json(nicknameAndPosts)
 }

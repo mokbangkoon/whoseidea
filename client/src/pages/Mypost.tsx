@@ -21,6 +21,7 @@ const Title = styled.div`
 `;
 
 export default function Mypost({ postData, commentData }: any) {
+  console.log(postData);
   console.log(commentData);
   const check = useSelector((state: RootState) => state.modal.check);
   return (
