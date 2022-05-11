@@ -227,7 +227,7 @@ export default function IdeaList({ handleToView }: any) {
             url: urls[i],
           });
         }
-        console.log(items);
+
         setPost(items);
         sethasnext(!!items);
       });
