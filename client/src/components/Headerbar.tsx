@@ -5,6 +5,8 @@ import { RootState } from '../modules';
 import { openModal } from '../modules/modal';
 import { Link } from 'react-router-dom';
 import Googlelogout from './Googlelogout';
+import { useNavigate } from 'react-router-dom';
+import { islogin } from '../modules/islogin';
 
 const Sidebar = styled.div`
   display: flex;
@@ -36,6 +38,7 @@ export default function Headerbar({ handleLogout }: any): React.ReactElement {
   const isgooglelogin = useSelector(
     (state: RootState) => state.isgooglelogin.isgooglelogin
   );
+  const navigate = useNavigate();
   const check = useSelector((state: RootState) => state.modal.check);
   const dispatch = useDispatch(); // 디스패치 함수를 가져옵니다
   // 각 액션들을 디스패치하는 함수들을 만들어줍니다
@@ -44,6 +47,7 @@ export default function Headerbar({ handleLogout }: any): React.ReactElement {
   };
   const checkedModal = () => {
     check ? dispatch(openModal()) : null;
+    isgooglelogin || islogincheck ? null : alert('로그인을 먼저 해주세요');
   };
   return (
     <Sidebar>
@@ -53,14 +57,26 @@ export default function Headerbar({ handleLogout }: any): React.ReactElement {
         </Link>
       </Button>
       <Button>
-        <Link to="/rank" className="link">
-          <div onClick={checkedModal}>Ranking</div>
-        </Link>
+        {isgooglelogin || islogincheck ? (
+          <Link to="/rank" className="link">
+            <div onClick={checkedModal}>Ranking</div>
+          </Link>
+        ) : (
+          <Link to="/" className="link">
+            <div onClick={checkedModal}>Ranking</div>
+          </Link>
+        )}
       </Button>
       <Button>
-        <Link to="/idealist" className="link">
-          <div onClick={checkedModal}>Idea List</div>
-        </Link>
+        {isgooglelogin || islogincheck ? (
+          <Link to="/idealist" className="link">
+            <div onClick={checkedModal}>Idea List</div>
+          </Link>
+        ) : (
+          <Link to="/" className="link">
+            <div onClick={checkedModal}>Idea List</div>
+          </Link>
+        )}
       </Button>
       {islogincheck ? (
         <Button>
