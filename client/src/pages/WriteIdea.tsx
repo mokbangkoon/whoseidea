@@ -154,6 +154,7 @@ export default function WriteIdea() {
     });
     console.log(data);
   };
+
   const handleFileInput = (event: any) => {
     setselectedFile(event.target.files[0]);
     setFileName(event.target.files[0].name);
