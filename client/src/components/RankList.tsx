@@ -48,69 +48,80 @@ const MobileRank2 = styled.div`
 const MobileRank3 = styled.div`
   border-bottom: 3px solid black;
 `;
+const RankData = styled.div`
+  position: absolute;
+  top: 20%;
+  background-color: yellow;
+`;
 
 export default function RankList() {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
-  const [rankData, setrankData] = useState<AxiosResponse | null | void>(null);
+  const [rankData, setrankData] = useState<any[]>([]);
   useEffect(() => {
     axios
       .get('https://localhost:8080/post/all?limit=10&order=desc')
-      .then(data => setrankData(data));
+      .then(data => setrankData(data.data));
   }, []);
+
+  console.log(rankData);
   return (
     <div>
-      <div>{rankData?.statusText}</div>
       {isPc ? (
-        <RankContainer>
-          <div>
-            <img src="1등.png"></img>
-          </div>
-          <Line>
-            <div></div>
-          </Line>
-          <div>
-            <img src="2등.png"></img>
-          </div>
-          <Line>
-            <div></div>
-          </Line>
-          <div>
-            <img src="3등.png"></img>
-          </div>
-          <Line>
-            <div></div>
-          </Line>
-          <div>4등</div>
-          <Line>
-            <div></div>
-          </Line>
-          <div>5등</div>
-          <Line>
-            <div></div>
-          </Line>
-          <div>6등</div>
-          <Line>
-            <div></div>
-          </Line>
-          <div>7등</div>
-          <Line>
-            <div></div>
-          </Line>
-          <div>8등</div>
-          <Line>
-            <div></div>
-          </Line>
-          <div>9등</div>
-          <Line>
-            <div></div>
-          </Line>
-          <div>10등</div>
-          <Line>
-            <div></div>
-          </Line>
-        </RankContainer>
+        <div>
+          <RankContainer>
+            <div>
+              <img src="1등.png"></img>
+              <span>
+                {rankData[0].caption} 작성자: {rankData[0].nickname}
+              </span>
+            </div>
+            <Line>
+              <div></div>
+            </Line>
+            <div>
+              <img src="2등.png"></img>
+            </div>
+            <Line>
+              <div></div>
+            </Line>
+            <div>
+              <img src="3등.png"></img>
+            </div>
+            <Line>
+              <div></div>
+            </Line>
+            <div>4등</div>
+            <Line>
+              <div></div>
+            </Line>
+            <div>5등</div>
+            <Line>
+              <div></div>
+            </Line>
+            <div>6등</div>
+            <Line>
+              <div></div>
+            </Line>
+            <div>7등</div>
+            <Line>
+              <div></div>
+            </Line>
+            <div>8등</div>
+            <Line>
+              <div></div>
+            </Line>
+            <div>9등</div>
+            <Line>
+              <div></div>
+            </Line>
+            <div>10등</div>
+            <Line>
+              <div></div>
+            </Line>
+          </RankContainer>
+        </div>
       ) : (
         <MobileContainer>
           <MobileRank1>
