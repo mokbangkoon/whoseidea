@@ -19,6 +19,33 @@ const Title = styled.div`
     drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 10px;
 `;
+const Writer = styled.div`
+  position: relative;
+  top: 150px;
+  left: 20%;
+  font-weight: bold;
+  font-family: sans-serif;
+`;
+
+const Data = styled.div`
+  position: relative;
+  top: 170px;
+  left: 20%;
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: xx-large;
+
+  color: #167e16;
+`;
+
+const OnlyData = styled.div`
+  :hover {
+    background-color: yellow;
+    transition: 0.5s;
+    width: 800px;
+    color: #000000;
+  }
+`;
 
 export default function Mycomment({ commentData }: any) {
   console.log(commentData);
@@ -26,14 +53,20 @@ export default function Mycomment({ commentData }: any) {
   return (
     <div>
       <Title>
-        <div> 내가 쓴 댓글</div>
+        <div> 내가 쓴 댓글 모음</div>
       </Title>
       {commentData === null || commentData.data.length === 0 ? null : (
         <div>
-          <div>작성자 : {commentData.data[0].nickname}</div>
+          <Writer>
+            <div>작성자 : {commentData.data[0].nickname}</div>
+          </Writer>
           <div>
             {commentData.data.map((el: any) => (
-              <div>{el.text}</div>
+              <Data>
+                <OnlyData>
+                  <div>{el.text}</div>
+                </OnlyData>
+              </Data>
             ))}
           </div>
         </div>

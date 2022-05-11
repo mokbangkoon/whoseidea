@@ -20,6 +20,51 @@ const Title = styled.div`
     drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   border-radius: 10px;
 `;
+const Writer = styled.div`
+  position: relative;
+  top: 20px;
+  left: 20%;
+  font-weight: bold;
+  font-family: sans-serif;
+`;
+
+const Data = styled.div`
+  position: relative;
+  top: 40px;
+  left: 20%;
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: xx-large;
+
+  color: #0d084d;
+`;
+
+const Button = styled.div`
+  & button {
+    height: 50px;
+    width: 200px;
+    border-radius: 1rem;
+    font-weight: bold;
+    color: white;
+    background-color: black;
+    :hover {
+      background-color: yellow;
+      transition: 0.5s;
+      width: 500px;
+      color: #000000;
+    }
+  }
+`;
+
+const Container = styled.div`
+  border: 1px solid black;
+  height: 200px;
+  width: 700px;
+  left: 300px;
+  position: relative;
+  background-color: gray;
+  top: 130px;
+`;
 
 export default function Mychat({ chatData, handleToView }: any) {
   console.log(chatData);
@@ -40,13 +85,21 @@ export default function Mychat({ chatData, handleToView }: any) {
               const source = el.source;
               return (
                 <div>
-                  <div>보낸 사람: {el.source}</div>
-                  <div> 내용: {el.text}</div>
-                  <Link to="/chat">
-                    <button onClick={() => reverse(source)}>
-                      {el.source}에게 답장하기
-                    </button>{' '}
-                  </Link>
+                  <Container>
+                    <Writer>
+                      <div>보낸 사람: {el.source}</div>
+                    </Writer>
+                    <Data>
+                      <div> 내용: {el.text}</div>
+                      <Link to="/chat">
+                        <Button>
+                          <button onClick={() => reverse(source)}>
+                            {el.source}에게 답장하기
+                          </button>
+                        </Button>
+                      </Link>
+                    </Data>
+                  </Container>
                 </div>
               );
             })}
