@@ -28,7 +28,7 @@ export default function Mychat({ chatData }: any) {
       <Title>
         <div> 쪽지 보관함</div>
       </Title>
-      {chatData === null ? null : <div>{chatData.statusText}</div>}
+      {chatData === null ? null : <div>{chatData.data.context}</div>}
 
       {check ? <Login /> : null}
     </div>

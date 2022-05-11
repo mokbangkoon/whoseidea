@@ -15,18 +15,29 @@ const MainStyle = styled.div`
   text-align: center;
   align-items: center;
 `;
+const Containerbox = styled.div`
+  .container .container-box {
+    position: absolute;
+    width: 780px;
+    height: 730px;
+    left: 121px;
+    top: 342px;
+    left: calc(35% - 1198px / 2 + 11px);
+    top: calc(24% - 650px / 2 + 150px);
+  }
+`;
 const BodyStyle = styled.div`
   position: absolute;
-  width: 2100px;
-  height: 800px;
-  left: calc(40% - 1198px / 2 + 11px);
-  top: calc(40% - 650px / 2 + 150px);
-  background: #d0ecf7;
+  width: 1700px;
+  height: 750px;
+  left: calc(45% - 1198px / 2 + 11px);
+  top: calc(45% - 650px / 2 + 150px);
+  background: url(백3.png);
   border: 1px solid #000000;
   box-sizing: border-box;
   .body-title .title {
     position: absolute;
-    width: 1200px;
+    width: 600px;
     height: 50px;
     left: 218px;
     top: 368px;
@@ -34,12 +45,12 @@ const BodyStyle = styled.div`
     background: #ffffff;
     border: 1px solid #000000;
     box-sizing: border-box;
-    left: calc(45% - 1198px / 2 + 11px);
-    top: calc(32% - 650px / 2 + 150px);
+    left: calc(92% - 1198px / 2 + 11px);
+    top: calc(30% - 650px / 2 + 150px);
   }
   .body-write .write-text {
     position: absolute;
-    width: 1200px;
+    width: 600px;
     height: 50px;
     left: 218px;
     top: 432px;
@@ -47,12 +58,12 @@ const BodyStyle = styled.div`
     background: #ffffff;
     border: 1px solid #000000;
     box-sizing: border-box;
-    left: calc(45% - 1198px / 2 + 11px);
+    left: calc(92% - 1198px / 2 + 11px);
     top: calc(40% - 650px / 2 + 150px);
   }
   .body-write .write-text1 {
     position: absolute;
-    width: 950px;
+    width: 450px;
     height: 50px;
     left: 218px;
     top: 432px;
@@ -61,12 +72,12 @@ const BodyStyle = styled.div`
     background: #ffffff;
     border: 1px solid #000000;
     box-sizing: border-box;
-    left: calc(45% - 1198px / 2 + 11px);
-    top: calc(95% - 650px / 2 + 150px);
+    left: calc(92% - 1198px / 2 + 11px);
+    top: calc(100% - 650px / 2 + 150px);
   }
   .file {
     position: absolute;
-    width: 250px;
+    width: 220px;
     height: 50px;
     left: 218px;
     top: 432px;
@@ -88,30 +99,30 @@ const BodyStyle = styled.div`
       clip: rect(0, 0, 0, 0);
       border: 0;
     }
-    left: calc(88.5% - 1198px / 2 + 11px);
-    top: calc(95% - 650px / 2 + 150px);
+    left: calc(114% - 1198px / 2 + 11px);
+    top: calc(100% - 650px / 2 + 150px);
   }
   .main-text .maintext {
     position: absolute;
-    width: 1200px;
+    width: 600px;
     height: 356px;
     left: 221px;
     top: 484px;
     font-size: 20px;
-    left: calc(45% - 1198px / 2 + 11px);
-    top: calc(48% - 650px / 2 + 150px);
+    left: calc(92% - 1198px / 2 + 11px);
+    top: calc(50% - 650px / 2 + 150px);
     background: #ffffff;
     border: 1px solid #000000;
     box-sizing: border-box;
   }
   .button {
     position: absolute;
-    width: 400px;
+    width: 300px;
     height: 50px;
     background-color: #ffff;
     font-size: 20px;
-    left: calc(60% - 1198px / 2 + 11px);
-    top: calc(105% - 650px / 2 + 150px);
+    left: calc(100% - 1198px / 2 + 11px);
+    top: calc(110% - 650px / 2 + 150px);
   }
 `;
 export default function WriteIdea() {
@@ -182,6 +193,12 @@ export default function WriteIdea() {
             <div className="body" />
             <div className="body-title">
               <span>
+                <Containerbox>
+                  <div className="container">
+                    <div className="contianer-box"></div>
+                    <img src="백6.png" className="container-box"></img>
+                  </div>
+                </Containerbox>
                 <input
                   type="text"
                   className="title"

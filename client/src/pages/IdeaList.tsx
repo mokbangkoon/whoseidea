@@ -12,7 +12,7 @@ import { text } from 'express';
 axios.defaults.withCredentials = true;
 
 const Main = styled.div`
-  background-color: blue;
+  background: blue;
   .cover {
     height: 100vh;
   }
@@ -26,6 +26,14 @@ const Title = styled.div`
   align-items: center;
   font-size: 25px;
 `;
+const Title1 = styled.div`
+  position: absolute;
+  top: 19%;
+  left: 70%;
+  right: 2%;
+  align-items: center;
+  font-size: 25px;
+`;
 const Container = styled.div`
   position: relative;
   top: 22%;
@@ -35,7 +43,6 @@ const Container = styled.div`
     position: relative;
     width: 400px;
   }
-
   input {
     width: 100%;
     height: 20px;
@@ -58,7 +65,7 @@ const MainStyle = styled.div`
   height: 2000px;
   left: 699px;
   top: 100px;
-  background-image: url(백2.png);
+  background-image: url(백5.png);
   border-radius: 10px;
 `;
 const HeaderContainer = styled.div`
@@ -193,10 +200,9 @@ const Box1 = styled.div`
   .follow-buttons {
     position: absolute;
     display: relative;
-    margin-left: 40%;
-    margin-top: -26%;
+    margin-left: 45%;
+    margin-top: 5%;
   }
-
   .follow {
     border: 2px solid var(--border-color);
     border-radius: 25px 0 0 25px;
@@ -208,26 +214,27 @@ const Box1 = styled.div`
     background-color: transparent;
     width: 100px;
     left: 100px;
-
     &:hover {
       background-color: var(--header-bg-color);
     }
   }
-
   .follow-option {
     border-radius: 0 25px 25px 0;
     left: 100px;
     width: 100px;
   }
 `;
-
-export default function IdeaList() {
+export default function IdeaList({ handleToView }: any) {
   const idealist = useSelector((state: RootState) => state.idealist);
   const [file, setFile] = useState('');
   const [offset, setOffset] = useState(0);
   const [hasnext, sethasnext] = useState(false);
   const [post, setPost] = useState<any[]>([]);
   const [pagenum, setPageNum] = useState(1);
+
+  const handleIdealist = (post: any) => {
+    handleToView(post);
+  };
 
   useEffect(() => {
     axios.get(`https://localhost:8080/post?page=${pagenum}`).then(data => {
@@ -243,12 +250,14 @@ export default function IdeaList() {
         });
 
         const items = [];
+
         for (let i = 0; i < data.data.length; i++) {
           items.push({
             ...data.data[i],
             url: urls[i],
           });
         }
+        console.log(items);
         setPost(items);
         sethasnext(!!items);
       });
@@ -263,6 +272,7 @@ export default function IdeaList() {
     setOffset(offset + 9);
     setPageNum(pagenum + 1);
   };
+
   return (
     <div>
       <Main>
@@ -305,25 +315,6 @@ export default function IdeaList() {
               </div>
             </Title2>
           </div>
-          <Ideabox>
-            <div className="container">
-              <div className="card-content">
-                {post.map((post: any) => (
-                  <div>
-                    <img src={post?.url} />
-                    <h2> {post?.caption}</h2>
-                    <p> {post?.nickname}</p>
-                    <p>Like: {post?.likes}</p>
-                    <div className="card-box">
-                      <Link to="/ideaView" className="text">
-                        <button className="main-button">Read more</button>
-                      </Link>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </Ideabox>
           <Box1>
             <div className="button">
               <div className="follow-buttons">
@@ -343,6 +334,30 @@ export default function IdeaList() {
               </div>
             </div>
           </Box1>
+          <Ideabox>
+            <div className="container">
+              <div className="card-content">
+                {post.map((post: any) => {
+                  return (
+                    <div>
+                      <img src={post?.url} />
+                      <h3>제목: {post?.caption}</h3>
+                      <p>닉네임: {post?.nickname}</p>
+                      <p>Like: {post?.likes}</p>
+                      <Link to={`/ideaview/${post?.id}`} className="text">
+                        <button
+                          className="main-button"
+                          onClick={() => handleIdealist(post)}
+                        >
+                          Read more
+                        </button>
+                      </Link>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </Ideabox>
         </MainStyle>
       </Main>
     </div>

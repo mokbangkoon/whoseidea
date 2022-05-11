@@ -257,9 +257,6 @@ export default function Main({
     <div>
       {isPc ? (
         <All>
-          {/*<Link to="/ideaview/31">
-            <button>임시버튼</button>
-      </Link>*/}
           <Title></Title>
           <MainStyle>
             <First>

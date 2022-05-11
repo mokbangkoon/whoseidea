@@ -55,5 +55,5 @@ export async function viewPost(req: Request, res: Response) {
         return res.status(200).json({})
 
     // 검색 결과 전달
-    return res.status(200).json(post)
+    return res.status(200).json({data: post , Boolean:false})
 }
