@@ -17,6 +17,7 @@ import Mypost from './pages/Mypost';
 import ChangePassword from './pages/ChangePassword';
 import Chat from './pages/Chat';
 import Mychat from './pages/Mychat';
+import Mycomment from './pages/Mycomment';
 
 import IdeaView from './pages/IdeaVIew';
 
@@ -102,16 +103,20 @@ function App() {
         />
         <Route path="/updatepro" element={<Updatepro />} />
         <Route path="/signout" element={<Signout />} />
+        <Route path="/mypost" element={<Mypost postData={postData} />} />
         <Route
-          path="/mypost"
-          element={<Mypost postData={postData} commentData={commentData} />}
+          path="/mycomment"
+          element={<Mycomment commentData={commentData} />}
         />
         <Route path="/changepassword" element={<ChangePassword />} />
         <Route
           path="/chat"
           element={<Chat writerdata={writerdata} postDatas={postDatas} />}
         />
-        <Route path="/mychat" element={<Mychat chatData={chatData} />} />
+        <Route
+          path="/mychat"
+          element={<Mychat chatData={chatData} handleToView={handleToView} />}
+        />
         <Route
           path="/ideaview/:id"
           element={

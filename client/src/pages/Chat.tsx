@@ -62,7 +62,7 @@ const Innertext = styled.div`
   left: 4%;
   color: white;
 `;
-export default function Chat({ writerdata, postDatas }: any) {
+export default function Chat({ writerdata, postDatas, handleToView }: any) {
   const [userinfo, setuserinfo] = useState({
     nickname: '',
     context: '',
