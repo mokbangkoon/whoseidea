@@ -43,7 +43,7 @@ const Writer = styled.div`
     width: 300px;
     height: 300px;
     position: absolute;
-    left: 900px;
+    left: 800px;
   }
   & span {
     position: relative;
@@ -120,6 +120,17 @@ const Context = styled.span`
   position: absolute;
   top: 30%;
 `;
+
+const CommentWriter = styled.div`
+  color: red;
+  font-weight: bold;
+  font-size: 30px;
+`;
+const Commentdata = styled.div`
+  color: #0f0f0f;
+  font-size: 20px;
+`;
+
 export default function IdeaView({
   handleIdeaView,
   postDatas,
@@ -237,8 +248,13 @@ export default function IdeaView({
               <div>
                 {allComment.map(el => (
                   <div>
-                    <div>{el.nickname}</div>
-                    <div>{el.text}</div>
+                    <CommentWriter>
+                      {' '}
+                      <div>{el.nickname}</div>{' '}
+                    </CommentWriter>
+                    <Commentdata>
+                      <div>{el.text}</div>{' '}
+                    </Commentdata>
                   </div>
                 ))}
               </div>
