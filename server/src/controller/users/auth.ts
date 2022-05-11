@@ -14,7 +14,7 @@ export async function auth (req: Request, res: Response) {
         const userInfo: any = await prisma.users.findFirst({
             where: {email: accsessTokenData.email}
         })
-        delete userInfo['password']
+        delete userInfo?.password
         return res.status(200).send(userInfo)
     }
 }

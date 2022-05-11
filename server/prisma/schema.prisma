@@ -24,41 +24,41 @@ model Users {
 
 model Posts {
   id               Int        @id @default(autoincrement())
-  nickname         Int
+  nickname         Int?
   caption          String
   file             Int
   likes            Int
   view             Int
   context          String
   created_at       DateTime   @default(now())
-  UsersToPosts     Users?     @relation("UsersToPosts", fields: [nickname], references: [id])
+  UsersToPosts     Users?     @relation("UsersToPosts", fields: [nickname], references: [id], onDelete: SetNull)
   PostsToLikes     Likes[]    @relation("PostsToLikes")
   PostsToComments2 Comments[] @relation("PostsToComments")
 }
 
 model Likes {
   id           Int    @id @default(autoincrement())
-  nickname     Int
-  postId       Int
-  UsersToLikes Users? @relation("UsersToLikes", fields: [nickname], references: [id])
+  nickname     Int?
+  postId       Int?
+  UsersToLikes Users? @relation("UsersToLikes", fields: [nickname], references: [id], onDelete: SetNull)
   PostsToLikes Posts? @relation("PostsToLikes", fields: [postId], references: [id])
 }
 
 model Comments {
   id               Int    @id @default(autoincrement())
   text             String
-  nickname         Int
-  postId           Int
-  UsersToComments  Users? @relation("UsersToComments", fields: [nickname], references: [id])
+  nickname         Int?
+  postId           Int?
+  UsersToComments  Users? @relation("UsersToComments", fields: [nickname], references: [id], onDelete: SetNull)
   PostsToComments2 Posts? @relation("PostsToComments", fields: [postId], references: [id])
 }
 
 model Messages {
   id             Int    @id @default(autoincrement())
-  nickname       Int
+  nickname       Int?
   text           String
   target         Int
-  UsersToMessage Users? @relation("UsersToMessage", fields: [nickname], references: [id])
+  UsersToMessage Users? @relation("UsersToMessage", fields: [nickname], references: [id], onDelete: SetNull)
 }
 
 model Files {
