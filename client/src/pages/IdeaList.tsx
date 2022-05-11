@@ -12,9 +12,12 @@ import { text } from 'express';
 axios.defaults.withCredentials = true;
 
 const Main = styled.div`
-  background: blue;
-  .cover {
-    height: 100vh;
+  .wrap {
+    width: 100%;
+    height: 100%;
+    background-image: url(백4.png);
+    background-size: cover;
+    position: absolute;
   }
 `;
 const Title = styled.div`
@@ -129,11 +132,6 @@ const Title2 = styled.div`
   margin-bottom: 0.5%;
   align-items: stretch;
   font-size: 20px;
-  @media only screen and (max-width: 768px) {
-    margin-left: 15%;
-    font-size: 20px;
-    position: absolute;
-  }
 `;
 const Ideabox = styled.div`
   .container .card-content {
@@ -276,89 +274,95 @@ export default function IdeaList({ handleToView }: any) {
   return (
     <div>
       <Main>
-        <MainStyle>
-          <Title>
+        <div className="wrap">
+          <MainStyle>
+            <Title>
+              <div>
+                <h1>Newest</h1>
+              </div>
+            </Title>
+            <Container>
+              <div className="search">
+                <input
+                  type="text"
+                  placeholder="search"
+                  className="input"
+                ></input>
+                <img src="search.png" />
+              </div>
+            </Container>
             <div>
-              <h1>Newest</h1>
-            </div>
-          </Title>
-          <Container>
-            <div className="search">
-              <input type="text" placeholder="search" className="input"></input>
-              <img src="search.png" />
-            </div>
-          </Container>
-          <div>
-            <HeaderContainer>
-              <div className="header-container" />
-              <HeaderContainertext>
-                <div className="headercontainertext">
-                  share your ideas with world
-                </div>
-              </HeaderContainertext>
-            </HeaderContainer>
-            <div className="container" />
-            <HeaderContainer1>
-              <HeaderContainertext1>
+              <HeaderContainer>
                 <div className="header-container" />
-                <div className="container" />
-                <div className="headercontainertext1"> 아이디어 작성하기</div>
-              </HeaderContainertext1>
-            </HeaderContainer1>
-          </div>
-          <div>
-            <Title2>
+                <HeaderContainertext>
+                  <div className="headercontainertext">
+                    share your ideas with world
+                  </div>
+                </HeaderContainertext>
+              </HeaderContainer>
+              <div className="container" />
+              <HeaderContainer1>
+                <HeaderContainertext1>
+                  <div className="header-container" />
+                  <div className="container" />
+                  <div className="headercontainertext1"> 아이디어 작성하기</div>
+                </HeaderContainertext1>
+              </HeaderContainer1>
+            </div>
+            <div>
+              <Title2>
+                <div className="container">
+                  <Link to="/writeidea">
+                    <img src="add.png"></img>
+                  </Link>
+                </div>
+              </Title2>
+            </div>
+            <Box1>
+              <div className="button">
+                <div className="follow-buttons">
+                  {offset === 0 ? null : (
+                    <button className="follow" onClick={handleback}>
+                      이전
+                    </button>
+                  )}
+                  {hasnext ? (
+                    <button
+                      className="follow follow-option active"
+                      onClick={handlefront}
+                    >
+                      다음
+                    </button>
+                  ) : null}
+                </div>
+              </div>
+            </Box1>
+            <Ideabox>
               <div className="container">
-                <Link to="/writeidea">
-                  <img src="add.png"></img>
-                </Link>
+                <div className="card-content">
+                  {post.map((post: any) => {
+                    return (
+                      <div>
+                        <img src={post?.url} />
+                        <h3>제목: {post?.caption}</h3>
+                        <p>닉네임: {post?.nickname}</p>
+                        <p>Like: {post?.likes}</p>
+                        <Link to={`/ideaview/${post?.id}`} className="text">
+                          <button
+                            className="main-button"
+                            onClick={() => handleIdealist(post)}
+                          >
+                            Read more
+                          </button>
+                        </Link>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            </Title2>
-          </div>
-          <Box1>
-            <div className="button">
-              <div className="follow-buttons">
-                {offset === 0 ? null : (
-                  <button className="follow" onClick={handleback}>
-                    이전
-                  </button>
-                )}
-                {hasnext ? (
-                  <button
-                    className="follow follow-option active"
-                    onClick={handlefront}
-                  >
-                    다음
-                  </button>
-                ) : null}
-              </div>
-            </div>
-          </Box1>
-          <Ideabox>
-            <div className="container">
-              <div className="card-content">
-                {post.map((post: any) => {
-                  return (
-                    <div>
-                      <img src={post?.url} />
-                      <h3>제목: {post?.caption}</h3>
-                      <p>닉네임: {post?.nickname}</p>
-                      <p>Like: {post?.likes}</p>
-                      <Link to={`/ideaview/${post?.id}`} className="text">
-                        <button
-                          className="main-button"
-                          onClick={() => handleIdealist(post)}
-                        >
-                          Read more
-                        </button>
-                      </Link>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </Ideabox>
-        </MainStyle>
+            </Ideabox>
+          </MainStyle>
+        </div>
       </Main>
     </div>
   );
