@@ -4,7 +4,6 @@ import Login from '../components/Login';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 const Title = styled.div`
   font-weight: bold;
@@ -21,35 +20,21 @@ const Title = styled.div`
   border-radius: 10px;
 `;
 
-export default function Mychat({ chatData, handleToView }: any) {
-  console.log(chatData);
+export default function Mycomment({ commentData }: any) {
+  console.log(commentData);
   const check = useSelector((state: RootState) => state.modal.check);
-  const reverse = (data: any) => {
-    console.log(data);
-    handleToView({ nickname: data });
-  };
   return (
     <div>
       <Title>
-        <div> 쪽지 보관함</div>
+        <div> 내가 쓴 댓글</div>
       </Title>
-      {chatData === null || chatData.data.length === 0 ? null : (
+      {commentData === null || commentData.data.length === 0 ? null : (
         <div>
+          <div>작성자 : {commentData.data[0].nickname}</div>
           <div>
-            {chatData.data.map((el: any) => {
-              const source = el.source;
-              return (
-                <div>
-                  <div>보낸 사람: {el.source}</div>
-                  <div> 내용: {el.text}</div>
-                  <Link to="/chat">
-                    <button onClick={() => reverse(source)}>
-                      {el.source}에게 답장하기
-                    </button>{' '}
-                  </Link>
-                </div>
-              );
-            })}
+            {commentData.data.map((el: any) => (
+              <div>{el.text}</div>
+            ))}
           </div>
         </div>
       )}
