@@ -2,17 +2,14 @@ import GoogleLogin from 'react-google-login';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { islogin } from '../modules/islogin';
-import { useState, useEffect } from 'react';
 import { googlelogin } from '../modules/isgooglelogin';
-import { RootState } from '../modules';
 import { openModal } from '../modules/modal';
-import { googledata } from '../modules/googledata';
+
 import axios from 'axios';
 
 export default function Googlelogin() {
   //클라이언트 ID (환경변수)
   const googleClientId: any = process.env.REACT_APP_GOOGLE_API_KEY;
-  const googledatas = useSelector((state: RootState) => state.googledatas);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   //사용자 정보를 담아둘 unpm serObj
