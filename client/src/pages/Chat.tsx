@@ -62,7 +62,7 @@ const Innertext = styled.div`
   left: 4%;
   color: white;
 `;
-export default function Chat({ writerdata, postDatas, handleToView }: any) {
+export default function Chat({ writerdata, postDatas }: any) {
   const [userinfo, setuserinfo] = useState({
     nickname: '',
     context: '',
@@ -79,7 +79,7 @@ export default function Chat({ writerdata, postDatas, handleToView }: any) {
   const handleChat = () => {
     console.log(userinfo);
     axios
-      .post('https://localhost:8080/message', userinfo)
+      .post('https://whoseidea.ml:8080/message', userinfo)
       .then(data => alert(data.data));
   };
 

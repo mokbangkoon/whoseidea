@@ -148,7 +148,7 @@ const Button = styled.button`
   }
 `;
 const SliderContainer = styled.div`
-  width: 100vh;
+  width: 600px;
   display: flex; //이미지들을 가로로 나열합니다.
 `;
 const TextContainer = styled.div`

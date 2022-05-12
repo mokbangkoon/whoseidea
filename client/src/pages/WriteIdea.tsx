@@ -164,7 +164,7 @@ export default function WriteIdea() {
     const formData = new FormData();
     formData.append('file', selectedFile);
     axios
-      .post('https://localhost:8080/post', data, {
+      .post('https://whoseidea.ml:8080/post', data, {
         headers: {
           'Content-Type': `application/json`,
           withCredentials: true,
@@ -176,10 +176,12 @@ export default function WriteIdea() {
       .catch(() => {
         alert('실패');
       });
-    axios.get('https://localhost:8080/post/last').then((lastPost: any) => {
+    axios.get('https://whoseidea.ml:8080/post/last').then((lastPost: any) => {
       axios
         .post(
-          `https://localhost:8080/post/image?postId=${lastPost.data.id + 1}`,
+          `hhttps://whoseidea.ml:8080/post/image?postId=${
+            lastPost.data.id + 1
+          }`,
           formData,
           {
             headers: {

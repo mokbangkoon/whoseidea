@@ -35,7 +35,7 @@ function App() {
   const [writerdata, serwriterdata] = useState('');
   const [postDatas, setpostDatas] = useState({});
   const isAuthenticated = () => {
-    axios.get('https://localhost:8080/auth').then(data => {
+    axios.get('https://whoseidea.ml:8080/auth').then(data => {
       setusernickname(data.data.nickname);
       dispatch(islogin(true));
       navigate('/');
@@ -47,19 +47,21 @@ function App() {
 
   const handleMypost = () => {
     axios
-      .get(`https://localhost:8080/user/my-post?nickname=${usernickname}`)
+      .get(`https://whoseidea.ml:8080/user/my-post?nickname=${usernickname}`)
       .then(data => setpostData(data));
   };
   const handleMycomment = () => {
     axios
-      .get(`https://localhost:8080/user/my-comment?nickname=${usernickname}`)
+      .get(`https://whoseidea.ml:8080/user/my-comment?nickname=${usernickname}`)
       .then(data => setcommentData(data));
   };
   const handleMychat = () => {
-    axios.get(`https://localhost:8080/message`).then(data => setchatData(data));
+    axios
+      .get(`https://whoseidea.ml:8080/message`)
+      .then(data => setchatData(data));
   };
   const handleLogout = () => {
-    axios.post('https://localhost:8080/logout').then(res => {
+    axios.post('https://whoseidea.ml:8080/logout').then(res => {
       dispatch(islogin(false));
       navigate('/');
     });
