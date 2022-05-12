@@ -50,7 +50,7 @@ export async function viewPost(req: Request, res: Response) {
     const nicknameAndViewPosts: any[] = []
     const nickname = await prisma.users.findFirst({
         where: {
-            id: posts.nickname
+            id: posts.nickname || undefined
         }
     })
     nicknameAndViewPosts.push({

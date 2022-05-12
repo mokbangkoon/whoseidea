@@ -33,7 +33,7 @@ export async function myComment(req: Request, res: Response) {
     for(let item of comments){
         const nickname = await prisma.users.findFirst({
             where:{
-                id: item.nickname
+                id: item.nickname || undefined
             }
         })
         nicknameAndComments.push({

@@ -29,6 +29,9 @@ export async function getMessage(req: Request, res: Response) {
         },
         include:{
             UsersToMessage:true
+        },
+        orderBy:{
+            id: 'desc'
         }
     })
 
@@ -48,7 +51,7 @@ export async function getMessage(req: Request, res: Response) {
         })
         const nickname = await prisma.users.findFirst({
             where:{
-                id:item.nickname
+                id:item.nickname || undefined
             }
         })
         nicknameAndMessages.push({

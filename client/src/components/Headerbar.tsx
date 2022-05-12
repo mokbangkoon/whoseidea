@@ -11,23 +11,30 @@ import { islogin } from '../modules/islogin';
 const Sidebar = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: gray;
-  border-radius: 0.5rem;
-  color: white;
-  font-weight: bold;
-  font-size: 2rem;
+  background-color: #ffff;
+  color: black;
+  font-weight: semi-bold;
+  font-size: 60px;
   text-decoration: none;
+  align-items: center;
+  font-family: 'Hahmlet', serif;
+  font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: 'Roboto Condensed', sans-serif;
 `;
 const Button = styled.div`
+  .home {
+    margin-right: 40%;
+    text-align: left;
+  }
   border-radius: 1rem;
   :hover {
-    background-color: black;
+    background-color: white;
     transition: 0.5s;
     cursor: pointer;
   }
   .link {
     text-decoration: none;
-    color: white;
+    color: black;
   }
 `;
 
@@ -53,7 +60,9 @@ export default function Headerbar({ handleLogout }: any): React.ReactElement {
     <Sidebar>
       <Button>
         <Link to="/" className="link">
-          <div onClick={checkedModal}>Home</div>
+          <div className="home" onClick={checkedModal}>
+            Home
+          </div>
         </Link>
       </Button>
       <Button>
