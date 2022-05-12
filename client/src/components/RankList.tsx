@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../modules';
-import { openModal } from '../modules/modal';
+
 import { Link } from 'react-router-dom';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { useMediaQuery } from 'react-responsive';
 
 const RankContainer = styled.div`
@@ -117,10 +115,6 @@ const MobileRank3 = styled.div`
       transition: 0.5s;
     }
   }
-`;
-const Writer = styled.div`
-  font-size: 30px;
-  font-weight: bold;
 `;
 
 export default function RankList() {

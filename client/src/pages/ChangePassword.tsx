@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import styled from 'styled-components';
@@ -53,23 +53,7 @@ const Input2 = styled.div`
     border-radius: 10px;
   }
 `;
-const Input3 = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 35%;
-  & input {
-    width: 300px;
-    height: 50px;
-    left: 200px;
-    font-size: 20px;
-    text-align: center;
-    background: rgba(196, 196, 196, 0.09);
-    border: 1px solid #f7f4ba;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-  }
-`;
+
 const Btn = styled.div`
   & button {
     position: absolute;
@@ -125,7 +109,7 @@ export default function Updatepro() {
     axios
       .patch('https://whoseidea.ml:8080/changepassword', userinfo)
       .then(data => setErrorMessage(data.data))
-      .catch(data => setErrorMessage('비밀번호를 올바르게 입력해주세요.'));
+      .catch(() => setErrorMessage('비밀번호를 올바르게 입력해주세요.'));
   };
 
   return (

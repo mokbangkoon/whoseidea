@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
@@ -259,7 +259,7 @@ function Signup() {
     return axios
       .get('https://whoseidea.ml:8080/emailduplication', { params: signup })
       .then(data => alert(data.data))
-      .catch(error =>
+      .catch(() =>
         dispatch(emailmessage({ emailmessage: '이메일이 이미 존재합니다.' }))
       );
   };
@@ -273,7 +273,7 @@ function Signup() {
     return axios
       .get('https://whoseidea.ml:8080/nicknameduplication', { params: signup })
       .then(data => alert(data.data))
-      .catch(error =>
+      .catch(() =>
         dispatch(
           nicknamemessage({ nicknamemessage: '닉네임이 이미 존재합니다.' })
         )
@@ -293,7 +293,7 @@ function Signup() {
         data.status === 200 ? alert('회원가입 완료') : alert('회원가입 실패');
       })
       .then(() => navigate('/'))
-      .catch(error =>
+      .catch(() =>
         dispatch(
           passwordmessage({ passwordmessage: '회원가입이 실패했습니다.' })
         )

@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import styled from 'styled-components';
@@ -157,7 +157,7 @@ export default function Mypage({
     (state: RootState) => state.isgooglelogin.isgooglelogin
   );
   const check = useSelector((state: RootState) => state.modal.check);
-  const login = useSelector((state: RootState) => state.login);
+
   const [selectedFile, setselectedFile] = useState('');
   const [filename, setfilename] = useState('');
   const [nickname, setnickname] = useState('');

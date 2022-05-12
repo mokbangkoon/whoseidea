@@ -1,13 +1,8 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../modules';
 import axios from 'axios';
 import styled from 'styled-components';
-import { check } from 'prettier';
-import { Link, useNavigationType } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
-import writeidea from './WriteIdea';
-import { userInfo } from 'os';
-import { text } from 'express';
+
+import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 axios.defaults.withCredentials = true;
 
@@ -29,39 +24,7 @@ const Title = styled.div`
   align-items: center;
   font-size: 25px;
 `;
-const Title1 = styled.div`
-  position: absolute;
-  top: 19%;
-  left: 70%;
-  right: 2%;
-  align-items: center;
-  font-size: 25px;
-`;
-const Container = styled.div`
-  /* position: relative;
-  top: 22%;
-  left: 75%;
-  right: 10%;
-  .search {
-    position: relative;
-    width: 400px;
-  } */
-  input {
-    width: 100%;
-    height: 20px;
-    border: 1px solid #bbb;
-    border-radius: 8px;
-    padding: 10px 12px;
-    font-size: 14px;
-  }
-  img {
-    position: absolute;
-    width: 17px;
-    top: 10px;
-    right: 12px;
-    margin: 0;
-  }
-`;
+
 const MainStyle = styled.div`
   position: absolute;
   width: 150vh;
@@ -223,8 +186,6 @@ const Box1 = styled.div`
   }
 `;
 export default function IdeaList({ handleToView }: any) {
-  const idealist = useSelector((state: RootState) => state.idealist);
-  const [file, setFile] = useState('');
   const [offset, setOffset] = useState(0);
   const [hasnext, sethasnext] = useState(false);
   const [post, setPost] = useState<any[]>([]);

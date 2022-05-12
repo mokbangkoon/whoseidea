@@ -1,7 +1,6 @@
-import { useSelector } from 'react-redux';
-import { RootState } from '../modules';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useEffect } from 'react';
 import React, { useState } from 'react';
 axios.defaults.withCredentials = true;
 
@@ -138,16 +137,18 @@ const BodyStyle = styled.div`
 `;
 export default function WriteIdea() {
   const [filename, setFileName] = useState('');
-  const [postid, setPostId] = useState([]);
   const [selectedFile, setselectedFile] = useState('');
-  const [post, setPost] = useState([]);
-  const [profile, setprofile] = useState('');
   const [data, setData] = useState({
     caption: '',
     context: '',
     nickname: '',
   });
-
+  const [nickname, setNickname] = useState('');
+  useEffect(() => {
+    axios
+      .get('https://whoseidea.ml:8080/auth')
+      .then(data => setNickname(data.data.nickname));
+  }, []);
   const handleInputValue = (key: any, e: any) => {
     setData({
       ...data,
@@ -177,22 +178,16 @@ export default function WriteIdea() {
         alert('실패');
       });
     axios.get('https://whoseidea.ml:8080/post/last').then((lastPost: any) => {
-      axios
-        .post(
-          `hhttps://whoseidea.ml:8080/post/image?postId=${
-            lastPost.data.id + 1
-          }`,
-          formData,
-          {
-            headers: {
-              'Content-Type': `multipart/form-data`,
-              withCredentials: true,
-            },
-          }
-        )
-        .then(res => {
-          console.log(res);
-        });
+      axios.post(
+        `https://whoseidea.ml:8080/post/image?postId=${lastPost.data.id + 1}`,
+        formData,
+        {
+          headers: {
+            'Content-Type': `multipart/form-data`,
+            withCredentials: true,
+          },
+        }
+      );
     });
   };
   return (
@@ -229,7 +224,7 @@ export default function WriteIdea() {
                       <input
                         type="text"
                         className="write-text"
-                        value={'nickname'}
+                        value={nickname}
                       ></input>
                     </span>
                   </div>
@@ -243,6 +238,7 @@ export default function WriteIdea() {
                       <input
                         className="write-text1"
                         placeholder="첨부파일"
+                        value={filename}
                       ></input>
                       <div>
                         <button
