@@ -81,7 +81,7 @@ export default function Footer() {
                 <img src="favicon.ico"></img>
               </Logo>
               <Member>
-                <h1>Client</h1>
+                <h1>Frontend</h1>
                 <a href="https://github.com/mokbangkoon">
                   <img src="깃헙로고.png" />
                   <span>차진성</span>
@@ -111,7 +111,7 @@ export default function Footer() {
                 <img src="favicon.ico"></img>
               </LogoM>
               <MemberM>
-                <h1>Client</h1>
+                <h1>Frontend</h1>
                 <a href="https://github.com/mokbangkoon">
                   <img src="깃헙로고.png" />
                   <span>차진성</span>
