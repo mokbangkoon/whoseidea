@@ -2,6 +2,7 @@ import GoogleLogin from 'react-google-login';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { islogin } from '../modules/islogin';
+import { useState, useEffect } from 'react';
 import { googlelogin } from '../modules/isgooglelogin';
 import { RootState } from '../modules';
 import { openModal } from '../modules/modal';
@@ -18,18 +19,17 @@ export default function Googlelogin() {
 
   //로그인 성공시 res처리
   const onLoginSuccess = (res: any) => {
-    console.log(res);
-    dispatch(
-      googledata({
-        email: res.profileObj.email,
-        name: res.profileObj.name,
-      })
-    );
+    const googleUserInfo = {
+      email: res.profileObj.email,
+      name: res.profileObj.name,
+    };
+
     dispatch(openModal());
     dispatch(googlelogin(true));
     dispatch(islogin(true));
+    axios.post('https://whoseidea.ml:8080/signup', googleUserInfo);
+
     navigate('/');
-    axios.post('https://whoseidea.ml:8080/signup', googledatas);
   };
 
   return (
