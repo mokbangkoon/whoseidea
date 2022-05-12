@@ -1,23 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
+import axios, { Axios } from 'axios';
+import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import { Link } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import Slide from '../components/Slidebar';
 import { useMediaQuery } from 'react-responsive';
+import Introduction from '../components/Introduction';
 import Footer from '../components/Footer';
 axios.defaults.withCredentials = true;
 
 const All = styled.div`
-  background-color: #fffafa;
+  background-color: black;
   height: 200vw;
 `;
 
 const MainStyle = styled.div`
-  background-color: #fffafa;
+  background-color: #000000;
   font-weight: bold;
   text-align: center;
   display: flex;
@@ -26,34 +27,26 @@ const MainStyle = styled.div`
   position: relative;
   left: 10%;
   top: 2%;
-
   font-size: 1rem;
   border-radius: 1rem;
   grid-column-gap: 2rem;
 `;
 const Title = styled.div`
-  background-image: url('대문6.png');
+  background-image: url('ㅇㅇ.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #151516;
   border-radius: 1rem;
   font-weight: bold;
-  border: 1px solid #fffafa;
-  width: 100%;
-  left: 0%;
+  border: 3px solid black;
+  width: 60%;
+  left: 20%;
   height: 28%;
   text-align: center;
-  font-size: 35px;
-  color: #2c2222;
+  font-size: 5rem;
+  color: #f7f8fc;
   position: relative;
   line-height: 100px;
-  .head-container .head-text {
-    font-size: 60px;
-    color: #2c2222;
-    margin-left: 30%;
-    margin-top: 30%;
-    text-shadow: 2px 2px 6px white;
-  }
 `;
 const First = styled.div`
   border: 3px solid red;
@@ -79,6 +72,7 @@ const Second = styled.div`
   :hover {
     transform: scale(1.2, 1.2);
     transition: 0.5s;
+
     background-color: blue;
   }
 `;
@@ -88,11 +82,11 @@ const Third = styled.div`
   color: #0f1a11;
   background-image: url('공유.jpg');
   background-repeat: no-repeat;
-
   background-size: cover;
   :hover {
     transform: scale(1.2, 1.2);
     transition: 0.5s;
+
     background-color: blue;
   }
 `;
@@ -227,16 +221,9 @@ const PositionContainerM = styled.div`
 export default function Main({
   handleResponseSuccess,
 }: any): React.ReactElement {
-  const islogincheck = useSelector(
-    (state: RootState) => state.islogincheck.islogin
-  );
-  const isgooglelogin = useSelector(
-    (state: RootState) => state.isgooglelogin.isgooglelogin
-  );
   const TOTAL_SLIDES = 2;
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef<HTMLDivElement>(null);
-
   const nextSlide = () => {
     if (currentSlide >= TOTAL_SLIDES) {
       // 더 이상 넘어갈 슬라이드가 없으면 슬라이드를 초기화합니다.
@@ -255,12 +242,7 @@ export default function Main({
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
-  const loginalert = () => {
-    alert('로그인을 먼저 해주세요!');
-  };
-
   const check = useSelector((state: RootState) => state.modal.check);
-
   useEffect(() => {
     slideRef.current!.style.transition = 'all 0.5s ease-in-out';
     slideRef.current!.style.transform = `translateX(-${currentSlide}00%)`; // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.
@@ -269,18 +251,7 @@ export default function Main({
     <div>
       {isPc ? (
         <All>
-          <Title>
-            <div className="head-container">
-              <div className="head-text">
-                <h1>Whose idea?</h1>
-              </div>
-            </div>
-            <div className="head-container">
-              <div className="head-text1">
-                <h1>share your idea with the world</h1>
-              </div>
-            </div>
-          </Title>
+          <Title></Title>
           <MainStyle>
             <First>
               <h1>세상의 모든 아인슈타인분들에게..</h1>
@@ -317,35 +288,21 @@ export default function Main({
           {currentSlide === 0 ? (
             <TextContainer>
               <h2>갑자기 생각난 독특한 아이디어가 있으신가요?</h2>
-
               <ul>당신도 최고의 아이디어가 될 수 있습니다!</ul>
               <ul>하나밖에 없는 당신의 아이디어를 써보세요!</ul>
-              {isgooglelogin || islogincheck ? (
-                <Link to="/idealist">
-                  <button>시작하기</button>
-                </Link>
-              ) : (
-                <Link to="/">
-                  <button onClick={loginalert}>시작하기</button>
-                </Link>
-              )}
+              <Link to="/idealist">
+                <button>시작하기</button>
+              </Link>
             </TextContainer>
           ) : null}
           {currentSlide === 1 ? (
             <TextContainer>
               <h2>최고의 아이디어를 보고 싶으신가요?</h2>
-
               <ul>가장 인기있는 아이디어를 볼 수 있습니다!</ul>
               <ul>유저들의 기발한 아이디어를 구경해보세요!</ul>
-              {isgooglelogin || islogincheck ? (
-                <Link to="/rank">
-                  <button>구경하기</button>
-                </Link>
-              ) : (
-                <Link to="/">
-                  <button onClick={loginalert}>구경하기</button>
-                </Link>
-              )}
+              <Link to="/rank">
+                <button>구경하기</button>
+              </Link>
             </TextContainer>
           ) : null}
           {currentSlide === 2 ? (
@@ -354,19 +311,12 @@ export default function Main({
               <ul>해당 유저에게 쪽지를 보내보세요!</ul>
               <ul>당신의 쪽지를 수많은 사람들이 기다립니다!</ul>
               <ul>일단 아이디어를 구경하러 가볼까요?</ul>
-              {isgooglelogin || islogincheck ? (
-                <Link to="/idealist">
-                  <button>구경하기</button>
-                </Link>
-              ) : (
-                <Link to="/">
-                  <button onClick={loginalert}>구경하기</button>
-                </Link>
-              )}
+              <Link to="/idealist">
+                <button>구경하기</button>
+              </Link>
             </TextContainer>
           ) : null}
           <Footer />
-
           {check ? (
             <Login handleResponseSuccess={handleResponseSuccess} />
           ) : null}
@@ -400,18 +350,11 @@ export default function Main({
             {currentSlide === 0 ? (
               <MobileContainer>
                 <h3>갑자기 생각난 독특한 아이디어가 있으신가요?</h3>
-
                 <ul>당신도 최고의 아이디어가 될 수 있습니다!</ul>
                 <ul>하나밖에 없는 당신의 아이디어를 써보세요!</ul>
-                {isgooglelogin || islogincheck ? (
-                  <Link to="/idealist">
-                    <button>시작하기</button>
-                  </Link>
-                ) : (
-                  <Link to="/">
-                    <button onClick={loginalert}>시작하기</button>
-                  </Link>
-                )}
+                <Link to="/idealist">
+                  <button>시작하기</button>
+                </Link>
               </MobileContainer>
             ) : null}
             {currentSlide === 1 ? (
@@ -419,36 +362,22 @@ export default function Main({
                 <h3>최고의 아이디어를 보고 싶으신가요?</h3>
                 <ul>가장 인기있는 아이디어를 볼 수 있습니다!</ul>
                 <ul>유저들의 기발한 아이디어를 구경해보세요!</ul>
-                {isgooglelogin || islogincheck ? (
-                  <Link to="/rank">
-                    <button>구경하기</button>
-                  </Link>
-                ) : (
-                  <Link to="/">
-                    <button onClick={loginalert}>구경하기</button>
-                  </Link>
-                )}
+                <Link to="/rank">
+                  <button>구경하기</button>
+                </Link>
               </MobileContainer>
             ) : null}
             {currentSlide === 2 ? (
               <MobileContainer>
                 <h3>아이디어를 활용하고 싶으신가요?</h3>
                 <ul>해당 유저에게 쪽지를 보내보세요!</ul>
-
                 <ul>일단 아이디어를 구경하러 가볼까요?</ul>
-                {isgooglelogin || islogincheck ? (
-                  <Link to="/idealist">
-                    <button>구경하기</button>
-                  </Link>
-                ) : (
-                  <Link to="/">
-                    <button onClick={loginalert}>구경하기</button>
-                  </Link>
-                )}
+                <Link to="/idealist">
+                  <button>구경하기</button>
+                </Link>
               </MobileContainer>
             ) : null}
             <Footer />
-
             {check ? (
               <Login handleResponseSuccess={handleResponseSuccess} />
             ) : null}
