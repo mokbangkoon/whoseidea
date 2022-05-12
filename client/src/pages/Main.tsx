@@ -22,12 +22,12 @@ const MainStyle = styled.div`
   font-weight: bold;
   text-align: center;
   display: flex;
-
   height: 10%;
   width: 100%;
   position: relative;
   left: 10%;
   top: 2%;
+
   font-size: 1rem;
   border-radius: 1rem;
   grid-column-gap: 2rem;
@@ -70,7 +70,6 @@ const Second = styled.div`
   background-image: url('햇빛.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-
   :hover {
     transform: scale(1.2, 1.2);
     transition: 0.5s;
@@ -99,7 +98,6 @@ const PositionContainer = styled.div`
 `;
 const Container = styled.div`
   width: 60%;
-
   overflow: hidden; // 선을 넘어간 이미지들은 보이지 않도록 처리합니다.
 `;
 const Button = styled.button`
