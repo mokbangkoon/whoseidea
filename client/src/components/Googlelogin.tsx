@@ -2,7 +2,6 @@ import GoogleLogin from 'react-google-login';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { islogin } from '../modules/islogin';
-import { useState, useEffect } from 'react';
 import { googlelogin } from '../modules/isgooglelogin';
 import { RootState } from '../modules';
 import { openModal } from '../modules/modal';

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 const All = styled.div`
@@ -77,7 +77,6 @@ export default function Chat({ writerdata, postDatas }: any) {
     });
   };
   const handleChat = () => {
-    console.log(userinfo);
     axios
       .post('https://whoseidea.ml:8080/message', userinfo)
       .then(data => alert(data.data));

@@ -1,14 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios, { Axios } from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import { Link } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import Slide from '../components/Slidebar';
 import { useMediaQuery } from 'react-responsive';
-import Introduction from '../components/Introduction';
 import Footer from '../components/Footer';
 axios.defaults.withCredentials = true;
 

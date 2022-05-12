@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 const All = styled.div`
   background-color: black;
   height: 200vw;
-<<<<<<< HEAD
-=======
   align-items: center;
   margin-top: 12%;
->>>>>>> 15c29a213fcab13c00b66e3522d32816d6450ca8
 `;
 const Member = styled.div`
   color: white;
@@ -64,10 +60,6 @@ const MemberM = styled.div`
   }
 `;
 
-const MobileContainer = styled.div`
-  position: absolute;
-  top: 180%;
-`;
 export default function Footer() {
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
