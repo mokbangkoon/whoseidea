@@ -14,7 +14,7 @@ const Sidebar = styled.div`
   background-color: #ffff;
   color: black;
   font-weight: semi-bold;
-  font-size: 60px;
+  font-size: 30px;
   text-decoration: none;
   align-items: center;
   font-family: 'Hahmlet', serif;

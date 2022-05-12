@@ -16,18 +16,18 @@ axios.defaults.withCredentials = true;
 const All = styled.div`
   position: absolute;
   background: url(대문6.png);
-  width: 3800px;
-  height: 1850px;
+  width: 1450px;
+  height: 800px;
 `;
 const HeaderText = styled.div`
   .head .head-text {
-    font-size: 70px;
+    font-size: 50px;
     text-align: center;
     margin-left: 45%;
     margin-top: 20%;
   }
   .head .head-text1 {
-    font-size: 40px;
+    font-size: 30px;
   }
 `;
 const MainStyle = styled.div`
@@ -42,7 +42,7 @@ const MainStyle = styled.div`
   font-size: 1rem;
   border-radius: 1rem;
   grid-column-gap: 3rem;
-  left: calc(40% - 1198px / 2 + 11px);
+  left: calc(50% - 1198px / 2 + 11px);
   top: calc(10% - 650px / 2 + 150px);
 `;
 const Body = styled.div`
@@ -57,8 +57,8 @@ const Body = styled.div`
   background-color: #d4cebec1;
   position: relative;
   line-height: 100px;
-  left: calc(10% - 1198px / 2 + 11px);
-  top: calc(47% - 650px / 2 + 150px);
+  left: calc(40% - 1198px / 2 + 11px);
+  top: calc(51% - 650px / 2 + 150px);
 `;
 const Body1 = styled.div`
   background-repeat: no-repeat;
@@ -72,14 +72,14 @@ const Body1 = styled.div`
   background-color: #e4d8b8c1;
   position: relative;
   line-height: 100px;
-  left: calc(10% - 1198px / 2 + 11px);
-  top: calc(37% - 650px / 2 + 150px);
+  left: calc(40% - 1198px / 2 + 11px);
+  top: calc(40% - 650px / 2 + 150px);
 `;
 const First = styled.div`
   border: 3px solid red;
   border-radius: 1rem;
-  height: 500px;
-  width: 10%;
+  height: 300px;
+  width: 20%;
   color: white;
   background-image: url('아인슈타인.png');
   background-repeat: no-repeat;
@@ -94,8 +94,8 @@ const Second = styled.div`
   border: 3px solid blue;
   border-radius: 1rem;
   color: #ffffff;
-  height: 500px;
-  width: 10%;
+  height: 300px;
+  width: 20%;
   background-image: url('햇빛.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -108,8 +108,8 @@ const Second = styled.div`
 const Third = styled.div`
   border: 3px solid orange;
   border-radius: 1rem;
-  height: 500px;
-  width: 20%;
+  height: 300px;
+  width: 35%;
   color: #0f1a11;
   background-image: url('공유.jpg');
   background-repeat: no-repeat;
@@ -122,7 +122,7 @@ const Third = styled.div`
 `;
 const PositionContainer = styled.div`
   position: absolute;
-  top: 150%;
+  top: 155%;
   left: 5%;
   background-color: #e4d8b8c1;
 `;
@@ -149,8 +149,8 @@ const SliderContainer = styled.div`
 `;
 const TextContainer = styled.div`
   position: absolute;
-  top: 150%;
-  left: 60%;
+  top: 160%;
+  left: 65%;
   background-color: #000000;
   width: 20%;
   height: 50%;
