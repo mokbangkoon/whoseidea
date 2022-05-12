@@ -15,6 +15,9 @@ export async function getComment(req: Request, res: Response) {
     const comments = await prisma.comments.findMany({
         where:{
             postId:Number(req.query.postId)
+        },
+        include:{
+            UsersToComments:true
         }
     })
 
@@ -22,6 +25,15 @@ export async function getComment(req: Request, res: Response) {
     if(!comments)
         return res.status(200).json([])
 
+    const commentsWithNickname = comments.map(item=>{
+        return {
+            id:item.id,
+            text:item.text,
+            nickname:item.UsersToComments?.nickname,
+            postId:item.postId,
+        }
+    })
+
     // 검색 결과 전달
-    return res.status(200).json(comments)
+    return res.status(200).json(commentsWithNickname)
 }
