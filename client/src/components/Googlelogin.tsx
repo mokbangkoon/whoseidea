@@ -18,6 +18,7 @@ export default function Googlelogin() {
 
   //로그인 성공시 res처리
   const onLoginSuccess = (res: any) => {
+    console.log(res);
     dispatch(
       googledata({
         email: res.profileObj.email,
