@@ -152,7 +152,7 @@ export default function IdeaView({
   const [allComment, setallComment] = useState<any[]>([]);
 
   useEffect(() => {
-    axios.get(`https://localhost:8080/post/view?postId=${id}`).then(data => {
+    axios.get(`https://whoseidea.ml:8080/post/view?postId=${id}`).then(data => {
       setView(data.data.data[0].view);
       setLikes(data.data.data[0].likes);
       setisHeart(data.data.Boolean);
@@ -164,11 +164,11 @@ export default function IdeaView({
     });
 
     axios
-      .get(`https://localhost:8080/comment?postId=${id}`)
+      .get(`https://whoseidea.ml:8080/comment?postId=${id}`)
       .then(data => setallComment(data.data));
 
     axios
-      .get(`https://localhost:8080/post/image?postId=${id}`)
+      .get(`https://whoseidea.ml:8080/post/image?postId=${id}`)
       .then(data => setUrl(data.data[0]));
   }, []);
 
@@ -178,15 +178,15 @@ export default function IdeaView({
   const handleHeart = () => {
     setisHeart(!isHeart);
     axios
-      .patch('https://localhost:8080/like', { postId: Number(id) })
+      .patch('https://whoseidea.ml:8080/like', { postId: Number(id) })
       .then(data => setLikes(data.data.likes));
   };
   const handleComment = () => {
     axios
-      .post('https://localhost:8080/comment', userinfo)
+      .post('https://whoseidea.ml:8080/comment', userinfo)
       .then(() =>
         axios
-          .get(`https://localhost:8080/comment?postId=${Number(id)}`)
+          .get(`https://whoseidea.ml:8080/comment?postId=${Number(id)}`)
           .then(data => setallComment(data.data))
       );
   };

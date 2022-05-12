@@ -2,45 +2,66 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import axios from 'axios';
 import styled from 'styled-components';
-import React, { useEffect, useState } from 'react';
-
+import React, { useState } from 'react';
 axios.defaults.withCredentials = true;
 
+const Main = styled.div`
+  .wrap {
+    width: 100%;
+    height: 150%;
+    background-image: url(백4.png);
+    background-size: cover;
+    position: absolute;
+  }
+`;
 const MainStyle = styled.div`
   width: 99.3%;
-  height: 250px;
+  bottom: 10%;
+  height: 200px;
   padding: 10px 10px 10px 10px;
-  background: url(대문3.png);
-  font-size: 80px;
+  background: url(백4.png);
+  font-size: 60px;
   color: #ffff;
   text-align: center;
   align-items: center;
+  margin-left: 3%;
+`;
+const Containerbox = styled.div`
+  .container .container-box {
+    position: absolute;
+    width: 600px;
+    height: 640px;
+    left: 121px;
+    top: 342px;
+    left: calc(50% - 1198px / 2 + 11px);
+    top: calc(27% - 650px / 2 + 150px);
+  }
 `;
 const BodyStyle = styled.div`
   position: absolute;
-  width: 2100px;
-  height: 800px;
-  left: calc(40% - 1198px / 2 + 11px);
-  top: calc(40% - 650px / 2 + 150px);
-  background: #d0ecf7;
+  width: 1200px;
+  height: 650px;
+  left: calc(50% - 1198px / 2 + 11px);
+  top: calc(35% - 650px / 2 + 150px);
+  background: url(백3.png);
   border: 1px solid #000000;
   box-sizing: border-box;
   .body-title .title {
     position: absolute;
-    width: 1200px;
+    width: 500px;
     height: 50px;
-    left: 218px;
-    top: 368px;
+    left: 108px;
+    top: 400px;
     font-size: 20px;
     background: #ffffff;
     border: 1px solid #000000;
     box-sizing: border-box;
-    left: calc(45% - 1198px / 2 + 11px);
-    top: calc(32% - 650px / 2 + 150px);
+    left: calc(105% - 1198px / 2 + 11px);
+    top: calc(30% - 650px / 2 + 150px);
   }
   .body-write .write-text {
     position: absolute;
-    width: 1200px;
+    width: 500px;
     height: 50px;
     left: 218px;
     top: 432px;
@@ -48,12 +69,12 @@ const BodyStyle = styled.div`
     background: #ffffff;
     border: 1px solid #000000;
     box-sizing: border-box;
-    left: calc(45% - 1198px / 2 + 11px);
+    left: calc(105% - 1198px / 2 + 11px);
     top: calc(40% - 650px / 2 + 150px);
   }
   .body-write .write-text1 {
     position: absolute;
-    width: 950px;
+    width: 300px;
     height: 50px;
     left: 218px;
     top: 432px;
@@ -62,12 +83,12 @@ const BodyStyle = styled.div`
     background: #ffffff;
     border: 1px solid #000000;
     box-sizing: border-box;
-    left: calc(45% - 1198px / 2 + 11px);
-    top: calc(95% - 650px / 2 + 150px);
+    left: calc(105% - 1198px / 2 + 11px);
+    top: calc(107% - 650px / 2 + 150px);
   }
   .file {
     position: absolute;
-    width: 250px;
+    width: 220px;
     height: 50px;
     left: 218px;
     top: 432px;
@@ -89,30 +110,30 @@ const BodyStyle = styled.div`
       clip: rect(0, 0, 0, 0);
       border: 0;
     }
-    left: calc(88.5% - 1198px / 2 + 11px);
-    top: calc(95% - 650px / 2 + 150px);
+    left: calc(128% - 1198px / 2 + 11px);
+    top: calc(107% - 650px / 2 + 150px);
   }
   .main-text .maintext {
     position: absolute;
-    width: 1200px;
+    width: 500px;
     height: 356px;
     left: 221px;
     top: 484px;
     font-size: 20px;
-    left: calc(45% - 1198px / 2 + 11px);
-    top: calc(48% - 650px / 2 + 150px);
+    left: calc(105% - 1198px / 2 + 11px);
+    top: calc(50% - 650px / 2 + 150px);
     background: #ffffff;
     border: 1px solid #000000;
     box-sizing: border-box;
   }
   .button {
     position: absolute;
-    width: 400px;
+    width: 300px;
     height: 50px;
     background-color: #ffff;
     font-size: 20px;
-    left: calc(60% - 1198px / 2 + 11px);
-    top: calc(105% - 650px / 2 + 150px);
+    left: calc(114% - 1198px / 2 + 11px);
+    top: calc(116% - 650px / 2 + 150px);
   }
 `;
 export default function WriteIdea() {
@@ -120,16 +141,12 @@ export default function WriteIdea() {
   const [postid, setPostId] = useState([]);
   const [selectedFile, setselectedFile] = useState('');
   const [post, setPost] = useState([]);
+  const [profile, setprofile] = useState('');
   const [data, setData] = useState({
     caption: '',
     context: '',
+    nickname: '',
   });
-  const [nickname, setNickname] = useState('');
-  useEffect(() => {
-    axios
-      .get('https://localhost:8080/auth')
-      .then(data => setNickname(data.data.nickname));
-  }, []);
 
   const handleInputValue = (key: any, e: any) => {
     setData({
@@ -147,7 +164,7 @@ export default function WriteIdea() {
     const formData = new FormData();
     formData.append('file', selectedFile);
     axios
-      .post('https://localhost:8080/post', data, {
+      .post('https://whoseidea.ml:8080/post', data, {
         headers: {
           'Content-Type': `application/json`,
           withCredentials: true,
@@ -159,10 +176,12 @@ export default function WriteIdea() {
       .catch(() => {
         alert('실패');
       });
-    axios.get('https://localhost:8080/post/last').then((lastPost: any) => {
+    axios.get('https://whoseidea.ml:8080/post/last').then((lastPost: any) => {
       axios
         .post(
-          `https://localhost:8080/post/image?postId=${lastPost.data.id + 1}`,
+          `hhttps://whoseidea.ml:8080/post/image?postId=${
+            lastPost.data.id + 1
+          }`,
           formData,
           {
             headers: {
@@ -177,64 +196,77 @@ export default function WriteIdea() {
     });
   };
   return (
-    <div>
-      <MainStyle>
-        <div className="head-container">
-          <div className="container-text">
-            <h2>아이디어를 작성해 주세요</h2>
-          </div>
-          <BodyStyle>
-            <div className="body" />
-            <div className="body-title">
-              <span>
-                <input
-                  type="text"
-                  className="title"
-                  placeholder="제목을 입력해주세요"
-                  onChange={e => handleInputValue('caption', e)}
-                  name="title"
-                ></input>
-              </span>
-            </div>
-            <div className="body-write">
-              <div className="writer">
-                <span>
-                  <input
-                    type="text"
-                    className="write-text"
-                    value={nickname}
-                  ></input>
-                </span>
+    <Main>
+      <div className="main">
+        <div className="wrap">
+          <MainStyle>
+            <div className="head-container">
+              <div className="container-text">
+                <h2>아이디어를 작성해 주세요</h2>
               </div>
-              <div className="main-text">
-                <span>
-                  <textarea
-                    className="maintext"
-                    placeholder="내용을 입력해 주세요"
-                    onChange={e => handleInputValue('context', e)}
-                  ></textarea>
-                  <input className="write-text1" placeholder="첨부파일"></input>
-                  <div>
-                    <button
-                      className="button"
-                      type="button"
-                      onClick={() => handlePost()}
-                    >
-                      확인
-                    </button>
+              <BodyStyle>
+                <div className="body" />
+                <div className="body-title">
+                  <span>
+                    <Containerbox>
+                      <div className="container">
+                        <div className="contianer-box"></div>
+                        <img src="백6.png" className="container-box"></img>
+                      </div>
+                    </Containerbox>
+                    <input
+                      type="text"
+                      className="title"
+                      placeholder="제목을 입력해주세요"
+                      onChange={e => handleInputValue('caption', e)}
+                      name="title"
+                    ></input>
+                  </span>
+                </div>
+                <div className="body-write">
+                  <div className="writer">
+                    <span>
+                      <input
+                        type="text"
+                        className="write-text"
+                        value={'nickname'}
+                      ></input>
+                    </span>
                   </div>
-                  <input
-                    type="file"
-                    className="file"
-                    accept="image/*"
-                    onChange={event => handleFileInput(event)}
-                  />
-                </span>
-              </div>
+                  <div className="main-text">
+                    <span>
+                      <textarea
+                        className="maintext"
+                        placeholder="내용을 입력해 주세요"
+                        onChange={e => handleInputValue('context', e)}
+                      ></textarea>
+                      <input
+                        className="write-text1"
+                        placeholder="첨부파일"
+                      ></input>
+                      <div>
+                        <button
+                          className="button"
+                          type="button"
+                          onClick={() => handlePost()}
+                        >
+                          확인
+                        </button>
+                      </div>
+                      <input
+                        type="file"
+                        className="file"
+                        accept="image/*"
+                        onChange={event => handleFileInput(event)}
+                      />
+                    </span>
+                  </div>
+                </div>
+              </BodyStyle>
             </div>
-          </BodyStyle>
+          </MainStyle>
         </div>
-      </MainStyle>
-    </div>
+      </div>
+    </Main>
   );
 }

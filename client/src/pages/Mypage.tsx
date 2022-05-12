@@ -167,7 +167,7 @@ export default function Mypage({
   });
 
   useEffect(() => {
-    axios.get('https://localhost:8080/auth').then(data => {
+    axios.get('https://whoseidea.ml:8080/auth').then(data => {
       setnickname(data.data.nickname);
       setprofile(data.data.profile);
     });
@@ -181,7 +181,10 @@ export default function Mypage({
     const formData = new FormData();
     formData.append('file', selectedFile);
     axios
-      .patch(`https://localhost:8080/user/image?nickname=${nickname}`, formData)
+      .patch(
+        `https://whoseidea.ml:8080/user/image?nickname=${nickname}`,
+        formData
+      )
       .then(res => {
         handleUserProfile();
         alert('프로필 변경 성공');
@@ -190,7 +193,7 @@ export default function Mypage({
 
   const handleUserProfile = () => {
     axios
-      .get(`https://localhost:8080/user?nickname=${nickname}`)
+      .get(`https://whoseidea.ml:8080/user?nickname=${nickname}`)
       .then(data => setprofile(data.data.profile));
   };
 

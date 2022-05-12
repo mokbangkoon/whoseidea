@@ -16,6 +16,11 @@ const RankContainer = styled.div`
   top: 30%;
   font-size: 60px;
   font-weight: bold;
+  position: absolute;
+  width: 2800px;
+  height: 2000px;
+  background: #fffafa;
+  border-radius: 10px;
 
   color: #0f0f0e;
   & img {
@@ -125,7 +130,7 @@ export default function RankList() {
   const [rankData, setrankData] = useState<any[]>([]);
   useEffect(() => {
     axios
-      .get('https://localhost:8080/post/all?limit=10&order=desc')
+      .get('https://whoseidea.ml:8080/post/all?limit=10&order=desc')
       .then(data => setrankData(data.data));
   }, []);
 

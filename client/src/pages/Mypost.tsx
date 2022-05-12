@@ -53,7 +53,6 @@ const OnlyData = styled.div`
 `;
 
 export default function Mypost({ postData }: any) {
-  console.log(postData);
   const check = useSelector((state: RootState) => state.modal.check);
   return (
     <div>
