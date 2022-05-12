@@ -29,6 +29,9 @@ export async function getMessage(req: Request, res: Response) {
         },
         include:{
             UsersToMessage:true
+        },
+        orderBy:{
+            id: 'desc'
         }
     })
 
