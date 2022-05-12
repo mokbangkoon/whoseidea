@@ -16,13 +16,13 @@ axios.defaults.withCredentials = true;
 const All = styled.div`
   position: absolute;
   background: url(대문6.png);
-  width: 2480px;
-  height: 800px;
+  width: 100vw;
+  height: 700px;
 `;
 const HeaderText = styled.div`
   .head .head-text {
     font-size: 50px;
-    text-align: center;
+
     margin-left: 45%;
     margin-top: 20%;
   }
@@ -42,23 +42,23 @@ const MainStyle = styled.div`
   font-size: 1rem;
   border-radius: 1rem;
   grid-column-gap: 3rem;
-  left: calc(35% - 1198px / 2 + 11px);
-  top: calc(-50% - 650px / 2 + 150px);
+  left: calc(50% - 1198px / 2 + 11px);
+  top: calc(-55% - 650px / 2 + 150px);
 `;
 const Body = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 1rem;
   font-weight: bold;
-  width: 105%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   text-align: center;
   font-size: 100px;
   background-color: #e4d8b8c1;
   position: relative;
   line-height: 100px;
-  left: calc(19% - 1198px / 2 + 11px);
-  top: calc(25.2% - 650px / 2 + 150px);
+  left: calc(40% - 1198px / 2 + 11px);
+  top: calc(40% - 650px / 2 + 150px);
 `;
 const Body1 = styled.div`
   background-repeat: no-repeat;
@@ -78,7 +78,7 @@ const Body1 = styled.div`
 const First = styled.div`
   border: 3px solid red;
   border-radius: 1rem;
-  height: 500px;
+  height: 50vh;
   width: 20%;
   color: white;
   background-image: url('아인슈타인.png');
@@ -88,17 +88,19 @@ const First = styled.div`
     transform: scale(1.2, 1.2);
     transition: 0.5s;
     background-color: blue;
+    position: flex;
   }
 `;
 const Second = styled.div`
   border: 3px solid blue;
   border-radius: 1rem;
   color: #ffffff;
-  height: 500px;
+  height: 50vh;
   width: 20%;
   background-image: url('햇빛.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  position: flex;
   :hover {
     transform: scale(1.2, 1.2);
     transition: 0.5s;
@@ -108,12 +110,13 @@ const Second = styled.div`
 const Third = styled.div`
   border: 3px solid orange;
   border-radius: 1rem;
-  height: 500px;
+  height: 50vh;
   width: 35%;
   color: #0f1a11;
   background-image: url('공유.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  position: flex;
   :hover {
     transform: scale(1.2, 1.2);
     transition: 0.5s;
@@ -149,7 +152,7 @@ const SliderContainer = styled.div`
 `;
 const TextContainer = styled.div`
   position: absolute;
-  top: 220%;
+  top: 210%;
   left: 75%;
   background-color: #000000;
   width: 20%;
