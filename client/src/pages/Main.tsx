@@ -12,12 +12,12 @@ import Footer from '../components/Footer';
 axios.defaults.withCredentials = true;
 
 const All = styled.div`
-  background-color: black;
+  background-color: #fffafa;
   height: 200vw;
 `;
 
 const MainStyle = styled.div`
-  background-color: #000000;
+  background-color: #fffafa;
   font-weight: bold;
   text-align: center;
   display: flex;
@@ -32,21 +32,28 @@ const MainStyle = styled.div`
   grid-column-gap: 2rem;
 `;
 const Title = styled.div`
-  background-image: url('ㅇㅇ.png');
+  background-image: url('대문6.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #151516;
   border-radius: 1rem;
   font-weight: bold;
-  border: 3px solid black;
-  width: 60%;
-  left: 20%;
+  border: 1px solid #fffafa;
+  width: 100%;
+  left: 0%;
   height: 28%;
   text-align: center;
-  font-size: 5rem;
-  color: #f7f8fc;
+  font-size: 35px;
+  color: #2c2222;
   position: relative;
   line-height: 100px;
+  .head-container .head-text {
+    font-size: 60px;
+    color: #2c2222;
+    margin-left: 30%;
+    margin-top: 30%;
+    text-shadow: 2px 2px 6px white;
+  }
 `;
 const First = styled.div`
   border: 3px solid red;
@@ -262,7 +269,18 @@ export default function Main({
     <div>
       {isPc ? (
         <All>
-          <Title></Title>
+          <Title>
+            <div className="head-container">
+              <div className="head-text">
+                <h1>Whose idea?</h1>
+              </div>
+            </div>
+            <div className="head-container">
+              <div className="head-text1">
+                <h1>share your idea with the world</h1>
+              </div>
+            </div>
+          </Title>
           <MainStyle>
             <First>
               <h1>세상의 모든 아인슈타인분들에게..</h1>
