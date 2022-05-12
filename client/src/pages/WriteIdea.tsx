@@ -2,6 +2,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useEffect } from 'react';
 import React, { useState } from 'react';
 axios.defaults.withCredentials = true;
 
@@ -147,7 +148,12 @@ export default function WriteIdea() {
     context: '',
     nickname: '',
   });
-
+  const [nickname, setNickname] = useState('');
+  useEffect(() => {
+    axios
+      .get('https://whoseidea.ml:8080/auth')
+      .then(data => setNickname(data.data.nickname));
+  }, []);
   const handleInputValue = (key: any, e: any) => {
     setData({
       ...data,
@@ -227,7 +233,7 @@ export default function WriteIdea() {
                       <input
                         type="text"
                         className="write-text"
-                        value={'nickname'}
+                        value={nickname}
                       ></input>
                     </span>
                   </div>

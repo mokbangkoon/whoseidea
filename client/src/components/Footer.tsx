@@ -4,15 +4,17 @@ import { useMediaQuery } from 'react-responsive';
 const All = styled.div`
   background-color: black;
   height: 200vw;
+<<<<<<< HEAD
+=======
   align-items: center;
   margin-top: 12%;
+>>>>>>> 15c29a213fcab13c00b66e3522d32816d6450ca8
 `;
 const Member = styled.div`
-  color: #f7f3f3;
+  color: white;
   font-weight: bold;
   position: absolute;
-  align-items: center;
-  top: 350%;
+  top: 270%;
   left: 60%;
   & img {
     position: relative;
@@ -30,7 +32,7 @@ const Logo = styled.div`
     width: 400px;
     height: 400px;
     position: absolute;
-    top: 340%;
+    top: 270%;
     left: 20%;
   }
 `;
@@ -73,70 +75,67 @@ export default function Footer() {
   return (
     <div>
       <All>
-        <div className="footer-container">
-          <div className="footer">footer</div>
-          {isPc ? (
-            <div>
-              <Logo>
-                <img src="favicon.ico"></img>
-              </Logo>
-              <Member>
-                <h1>Frontend</h1>
-                <a href="https://github.com/mokbangkoon">
+        {isPc ? (
+          <div>
+            <Logo>
+              <img src="favicon.ico"></img>
+            </Logo>
+            <Member>
+              <h1>Client</h1>
+              <a href="https://github.com/mokbangkoon">
+                <img src="깃헙로고.png" />
+                <span>차진성</span>
+              </a>
+              <div>
+                <a href="https://github.com/haheon">
                   <img src="깃헙로고.png" />
-                  <span>차진성</span>
+                  <span>전하헌</span>
                 </a>
-                <div>
-                  <a href="https://github.com/haheon">
-                    <img src="깃헙로고.png" />
-                    <span>전하헌</span>
-                  </a>
-                </div>
-                <h1>Backend</h1>
-                <a href="https://github.com/chunwoolee-work">
+              </div>
+              <h1>Backend</h1>
+              <a href="https://github.com/chunwoolee-work">
+                <img src="깃헙로고.png" />
+                <span>이춘우</span>
+              </a>
+              <div>
+                <a href="https://github.com/Mizulatte">
                   <img src="깃헙로고.png" />
-                  <span>이춘우</span>
+                  <span>김주원</span>
                 </a>
-                <div>
-                  <a href="https://github.com/Mizulatte">
-                    <img src="깃헙로고.png" />
-                    <span>김주원</span>
-                  </a>
-                </div>
-              </Member>
-            </div>
-          ) : (
-            <div>
-              <LogoM>
-                <img src="favicon.ico"></img>
-              </LogoM>
-              <MemberM>
-                <h1>Frontend</h1>
-                <a href="https://github.com/mokbangkoon">
+              </div>
+            </Member>
+          </div>
+        ) : (
+          <div>
+            <LogoM>
+              <img src="favicon.ico"></img>
+            </LogoM>
+            <MemberM>
+              <h1>Client</h1>
+              <a href="https://github.com/mokbangkoon">
+                <img src="깃헙로고.png" />
+                <span>차진성</span>
+              </a>
+              <div>
+                <a href="https://github.com/haheon">
                   <img src="깃헙로고.png" />
-                  <span>차진성</span>
+                  <span>전하헌</span>
                 </a>
-                <div>
-                  <a href="https://github.com/haheon">
-                    <img src="깃헙로고.png" />
-                    <span>전하헌</span>
-                  </a>
-                </div>
-                <h1>Backend</h1>
-                <a href="https://github.com/chunwoolee-work">
+              </div>
+              <h1>Backend</h1>
+              <a href="https://github.com/chunwoolee-work">
+                <img src="깃헙로고.png" />
+                <span>이춘우</span>
+              </a>
+              <div>
+                <a href="https://github.com/Mizulatte">
                   <img src="깃헙로고.png" />
-                  <span>이춘우</span>
+                  <span>김주원</span>
                 </a>
-                <div>
-                  <a href="https://github.com/Mizulatte">
-                    <img src="깃헙로고.png" />
-                    <span>김주원</span>
-                  </a>
-                </div>
-              </MemberM>
-            </div>
-          )}
-        </div>
+              </div>
+            </MemberM>
+          </div>
+        )}
       </All>
     </div>
   );
