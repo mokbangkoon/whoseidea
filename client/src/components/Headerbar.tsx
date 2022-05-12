@@ -23,7 +23,7 @@ const Button = styled.div`
   }
   border-radius: 1rem;
   :hover {
-    background-color: #ffffe0;
+    background-color: #f1f186;
     color: black;
     transition: 0.5s;
     cursor: pointer;
