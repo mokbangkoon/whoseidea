@@ -34,7 +34,7 @@ const MainStyle = styled.div`
   font-weight: bold;
   text-align: center;
   display: flex;
-  height: 30%;
+  height: 100vh;
   width: 100%;
   position: relative;
   left: 10%;
@@ -54,7 +54,7 @@ const Body = styled.div`
   height: 100vh;
   text-align: center;
   font-size: 100px;
-  background-color: #e4d8b8c1;
+  /* background-color: #e4d8b8c1; */
   position: relative;
   line-height: 100px;
   left: calc(40% - 1198px / 2 + 11px);
@@ -125,9 +125,10 @@ const Third = styled.div`
 `;
 const PositionContainer = styled.div`
   position: absolute;
+
   top: 200%;
-  left: 0%;
-  background-color: #e4d8b8c1;
+  left: 10%;
+  /* background-color: #e4d8b8c1; */
 `;
 const Container = styled.div`
   width: 70%;
@@ -147,13 +148,13 @@ const Button = styled.button`
   }
 `;
 const SliderContainer = styled.div`
-  width: 110%;
+  width: 100vh;
   display: flex; //이미지들을 가로로 나열합니다.
 `;
 const TextContainer = styled.div`
   position: absolute;
   top: 210%;
-  left: 75%;
+  left: 65%;
   background-color: #000000;
   width: 20%;
   height: 50%;
@@ -328,7 +329,7 @@ export default function Main({
               <SliderContainer ref={slideRef}>
                 <Slide img={'전구.png'} />
                 <Slide img={'랭킹.jpg'} />
-                <Slide img={'독창적인아이디어.jpg'} />
+                <Slide img={'독창적인아이디어.png'} />
               </SliderContainer>
               <Button onClick={prevSlide}>Prev</Button>
               <Button onClick={nextSlide}>Next</Button>

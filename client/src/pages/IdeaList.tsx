@@ -15,7 +15,7 @@ const Main = styled.div`
   .wrap {
     width: 100%;
     height: 100%;
-    background-image: url(백4.png);
+
     background-size: cover;
     position: absolute;
   }
@@ -23,8 +23,8 @@ const Main = styled.div`
 const Title = styled.div`
   position: absolute;
   display: flex;
-  top: 20%;
-  left: 7%;
+  top: 10%;
+  left: 10%;
   right: 2%;
   align-items: center;
   font-size: 25px;
@@ -38,14 +38,14 @@ const Title1 = styled.div`
   font-size: 25px;
 `;
 const Container = styled.div`
-  position: relative;
+  /* position: relative;
   top: 22%;
   left: 75%;
   right: 10%;
   .search {
     position: relative;
     width: 400px;
-  }
+  } */
   input {
     width: 100%;
     height: 20px;
@@ -64,9 +64,9 @@ const Container = styled.div`
 `;
 const MainStyle = styled.div`
   position: absolute;
-  width: 2000px;
+  width: 150vh;
   height: 2000px;
-  left: 699px;
+  left: 109px;
   top: 100px;
   background-image: url(백5.png);
   border-radius: 10px;
@@ -74,7 +74,7 @@ const MainStyle = styled.div`
 const HeaderContainer = styled.div`
   position: absolute;
   width: 75%;
-  height: 371px;
+  height: 200px;
   left: 2%;
   top: 10px;
   background: url(header.png);
@@ -84,13 +84,13 @@ const HeaderContainertext = styled.div`
   position: absolute;
   width: 80%;
   height: 125px;
-  left: 20%;
-  top: 68%;
+  left: 10%;
+  top: 20%;
   text-shadow: 2px 6px 2px #4b4b49;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 80px;
+  font-size: 50px;
   line-height: 48px;
   display: flex;
   align-items: center;
@@ -99,14 +99,14 @@ const HeaderContainertext = styled.div`
 `;
 const HeaderContainertext1 = styled.div`
   position: absolute;
-  width: 60%;
+  width: 85%;
   height: 125px;
-  left: 12%;
-  top: 74.5%;
+  left: 8%;
+  top: 60%;
   font-family: 'Inter';
   font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
+  font-weight: 800;
+  font-size: 21px;
   line-height: 48px;
   display: flex;
   align-items: center;
@@ -117,7 +117,7 @@ const HeaderContainertext1 = styled.div`
 const HeaderContainer1 = styled.div`
   position: absolute;
   width: 20%;
-  height: 371px;
+  height: 200px;
   right: 2%;
   top: 10px;
   background: url(header3.png);
@@ -141,14 +141,14 @@ const Ideabox = styled.div`
     align-items: flex-start;
     padding: 0px;
     position: relative;
-    width: 320px;
+    width: 250px;
     height: 420px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1.5fr 1.5fr 1.5fr;
-    grid-row-gap: 110px;
-    grid-column-gap: 120px;
-    margin-left: 20%;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-row-gap: 80px;
+    grid-column-gap: 80px;
+    margin-left: 10%;
     margin-top: 10%;
     text-align: center;
     background-position: center;
@@ -157,7 +157,7 @@ const Ideabox = styled.div`
   }
   & img {
     position: static;
-    width: 320px;
+    width: 250px;
     height: 200px;
     left: 0px;
     top: 0px;
@@ -171,7 +171,7 @@ const Ideabox = styled.div`
   }
   .main-button {
     display: block;
-    margin-left: 20%;
+    margin-left: 10%;
     margin-top: 8%;
     align-items: center;
     text-align: center;
@@ -280,16 +280,6 @@ export default function IdeaList({ handleToView }: any) {
                 <h1>Newest</h1>
               </div>
             </Title>
-            <Container>
-              <div className="search">
-                <input
-                  type="text"
-                  placeholder="search"
-                  className="input"
-                ></input>
-                <img src="search.png" />
-              </div>
-            </Container>
             <div>
               <HeaderContainer>
                 <div className="header-container" />
