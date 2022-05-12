@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 const All = styled.div`
   background-color: #292927;
-  height: 1200px;
+  height: 100vh;
   align-items: center;
   margin-top: 12%;
 `;
