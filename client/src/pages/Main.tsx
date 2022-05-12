@@ -14,72 +14,46 @@ import Footer from '../components/Footer';
 axios.defaults.withCredentials = true;
 
 const All = styled.div`
-  position: absolute;
-  background: url(대문6.png);
-  width: 100vw;
-  height: 700px;
+  background-color: black;
+  height: 200vw;
 `;
-const HeaderText = styled.div`
-  .head .head-text {
-    font-size: 50px;
 
-    margin-left: 45%;
-    margin-top: 20%;
-  }
-  .head .head-text1 {
-    font-size: 30px;
-  }
-`;
 const MainStyle = styled.div`
+  background-color: #000000;
   font-weight: bold;
   text-align: center;
   display: flex;
-  height: 100vh;
+  height: 10%;
   width: 100%;
   position: relative;
   left: 10%;
   top: 2%;
+
   font-size: 1rem;
   border-radius: 1rem;
-  grid-column-gap: 3rem;
-  left: calc(50% - 1198px / 2 + 11px);
-  top: calc(-55% - 650px / 2 + 150px);
+  grid-column-gap: 2rem;
 `;
-const Body = styled.div`
+const Title = styled.div`
+  background-image: url('ㅇㅇ.png');
   background-repeat: no-repeat;
   background-size: cover;
+
+  background-color: #151516;
   border-radius: 1rem;
   font-weight: bold;
-  width: 100vw;
-  height: 100vh;
+  border: 3px solid black;
+  width: 60%;
+  left: 20%;
+  height: 28%;
   text-align: center;
-  font-size: 100px;
-  /* background-color: #e4d8b8c1; */
+  font-size: 5rem;
+  color: #f7f8fc;
   position: relative;
   line-height: 100px;
-  left: calc(40% - 1198px / 2 + 11px);
-  top: calc(40% - 650px / 2 + 150px);
-`;
-const Body1 = styled.div`
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-radius: 1rem;
-  font-weight: bold;
-  width: 105%;
-  height: 120%;
-  text-align: center;
-  font-size: 100px;
-  background-color: #8b8471c1;
-  position: relative;
-  line-height: 100px;
-  left: calc(20% - 1198px / 2 + 11px);
-  top: calc(58% - 650px / 2 + 150px);
 `;
 const First = styled.div`
   border: 3px solid red;
   border-radius: 1rem;
-  height: 50vh;
-  width: 20%;
   color: white;
   background-image: url('아인슈타인.png');
   background-repeat: no-repeat;
@@ -88,19 +62,15 @@ const First = styled.div`
     transform: scale(1.2, 1.2);
     transition: 0.5s;
     background-color: blue;
-    position: flex;
   }
 `;
 const Second = styled.div`
   border: 3px solid blue;
   border-radius: 1rem;
   color: #ffffff;
-  height: 50vh;
-  width: 20%;
   background-image: url('햇빛.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  position: flex;
   :hover {
     transform: scale(1.2, 1.2);
     transition: 0.5s;
@@ -110,13 +80,10 @@ const Second = styled.div`
 const Third = styled.div`
   border: 3px solid orange;
   border-radius: 1rem;
-  height: 50vh;
-  width: 35%;
   color: #0f1a11;
   background-image: url('공유.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  position: flex;
   :hover {
     transform: scale(1.2, 1.2);
     transition: 0.5s;
@@ -125,13 +92,12 @@ const Third = styled.div`
 `;
 const PositionContainer = styled.div`
   position: absolute;
-
-  top: 200%;
+  top: 180%;
   left: 10%;
-  /* background-color: #e4d8b8c1; */
+  background-repeat: no-repeat;
 `;
 const Container = styled.div`
-  width: 70%;
+  width: 60%;
   overflow: hidden; // 선을 넘어간 이미지들은 보이지 않도록 처리합니다.
 `;
 const Button = styled.button`
@@ -148,16 +114,16 @@ const Button = styled.button`
   }
 `;
 const SliderContainer = styled.div`
-  width: 600px;
+  width: 100%;
   display: flex; //이미지들을 가로로 나열합니다.
 `;
 const TextContainer = styled.div`
   position: absolute;
-  top: 210%;
+  top: 178%;
   left: 65%;
   background-color: #000000;
-  width: 20%;
-  height: 50%;
+  width: 25%;
+  height: 70%;
   color: white;
   font-weight: bold;
   font-size: x-large;
@@ -291,17 +257,7 @@ export default function Main({
     <div>
       {isPc ? (
         <All>
-          <HeaderText>
-            <div className="head">
-              <div className="head-text">
-                <h1>Whose idea?</h1>
-                <div className="head-text1">
-                  <h2>share your ideas with the world</h2>
-                </div>
-              </div>
-            </div>
-          </HeaderText>
-          <Body></Body>
+          <Title></Title>
           <MainStyle>
             <First>
               <h1>세상의 모든 아인슈타인분들에게..</h1>
@@ -323,13 +279,12 @@ export default function Main({
               </p>
             </Third>
           </MainStyle>
-          {/* <Body1></Body1> */}
           <PositionContainer>
             <Container>
               <SliderContainer ref={slideRef}>
                 <Slide img={'전구.png'} />
                 <Slide img={'랭킹.jpg'} />
-                <Slide img={'독창적인아이디어.png'} />
+                <Slide img={'독창적인아이디어.jpg'} />
               </SliderContainer>
               <Button onClick={prevSlide}>Prev</Button>
               <Button onClick={nextSlide}>Next</Button>
@@ -376,6 +331,7 @@ export default function Main({
       ) : (
         <div>
           <All>
+            <Title></Title>
             <FirstM>
               <h1>세상의 모든 아이디어 모음</h1>
             </FirstM>

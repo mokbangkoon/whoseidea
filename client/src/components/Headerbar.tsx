@@ -14,12 +14,9 @@ const Sidebar = styled.div`
   background-color: #ffff;
   color: black;
   font-weight: semi-bold;
-  font-size: 30px;
+  font-size: 40px;
   text-decoration: none;
   align-items: center;
-  font-family: 'Hahmlet', serif;
-  font-family: 'IBM Plex Sans KR', sans-serif;
-  font-family: 'Roboto Condensed', sans-serif;
 `;
 const Button = styled.div`
   .home {
@@ -28,7 +25,8 @@ const Button = styled.div`
   }
   border-radius: 1rem;
   :hover {
-    background-color: white;
+    background-color: #ddd2a2;
+    color: black;
     transition: 0.5s;
     cursor: pointer;
   }

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 const All = styled.div`
-  background-color: #292927;
-  height: 100vh;
+  background-color: black;
+  height: 200vw;
   align-items: center;
   margin-top: 12%;
 `;
