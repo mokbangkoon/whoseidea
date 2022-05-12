@@ -138,7 +138,6 @@ export default function RankList() {
               {rankData[0] !== undefined ? (
                 <span>
                   <span>
-                    {console.log(rankData)}
                     제목: {rankData[0].caption} 작성자: {rankData[0].nickname}
                   </span>
                   <Link to={`/ideaview/${rankData[0].id}`}>
