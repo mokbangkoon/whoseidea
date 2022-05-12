@@ -29,7 +29,7 @@ export default function Googlelogin() {
     dispatch(googlelogin(true));
     dispatch(islogin(true));
     navigate('/');
-    axios.post('https://whoseidea.ml:8080/signup', googledatas);
+    axios.post('https://localhost:8080/signup', googledatas);
   };
 
   return (

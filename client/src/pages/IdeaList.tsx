@@ -235,10 +235,10 @@ export default function IdeaList({ handleToView }: any) {
   };
 
   useEffect(() => {
-    axios.get(`https://whoseidea.ml:8080/post?page=${pagenum}`).then(data => {
+    axios.get(`https://localhost:8080/post?page=${pagenum}`).then(data => {
       Promise.all(
         data.data.map((item: any) =>
-          axios.get(`https://whoseidea.ml:8080/post/image?postId=${item.id}`)
+          axios.get(`https://localhost:8080/post/image?postId=${item.id}`)
         )
       ).then(requests => {
         const urls = requests.map(item => {
