@@ -16,7 +16,7 @@ axios.defaults.withCredentials = true;
 const All = styled.div`
   position: absolute;
   background: url(대문6.png);
-  width: 1450px;
+  width: 2480px;
   height: 800px;
 `;
 const HeaderText = styled.div`
@@ -34,7 +34,7 @@ const MainStyle = styled.div`
   font-weight: bold;
   text-align: center;
   display: flex;
-  height: 10%;
+  height: 30%;
   width: 100%;
   position: relative;
   left: 10%;
@@ -42,43 +42,43 @@ const MainStyle = styled.div`
   font-size: 1rem;
   border-radius: 1rem;
   grid-column-gap: 3rem;
-  left: calc(50% - 1198px / 2 + 11px);
-  top: calc(10% - 650px / 2 + 150px);
+  left: calc(35% - 1198px / 2 + 11px);
+  top: calc(-50% - 650px / 2 + 150px);
 `;
 const Body = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 1rem;
   font-weight: bold;
-  width: 100%;
-  height: 45%;
+  width: 105%;
+  height: 100%;
   text-align: center;
   font-size: 100px;
-  background-color: #d4cebec1;
+  background-color: #e4d8b8c1;
   position: relative;
   line-height: 100px;
-  left: calc(40% - 1198px / 2 + 11px);
-  top: calc(51% - 650px / 2 + 150px);
+  left: calc(19% - 1198px / 2 + 11px);
+  top: calc(25.2% - 650px / 2 + 150px);
 `;
 const Body1 = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 1rem;
   font-weight: bold;
-  width: 100%;
-  height: 85%;
+  width: 105%;
+  height: 120%;
   text-align: center;
   font-size: 100px;
-  background-color: #e4d8b8c1;
+  background-color: #8b8471c1;
   position: relative;
   line-height: 100px;
-  left: calc(40% - 1198px / 2 + 11px);
-  top: calc(40% - 650px / 2 + 150px);
+  left: calc(20% - 1198px / 2 + 11px);
+  top: calc(58% - 650px / 2 + 150px);
 `;
 const First = styled.div`
   border: 3px solid red;
   border-radius: 1rem;
-  height: 300px;
+  height: 500px;
   width: 20%;
   color: white;
   background-image: url('아인슈타인.png');
@@ -94,7 +94,7 @@ const Second = styled.div`
   border: 3px solid blue;
   border-radius: 1rem;
   color: #ffffff;
-  height: 300px;
+  height: 500px;
   width: 20%;
   background-image: url('햇빛.jpg');
   background-repeat: no-repeat;
@@ -108,7 +108,7 @@ const Second = styled.div`
 const Third = styled.div`
   border: 3px solid orange;
   border-radius: 1rem;
-  height: 300px;
+  height: 500px;
   width: 35%;
   color: #0f1a11;
   background-image: url('공유.jpg');
@@ -122,12 +122,12 @@ const Third = styled.div`
 `;
 const PositionContainer = styled.div`
   position: absolute;
-  top: 155%;
-  left: 5%;
+  top: 200%;
+  left: 0%;
   background-color: #e4d8b8c1;
 `;
 const Container = styled.div`
-  width: 60%;
+  width: 70%;
   overflow: hidden; // 선을 넘어간 이미지들은 보이지 않도록 처리합니다.
 `;
 const Button = styled.button`
@@ -144,13 +144,13 @@ const Button = styled.button`
   }
 `;
 const SliderContainer = styled.div`
-  width: 100%;
+  width: 110%;
   display: flex; //이미지들을 가로로 나열합니다.
 `;
 const TextContainer = styled.div`
   position: absolute;
-  top: 160%;
-  left: 65%;
+  top: 220%;
+  left: 75%;
   background-color: #000000;
   width: 20%;
   height: 50%;
@@ -319,7 +319,7 @@ export default function Main({
               </p>
             </Third>
           </MainStyle>
-          <Body1></Body1>
+          {/* <Body1></Body1> */}
           <PositionContainer>
             <Container>
               <SliderContainer ref={slideRef}>
