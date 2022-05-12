@@ -27,11 +27,10 @@ const Right = styled.div`
   top: 8%;
   bottom: 0%;
   background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.2),
-      rgba(255, 255, 255, 0.2)
-    ),
-    url(.jpg);
+    0deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.2)
+  );
 `;
 const Left = styled.div`
   position: absolute;
