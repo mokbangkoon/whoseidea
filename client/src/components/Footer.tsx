@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 const All = styled.div`
-  background-color: black;
+  background-color: #f0ffff;
   height: 200vw;
   align-items: center;
   margin-top: 12%;
 `;
 const Member = styled.div`
-  color: #f7f3f3;
+  color: #42403b;
   font-weight: bold;
   position: absolute;
   align-items: center;
@@ -21,7 +21,7 @@ const Member = styled.div`
     right: 10px;
   }
   a {
-    color: pink;
+    color: #1d1c1c;
     text-decoration: none;
   }
 `;
@@ -74,7 +74,7 @@ export default function Footer() {
     <div>
       <All>
         <div className="footer-container">
-          <div className="footer">footer</div>
+          <div className="footer"></div>
           {isPc ? (
             <div>
               <Logo>
