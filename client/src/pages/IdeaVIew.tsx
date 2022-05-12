@@ -1,12 +1,11 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { AxiosResponse } from 'axios';
 
 const Title = styled.div`
   font-weight: bold;
@@ -131,11 +130,7 @@ const Commentdata = styled.div`
   font-size: 20px;
 `;
 
-export default function IdeaView({
-  handleIdeaView,
-  postDatas,
-  usernickname,
-}: any) {
+export default function IdeaView({ handleIdeaView, usernickname }: any) {
   const { id } = useParams();
   const check = useSelector((state: RootState) => state.modal.check);
   const [isHeart, setisHeart] = useState(false);
@@ -159,8 +154,6 @@ export default function IdeaView({
       setCaption(data.data.data[0].caption);
       setContext(data.data.data[0].context);
       setNickname(data.data.data[0].nickname);
-
-      console.log(data);
     });
 
     axios
