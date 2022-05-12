@@ -1,5 +1,5 @@
 import GoogleLogin from 'react-google-login';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { islogin } from '../modules/islogin';
 import { googlelogin } from '../modules/isgooglelogin';

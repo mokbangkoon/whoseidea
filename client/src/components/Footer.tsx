@@ -7,10 +7,10 @@ const All = styled.div`
   margin-top: 12%;
 `;
 const Member = styled.div`
-  color: white;
+  color: #6d0202;
   font-weight: bold;
   position: absolute;
-  top: 270%;
+  top: 300%;
   left: 60%;
   & img {
     position: relative;
@@ -28,7 +28,7 @@ const Logo = styled.div`
     width: 400px;
     height: 400px;
     position: absolute;
-    top: 270%;
+    top: 300%;
     left: 20%;
   }
 `;
@@ -43,7 +43,7 @@ const LogoM = styled.div`
   }
 `;
 const MemberM = styled.div`
-  color: white;
+  color: #eb6666;
   font-weight: bold;
   position: absolute;
   top: 220%;
@@ -55,7 +55,7 @@ const MemberM = styled.div`
     right: 10px;
   }
   a {
-    color: pink;
+    color: #f37c90;
     text-decoration: none;
   }
 `;

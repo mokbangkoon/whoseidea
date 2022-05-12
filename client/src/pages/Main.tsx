@@ -1,27 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
-import axios, { Axios } from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import { Link } from 'react-router-dom';
 import { useState, useRef, useEffect } from 'react';
 import Slide from '../components/Slidebar';
 import { useMediaQuery } from 'react-responsive';
-import Introduction from '../components/Introduction';
 import Footer from '../components/Footer';
 axios.defaults.withCredentials = true;
 
 const All = styled.div`
-  background-color: black;
+  background-color: #fffafa;
   height: 200vw;
 `;
 
 const MainStyle = styled.div`
-  background-color: #000000;
+  background-color: #fffafa;
   font-weight: bold;
   text-align: center;
   display: flex;
+
   height: 10%;
   width: 100%;
   position: relative;
@@ -32,29 +32,36 @@ const MainStyle = styled.div`
   grid-column-gap: 2rem;
 `;
 const Title = styled.div`
-  background-image: url('ㅇㅇ.png');
+  background-image: url('대문6.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #151516;
   border-radius: 1rem;
   font-weight: bold;
-  border: 3px solid black;
-  width: 60%;
-  left: 20%;
+  border: 1px solid #fffafa;
+  width: 100%;
+  left: 0%;
   height: 28%;
   text-align: center;
-  font-size: 5rem;
-  color: #f7f8fc;
+  font-size: 35px;
+  color: #2c2222;
   position: relative;
   line-height: 100px;
+  .head-container .head-text {
+    font-size: 60px;
+    color: #2c2222;
+    margin-left: 30%;
+    margin-top: 30%;
+    text-shadow: 2px 2px 6px white;
+  }
 `;
 const First = styled.div`
   border: 3px solid red;
+
   border-radius: 1rem;
   color: white;
   background-image: url('아인슈타인.png');
   background-repeat: no-repeat;
-
   background-size: cover;
   :hover {
     transform: scale(1.2, 1.2);
@@ -72,7 +79,6 @@ const Second = styled.div`
   :hover {
     transform: scale(1.2, 1.2);
     transition: 0.5s;
-
     background-color: blue;
   }
 `;
@@ -86,13 +92,12 @@ const Third = styled.div`
   :hover {
     transform: scale(1.2, 1.2);
     transition: 0.5s;
-
     background-color: blue;
   }
 `;
 const PositionContainer = styled.div`
   position: absolute;
-  top: 180%;
+  top: 210%;
   left: 10%;
   background-repeat: no-repeat;
 `;
@@ -119,7 +124,7 @@ const SliderContainer = styled.div`
 `;
 const TextContainer = styled.div`
   position: absolute;
-  top: 178%;
+  top: 208%;
   left: 65%;
   background-color: #000000;
   width: 25%;
@@ -127,7 +132,6 @@ const TextContainer = styled.div`
   color: white;
   font-weight: bold;
   font-size: x-large;
-
   margin: 10px;
   padding: 10px;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
@@ -221,6 +225,12 @@ const PositionContainerM = styled.div`
 export default function Main({
   handleResponseSuccess,
 }: any): React.ReactElement {
+  const islogincheck = useSelector(
+    (state: RootState) => state.islogincheck.islogin
+  );
+  const isgooglelogin = useSelector(
+    (state: RootState) => state.isgooglelogin.isgooglelogin
+  );
   const TOTAL_SLIDES = 2;
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef<HTMLDivElement>(null);
@@ -242,6 +252,9 @@ export default function Main({
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
+  const loginalert = () => {
+    alert('로그인을 먼저 해주세요!');
+  };
   const check = useSelector((state: RootState) => state.modal.check);
   useEffect(() => {
     slideRef.current!.style.transition = 'all 0.5s ease-in-out';
@@ -251,7 +264,18 @@ export default function Main({
     <div>
       {isPc ? (
         <All>
-          <Title></Title>
+          <Title>
+            <div className="head-container">
+              <div className="head-text">
+                <h1>Whose idea?</h1>
+              </div>
+            </div>
+            <div className="head-container">
+              <div className="head-text1">
+                <h1>share your idea with the world</h1>
+              </div>
+            </div>
+          </Title>
           <MainStyle>
             <First>
               <h1>세상의 모든 아인슈타인분들에게..</h1>
@@ -277,9 +301,9 @@ export default function Main({
           <PositionContainer>
             <Container>
               <SliderContainer ref={slideRef}>
-                <Slide img={'전구.png'} />
-                <Slide img={'랭킹.jpg'} />
-                <Slide img={'독창적인아이디어.jpg'} />
+                <Slide img={'전구카피.png'} />
+                <Slide img={'랭킹카피.png'} />
+                <Slide img={'독창적인아이디어.png'} />
               </SliderContainer>
               <Button onClick={prevSlide}>Prev</Button>
               <Button onClick={nextSlide}>Next</Button>
@@ -290,9 +314,15 @@ export default function Main({
               <h2>갑자기 생각난 독특한 아이디어가 있으신가요?</h2>
               <ul>당신도 최고의 아이디어가 될 수 있습니다!</ul>
               <ul>하나밖에 없는 당신의 아이디어를 써보세요!</ul>
-              <Link to="/idealist">
-                <button>시작하기</button>
-              </Link>
+              {isgooglelogin || islogincheck ? (
+                <Link to="/idealist">
+                  <button>시작하기</button>
+                </Link>
+              ) : (
+                <Link to="/">
+                  <button onClick={loginalert}>시작하기</button>
+                </Link>
+              )}
             </TextContainer>
           ) : null}
           {currentSlide === 1 ? (
@@ -300,9 +330,15 @@ export default function Main({
               <h2>최고의 아이디어를 보고 싶으신가요?</h2>
               <ul>가장 인기있는 아이디어를 볼 수 있습니다!</ul>
               <ul>유저들의 기발한 아이디어를 구경해보세요!</ul>
-              <Link to="/rank">
-                <button>구경하기</button>
-              </Link>
+              {isgooglelogin || islogincheck ? (
+                <Link to="/rank">
+                  <button>구경하기</button>
+                </Link>
+              ) : (
+                <Link to="/">
+                  <button onClick={loginalert}>구경하기</button>
+                </Link>
+              )}
             </TextContainer>
           ) : null}
           {currentSlide === 2 ? (
@@ -311,9 +347,15 @@ export default function Main({
               <ul>해당 유저에게 쪽지를 보내보세요!</ul>
               <ul>당신의 쪽지를 수많은 사람들이 기다립니다!</ul>
               <ul>일단 아이디어를 구경하러 가볼까요?</ul>
-              <Link to="/idealist">
-                <button>구경하기</button>
-              </Link>
+              {isgooglelogin || islogincheck ? (
+                <Link to="/idealist">
+                  <button>구경하기</button>
+                </Link>
+              ) : (
+                <Link to="/">
+                  <button onClick={loginalert}>구경하기</button>
+                </Link>
+              )}
             </TextContainer>
           ) : null}
           <Footer />
@@ -328,7 +370,6 @@ export default function Main({
             <FirstM>
               <h1>세상의 모든 아이디어 모음</h1>
             </FirstM>
-
             <SecondM>
               <h1>당신의 아이디어를 알려주세요!</h1>
             </SecondM>
@@ -339,9 +380,9 @@ export default function Main({
             <PositionContainerM>
               <Container>
                 <SliderContainer ref={slideRef}>
-                  <Slide img={'전구.png'} />
-                  <Slide img={'랭킹.jpg'} />
-                  <Slide img={'독창적인아이디어.jpg'} />
+                  <Slide img={'전구카피.png'} />
+                  <Slide img={'랭킹카피.png'} />
+                  <Slide img={'독창적인아이디어.png'} />
                 </SliderContainer>
                 <Button onClick={prevSlide}>Prev</Button>
                 <Button onClick={nextSlide}>Next</Button>
@@ -352,9 +393,15 @@ export default function Main({
                 <h3>갑자기 생각난 독특한 아이디어가 있으신가요?</h3>
                 <ul>당신도 최고의 아이디어가 될 수 있습니다!</ul>
                 <ul>하나밖에 없는 당신의 아이디어를 써보세요!</ul>
-                <Link to="/idealist">
-                  <button>시작하기</button>
-                </Link>
+                {isgooglelogin || islogincheck ? (
+                  <Link to="/idealist">
+                    <button>시작하기</button>
+                  </Link>
+                ) : (
+                  <Link to="/">
+                    <button onClick={loginalert}>시작하기</button>
+                  </Link>
+                )}
               </MobileContainer>
             ) : null}
             {currentSlide === 1 ? (
@@ -362,9 +409,15 @@ export default function Main({
                 <h3>최고의 아이디어를 보고 싶으신가요?</h3>
                 <ul>가장 인기있는 아이디어를 볼 수 있습니다!</ul>
                 <ul>유저들의 기발한 아이디어를 구경해보세요!</ul>
-                <Link to="/rank">
-                  <button>구경하기</button>
-                </Link>
+                {isgooglelogin || islogincheck ? (
+                  <Link to="/rank">
+                    <button>구경하기</button>
+                  </Link>
+                ) : (
+                  <Link to="/">
+                    <button onClick={loginalert}>구경하기</button>
+                  </Link>
+                )}
               </MobileContainer>
             ) : null}
             {currentSlide === 2 ? (
@@ -372,9 +425,15 @@ export default function Main({
                 <h3>아이디어를 활용하고 싶으신가요?</h3>
                 <ul>해당 유저에게 쪽지를 보내보세요!</ul>
                 <ul>일단 아이디어를 구경하러 가볼까요?</ul>
-                <Link to="/idealist">
-                  <button>구경하기</button>
-                </Link>
+                {isgooglelogin || islogincheck ? (
+                  <Link to="/idealist">
+                    <button>구경하기</button>
+                  </Link>
+                ) : (
+                  <Link to="/">
+                    <button onClick={loginalert}>구경하기</button>
+                  </Link>
+                )}
               </MobileContainer>
             ) : null}
             <Footer />
