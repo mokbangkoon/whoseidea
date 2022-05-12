@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 const All = styled.div`
   background-color: #292927;
-  height: 600px;
+  height: 1000px;
   align-items: center;
   margin-top: 12%;
 `;
@@ -12,8 +12,8 @@ const Member = styled.div`
   font-weight: bold;
   position: absolute;
   align-items: center;
-  top: 238%;
-  left: 50%;
+  top: 260%;
+  left: 60%;
   & img {
     position: relative;
     height: 20px;
@@ -30,7 +30,7 @@ const Logo = styled.div`
     width: 400px;
     height: 400px;
     position: absolute;
-    top: 235%;
+    top: 250%;
     left: 20%;
   }
 `;
