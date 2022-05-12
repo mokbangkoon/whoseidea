@@ -179,9 +179,7 @@ export default function WriteIdea() {
     axios.get('https://whoseidea.ml:8080/post/last').then((lastPost: any) => {
       axios
         .post(
-          `hhttps://whoseidea.ml:8080/post/image?postId=${
-            lastPost.data.id + 1
-          }`,
+          `https://whoseidea.ml:8080/post/image?postId=${lastPost.data.id + 1}`,
           formData,
           {
             headers: {
