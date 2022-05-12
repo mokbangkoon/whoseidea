@@ -32,7 +32,7 @@ export async function myPost(req: Request, res: Response) {
     for(let item of posts){
         const nickname = await prisma.users.findFirst({
             where:{
-                id: item.nickname
+                id: item.nickname || undefined
             }
         })
         nicknameAndPosts.push({
