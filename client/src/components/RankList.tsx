@@ -16,6 +16,11 @@ const RankContainer = styled.div`
   top: 30%;
   font-size: 60px;
   font-weight: bold;
+  position: absolute;
+  width: 2800px;
+  height: 2000px;
+  background: #fffafa;
+  border-radius: 10px;
 
   color: #0f0f0e;
   & img {
