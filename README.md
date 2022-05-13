@@ -213,7 +213,7 @@
 # API 문서
 
 ![image](https://user-images.githubusercontent.com/91464005/167088286-e4f8be03-1100-4b73-a1f0-26cb4ae1c787.png)
-![image](https://user-images.githubusercontent.com/91464005/167088354-6fa9146a-3a63-42a0-b912-50614ac2110b.png)
+![image](https://user-images.githubusercontent.com/91464005/168187930-635b64bd-9076-407b-8184-000efd14056f.png)
 ![image](https://user-images.githubusercontent.com/91464005/167088391-a23f63e6-d368-40ef-950b-6ca994a2405d.png)
 ![image](https://user-images.githubusercontent.com/91464005/167088412-7b71eea9-46ca-4b50-97cf-c0b07b29c667.png)
 ![image](https://user-images.githubusercontent.com/91464005/167088430-c9efbfe1-8ad2-4685-b150-b4a876b6a8ee.png)
