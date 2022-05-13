@@ -206,7 +206,9 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
             )}
           </Writer>
           <Context>
-            <span>{context}</span>
+            <pre>
+              <span>{context}</span>{' '}
+            </pre>
           </Context>
           <Menu>
             <Chat>
