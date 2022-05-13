@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from '../db'
 import { isAuthorized } from "../tokenFunctions";
 import { Request, Response } from 'express'
 
@@ -11,7 +11,6 @@ export async function writeComment (req: Request, res: Response) {
 
     // 닉네임으로 users 테이블에서 id값을 가져온다.
     const accsessTokenData: any = isAuthorized(req)
-    const prisma = new PrismaClient();
     const userInfo = await prisma.users.findFirst({
         where:{
             email:accsessTokenData.email

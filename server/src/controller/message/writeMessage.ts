@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from '../db'
 import { isAuthorized } from "../tokenFunctions";
 import { Request, Response } from 'express'
 
@@ -18,7 +18,6 @@ export async function writeMessage (req :Request, res: Response) {
     }
 
     // 내 닉네임 찾기
-    const prisma = new PrismaClient()
     const accsessTokenData: any = isAuthorized(req)
     const user1Info = await prisma.users.findFirst({
         where: {

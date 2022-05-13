@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from '../db'
 import { isAuthorized } from "../tokenFunctions";
 import { Request, Response } from 'express'
 
@@ -8,8 +8,6 @@ export async function modifyPost (req: Request, res: Response) {
     if (!isAuthorized(req)) {
         return res.status(405).send('Mismatched Cookies')
     }
-
-    const prisma = new PrismaClient();
 
     // posts 테이블에서 가져온값으로 수정한다.
     await prisma.posts.update({

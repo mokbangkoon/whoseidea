@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../db'
 import { Request, Response } from 'express'
 
 export async function myComment(req: Request, res: Response) {
@@ -7,7 +7,6 @@ export async function myComment(req: Request, res: Response) {
     if (!req.query.nickname) {
         return res.status(406).send('nickname is empty')
     }
-    const prisma = new PrismaClient()
     const userInfo = await prisma.users.findFirst({
         where: {
             nickname: req.query.nickname as any,

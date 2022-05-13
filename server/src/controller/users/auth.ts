@@ -1,5 +1,4 @@
-import { PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import { prisma } from '../db'
 import { isAuthorized } from '../tokenFunctions'
 import { Request, Response } from 'express'
 
