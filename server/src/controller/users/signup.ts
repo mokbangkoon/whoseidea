@@ -4,8 +4,8 @@ import { Request, Response } from 'express'
 
 export async function signup (req: Request, res: Response) {
 
-    // 만약 G_AUTHUSER_H 쿠키가 있다면 google 로그인으로 판단
-    if(req.cookies.G_AUTHUSER_H){
+    // 만약 name 변수가 있다면 google 로그인으로 판단
+    if(req.body.name){
         
         // 아이디가 이미 있다면 쿠키와 ok를 반환한다.
         if(await prisma.users.findFirst({ where:{ email:req.body.email } })){
