@@ -1,10 +1,8 @@
 import { generateAccessToken } from '../tokenFunctions'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../db'
 import { Request, Response } from 'express'
 
 export async function signup (req: Request, res: Response) {
-
-    const prisma = new PrismaClient()
 
     // 만약 G_AUTHUSER_H 쿠키가 있다면 google 로그인으로 판단
     if(req.cookies.G_AUTHUSER_H){

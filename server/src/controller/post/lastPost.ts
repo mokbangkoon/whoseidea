@@ -1,6 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from '../db'
 import { Request, Response } from "express";
-const prisma = new PrismaClient()
 
 export async function lastPost (req: Request, res: Response) {
     const last = await prisma.posts.findFirst({

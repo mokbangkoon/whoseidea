@@ -1,5 +1,5 @@
+import { prisma } from '../db'
 import { isAuthorized } from '../tokenFunctions'
-import { PrismaClient } from '@prisma/client'
 import { Request, Response } from 'express'
 
 export async function signout(req: Request, res: Response) {
@@ -7,7 +7,7 @@ export async function signout(req: Request, res: Response) {
     if (!isAuthorized(req)) {
         return res.status(405).send('Mismatched Cookies')
     }
-    const prisma = new PrismaClient()
+
     const userInfo = await prisma.users.findFirst({
         where: {
             email: req.body.email
