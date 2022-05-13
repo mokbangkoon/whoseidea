@@ -206,7 +206,8 @@
 
 # DB 스키마
 
-![image](https://user-images.githubusercontent.com/96035912/165047330-9dbbf0e7-39e8-4b8d-8c8c-02194d31602b.png)
+![image](https://user-images.githubusercontent.com/91464005/168188595-8b99f941-8be7-4762-aef0-d80461584c53.png)
+
 
 <a href="https://dbdiagram.io/d/624ba1e0d043196e39f60a63">링크</a>
   
@@ -221,6 +222,7 @@
 ![image](https://user-images.githubusercontent.com/91464005/167088475-93b39e74-7a0b-4e92-a0a2-4008789205cb.png)
 ![image](https://user-images.githubusercontent.com/91464005/167088512-6143aa8a-7a0e-4e7e-b03f-ac92039325b5.png)
 
+  
 <a href="https://go.postman.co/workspace/Team-Workspace~a67f5ba8-36e0-4625-8292-9e9aeae8bdca/collection/20596660-7b534007-c3bc-41a4-a3ad-edd56c95a41b?action=share&creator=18430618">링크</a>
 
 
