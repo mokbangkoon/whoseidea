@@ -231,11 +231,6 @@ const Error = styled.div`
 function Signup() {
   const navigate = useNavigate();
   const check = useSelector((state: RootState) => state.modal.check);
-  const deleteCookie = (name: string) => {
-    const date = new Date('2020-01-01').toUTCString();
-
-    document.cookie = name + '=; expires=' + date;
-  };
   const signup = useSelector((state: RootState) => state.signup);
   const checkedModal = () => {
     check ? dispatch(openModal()) : null;
@@ -291,7 +286,6 @@ function Signup() {
     } else {
       dispatch(passwordmessage({ passwordmessage: '' }));
     }
-    deleteCookie('G_AUTHUSER_H=0');
     return axios
       .post('https://whoseidea.ml:8080/signup', signup)
       .then(data => {
