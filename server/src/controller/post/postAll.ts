@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../db'
 import { Request, Response } from 'express'
 
 export async function postAll(req: Request, res: Response) {
@@ -16,7 +16,6 @@ export async function postAll(req: Request, res: Response) {
     if (!['desc','asc'].includes(req.query.order as string))
         return res.status(406).send('order is not "desc" or "asc"')
 
-    const prisma = new PrismaClient()
     const posts = await prisma.posts.findMany({
         take: Number(req.query.limit),
         orderBy: {

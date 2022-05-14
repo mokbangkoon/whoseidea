@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../db'
 import { Request, Response } from 'express'
 
 export async function getComment(req: Request, res: Response) {
@@ -11,7 +11,6 @@ export async function getComment(req: Request, res: Response) {
     if (!Number(req.query.postId))
         return res.status(406).send('postId is not number')
 
-    const prisma = new PrismaClient()
     const comments = await prisma.comments.findMany({
         where:{
             postId:Number(req.query.postId)

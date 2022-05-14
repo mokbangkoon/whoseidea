@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../db'
 import { Request, Response } from 'express'
 import { isAuthorized } from '../tokenFunctions'
 
@@ -17,7 +17,6 @@ export async function viewPost(req: Request, res: Response) {
     if (postId <= 0)
         return res.status(406).send('postId is zero or less.')
 
-    const prisma = new PrismaClient()
     const accsessTokenData: any = isAuthorized(req)
     const userInfo = await prisma.users.findFirst({
         where:{

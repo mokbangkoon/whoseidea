@@ -1,5 +1,5 @@
+import { prisma } from '../db'
 import { isAuthorized } from '../tokenFunctions'
-import { PrismaClient } from '@prisma/client'
 
 export async function uploadPostImage(req: any, res: any) {
 
@@ -13,7 +13,6 @@ export async function uploadPostImage(req: any, res: any) {
     
     try {
         // postId와 url을 저장
-        const prisma = new PrismaClient()
         await prisma.files.create({
             data: {
                 postId: Number(req.query.postId),

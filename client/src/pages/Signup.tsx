@@ -279,7 +279,7 @@ function Signup() {
       );
   };
   const handleSignup = () => {
-    if (!signup.password || !signup.email || signup.nickname) {
+    if (!signup.password || !signup.email || !signup.nickname) {
       dispatch(
         passwordmessage({ passwordmessage: '모든 항목을 입력해주세요.' })
       );
