@@ -1,6 +1,5 @@
 import axios from 'axios';
 import styled from 'styled-components';
-
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
@@ -17,12 +16,19 @@ const Main = styled.div`
 `;
 const Title = styled.div`
   position: absolute;
+  width: 456px;
+  height: 100px;
+  left: -67px;
+  top: 783px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 61px;
   display: flex;
-  top: 10%;
-  left: 10%;
-  right: 2%;
   align-items: center;
-  font-size: 25px;
+  text-align: center;
+  color: #000000;
 `;
 
 const MainStyle = styled.div`
@@ -36,47 +42,31 @@ const MainStyle = styled.div`
 `;
 const HeaderContainer = styled.div`
   position: absolute;
-  width: 75%;
-  height: 200px;
-  left: 2%;
-  top: 10px;
-  background: url(header.png);
-  border-radius: 10px;
+  width: 1322px;
+  height: 400px;
+  left: 59px;
+  top: 91px;
+  background: url(.jpg), #ffffff;
+  border-radius: 20px;
 `;
 const HeaderContainertext = styled.div`
   position: absolute;
-  width: 80%;
-  height: 125px;
-  left: 10%;
-  top: 20%;
-  text-shadow: 2px 6px 2px #4b4b49;
-  font-family: 'Inter';
+  width: 650px;
+  height: 93px;
+  left: 395px;
+  top: 559px;
+
+  font-family: 'M PLUS 1';
   font-style: normal;
   font-weight: 700;
   font-size: 50px;
-  line-height: 48px;
+  line-height: 72px;
   display: flex;
   align-items: center;
   text-align: center;
-  color: #ffffff;
-`;
-const HeaderContainertext1 = styled.div`
-  position: absolute;
-  width: 85%;
-  height: 125px;
-  left: 8%;
-  top: 60%;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 800;
-  font-size: 21px;
-  line-height: 48px;
-  display: flex;
-  align-items: center;
-  text-align: center;
+
   color: #000000;
 `;
-
 const HeaderContainer1 = styled.div`
   position: absolute;
   width: 20%;
@@ -246,18 +236,10 @@ export default function IdeaList({ handleToView }: any) {
                 <div className="header-container" />
                 <HeaderContainertext>
                   <div className="headercontainertext">
-                    share your ideas with world
+                    당신의 아이디어를 채워주세요
                   </div>
                 </HeaderContainertext>
               </HeaderContainer>
-              <div className="container" />
-              <HeaderContainer1>
-                <HeaderContainertext1>
-                  <div className="header-container" />
-                  <div className="container" />
-                  <div className="headercontainertext1"> 아이디어 작성하기</div>
-                </HeaderContainertext1>
-              </HeaderContainer1>
             </div>
             <div>
               <Title2>
