@@ -1,6 +1,5 @@
 import axios from 'axios';
 import styled from 'styled-components';
-
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
@@ -31,7 +30,7 @@ const MainStyle = styled.div`
   height: 2000px;
   left: 109px;
   top: 100px;
-  background-image: url(백5.png);
+  background: #fffbfe;
   border-radius: 10px;
 `;
 const HeaderContainer = styled.div`
@@ -91,7 +90,7 @@ const Title2 = styled.div`
   margin-left: 92%;
   font-size: 50px;
   position: relative;
-  margin-top: 14%;
+  margin-top: 13%;
   margin-bottom: 0.5%;
   align-items: stretch;
   font-size: 20px;
@@ -109,9 +108,9 @@ const Ideabox = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    grid-row-gap: 80px;
-    grid-column-gap: 80px;
-    margin-left: 10%;
+    grid-row-gap: 50px;
+    grid-column-gap: 50px;
+    margin-left: 20%;
     margin-top: 10%;
     text-align: center;
     background-position: center;
@@ -163,6 +162,7 @@ const Box1 = styled.div`
     display: relative;
     margin-left: 45%;
     margin-top: 5%;
+    border-radius: 1px soild black;
   }
   .follow {
     border: 2px solid var(--border-color);
@@ -246,7 +246,7 @@ export default function IdeaList({ handleToView }: any) {
                 <div className="header-container" />
                 <HeaderContainertext>
                   <div className="headercontainertext">
-                    share your ideas with world
+                    당신의 아이디어를 보여주세요
                   </div>
                 </HeaderContainertext>
               </HeaderContainer>
@@ -294,9 +294,9 @@ export default function IdeaList({ handleToView }: any) {
                     return (
                       <div>
                         <img src={post?.url} />
-                        <h3>제목: {post?.caption}</h3>
-                        <p>닉네임: {post?.nickname}</p>
-                        <p>Like: {post?.likes}</p>
+                        <h3>{post?.caption}</h3>
+                        <p>{post?.nickname}</p>
+                        <p>Like:{post?.likes}</p>
                         <Link to={`/ideaview/${post?.id}`} className="text">
                           <button
                             className="main-button"
