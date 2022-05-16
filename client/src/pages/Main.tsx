@@ -32,7 +32,7 @@ const MainStyle = styled.div`
   grid-column-gap: 2rem;
 `;
 const Title = styled.div`
-  background-image: url('대문6.png');
+  background-image: url('mainimg6.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #151516;
