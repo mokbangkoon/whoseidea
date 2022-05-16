@@ -8,7 +8,7 @@ const Main = styled.div`
   .wrap {
     width: 100%;
     height: 150%;
-    background-image: url(백4.png);
+    background-image: url(back4.png);
     background-size: cover;
     position: absolute;
   }
@@ -18,7 +18,7 @@ const MainStyle = styled.div`
   bottom: 10%;
   height: 200px;
   padding: 10px 10px 10px 10px;
-  background: url(백4.png);
+  background: url(back4.png);
   font-size: 60px;
   color: #ffff;
   text-align: center;
@@ -41,8 +41,8 @@ const BodyStyle = styled.div`
   width: 1200px;
   height: 650px;
   left: calc(50% - 1198px / 2 + 11px);
-  top: calc(35% - 650px / 2 + 150px);
-  background: url(백3.png);
+  top: calc(38% - 650px / 2 + 150px);
+  background: url(back3.png);
   border: 1px solid #000000;
   box-sizing: border-box;
   .body-title .title {
@@ -205,7 +205,7 @@ export default function WriteIdea() {
                     <Containerbox>
                       <div className="container">
                         <div className="contianer-box"></div>
-                        <img src="백6.png" className="container-box"></img>
+                        <img src="back6.png" className="container-box"></img>
                       </div>
                     </Containerbox>
                     <input
