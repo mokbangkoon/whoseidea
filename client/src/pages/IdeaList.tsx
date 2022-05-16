@@ -16,19 +16,12 @@ const Main = styled.div`
 `;
 const Title = styled.div`
   position: absolute;
-  width: 456px;
-  height: 100px;
-  left: -67px;
-  top: 783px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 50px;
-  line-height: 61px;
   display: flex;
+  top: 10%;
+  left: 10%;
+  right: 2%;
   align-items: center;
-  text-align: center;
-  color: #000000;
+  font-size: 25px;
 `;
 
 const MainStyle = styled.div`
@@ -37,36 +30,52 @@ const MainStyle = styled.div`
   height: 2000px;
   left: 109px;
   top: 100px;
-  background-image: url(백5.png);
+  background: #fffbfe;
   border-radius: 10px;
 `;
 const HeaderContainer = styled.div`
   position: absolute;
-  width: 1322px;
-  height: 400px;
-  left: 59px;
-  top: 91px;
-  background: url(.jpg), #ffffff;
-  border-radius: 20px;
+  width: 75%;
+  height: 200px;
+  left: 2%;
+  top: 10px;
+  background: url(header.png);
+  border-radius: 10px;
 `;
 const HeaderContainertext = styled.div`
   position: absolute;
-  width: 650px;
-  height: 93px;
-  left: 395px;
-  top: 559px;
-
-  font-family: 'M PLUS 1';
+  width: 80%;
+  height: 125px;
+  left: 10%;
+  top: 20%;
+  text-shadow: 2px 6px 2px #4b4b49;
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
   font-size: 50px;
-  line-height: 72px;
+  line-height: 48px;
   display: flex;
   align-items: center;
   text-align: center;
-
+  color: #ffffff;
+`;
+const HeaderContainertext1 = styled.div`
+  position: absolute;
+  width: 85%;
+  height: 125px;
+  left: 8%;
+  top: 60%;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 21px;
+  line-height: 48px;
+  display: flex;
+  align-items: center;
+  text-align: center;
   color: #000000;
 `;
+
 const HeaderContainer1 = styled.div`
   position: absolute;
   width: 20%;
@@ -81,7 +90,7 @@ const Title2 = styled.div`
   margin-left: 92%;
   font-size: 50px;
   position: relative;
-  margin-top: 14%;
+  margin-top: 13%;
   margin-bottom: 0.5%;
   align-items: stretch;
   font-size: 20px;
@@ -99,9 +108,9 @@ const Ideabox = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    grid-row-gap: 80px;
-    grid-column-gap: 80px;
-    margin-left: 10%;
+    grid-row-gap: 50px;
+    grid-column-gap: 50px;
+    margin-left: 20%;
     margin-top: 10%;
     text-align: center;
     background-position: center;
@@ -153,6 +162,7 @@ const Box1 = styled.div`
     display: relative;
     margin-left: 45%;
     margin-top: 5%;
+    border-radius: 1px soild black;
   }
   .follow {
     border: 2px solid var(--border-color);
@@ -236,10 +246,18 @@ export default function IdeaList({ handleToView }: any) {
                 <div className="header-container" />
                 <HeaderContainertext>
                   <div className="headercontainertext">
-                    당신의 아이디어를 채워주세요
+                    당신의 아이디어를 보여주세요
                   </div>
                 </HeaderContainertext>
               </HeaderContainer>
+              <div className="container" />
+              <HeaderContainer1>
+                <HeaderContainertext1>
+                  <div className="header-container" />
+                  <div className="container" />
+                  <div className="headercontainertext1"> 아이디어 작성하기</div>
+                </HeaderContainertext1>
+              </HeaderContainer1>
             </div>
             <div>
               <Title2>
@@ -276,9 +294,9 @@ export default function IdeaList({ handleToView }: any) {
                     return (
                       <div>
                         <img src={post?.url} />
-                        <h3>제목: {post?.caption}</h3>
-                        <p>닉네임: {post?.nickname}</p>
-                        <p>Like: {post?.likes}</p>
+                        <h3>{post?.caption}</h3>
+                        <p>{post?.nickname}</p>
+                        <p>Like:{post?.likes}</p>
                         <Link to={`/ideaview/${post?.id}`} className="text">
                           <button
                             className="main-button"
