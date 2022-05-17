@@ -141,53 +141,8 @@
 
 ## 와이어프레임
 
-### 메인페이지
-
-![image](https://user-images.githubusercontent.com/95297566/163959024-a0420c43-06bf-4079-a9dd-7941fc790209.png)
-![Main2 다시캡쳐](https://user-images.githubusercontent.com/95297566/164154511-dd923fc1-89d1-4295-99bb-ff6991c1f84f.PNG)
-![image](https://user-images.githubusercontent.com/95297566/163959941-35ab68db-0c68-4c99-af9a-eab60b4a0550.png)
-
-
-### 회원가입 페이지
-
-![image](https://user-images.githubusercontent.com/95297566/163959511-c9c76a69-476f-49bc-890b-d50024c2a978.png)
-
-
-### 아이디어 리스트 페이지
-
-![image](https://user-images.githubusercontent.com/95297566/163959161-b5714923-226d-412b-9849-c4b26b0b9615.png)
-
-
-### 로그인 페이지
-
-![로그인창](https://user-images.githubusercontent.com/95297566/164154404-9f152f32-eeab-487a-99d2-8a22ecb00998.PNG)
-
-
-### 마이페이지
-
-![image](https://user-images.githubusercontent.com/95297566/163959295-812a672d-7a9c-461c-acc0-581074d59852.png)
-
-
-### 아이디어 작성 페이지
-
-![image](https://user-images.githubusercontent.com/95297566/163959585-6c8b19ee-9c39-4447-a6b0-a37c352fe163.png)
-
-### 아이디어 View 페이지
-
-![image](https://user-images.githubusercontent.com/95297566/163959648-0bc9cd04-9369-4d17-9ebc-1fbbfdce517f.png)
-
-### 랭킹 페이지
-
-![image](https://user-images.githubusercontent.com/95297566/163959690-52243dba-3645-4f89-a4fb-f24a16b26dde.png)
-
-### 쪽지 페이지
-
-![image](https://user-images.githubusercontent.com/95297566/163959740-e50d231d-afe1-4bdd-b1c4-aa0a3534f409.png)
-
-### Advanced) 토론게시판 페이지
-
-![image](https://user-images.githubusercontent.com/95297566/163960060-30428767-045d-4a09-b377-1cad14579ce3.png)
-
+<a href="https://github.com/codestates/whoseidea/wiki#%EC%99%80%EC%9D%B4%EC%96%B4%ED%94%84%EB%A0%88%EC%9E%84">Wiki 링크</a>
+  
 # 사용법
 ## 로그인 기능
 
@@ -213,19 +168,9 @@
   
 # API 문서
 
-![image](https://user-images.githubusercontent.com/91464005/167088286-e4f8be03-1100-4b73-a1f0-26cb4ae1c787.png)
-![image](https://user-images.githubusercontent.com/91464005/168187930-635b64bd-9076-407b-8184-000efd14056f.png)
-![image](https://user-images.githubusercontent.com/91464005/167088391-a23f63e6-d368-40ef-950b-6ca994a2405d.png)
-![image](https://user-images.githubusercontent.com/91464005/167088412-7b71eea9-46ca-4b50-97cf-c0b07b29c667.png)
-![image](https://user-images.githubusercontent.com/91464005/167088430-c9efbfe1-8ad2-4685-b150-b4a876b6a8ee.png)
-![image](https://user-images.githubusercontent.com/91464005/167088446-13c8288b-3775-4062-8ea7-0b051c78a442.png)
-![image](https://user-images.githubusercontent.com/91464005/167088475-93b39e74-7a0b-4e92-a0a2-4008789205cb.png)
-![image](https://user-images.githubusercontent.com/91464005/167088512-6143aa8a-7a0e-4e7e-b03f-ac92039325b5.png)
-
-  
+<a href="https://github.com/codestates/whoseidea/wiki#api-%EB%AC%B8%EC%84%9C">Wiki 링크</a>
 <a href="https://go.postman.co/workspace/Team-Workspace~a67f5ba8-36e0-4625-8292-9e9aeae8bdca/collection/20596660-7b534007-c3bc-41a4-a3ad-edd56c95a41b?action=share&creator=18430618">링크</a>
-
-
+  
 # Bare-Minimum
 - 로그인 기능(회원가입, 로그인, 로그아웃, 회원상태 변경
 - JWT를 이용한 로그인 구현
