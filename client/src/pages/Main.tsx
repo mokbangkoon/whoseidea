@@ -192,28 +192,31 @@ const Line = styled.div`
 const FirstM = styled.div`
   border: 3px solid red;
   border-radius: 1rem;
-  color: white;
+  color: #020202;
   :hover {
     transition: 0.5s;
     background-color: blue;
+    color: white;
   }
 `;
 const SecondM = styled.div`
   border: 3px solid blue;
   border-radius: 1rem;
-  color: #ffffff;
+  color: #020202;
   :hover {
     transition: 0.5s;
     background-color: blue;
+    color: white;
   }
 `;
 const ThirdM = styled.div`
   border: 3px solid orange;
   border-radius: 1rem;
-  color: #ffffff;
+  color: #0a0a0a;
   :hover {
     transition: 0.5s;
     background-color: blue;
+    color: white;
   }
 `;
 const PositionContainerM = styled.div`
