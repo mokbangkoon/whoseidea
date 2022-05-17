@@ -169,6 +169,7 @@
 # API 문서
 
 <a href="https://github.com/codestates/whoseidea/wiki#api-%EB%AC%B8%EC%84%9C">Wiki 링크</a>
+  
 <a href="https://go.postman.co/workspace/Team-Workspace~a67f5ba8-36e0-4625-8292-9e9aeae8bdca/collection/20596660-7b534007-c3bc-41a4-a3ad-edd56c95a41b?action=share&creator=18430618">링크</a>
   
 # Bare-Minimum
