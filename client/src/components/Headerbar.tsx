@@ -5,8 +5,6 @@ import { RootState } from '../modules';
 import { openModal } from '../modules/modal';
 import { Link } from 'react-router-dom';
 import Googlelogout from './Googlelogout';
-import { useNavigate } from 'react-router-dom';
-import { islogin } from '../modules/islogin';
 
 const Sidebar = styled.div`
   display: flex;
@@ -14,12 +12,9 @@ const Sidebar = styled.div`
   background-color: #ffff;
   color: black;
   font-weight: semi-bold;
-  font-size: 30px;
+  font-size: 40px;
   text-decoration: none;
   align-items: center;
-  font-family: 'Hahmlet', serif;
-  font-family: 'IBM Plex Sans KR', sans-serif;
-  font-family: 'Roboto Condensed', sans-serif;
 `;
 const Button = styled.div`
   .home {
@@ -28,7 +23,8 @@ const Button = styled.div`
   }
   border-radius: 1rem;
   :hover {
-    background-color: white;
+    background-color: #f1f186;
+    color: black;
     transition: 0.5s;
     cursor: pointer;
   }
@@ -45,7 +41,7 @@ export default function Headerbar({ handleLogout }: any): React.ReactElement {
   const isgooglelogin = useSelector(
     (state: RootState) => state.isgooglelogin.isgooglelogin
   );
-  const navigate = useNavigate();
+
   const check = useSelector((state: RootState) => state.modal.check);
   const dispatch = useDispatch(); // 디스패치 함수를 가져옵니다
   // 각 액션들을 디스패치하는 함수들을 만들어줍니다

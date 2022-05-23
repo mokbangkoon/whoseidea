@@ -1,12 +1,11 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { AxiosResponse } from 'axios';
 
 const Title = styled.div`
   font-weight: bold;
@@ -131,11 +130,7 @@ const Commentdata = styled.div`
   font-size: 20px;
 `;
 
-export default function IdeaView({
-  handleIdeaView,
-  postDatas,
-  usernickname,
-}: any) {
+export default function IdeaView({ handleIdeaView, usernickname }: any) {
   const { id } = useParams();
   const check = useSelector((state: RootState) => state.modal.check);
   const [isHeart, setisHeart] = useState(false);
@@ -152,23 +147,21 @@ export default function IdeaView({
   const [allComment, setallComment] = useState<any[]>([]);
 
   useEffect(() => {
-    axios.get(`https://localhost:8080/post/view?postId=${id}`).then(data => {
+    axios.get(`https://whoseidea.ml:8080/post/view?postId=${id}`).then(data => {
       setView(data.data.data[0].view);
       setLikes(data.data.data[0].likes);
       setisHeart(data.data.Boolean);
       setCaption(data.data.data[0].caption);
       setContext(data.data.data[0].context);
       setNickname(data.data.data[0].nickname);
-
-      console.log(data);
     });
 
     axios
-      .get(`https://localhost:8080/comment?postId=${id}`)
+      .get(`https://whoseidea.ml:8080/comment?postId=${id}`)
       .then(data => setallComment(data.data));
 
     axios
-      .get(`https://localhost:8080/post/image?postId=${id}`)
+      .get(`https://whoseidea.ml:8080/post/image?postId=${id}`)
       .then(data => setUrl(data.data[0]));
   }, []);
 
@@ -178,15 +171,15 @@ export default function IdeaView({
   const handleHeart = () => {
     setisHeart(!isHeart);
     axios
-      .patch('https://localhost:8080/like', { postId: Number(id) })
+      .patch('https://whoseidea.ml:8080/like', { postId: Number(id) })
       .then(data => setLikes(data.data.likes));
   };
   const handleComment = () => {
     axios
-      .post('https://localhost:8080/comment', userinfo)
+      .post('https://whoseidea.ml:8080/comment', userinfo)
       .then(() =>
         axios
-          .get(`https://localhost:8080/comment?postId=${Number(id)}`)
+          .get(`https://whoseidea.ml:8080/comment?postId=${Number(id)}`)
           .then(data => setallComment(data.data))
       );
   };
@@ -213,7 +206,9 @@ export default function IdeaView({
             )}
           </Writer>
           <Context>
-            <span>{context}</span>
+            <pre>
+              <span>{context}</span>{' '}
+            </pre>
           </Context>
           <Menu>
             <Chat>

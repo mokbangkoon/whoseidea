@@ -196,11 +196,11 @@ export default function Signout() {
     const params = { data: userinfo };
 
     axios
-      .delete('https://localhost:8080/signout', params)
+      .delete('https://whoseidea.ml:8080/signout', params)
       .then(data => alert(data.data))
-      .then(data => navigate('/'))
-      .then(data => dispatch(islogin(false)))
-      .catch(data => setErrorMessage('잘못된 정보를 입력하셨습니다.'));
+      .then(() => navigate('/'))
+      .then(() => dispatch(islogin(false)))
+      .catch(() => setErrorMessage('잘못된 정보를 입력하셨습니다.'));
   };
 
   return (

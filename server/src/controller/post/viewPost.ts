@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../db'
 import { Request, Response } from 'express'
 import { isAuthorized } from '../tokenFunctions'
 
@@ -17,7 +17,6 @@ export async function viewPost(req: Request, res: Response) {
     if (postId <= 0)
         return res.status(406).send('postId is zero or less.')
 
-    const prisma = new PrismaClient()
     const accsessTokenData: any = isAuthorized(req)
     const userInfo = await prisma.users.findFirst({
         where:{
@@ -64,6 +63,7 @@ export async function viewPost(req: Request, res: Response) {
         created_at: posts.created_at
     })
 
+    // 이미 좋아요를 누른 유저인 경우, boolean값을 참으로 전달
     if (isAuthorized(req) && await prisma.likes.findFirst({
         where:{
             nickname:userInfo?.id,

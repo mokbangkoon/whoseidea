@@ -1,9 +1,7 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
 
 const Title = styled.div`
@@ -53,7 +51,6 @@ const OnlyData = styled.div`
 `;
 
 export default function Mypost({ postData }: any) {
-  console.log(postData);
   const check = useSelector((state: RootState) => state.modal.check);
   return (
     <div>

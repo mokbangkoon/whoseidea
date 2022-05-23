@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import styled from 'styled-components';
@@ -27,11 +27,10 @@ const Right = styled.div`
   top: 8%;
   bottom: 0%;
   background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.2),
-      rgba(255, 255, 255, 0.2)
-    ),
-    url(.jpg);
+    0deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.2)
+  );
 `;
 const Left = styled.div`
   position: absolute;
@@ -157,7 +156,7 @@ export default function Mypage({
     (state: RootState) => state.isgooglelogin.isgooglelogin
   );
   const check = useSelector((state: RootState) => state.modal.check);
-  const login = useSelector((state: RootState) => state.login);
+
   const [selectedFile, setselectedFile] = useState('');
   const [filename, setfilename] = useState('');
   const [nickname, setnickname] = useState('');
@@ -167,7 +166,7 @@ export default function Mypage({
   });
 
   useEffect(() => {
-    axios.get('https://localhost:8080/auth').then(data => {
+    axios.get('https://whoseidea.ml:8080/auth').then(data => {
       setnickname(data.data.nickname);
       setprofile(data.data.profile);
     });
@@ -181,7 +180,10 @@ export default function Mypage({
     const formData = new FormData();
     formData.append('file', selectedFile);
     axios
-      .patch(`https://localhost:8080/user/image?nickname=${nickname}`, formData)
+      .patch(
+        `https://whoseidea.ml:8080/user/image?nickname=${nickname}`,
+        formData
+      )
       .then(res => {
         handleUserProfile();
         alert('프로필 변경 성공');
@@ -190,7 +192,7 @@ export default function Mypage({
 
   const handleUserProfile = () => {
     axios
-      .get(`https://localhost:8080/user?nickname=${nickname}`)
+      .get(`https://whoseidea.ml:8080/user?nickname=${nickname}`)
       .then(data => setprofile(data.data.profile));
   };
 

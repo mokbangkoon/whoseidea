@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
@@ -30,11 +30,10 @@ const Right = styled.div`
   top: 8%;
   bottom: 0%;
   background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.2),
-      rgba(255, 255, 255, 0.2)
-    ),
-    url(.jpg);
+    0deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.2)
+  );
 `;
 const Left = styled.div`
   position: absolute;
@@ -257,9 +256,9 @@ function Signup() {
       dispatch(emailmessage({ emailmessage: '' }));
     }
     return axios
-      .get('https://localhost:8080/emailduplication', { params: signup })
+      .get('https://whoseidea.ml:8080/emailduplication', { params: signup })
       .then(data => alert(data.data))
-      .catch(error =>
+      .catch(() =>
         dispatch(emailmessage({ emailmessage: '이메일이 이미 존재합니다.' }))
       );
   };
@@ -271,16 +270,16 @@ function Signup() {
     }
 
     return axios
-      .get('https://localhost:8080/nicknameduplication', { params: signup })
+      .get('https://whoseidea.ml:8080/nicknameduplication', { params: signup })
       .then(data => alert(data.data))
-      .catch(error =>
+      .catch(() =>
         dispatch(
           nicknamemessage({ nicknamemessage: '닉네임이 이미 존재합니다.' })
         )
       );
   };
   const handleSignup = () => {
-    if (!signup.password || !signup.email || signup.nickname) {
+    if (!signup.password || !signup.email || !signup.nickname) {
       dispatch(
         passwordmessage({ passwordmessage: '모든 항목을 입력해주세요.' })
       );
@@ -288,12 +287,12 @@ function Signup() {
       dispatch(passwordmessage({ passwordmessage: '' }));
     }
     return axios
-      .post('https://localhost:8080/signup', signup)
+      .post('https://whoseidea.ml:8080/signup', signup)
       .then(data => {
         data.status === 200 ? alert('회원가입 완료') : alert('회원가입 실패');
       })
       .then(() => navigate('/'))
-      .catch(error =>
+      .catch(() =>
         dispatch(
           passwordmessage({ passwordmessage: '회원가입이 실패했습니다.' })
         )

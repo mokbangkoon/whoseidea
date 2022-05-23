@@ -1,13 +1,7 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../modules';
 import axios from 'axios';
 import styled from 'styled-components';
-import { check } from 'prettier';
-import { Link, useNavigationType } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
-import writeidea from './WriteIdea';
-import { userInfo } from 'os';
-import { text } from 'express';
+import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 axios.defaults.withCredentials = true;
 
@@ -29,46 +23,14 @@ const Title = styled.div`
   align-items: center;
   font-size: 25px;
 `;
-const Title1 = styled.div`
-  position: absolute;
-  top: 19%;
-  left: 70%;
-  right: 2%;
-  align-items: center;
-  font-size: 25px;
-`;
-const Container = styled.div`
-  /* position: relative;
-  top: 22%;
-  left: 75%;
-  right: 10%;
-  .search {
-    position: relative;
-    width: 400px;
-  } */
-  input {
-    width: 100%;
-    height: 20px;
-    border: 1px solid #bbb;
-    border-radius: 8px;
-    padding: 10px 12px;
-    font-size: 14px;
-  }
-  img {
-    position: absolute;
-    width: 17px;
-    top: 10px;
-    right: 12px;
-    margin: 0;
-  }
-`;
+
 const MainStyle = styled.div`
   position: absolute;
   width: 150vh;
   height: 2000px;
   left: 109px;
   top: 100px;
-  background-image: url(백5.png);
+  background: #fffbfe;
   border-radius: 10px;
 `;
 const HeaderContainer = styled.div`
@@ -128,7 +90,7 @@ const Title2 = styled.div`
   margin-left: 92%;
   font-size: 50px;
   position: relative;
-  margin-top: 14%;
+  margin-top: 13%;
   margin-bottom: 0.5%;
   align-items: stretch;
   font-size: 20px;
@@ -146,9 +108,9 @@ const Ideabox = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    grid-row-gap: 80px;
-    grid-column-gap: 80px;
-    margin-left: 10%;
+    grid-row-gap: 50px;
+    grid-column-gap: 50px;
+    margin-left: 20%;
     margin-top: 10%;
     text-align: center;
     background-position: center;
@@ -200,6 +162,7 @@ const Box1 = styled.div`
     display: relative;
     margin-left: 45%;
     margin-top: 5%;
+    border-radius: 1px soild black;
   }
   .follow {
     border: 2px solid var(--border-color);
@@ -223,8 +186,6 @@ const Box1 = styled.div`
   }
 `;
 export default function IdeaList({ handleToView }: any) {
-  const idealist = useSelector((state: RootState) => state.idealist);
-  const [file, setFile] = useState('');
   const [offset, setOffset] = useState(0);
   const [hasnext, sethasnext] = useState(false);
   const [post, setPost] = useState<any[]>([]);
@@ -235,10 +196,10 @@ export default function IdeaList({ handleToView }: any) {
   };
 
   useEffect(() => {
-    axios.get(`https://localhost:8080/post?page=${pagenum}`).then(data => {
+    axios.get(`https://whoseidea.ml:8080/post?page=${pagenum}`).then(data => {
       Promise.all(
         data.data.map((item: any) =>
-          axios.get(`https://localhost:8080/post/image?postId=${item.id}`)
+          axios.get(`https://whoseidea.ml:8080/post/image?postId=${item.id}`)
         )
       ).then(requests => {
         const urls = requests.map(item => {
@@ -285,7 +246,7 @@ export default function IdeaList({ handleToView }: any) {
                 <div className="header-container" />
                 <HeaderContainertext>
                   <div className="headercontainertext">
-                    share your ideas with world
+                    당신의 아이디어를 보여주세요
                   </div>
                 </HeaderContainertext>
               </HeaderContainer>
@@ -333,9 +294,9 @@ export default function IdeaList({ handleToView }: any) {
                     return (
                       <div>
                         <img src={post?.url} />
-                        <h3>제목: {post?.caption}</h3>
-                        <p>닉네임: {post?.nickname}</p>
-                        <p>Like: {post?.likes}</p>
+                        <h3>{post?.caption}</h3>
+                        <p>{post?.nickname}</p>
+                        <p>Like:{post?.likes}</p>
                         <Link to={`/ideaview/${post?.id}`} className="text">
                           <button
                             className="main-button"

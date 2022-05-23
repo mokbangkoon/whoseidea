@@ -1,7 +1,6 @@
-import { useSelector } from 'react-redux';
-import { RootState } from '../modules';
 import axios from 'axios';
 import styled from 'styled-components';
+import { useEffect } from 'react';
 import React, { useState } from 'react';
 axios.defaults.withCredentials = true;
 
@@ -9,7 +8,7 @@ const Main = styled.div`
   .wrap {
     width: 100%;
     height: 150%;
-    background-image: url(백4.png);
+    background-image: url(back4.png);
     background-size: cover;
     position: absolute;
   }
@@ -19,7 +18,7 @@ const MainStyle = styled.div`
   bottom: 10%;
   height: 200px;
   padding: 10px 10px 10px 10px;
-  background: url(백4.png);
+  background: url(back4.png);
   font-size: 60px;
   color: #ffff;
   text-align: center;
@@ -42,8 +41,8 @@ const BodyStyle = styled.div`
   width: 1200px;
   height: 650px;
   left: calc(50% - 1198px / 2 + 11px);
-  top: calc(35% - 650px / 2 + 150px);
-  background: url(백3.png);
+  top: calc(38% - 650px / 2 + 150px);
+  background: url(back3.png);
   border: 1px solid #000000;
   box-sizing: border-box;
   .body-title .title {
@@ -138,22 +137,23 @@ const BodyStyle = styled.div`
 `;
 export default function WriteIdea() {
   const [filename, setFileName] = useState('');
-  const [postid, setPostId] = useState([]);
   const [selectedFile, setselectedFile] = useState('');
-  const [post, setPost] = useState([]);
-  const [profile, setprofile] = useState('');
   const [data, setData] = useState({
     caption: '',
     context: '',
     nickname: '',
   });
-
+  const [nickname, setNickname] = useState('');
+  useEffect(() => {
+    axios
+      .get('https://whoseidea.ml:8080/auth')
+      .then(data => setNickname(data.data.nickname));
+  }, []);
   const handleInputValue = (key: any, e: any) => {
     setData({
       ...data,
       [key]: e.target.value,
     });
-    console.log(data);
   };
   const handleFileInput = (event: any) => {
     setselectedFile(event.target.files[0]);
@@ -164,7 +164,7 @@ export default function WriteIdea() {
     const formData = new FormData();
     formData.append('file', selectedFile);
     axios
-      .post('https://localhost:8080/post', data, {
+      .post('https://whoseidea.ml:8080/post', data, {
         headers: {
           'Content-Type': `application/json`,
           withCredentials: true,
@@ -176,21 +176,17 @@ export default function WriteIdea() {
       .catch(() => {
         alert('실패');
       });
-    axios.get('https://localhost:8080/post/last').then((lastPost: any) => {
-      axios
-        .post(
-          `https://localhost:8080/post/image?postId=${lastPost.data.id + 1}`,
-          formData,
-          {
-            headers: {
-              'Content-Type': `multipart/form-data`,
-              withCredentials: true,
-            },
-          }
-        )
-        .then(res => {
-          console.log(res);
-        });
+    axios.get('https://whoseidea.ml:8080/post/last').then((lastPost: any) => {
+      axios.post(
+        `https://whoseidea.ml:8080/post/image?postId=${lastPost.data.id + 1}`,
+        formData,
+        {
+          headers: {
+            'Content-Type': `multipart/form-data`,
+            withCredentials: true,
+          },
+        }
+      );
     });
   };
   return (
@@ -209,7 +205,7 @@ export default function WriteIdea() {
                     <Containerbox>
                       <div className="container">
                         <div className="contianer-box"></div>
-                        <img src="백6.png" className="container-box"></img>
+                        <img src="back6.png" className="container-box"></img>
                       </div>
                     </Containerbox>
                     <input
@@ -227,7 +223,7 @@ export default function WriteIdea() {
                       <input
                         type="text"
                         className="write-text"
-                        value={'nickname'}
+                        value={nickname}
                       ></input>
                     </span>
                   </div>
@@ -241,6 +237,7 @@ export default function WriteIdea() {
                       <input
                         className="write-text1"
                         placeholder="첨부파일"
+                        value={filename}
                       ></input>
                       <div>
                         <button
