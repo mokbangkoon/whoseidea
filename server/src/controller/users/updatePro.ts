@@ -14,7 +14,7 @@ export async function updatePro (req: Request, res: Response) {
 
     // 입력한 닉네임이 users 테이블에 존재한 경우 이미 존재하는 닉네임이라 알려준다
     if (await prisma.users.findFirst({where: {nickname: req.body.nickname}})) {
-        return res.status(403).send('nickname exists')
+        return res.status(401).send('nickname exists')
     }
 
     // 입력한 닉네임을 유저정보에 업데이트 한다

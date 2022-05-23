@@ -14,7 +14,7 @@ export async function login (req: Request, res: Response) {
 
     // 유저정보가 맞지 않는 경우 오류 처리
     if (!userInfo) {
-        res.status(404).send('invaild')
+        res.status(401).send('User information is not correct')
     } else {
 
         // 유저정보가 맞는 경우 jwt 토큰을 발행 후 접속을 허용한다

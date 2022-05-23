@@ -6,7 +6,7 @@ export async function signout(req: Request, res: Response) {
     
     // 쿠키가 잘못되거나 없는 경우 오류 처리
     if (!isAuthorized(req)) {
-        return res.status(405).send('Mismatched Cookies')
+        return res.status(401).send('Mismatched Cookies')
     }
 
     // 이메일값과 패스워드값으로 users 테이블에서 유저정보를 가져온다
@@ -19,7 +19,7 @@ export async function signout(req: Request, res: Response) {
 
     // 이메일과 패스워드가 맞지 않으면 오류 처리
     if (!userInfo) {
-        return res.status(406).send('incorrect id or password')
+        return res.status(401).send('incorrect id or password')
     }
 
     // users 테이블에서 유저정보 및 jwt 쿠키를 제거 후 회원탈퇴
@@ -29,5 +29,5 @@ export async function signout(req: Request, res: Response) {
             password: req.body.password
         }
     })
-    return res.status(206).clearCookie('jwt').send('good bye')
+    return res.status(200).clearCookie('jwt').send('good bye')
 }
