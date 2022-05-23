@@ -60,7 +60,7 @@ const Btn = styled.div`
   & button {
     position: absolute;
     top: 50%;
-    left: 40%;
+    left: 38%;
     border-radius: 1rem;
     width: 10%;
     height: 40px;
@@ -237,7 +237,7 @@ export default function Signout() {
                 <button onClick={() => handleSignout()}>확인</button>
               </div>
             </Btn>
-            <Error>{errorMessage}</Error>
+            {errorMessage === '' ? null : <Error>{errorMessage}</Error>}
           </div>
         </div>
       ) : (
@@ -266,7 +266,7 @@ export default function Signout() {
                 <button onClick={() => handleSignout()}>확인</button>
               </div>
             </BtnM>
-            <ErrorM>{errorMessage}</ErrorM>
+            {errorMessage === '' ? null : <ErrorM>{errorMessage}</ErrorM>}
           </div>
         </div>
       )}

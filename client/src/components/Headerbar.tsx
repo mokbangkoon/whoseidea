@@ -15,6 +15,7 @@ const Sidebar = styled.div`
   font-size: 40px;
   text-decoration: none;
   align-items: center;
+  padding: 10px;
 `;
 const Button = styled.div`
   .home {

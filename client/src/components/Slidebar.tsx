@@ -4,6 +4,7 @@ export default function Slide({ img }: any) {
 }
 // slide 부분 이미지 크기 수정
 const IMG = styled.img`
+  border-radius: 1rem;
   width: 103%;
-  height: 70vh;
+  height: 550px;
 `;

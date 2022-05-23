@@ -41,7 +41,7 @@ const Input1 = styled.div`
 const Btn = styled.div`
   & button {
     position: absolute;
-    top: 42%;
+    top: 40%;
     left: 37%;
     border-radius: 1rem;
     width: 10%;
