@@ -1,12 +1,11 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import { AxiosResponse } from 'axios';
 
 const Title = styled.div`
   font-weight: bold;
@@ -131,11 +130,10 @@ const Commentdata = styled.div`
   font-size: 20px;
 `;
 
-export default function IdeaView({
-  handleIdeaView,
-  postDatas,
-  usernickname,
-}: any) {
+export default function IdeaView({ handleIdeaView, usernickname }: any) {
+  // 아이디어 뷰 페이지
+  // 좋아요, 조회수, 쪽지 기능 , 댓글 기능 제공
+  // params에 몇번째 아이디어인지 넘겨받음.
   const { id } = useParams();
   const check = useSelector((state: RootState) => state.modal.check);
   const [isHeart, setisHeart] = useState(false);
@@ -151,45 +149,47 @@ export default function IdeaView({
   });
   const [allComment, setallComment] = useState<any[]>([]);
 
+  // useEffect로 서버에서 받아온 데이터들을 세팅한다.
   useEffect(() => {
-    axios.get(`https://localhost:8080/post/view?postId=${id}`).then(data => {
+    axios.get(`https://whoseidea.ml:8080/post/view?postId=${id}`).then(data => {
       setView(data.data.data[0].view);
       setLikes(data.data.data[0].likes);
       setisHeart(data.data.Boolean);
       setCaption(data.data.data[0].caption);
       setContext(data.data.data[0].context);
       setNickname(data.data.data[0].nickname);
-
-      console.log(data);
     });
 
     axios
-      .get(`https://localhost:8080/comment?postId=${id}`)
+      .get(`https://whoseidea.ml:8080/comment?postId=${id}`)
       .then(data => setallComment(data.data));
 
     axios
-      .get(`https://localhost:8080/post/image?postId=${id}`)
+      .get(`https://whoseidea.ml:8080/post/image?postId=${id}`)
       .then(data => setUrl(data.data[0]));
   }, []);
-
+  // 글쓴이 고정시키기
   const handleWriter = () => {
     handleIdeaView(usernickname);
   };
+  // 좋아요 기능 제어
   const handleHeart = () => {
     setisHeart(!isHeart);
     axios
-      .patch('https://localhost:8080/like', { postId: Number(id) })
+      .patch('https://whoseidea.ml:8080/like', { postId: Number(id) })
       .then(data => setLikes(data.data.likes));
   };
+  // 댓글 기능 제어
   const handleComment = () => {
     axios
-      .post('https://localhost:8080/comment', userinfo)
+      .post('https://whoseidea.ml:8080/comment', userinfo)
       .then(() =>
         axios
-          .get(`https://localhost:8080/comment?postId=${Number(id)}`)
+          .get(`https://whoseidea.ml:8080/comment?postId=${Number(id)}`)
           .then(data => setallComment(data.data))
       );
   };
+  // userinfo를 객체로 입력받음.
   const handleInputValue = (key: any, e: any) => {
     setuserinfo({ ...userinfo, postId: Number(id), [key]: e.target.value });
   };
@@ -213,7 +213,9 @@ export default function IdeaView({
             )}
           </Writer>
           <Context>
-            <span>{context}</span>
+            <pre>
+              <span>{context}</span>{' '}
+            </pre>
           </Context>
           <Menu>
             <Chat>
@@ -249,11 +251,10 @@ export default function IdeaView({
                 {allComment.map(el => (
                   <div>
                     <CommentWriter>
-                      {' '}
-                      <div>{el.nickname}</div>{' '}
+                      <div>{el.nickname}</div>
                     </CommentWriter>
                     <Commentdata>
-                      <div>{el.text}</div>{' '}
+                      <div>{el.text}</div>
                     </Commentdata>
                   </div>
                 ))}

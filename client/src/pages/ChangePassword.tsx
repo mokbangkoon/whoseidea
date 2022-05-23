@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import styled from 'styled-components';
@@ -53,23 +53,7 @@ const Input2 = styled.div`
     border-radius: 10px;
   }
 `;
-const Input3 = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 35%;
-  & input {
-    width: 300px;
-    height: 50px;
-    left: 200px;
-    font-size: 20px;
-    text-align: center;
-    background: rgba(196, 196, 196, 0.09);
-    border: 1px solid #f7f4ba;
-    box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25), 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 10px;
-  }
-`;
+
 const Btn = styled.div`
   & button {
     position: absolute;
@@ -105,6 +89,8 @@ const Error = styled.div`
 `;
 
 export default function Updatepro() {
+  // 비밀번호 변경 페이지
+  // 비밀번호 변경기능을 제공한다.
   const [userinfo, setuserinfo] = useState({
     oldPassword: '',
     newPassword: '',
@@ -114,7 +100,9 @@ export default function Updatepro() {
   const handleInputValue = (key: any, e: any) => {
     setuserinfo({ ...userinfo, [key]: e.target.value });
   };
-
+  // 패스워드 변경을 클릭 시 실행되는 함수
+  // 유효성 검사 및 모든항목을 입력했는지 여부를 판단 후 서버에 userinfo를 보낸다.
+  // 서버에서 주는 에러메세지를 출력한다.
   const handleUpdatepassword = () => {
     const { oldPassword, newPassword } = userinfo;
     if (!oldPassword || !newPassword) {
@@ -123,9 +111,9 @@ export default function Updatepro() {
     setErrorMessage('');
 
     axios
-      .patch('https://localhost:8080/changepassword', userinfo)
+      .patch('https://whoseidea.ml:8080/changepassword', userinfo)
       .then(data => setErrorMessage(data.data))
-      .catch(data => setErrorMessage('비밀번호를 올바르게 입력해주세요.'));
+      .catch(() => setErrorMessage('비밀번호를 올바르게 입력해주세요.'));
   };
 
   return (
@@ -153,7 +141,8 @@ export default function Updatepro() {
             <button onClick={() => handleUpdatepassword()}>확인</button>
           </div>
         </Btn>
-        <Error>{errorMessage}</Error>
+        {/* 에러메세지가 빈문자열이라면 아무것도 출력하지 않는다. */}
+        {errorMessage === '' ? null : <Error>{errorMessage}</Error>}
       </div>
 
       {check ? <Login /> : null}

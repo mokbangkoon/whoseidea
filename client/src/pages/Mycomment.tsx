@@ -1,9 +1,7 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 
 const Title = styled.div`
   font-weight: bold;
@@ -48,7 +46,8 @@ const OnlyData = styled.div`
 `;
 
 export default function Mycomment({ commentData }: any) {
-  console.log(commentData);
+  // 댓글 페이지
+  // commentData를 이용해서 내가 쓴 댓글을 볼 수 있음
   const check = useSelector((state: RootState) => state.modal.check);
   return (
     <div>

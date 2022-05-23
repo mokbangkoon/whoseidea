@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import styled from 'styled-components';
@@ -24,7 +24,7 @@ const Title = styled.div`
 const Input1 = styled.div`
   position: absolute;
   top: 30%;
-  left: 37%;
+  left: 40%;
   & input {
     width: 300px;
     height: 50px;
@@ -41,7 +41,7 @@ const Input1 = styled.div`
 const Btn = styled.div`
   & button {
     position: absolute;
-    top: 40%;
+    top: 42%;
     left: 37%;
     border-radius: 1rem;
     width: 10%;
@@ -174,6 +174,8 @@ const ErrorM = styled.div`
 `;
 
 export default function Updatepro() {
+  // 회원정보 수정 페이지
+  // 반응형 웹 구현 : 최소 너비가 768px 아래면 반응형 웹 실행
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
@@ -189,17 +191,18 @@ export default function Updatepro() {
     setuserinfo({ ...userinfo, [key]: e.target.value });
   };
 
+  // 닉네임 변경 기능
   const handleUpdatepro = () => {
     const { nickname } = userinfo;
     if (!nickname) {
       return setErrorMessage('모든 항목은 필수입니다');
     }
     setErrorMessage('');
-
+    // 닉네임 유효성 검사 후 존재하면 에러메세지 출력
     axios
-      .patch('https://localhost:8080/user', userinfo)
+      .patch('https://whoseidea.ml:8080/user', userinfo)
       .then(data => setErrorMessage(data.data))
-      .catch(data => setErrorMessage('닉네임이 이미 존재합니다.'));
+      .catch(() => setErrorMessage('닉네임이 이미 존재합니다.'));
   };
 
   return (
@@ -232,7 +235,7 @@ export default function Updatepro() {
                 </div>
               </Btn2>
             )}
-            <Error>{errorMessage}</Error>
+            {errorMessage === '' ? null : <Error>{errorMessage}</Error>}
           </div>
         </div>
       ) : (
@@ -262,7 +265,7 @@ export default function Updatepro() {
                 </div>
               </Btn2M>
             )}
-            <ErrorM>{errorMessage}</ErrorM>
+            {errorMessage === '' ? null : <ErrorM>{errorMessage}</ErrorM>}
           </div>
         </div>
       )}

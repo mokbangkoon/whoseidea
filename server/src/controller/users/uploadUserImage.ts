@@ -1,5 +1,5 @@
 import { isAuthorized } from '../tokenFunctions'
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../db'
 
 export async function uploadUserImage(req: any, res: any) {
     // 인자가 없으면 오류 처리
@@ -11,7 +11,6 @@ export async function uploadUserImage(req: any, res: any) {
         return res.status(405).send('Mismatched Cookies')
     
     try {
-        const prisma = new PrismaClient()
         await prisma.users.updateMany({
             where: {
                 nickname:req.query.nickname as any

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
@@ -30,11 +30,10 @@ const Right = styled.div`
   top: 8%;
   bottom: 0%;
   background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.2),
-      rgba(255, 255, 255, 0.2)
-    ),
-    url(.jpg);
+    0deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.2)
+  );
 `;
 const Left = styled.div`
   position: absolute;
@@ -230,6 +229,9 @@ const Error = styled.div`
 `;
 
 function Signup() {
+  // 회원가입 페이지
+  // 닉네임, 이메일 유효성 검사 기능 제공
+  // 패스워드 일치, 불일치 여부 제공
   const navigate = useNavigate();
   const check = useSelector((state: RootState) => state.modal.check);
   const signup = useSelector((state: RootState) => state.signup);
@@ -250,6 +252,7 @@ function Signup() {
   const handleSignupValue = (key: string, event: any) => {
     dispatch(signupdata({ [key]: event.target.value }));
   };
+  // 이메일 유효성 검사
   const emailCheck = () => {
     if (!signup.email) {
       dispatch(emailmessage({ emailmessage: '이메일을 입력해주세요.' }));
@@ -257,12 +260,13 @@ function Signup() {
       dispatch(emailmessage({ emailmessage: '' }));
     }
     return axios
-      .get('https://localhost:8080/emailduplication', { params: signup })
+      .get('https://whoseidea.ml:8080/emailduplication', { params: signup })
       .then(data => alert(data.data))
-      .catch(error =>
+      .catch(() =>
         dispatch(emailmessage({ emailmessage: '이메일이 이미 존재합니다.' }))
       );
   };
+  // 닉네임 유효성 검사
   const nicknameCheck = () => {
     if (!signup.nickname) {
       dispatch(nicknamemessage({ nicknamemessage: '닉네임을 입력해주세요.' }));
@@ -271,16 +275,19 @@ function Signup() {
     }
 
     return axios
-      .get('https://localhost:8080/nicknameduplication', { params: signup })
+      .get('https://whoseidea.ml:8080/nicknameduplication', { params: signup })
       .then(data => alert(data.data))
-      .catch(error =>
+      .catch(() =>
         dispatch(
           nicknamemessage({ nicknamemessage: '닉네임이 이미 존재합니다.' })
         )
       );
   };
+  // 회원가입 누를 시 빈항목 있으면 에러메세지 출력
+  // 회원가입 성공, 실패시 alert메세지 출력
+  // 에러발생 시 회원가입실패 메세지 출력
   const handleSignup = () => {
-    if (!signup.password || !signup.email || signup.nickname) {
+    if (!signup.password || !signup.email || !signup.nickname) {
       dispatch(
         passwordmessage({ passwordmessage: '모든 항목을 입력해주세요.' })
       );
@@ -288,17 +295,19 @@ function Signup() {
       dispatch(passwordmessage({ passwordmessage: '' }));
     }
     return axios
-      .post('https://localhost:8080/signup', signup)
+      .post('https://whoseidea.ml:8080/signup', signup)
       .then(data => {
         data.status === 200 ? alert('회원가입 완료') : alert('회원가입 실패');
       })
       .then(() => navigate('/'))
-      .catch(error =>
+      .catch(() =>
         dispatch(
           passwordmessage({ passwordmessage: '회원가입이 실패했습니다.' })
         )
       );
   };
+  // 비밀번호 유효성 검사
+  // 두 비밀번호가 서로 일치하는지 여부 검사
   const checkpassword = (event: any) => {
     if (event.target.value !== password) {
       dispatch(
@@ -308,7 +317,7 @@ function Signup() {
       dispatch(passwordmessage({ passwordmessage: '' }));
     }
   };
-
+  // Modal창 검사
   useEffect(() => {
     checkedModal();
   }, []);

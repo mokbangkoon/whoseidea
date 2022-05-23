@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../db'
 import { Request, Response } from 'express'
 
 export async function getPostPage(req: Request, res: Response) {
@@ -15,8 +15,6 @@ export async function getPostPage(req: Request, res: Response) {
     // 인자가 숫자 0 이하면 오류 처리
     if (page <= 0)
         return res.status(406).send('page is zero or less.')
-
-    const prisma = new PrismaClient()
 
     const posts = await prisma.posts.findMany({
         skip: (page - 1) * 9,

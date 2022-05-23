@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import styled from 'styled-components';
@@ -27,11 +27,10 @@ const Right = styled.div`
   top: 8%;
   bottom: 0%;
   background: linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.2),
-      rgba(255, 255, 255, 0.2)
-    ),
-    url(.jpg);
+    0deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.2)
+  );
 `;
 const Left = styled.div`
   position: absolute;
@@ -153,44 +152,57 @@ export default function Mypage({
   handleMycomment,
   handleMychat,
 }: any) {
+  // 마이 페이지
+  // props로 들어오는 함수들은 나의 포스트, 나의 댓글, 쪽지 보관함에 관련된 함수
+  // 프로필 수정, 개인정보 수정, 회원탈퇴 , 나의 댓글보기, 나의 포스트보기, 쪽지 보관함 기능 제공
   const isgooglelogin = useSelector(
     (state: RootState) => state.isgooglelogin.isgooglelogin
   );
   const check = useSelector((state: RootState) => state.modal.check);
-  const login = useSelector((state: RootState) => state.login);
+
   const [selectedFile, setselectedFile] = useState('');
   const [filename, setfilename] = useState('');
   const [nickname, setnickname] = useState('');
   const [profile, setprofile] = useState('');
+  // 반응형 웹 구현 : 최소 너비가 768px 아래로 가면 반응형 웹 실행
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
 
+  // 권한 요청을 통해서 사용자의 닉네임과 프로필을 세팅
   useEffect(() => {
-    axios.get('https://localhost:8080/auth').then(data => {
+    axios.get('https://whoseidea.ml:8080/auth').then(data => {
       setnickname(data.data.nickname);
       setprofile(data.data.profile);
     });
   }, []);
 
+  // 파일 선택시 나오는 이벤트를 제어해서 파일과 파일이름을 set함
   const handleFileInput = (event: any) => {
     setselectedFile(event.target.files[0]);
     setfilename(event.target.files[0].name);
   };
+  // 파일을 서버에 axios로 보낸다.
+  // 선택된 이미지파일을 formData에 넣어서 서버에 보낸다.
   const handlePost = () => {
     const formData = new FormData();
     formData.append('file', selectedFile);
     axios
-      .patch(`https://localhost:8080/user/image?nickname=${nickname}`, formData)
+      .patch(
+        `https://whoseidea.ml:8080/user/image?nickname=${nickname}`,
+        formData
+      )
       .then(res => {
         handleUserProfile();
         alert('프로필 변경 성공');
       });
   };
 
+  // 서버에 닉네임을 함께 보내면 해당 프로필 사진의 url이 온다.
+  // 그걸로 profile을 수정한다.
   const handleUserProfile = () => {
     axios
-      .get(`https://localhost:8080/user?nickname=${nickname}`)
+      .get(`https://whoseidea.ml:8080/user?nickname=${nickname}`)
       .then(data => setprofile(data.data.profile));
   };
 

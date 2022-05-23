@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 const All = styled.div`
-  background-color: #292927;
-  height: 100vh;
+  background-color: #f0ffff;
+  height: 200vw;
   align-items: center;
   margin-top: 12%;
 `;
 const Member = styled.div`
-  color: #f7f3f3;
+  color: #6d0202;
   font-weight: bold;
   position: absolute;
-  align-items: center;
-  top: 350%;
+  top: 300%;
   left: 60%;
   & img {
     position: relative;
@@ -21,7 +19,7 @@ const Member = styled.div`
     right: 10px;
   }
   a {
-    color: pink;
+    color: #1d1c1c;
     text-decoration: none;
   }
 `;
@@ -30,7 +28,7 @@ const Logo = styled.div`
     width: 400px;
     height: 400px;
     position: absolute;
-    top: 340%;
+    top: 300%;
     left: 20%;
   }
 `;
@@ -45,7 +43,7 @@ const LogoM = styled.div`
   }
 `;
 const MemberM = styled.div`
-  color: white;
+  color: #eb6666;
   font-weight: bold;
   position: absolute;
   top: 220%;
@@ -57,86 +55,81 @@ const MemberM = styled.div`
     right: 10px;
   }
   a {
-    color: pink;
+    color: #f37c90;
     text-decoration: none;
   }
 `;
 
-const MobileContainer = styled.div`
-  position: absolute;
-  top: 180%;
-`;
 export default function Footer() {
+  // 반응형 웹 부분 : 최소 너비가 768px아래로 가면 반응형웹 시작.
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
   return (
     <div>
       <All>
-        <div className="footer-container">
-          <div className="footer">footer</div>
-          {isPc ? (
-            <div>
-              <Logo>
-                <img src="favicon.ico"></img>
-              </Logo>
-              <Member>
-                <h1>Frontend</h1>
-                <a href="https://github.com/mokbangkoon">
+        {/* isPc가 true이면 데스크톱화면 , false이면 모바일 화면 */}
+        {isPc ? (
+          <div>
+            <Logo>
+              <img src="favicon.ico"></img>
+            </Logo>
+            <Member>
+              <h1>Client</h1>
+              <a href="https://github.com/mokbangkoon">
+                <img src="깃헙로고.png" />
+                <span>차진성</span>
+              </a>
+              <div>
+                <a href="https://github.com/haheon">
                   <img src="깃헙로고.png" />
-                  <span>차진성</span>
+                  <span>전하헌</span>
                 </a>
-                <div>
-                  <a href="https://github.com/haheon">
-                    <img src="깃헙로고.png" />
-                    <span>전하헌</span>
-                  </a>
-                </div>
-                <h1>Backend</h1>
-                <a href="https://github.com/chunwoolee-work">
+              </div>
+              <h1>Backend</h1>
+              <a href="https://github.com/chunwoolee-work">
+                <img src="깃헙로고.png" />
+                <span>이춘우</span>
+              </a>
+              <div>
+                <a href="https://github.com/Mizulatte">
                   <img src="깃헙로고.png" />
-                  <span>이춘우</span>
+                  <span>김주원</span>
                 </a>
-                <div>
-                  <a href="https://github.com/Mizulatte">
-                    <img src="깃헙로고.png" />
-                    <span>김주원</span>
-                  </a>
-                </div>
-              </Member>
-            </div>
-          ) : (
-            <div>
-              <LogoM>
-                <img src="favicon.ico"></img>
-              </LogoM>
-              <MemberM>
-                <h1>Frontend</h1>
-                <a href="https://github.com/mokbangkoon">
+              </div>
+            </Member>
+          </div>
+        ) : (
+          <div>
+            <LogoM>
+              <img src="favicon.ico"></img>
+            </LogoM>
+            <MemberM>
+              <h1>Client</h1>
+              <a href="https://github.com/mokbangkoon">
+                <img src="깃헙로고.png" />
+                <span>차진성</span>
+              </a>
+              <div>
+                <a href="https://github.com/haheon">
                   <img src="깃헙로고.png" />
-                  <span>차진성</span>
+                  <span>전하헌</span>
                 </a>
-                <div>
-                  <a href="https://github.com/haheon">
-                    <img src="깃헙로고.png" />
-                    <span>전하헌</span>
-                  </a>
-                </div>
-                <h1>Backend</h1>
-                <a href="https://github.com/chunwoolee-work">
+              </div>
+              <h1>Backend</h1>
+              <a href="https://github.com/chunwoolee-work">
+                <img src="깃헙로고.png" />
+                <span>이춘우</span>
+              </a>
+              <div>
+                <a href="https://github.com/Mizulatte">
                   <img src="깃헙로고.png" />
-                  <span>이춘우</span>
+                  <span>김주원</span>
                 </a>
-                <div>
-                  <a href="https://github.com/Mizulatte">
-                    <img src="깃헙로고.png" />
-                    <span>김주원</span>
-                  </a>
-                </div>
-              </MemberM>
-            </div>
-          )}
-        </div>
+              </div>
+            </MemberM>
+          </div>
+        )}
       </All>
     </div>
   );

@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client'
+import { prisma } from '../db'
 import { isAuthorized } from '../tokenFunctions'
 import { Request, Response } from 'express'
 
@@ -6,8 +6,6 @@ export async function getMessage(req: Request, res: Response) {
 
     if (!isAuthorized(req))
         return res.status(405).send('Mismatched Cookies')
-
-    const prisma = new PrismaClient()
 
     // 내 정보 가져오기
     const tokenInfo:any = isAuthorized(req)

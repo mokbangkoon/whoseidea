@@ -88,29 +88,33 @@ export default function Login({
   const login = useSelector((state: RootState) => state.login);
   const error = useSelector((state: RootState) => state.error.errormessage);
   const dispatch = useDispatch();
+  // key와 event가 들어오면 로그인데이터에 객체로 집어넣기
   const handleInputValue = (key: string, event: any) => {
     dispatch(logindata({ [key]: event.target.value }));
   };
+  // 에러메세지 핸들링하는 함수
   const handleErrorMessage = (message: string) => {
     dispatch(errormessage({ errormessage: message }));
   };
+  // 로그인 버튼 클릭시 실행되는 함수
   const handleLogin = () => {
     if (!login.email || !login.password) {
       handleErrorMessage('아이디와 비밀번호를 다시 입력해주세요.');
     } else {
       handleErrorMessage('');
     }
+    // axios로 객체로 만든 로그인데이터를 보내서 에러핸들링까지 하는 작업
     return axios
-      .post('https://localhost:8080/login', login)
+      .post('https://whoseidea.ml:8080/login', login)
       .then(data => {
         handleErrorMessage(data.data.message);
         handleResponseSuccess();
       })
-      .then(data => {
+      .then(() => {
         handleModal();
         handleErrorMessage('');
       })
-      .catch(data => handleErrorMessage('잘못된 사용자 정보입니다.'));
+      .catch(() => handleErrorMessage('잘못된 사용자 정보입니다.'));
   };
   // 각 액션들을 디스패치하는 함수들을 만들어줍니다
   const handleModal = () => {

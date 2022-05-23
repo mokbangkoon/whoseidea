@@ -5,8 +5,6 @@ import { RootState } from '../modules';
 import { openModal } from '../modules/modal';
 import { Link } from 'react-router-dom';
 import Googlelogout from './Googlelogout';
-import { useNavigate } from 'react-router-dom';
-import { islogin } from '../modules/islogin';
 
 const Sidebar = styled.div`
   display: flex;
@@ -14,12 +12,9 @@ const Sidebar = styled.div`
   background-color: #ffff;
   color: black;
   font-weight: semi-bold;
-  font-size: 30px;
+  font-size: 40px;
   text-decoration: none;
   align-items: center;
-  font-family: 'Hahmlet', serif;
-  font-family: 'IBM Plex Sans KR', sans-serif;
-  font-family: 'Roboto Condensed', sans-serif;
 `;
 const Button = styled.div`
   .home {
@@ -28,7 +23,8 @@ const Button = styled.div`
   }
   border-radius: 1rem;
   :hover {
-    background-color: white;
+    background-color: #f1f186;
+    color: black;
     transition: 0.5s;
     cursor: pointer;
   }
@@ -45,13 +41,15 @@ export default function Headerbar({ handleLogout }: any): React.ReactElement {
   const isgooglelogin = useSelector(
     (state: RootState) => state.isgooglelogin.isgooglelogin
   );
-  const navigate = useNavigate();
+
   const check = useSelector((state: RootState) => state.modal.check);
   const dispatch = useDispatch(); // 디스패치 함수를 가져옵니다
   // 각 액션들을 디스패치하는 함수들을 만들어줍니다
   const handleModal = () => {
     dispatch(openModal());
   };
+  // Modal창을 체크해서 페이지가 바뀌면 안나오는 함수
+  // 로그인이 안되있으면 페이지이동불가
   const checkedModal = () => {
     check ? dispatch(openModal()) : null;
     isgooglelogin || islogincheck ? null : alert('로그인을 먼저 해주세요');
@@ -66,6 +64,7 @@ export default function Headerbar({ handleLogout }: any): React.ReactElement {
         </Link>
       </Button>
       <Button>
+        {/* 구글로그인이나 일반로그인이 안되있으면 눌러도 메인으로 돌아옴 */}
         {isgooglelogin || islogincheck ? (
           <Link to="/rank" className="link">
             <div onClick={checkedModal}>Ranking</div>
@@ -94,7 +93,7 @@ export default function Headerbar({ handleLogout }: any): React.ReactElement {
           </Link>
         </Button>
       ) : null}
-
+      {/* 일반로그인이 되면 로그아웃버튼이 나오고 구글로그인이 되면 구글로그아웃 버튼이 나옴 */}
       <Button>
         {isgooglelogin ? (
           <Googlelogout />
