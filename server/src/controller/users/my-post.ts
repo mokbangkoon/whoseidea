@@ -26,8 +26,13 @@ export async function myPost(req: Request, res: Response) {
     // 검색 결과가 없으면 빈 배열 보냄
     if(!posts)
         return res.status(200).json([])
+    interface NicknameAndPosts {
+        nickname: string,
+        caption: string,
+        id: number
+    }
 
-    const nicknameAndPosts: any[] = []
+    const nicknameAndPosts: NicknameAndPosts[] = []
     for(let item of posts){
         const nickname = await prisma.users.findFirst({
             where:{
@@ -35,7 +40,7 @@ export async function myPost(req: Request, res: Response) {
             }
         })
         nicknameAndPosts.push({
-            nickname: nickname?.nickname,
+            nickname: nickname?.nickname || '',
             caption: item.caption,
             id: item.id
         })

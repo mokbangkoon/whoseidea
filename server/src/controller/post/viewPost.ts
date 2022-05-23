@@ -46,14 +46,25 @@ export async function viewPost(req: Request, res: Response) {
         }
     })
 
-    const nicknameAndViewPosts: any[] = []
+    interface NicknameAndViewPosts {
+        nickname: string,
+        id: number,
+        caption: string,
+        file: number,
+        likes: number,
+        view: number,
+        context: string,
+        created_at: Date,
+    }
+
+    const nicknameAndViewPosts: NicknameAndViewPosts[] = []
     const nickname = await prisma.users.findFirst({
         where: {
             id: post.nickname || undefined
         }
     })
     nicknameAndViewPosts.push({
-        nickname: nickname?.nickname,
+        nickname: nickname?.nickname || '',
         id: post.id,
         caption: post.caption,
         file: post.file,
