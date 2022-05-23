@@ -7,6 +7,15 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
+const Header = styled.div`
+  position: absolute;
+  width: 900px;
+  height: 300px;
+  left: 270px;
+  top: 190px;
+  background: url(header.png), #ffffff;
+  border-radius: 20px;
+`;
 const Title = styled.div`
   font-weight: bold;
   font-size: 30px;
@@ -191,6 +200,7 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
       <div>{check ? <Login /> : null}</div>
       <div>{id}번째 아이디어</div>
       <div>
+        <Header></Header>
         <Title>
           <h1>{caption}</h1>
         </Title>
