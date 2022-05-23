@@ -2,7 +2,7 @@ import { deprecated, ActionType, createReducer } from 'typesafe-actions';
 const { createStandardAction } = deprecated;
 
 const IDEALIST = 'idea/idealistdata';
-
+// 아이디어리스트에 필요한 데이터를 state로 관리
 export const idealistdata = createStandardAction(IDEALIST)<object>();
 
 const actions = { idealistdata };

@@ -51,6 +51,9 @@ const OnlyData = styled.div`
 `;
 
 export default function Mypost({ postData }: any) {
+  // 나의 포스트보기 페이지
+  // postData를 이용해서 내가 쓴 게시글을 map으로 뿌려서 볼 수 있다.
+  // 클릭 시 해당 게시글 페이지로 이동한다.
   const check = useSelector((state: RootState) => state.modal.check);
   return (
     <div>

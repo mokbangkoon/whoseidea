@@ -173,6 +173,8 @@ const ErrorM = styled.div`
 `;
 
 export default function Signout() {
+  // 회원탈퇴 기능
+  // 반응형 웹 구현 : 최소 너비가 768px 아래로 가면 반응형 웹 실행
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
@@ -184,9 +186,11 @@ export default function Signout() {
   });
   const [errorMessage, setErrorMessage] = useState('');
   const check = useSelector((state: RootState) => state.modal.check);
+  // userinfo에 쓰이는 데이터를 객체로 생성
   const handleInputValue = (key: any, e: any) => {
     setuserinfo({ ...userinfo, [key]: e.target.value });
   };
+  // 이메일과 패스워드를 입력받아 회원탈퇴 버튼 누르면 실행되는 함수
   const handleSignout = () => {
     const { email, password } = userinfo;
     if (!email || !password) {
@@ -194,7 +198,8 @@ export default function Signout() {
     }
     setErrorMessage('');
     const params = { data: userinfo };
-
+    // 회원탈퇴 성공 시 서버에서 받아온 메세지 출력
+    // 실패 시 에러메세지 출력
     axios
       .delete('https://whoseidea.ml:8080/signout', params)
       .then(data => alert(data.data))

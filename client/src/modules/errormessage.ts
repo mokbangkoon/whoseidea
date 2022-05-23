@@ -1,6 +1,6 @@
 import { deprecated, ActionType, createReducer } from 'typesafe-actions';
 const { createStandardAction } = deprecated;
-
+// 에러메세지 핸들링 -> 유효성 검사에 사용
 const ERRORMESSAGE = 'error/errormessage';
 const EMAILCHECK = 'error/emailcheck';
 const PASSWORDCHECK = 'error/passwordcheck';

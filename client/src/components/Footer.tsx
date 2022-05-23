@@ -61,12 +61,14 @@ const MemberM = styled.div`
 `;
 
 export default function Footer() {
+  // 반응형 웹 부분 : 최소 너비가 768px아래로 가면 반응형웹 시작.
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
   return (
     <div>
       <All>
+        {/* isPc가 true이면 데스크톱화면 , false이면 모바일 화면 */}
         {isPc ? (
           <div>
             <Logo>
