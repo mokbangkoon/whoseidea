@@ -65,6 +65,8 @@ const Container = styled.div`
 `;
 
 export default function Mychat({ chatData, handleToView }: any) {
+  // 쪽지 페이지
+  // chatdata를 통해서 보낸사람, 내용, 답장하기 기능 제공
   const check = useSelector((state: RootState) => state.modal.check);
   const reverse = (data: any) => {
     handleToView({ nickname: data });

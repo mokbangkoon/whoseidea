@@ -131,6 +131,9 @@ const Commentdata = styled.div`
 `;
 
 export default function IdeaView({ handleIdeaView, usernickname }: any) {
+  // 아이디어 뷰 페이지
+  // 좋아요, 조회수, 쪽지 기능 , 댓글 기능 제공
+  // params에 몇번째 아이디어인지 넘겨받음.
   const { id } = useParams();
   const check = useSelector((state: RootState) => state.modal.check);
   const [isHeart, setisHeart] = useState(false);
@@ -146,6 +149,7 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
   });
   const [allComment, setallComment] = useState<any[]>([]);
 
+  // useEffect로 서버에서 받아온 데이터들을 세팅한다.
   useEffect(() => {
     axios.get(`https://whoseidea.ml:8080/post/view?postId=${id}`).then(data => {
       setView(data.data.data[0].view);
@@ -164,16 +168,18 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
       .get(`https://whoseidea.ml:8080/post/image?postId=${id}`)
       .then(data => setUrl(data.data[0]));
   }, []);
-
+  // 글쓴이 고정시키기
   const handleWriter = () => {
     handleIdeaView(usernickname);
   };
+  // 좋아요 기능 제어
   const handleHeart = () => {
     setisHeart(!isHeart);
     axios
       .patch('https://whoseidea.ml:8080/like', { postId: Number(id) })
       .then(data => setLikes(data.data.likes));
   };
+  // 댓글 기능 제어
   const handleComment = () => {
     axios
       .post('https://whoseidea.ml:8080/comment', userinfo)
@@ -183,6 +189,7 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
           .then(data => setallComment(data.data))
       );
   };
+  // userinfo를 객체로 입력받음.
   const handleInputValue = (key: any, e: any) => {
     setuserinfo({ ...userinfo, postId: Number(id), [key]: e.target.value });
   };
@@ -244,11 +251,10 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
                 {allComment.map(el => (
                   <div>
                     <CommentWriter>
-                      {' '}
-                      <div>{el.nickname}</div>{' '}
+                      <div>{el.nickname}</div>
                     </CommentWriter>
                     <Commentdata>
-                      <div>{el.text}</div>{' '}
+                      <div>{el.text}</div>
                     </Commentdata>
                   </div>
                 ))}

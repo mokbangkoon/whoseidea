@@ -237,6 +237,12 @@ export default function Main({
   const TOTAL_SLIDES = 2;
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideRef = useRef<HTMLDivElement>(null);
+  // 슬라이드 기능 제어
+  // 총 슬라이드는 0,1,2 로 3개이다.
+  // currentSlide는 0부터 시작
+  // next 버튼 누를 시 다음 슬라이드로 이동
+  // prev 버튼 누를 시 이전 슬라이드로 이동
+  // 3번째 슬라이드에서 next누를 시 처음으로 돌아옴
   const nextSlide = () => {
     if (currentSlide >= TOTAL_SLIDES) {
       // 더 이상 넘어갈 슬라이드가 없으면 슬라이드를 초기화합니다.
@@ -252,13 +258,16 @@ export default function Main({
       setCurrentSlide(currentSlide - 1);
     }
   };
+  // 반응형 웹 부분 : 최소 너비가 768px 아래로 가면 반응형 웹 실행
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
+  // 로그인 알람 부분
   const loginalert = () => {
     alert('로그인을 먼저 해주세요!');
   };
   const check = useSelector((state: RootState) => state.modal.check);
+  // currentSlide가 변할 때마다 슬라이드 애니메이션 효과 실행
   useEffect(() => {
     slideRef.current!.style.transition = 'all 0.5s ease-in-out';
     slideRef.current!.style.transform = `translateX(-${currentSlide}00%)`; // 백틱을 사용하여 슬라이드로 이동하는 애니메이션을 만듭니다.

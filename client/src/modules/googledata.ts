@@ -1,6 +1,6 @@
 import { deprecated, ActionType, createReducer } from 'typesafe-actions';
 const { createStandardAction } = deprecated;
-
+// 객체로 서버에 전달할 구글데이터를 생성
 const GOOGLEDATA = 'google/googledata';
 
 export const googledata = createStandardAction(GOOGLEDATA)<object>();
