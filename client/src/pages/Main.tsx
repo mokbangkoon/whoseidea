@@ -9,11 +9,17 @@ import { useState, useRef, useEffect } from 'react';
 import Slide from '../components/Slidebar';
 import { useMediaQuery } from 'react-responsive';
 import Footer from '../components/Footer';
+import FeatureChat from '../components/FeatureChat';
+import FeatureIdea from '../components/FeatureIdea';
 axios.defaults.withCredentials = true;
 
 const All = styled.div`
   background-color: #fffafa;
   height: 200vw;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 100px;
+  border: 0;
 `;
 
 const MainStyle = styled.div`
@@ -21,17 +27,20 @@ const MainStyle = styled.div`
   font-weight: bold;
   text-align: center;
   display: flex;
-
-  height: 10%;
+  height: 15%;
   width: 100%;
   position: relative;
-  left: 10%;
+  justify-content: center;
+
   top: 2%;
   font-size: 1rem;
   border-radius: 1rem;
   grid-column-gap: 2rem;
 `;
 const Title = styled.div`
+  position: relative;
+  overflow: hidden;
+  display: flex;
   background-image: url('mainimg6.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -47,16 +56,15 @@ const Title = styled.div`
   color: #2c2222;
   position: relative;
   line-height: 100px;
-  .head-container .head-text {
-    font-size: 60px;
-    color: #2c2222;
-    margin-left: 30%;
-    margin-top: 30%;
-    text-shadow: 2px 2px 6px white;
+  align-items: center;
+  flex-direction: column;
+  h1 {
+    padding: 100px;
+    font-size: 100px;
   }
 `;
 const First = styled.div`
-  border: 3px solid red;
+  border: 3px solid black;
 
   border-radius: 1rem;
   color: white;
@@ -70,7 +78,7 @@ const First = styled.div`
   }
 `;
 const Second = styled.div`
-  border: 3px solid blue;
+  border: 3px solid none;
   border-radius: 1rem;
   color: #ffffff;
   background-image: url('햇빛.jpg');
@@ -83,35 +91,63 @@ const Second = styled.div`
   }
 `;
 const Third = styled.div`
-  border: 3px solid orange;
+  border: 3px solid none;
   border-radius: 1rem;
   color: #0f1a11;
   background-image: url('공유.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: -200px 0px;
+
   :hover {
     transform: scale(1.2, 1.2);
     transition: 0.5s;
     background-color: blue;
   }
 `;
-const PositionContainer = styled.div`
-  position: absolute;
-  top: 210%;
-  left: 10%;
-  background-repeat: no-repeat;
-`;
 const Container = styled.div`
+  position: relative;
+  top: 50px;
+  display: flex;
+  width: 100%;
+  background-color: #ffffff;
+`;
+const PositionContainer = styled.div`
+  position: relative;
+  background-repeat: no-repeat;
+  padding: 50px;
   width: 60%;
   overflow: hidden; // 선을 넘어간 이미지들은 보이지 않도록 처리합니다.
 `;
-const Button = styled.button`
-  all: unset;
+
+const Next = styled.button`
+  position: absolute;
+  top: 50%;
+  left: 86%;
+
+  border: 1px solid coral;
+  font-weight: bold;
+  padding: 0.5em 2em;
+  color: coral;
+
+  border-radius: 10px;
+  background-color: black;
+  &:hover {
+    transition: all 0.3s ease-in-out;
+    background-color: coral;
+    color: #fff;
+  }
+`;
+const Prev = styled.button`
+  position: absolute;
+  top: 50%;
+
   border: 1px solid coral;
   padding: 0.5em 2em;
   color: coral;
   border-radius: 10px;
   background-color: black;
+  font-weight: bold;
   &:hover {
     transition: all 0.3s ease-in-out;
     background-color: coral;
@@ -123,17 +159,16 @@ const SliderContainer = styled.div`
   display: flex; //이미지들을 가로로 나열합니다.
 `;
 const TextContainer = styled.div`
-  position: absolute;
-  top: 208%;
-  left: 65%;
+  position: relative;
   background-color: #000000;
-  width: 25%;
-  height: 70%;
+  border-radius: 1rem;
+  left: 2%;
+  top: 50px;
+  height: 550px;
   color: white;
   font-weight: bold;
   font-size: x-large;
-  margin: 10px;
-  padding: 10px;
+
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande',
     'Lucida Sans', Arial, sans-serif;
   text-shadow: 2px 2px 0px #bdbdbd;
@@ -141,6 +176,7 @@ const TextContainer = styled.div`
     position: relative;
     left: 10%;
     width: 70%;
+    top: 10%;
     height: 100px;
     border-radius: 1rem;
     font-size: xx-large;
@@ -152,6 +188,22 @@ const TextContainer = styled.div`
       cursor: pointer;
     }
   }
+`;
+const IdeaContainer = styled.div`
+  background-color: #aaa2a2;
+  border-radius: 1rem;
+  font-weight: bold;
+  display: flex;
+  position: relative;
+  top: 6%;
+`;
+const ChatContainer = styled.div`
+  background-color: #9ca19c;
+  border-radius: 1rem;
+  font-weight: bold;
+  display: flex;
+  position: relative;
+  top: 3%;
 `;
 const MobileContainer = styled.div`
   position: absolute;
@@ -277,16 +329,9 @@ export default function Main({
       {isPc ? (
         <All>
           <Title>
-            <div className="head-container">
-              <div className="head-text">
-                <h1>Whose idea?</h1>
-              </div>
-            </div>
-            <div className="head-container">
-              <div className="head-text1">
-                <h1>share your idea with the world</h1>
-              </div>
-            </div>
+            <h1>Whose idea?</h1>
+
+            <p>share your idea with the world</p>
           </Title>
           <MainStyle>
             <First>
@@ -310,66 +355,72 @@ export default function Main({
               </p>
             </Third>
           </MainStyle>
-          <PositionContainer>
-            <Container>
+          <Container>
+            <PositionContainer>
               <SliderContainer ref={slideRef}>
                 <Slide img={'전구카피.png'} />
                 <Slide img={'랭킹카피.png'} />
                 <Slide img={'독창적인아이디어.png'} />
               </SliderContainer>
-              <Button onClick={prevSlide}>Prev</Button>
-              <Button onClick={nextSlide}>Next</Button>
-            </Container>
-          </PositionContainer>
-          {currentSlide === 0 ? (
-            <TextContainer>
-              <h2>갑자기 생각난 독특한 아이디어가 있으신가요?</h2>
-              <ul>당신도 최고의 아이디어가 될 수 있습니다!</ul>
-              <ul>하나밖에 없는 당신의 아이디어를 써보세요!</ul>
-              {isgooglelogin || islogincheck ? (
-                <Link to="/idealist">
-                  <button>시작하기</button>
-                </Link>
-              ) : (
-                <Link to="/">
-                  <button onClick={loginalert}>시작하기</button>
-                </Link>
-              )}
-            </TextContainer>
-          ) : null}
-          {currentSlide === 1 ? (
-            <TextContainer>
-              <h2>최고의 아이디어를 보고 싶으신가요?</h2>
-              <ul>가장 인기있는 아이디어를 볼 수 있습니다!</ul>
-              <ul>유저들의 기발한 아이디어를 구경해보세요!</ul>
-              {isgooglelogin || islogincheck ? (
-                <Link to="/rank">
-                  <button>구경하기</button>
-                </Link>
-              ) : (
-                <Link to="/">
-                  <button onClick={loginalert}>구경하기</button>
-                </Link>
-              )}
-            </TextContainer>
-          ) : null}
-          {currentSlide === 2 ? (
-            <TextContainer>
-              <h2>아이디어를 활용하고 싶으신가요?</h2>
-              <ul>해당 유저에게 쪽지를 보내보세요!</ul>
-              <ul>당신의 쪽지를 수많은 사람들이 기다립니다!</ul>
-              <ul>일단 아이디어를 구경하러 가볼까요?</ul>
-              {isgooglelogin || islogincheck ? (
-                <Link to="/idealist">
-                  <button>구경하기</button>
-                </Link>
-              ) : (
-                <Link to="/">
-                  <button onClick={loginalert}>구경하기</button>
-                </Link>
-              )}
-            </TextContainer>
-          ) : null}
+              <Prev onClick={prevSlide}>{'⇦'}</Prev>
+              <Next onClick={nextSlide}>{'⇨'}</Next>
+            </PositionContainer>
+            {currentSlide === 0 ? (
+              <TextContainer>
+                <h2>갑자기 생각난 독특한 아이디어가 있으신가요?</h2>
+                <ul>당신도 최고의 아이디어가 될 수 있습니다!</ul>
+                <ul>하나밖에 없는 당신의 아이디어를 써보세요!</ul>
+                {isgooglelogin || islogincheck ? (
+                  <Link to="/idealist">
+                    <button>시작하기</button>
+                  </Link>
+                ) : (
+                  <Link to="/">
+                    <button onClick={loginalert}>시작하기</button>
+                  </Link>
+                )}
+              </TextContainer>
+            ) : null}
+            {currentSlide === 1 ? (
+              <TextContainer>
+                <h2>최고의 아이디어를 보고 싶으신가요?</h2>
+                <ul>가장 인기있는 아이디어를 볼 수 있습니다!</ul>
+                <ul>유저들의 기발한 아이디어를 구경해보세요!</ul>
+                {isgooglelogin || islogincheck ? (
+                  <Link to="/rank">
+                    <button>구경하기</button>
+                  </Link>
+                ) : (
+                  <Link to="/">
+                    <button onClick={loginalert}>구경하기</button>
+                  </Link>
+                )}
+              </TextContainer>
+            ) : null}
+            {currentSlide === 2 ? (
+              <TextContainer>
+                <h2>아이디어를 활용하고 싶으신가요?</h2>
+                <ul>해당 유저에게 쪽지를 보내보세요!</ul>
+                <ul>당신의 쪽지를 수많은 사람들이 기다립니다!</ul>
+                <ul>일단 아이디어를 구경하러 가볼까요?</ul>
+                {isgooglelogin || islogincheck ? (
+                  <Link to="/idealist">
+                    <button>구경하기</button>
+                  </Link>
+                ) : (
+                  <Link to="/">
+                    <button onClick={loginalert}>구경하기</button>
+                  </Link>
+                )}
+              </TextContainer>
+            ) : null}
+          </Container>
+          <ChatContainer>
+            <FeatureChat />
+          </ChatContainer>
+          <IdeaContainer>
+            <FeatureIdea />
+          </IdeaContainer>
           <Footer />
           {check ? (
             <Login handleResponseSuccess={handleResponseSuccess} />
@@ -390,15 +441,13 @@ export default function Main({
             </ThirdM>
             <Line></Line>
             <PositionContainerM>
-              <Container>
-                <SliderContainer ref={slideRef}>
-                  <Slide img={'전구카피.png'} />
-                  <Slide img={'랭킹카피.png'} />
-                  <Slide img={'독창적인아이디어.png'} />
-                </SliderContainer>
-                <Button onClick={prevSlide}>Prev</Button>
-                <Button onClick={nextSlide}>Next</Button>
-              </Container>
+              <SliderContainer ref={slideRef}>
+                <Slide img={'전구카피.png'} />
+                <Slide img={'랭킹카피.png'} />
+                <Slide img={'독창적인아이디어.png'} />
+              </SliderContainer>
+              <Prev onClick={prevSlide}>Prev</Prev>
+              <Next onClick={nextSlide}>Next</Next>
             </PositionContainerM>
             {currentSlide === 0 ? (
               <MobileContainer>
