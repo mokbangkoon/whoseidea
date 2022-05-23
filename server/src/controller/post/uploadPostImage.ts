@@ -9,7 +9,7 @@ export async function uploadPostImage(req: any, res: any) {
 
     // 토큰이 맞지 않으면 오류 처리
     if(!isAuthorized(req))
-        return res.status(405).send('Mismatched Cookies')
+        return res.status(401).send('Mismatched Cookies')
     
     try {
         // postId와 url을 저장
