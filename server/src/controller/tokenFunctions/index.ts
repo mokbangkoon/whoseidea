@@ -1,17 +1,19 @@
 require('dotenv').config()
-import { sign, verify } from 'jsonwebtoken'
+import { sign, verify, VerifyCallback } from 'jsonwebtoken'
+import { Request } from 'express'
 
-export async function generateAccessToken (data: any) {
-    return await sign(data, process.env.ACCESS_SECRET as any)
+export async function generateAccessToken (data: object) {
+    return await sign(data, process.env.ACCESS_SECRET as string)
 }
-export function isAuthorized (req: any) {
+export function isAuthorized (req: Request) {
     if (!req.headers.cookie) {
         return;
     } else {
         let decodeData
-        verify(req.cookies.jwt, process.env.ACCESS_SECRET as any, (err: any, decoded: any) => {
+        const callback: VerifyCallback = (_,decoded) => {
             decodeData = decoded
-        })
+        }
+        verify(req.cookies.jwt, process.env.ACCESS_SECRET as string, callback)
         return decodeData
     }
 }
