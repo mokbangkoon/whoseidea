@@ -17,45 +17,86 @@ const Header = styled.div`
   border-radius: 20px;
 `;
 const Title = styled.div`
-  font-weight: bold;
-  font-size: 30px;
-  text-align: center;
   position: absolute;
+  width: 342px;
+  height: 60px;
+  left: 745px;
+  top: 581px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 24px;
+  /* or 80% */
+
+  display: flex;
+  align-items: center;
+
   color: #000000;
-  border-radius: 1rem;
-  left: 40%;
-  font-family: 'Courier New', Courier, monospace;
-  filter: drop-shadow(0px 4px 4px rgba(218, 105, 105, 0.25))
-    drop-shadow(4px 4px 4px rgba(56, 76, 141, 0.25))
-    drop-shadow(0px 4px 4px rgba(134, 51, 51, 0.25));
-  border-radius: 10px;
 `;
 const SubTitle = styled.div`
-  font-weight: bold;
+  box-sizing: border-box;
+
   position: absolute;
-  font-size: large;
-  left: 10%;
-  top: 30%;
-  right: 10%;
-  width: 80%;
-  height: 500px;
-  background-color: #99fcff;
+  width: 900px;
+  height: 1200px;
+  left: 270px;
+  top: 520px;
+  background: rgba(239, 240, 243, 0.6);
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  /* Note: backdrop-filter has minimal browser support */
+  border-radius: 20px;
+`;
+const ContentNickname = styled.div`
+  position: absolute;
+  width: 118px;
+  height: 32px;
+  left: 947px;
+  top: 662px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  /* or 120% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #000000;
 `;
 const Menu = styled.div`
   position: relative;
   top: -61%;
 `;
 const Writer = styled.div`
-  position: relative;
   & img {
-    width: 300px;
-    height: 300px;
+    box-sizing: border-box;
     position: absolute;
-    left: 800px;
+    width: 353px;
+    height: 606px;
+    left: 354px;
+    top: 564px;
+    background: url(.jpg), #ffffff;
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
   }
   & span {
-    position: relative;
-    top: -250px;
+    box-sizing: border-box;
+    position: absolute;
+    width: 350px;
+    height: 606px;
+    left: 736px;
+    top: 564px;
+    background: #ffffff;
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
   }
 `;
 
@@ -126,7 +167,22 @@ const Chat = styled.span`
 `;
 const Context = styled.span`
   position: absolute;
-  top: 30%;
+  width: 330px;
+  height: 381px;
+  left: 749px;
+  top: 691px;
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  /* or 120% */
+
+  display: flex;
+  align-items: center;
+
+  color: #000000;
 `;
 
 const CommentWriter = styled.div`
@@ -137,6 +193,18 @@ const CommentWriter = styled.div`
 const Commentdata = styled.div`
   color: #0f0f0f;
   font-size: 20px;
+`;
+const Commentbox = styled.div`
+  box-sizing: border-box;
+  position: absolute;
+  width: 725px;
+  height: 284px;
+  left: 356px;
+  top: 1368px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
 `;
 
 export default function IdeaView({ handleIdeaView, usernickname }: any) {
@@ -205,7 +273,9 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
           <h1>{caption}</h1>
         </Title>
         <SubTitle>
-          <div>글쓴이 : {nickname}</div>
+          <ContentNickname>
+            <div>글쓴이 : {nickname}</div>
+          </ContentNickname>
           <Writer>
             {url === undefined || url.length === 0 ? null : (
               <div>
@@ -248,23 +318,25 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
             onChange={e => handleInputValue('context', e)}
           ></input>
           <button onClick={handleComment}>댓글달기</button>
-          <div>
-            {allComment.length === 0 ? null : (
-              <div>
-                {allComment.map(el => (
-                  <div>
-                    <CommentWriter>
-                      {' '}
-                      <div>{el.nickname}</div>{' '}
-                    </CommentWriter>
-                    <Commentdata>
-                      <div>{el.text}</div>{' '}
-                    </Commentdata>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <Commentbox>
+            <div>
+              {allComment.length === 0 ? null : (
+                <div>
+                  {allComment.map(el => (
+                    <div>
+                      <CommentWriter>
+                        {' '}
+                        <div>{el.nickname}</div>{' '}
+                      </CommentWriter>
+                      <Commentdata>
+                        <div>{el.text}</div>{' '}
+                      </Commentdata>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </Commentbox>
         </Comment>
       </div>
     </div>
