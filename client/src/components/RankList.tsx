@@ -131,10 +131,12 @@ const MobileRank3 = styled.div`
 `;
 
 export default function RankList() {
+  // 최소너비가 768px이 되면 반응형 웹 실행
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
   const [rankData, setrankData] = useState<any[]>([]);
+  // useEffect로 랭크데이터를 화면에 좋아요 순으로 렌더링
   useEffect(() => {
     axios
       .get('https://whoseidea.ml:8080/post/all?limit=10&order=desc')
@@ -143,6 +145,7 @@ export default function RankList() {
 
   return (
     <div>
+      {/* isPc가 true일때 데스크톱화면, false일때 모바일 화면으로 렌더링 */}
       {isPc ? (
         <div>
           <RankContainer>

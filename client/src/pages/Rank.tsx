@@ -35,6 +35,9 @@ const TitleM = styled.div`
 `;
 
 export default function Rank() {
+  // 랭크페이지
+  // RankList를 컴포넌트로 썼음.
+  // isPc가 true일때 데스크톱화면 (랭킹 1~10등 까지 출력) , false 일때 모바일 화면 (랭킹 1~3등 까지 출력)
   const check = useSelector((state: RootState) => state.modal.check);
   const isPc = useMediaQuery({
     query: '(min-width:768px)',

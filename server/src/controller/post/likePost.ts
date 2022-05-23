@@ -6,7 +6,7 @@ export async function likePost (req: Request, res: Response) {
 
     // 쿠키가 없거나 맞지 않으면 오류 처리
     if (!isAuthorized(req)) {
-        return res.status(405).send('Mismatched Cookies')
+        return res.status(401).send('Mismatched Cookies')
     }
 
     // 닉네임으로 users 테이블에서 id값을 가져온다.

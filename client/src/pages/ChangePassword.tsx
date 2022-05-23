@@ -89,6 +89,8 @@ const Error = styled.div`
 `;
 
 export default function Updatepro() {
+  // 비밀번호 변경 페이지
+  // 비밀번호 변경기능을 제공한다.
   const [userinfo, setuserinfo] = useState({
     oldPassword: '',
     newPassword: '',
@@ -98,7 +100,9 @@ export default function Updatepro() {
   const handleInputValue = (key: any, e: any) => {
     setuserinfo({ ...userinfo, [key]: e.target.value });
   };
-
+  // 패스워드 변경을 클릭 시 실행되는 함수
+  // 유효성 검사 및 모든항목을 입력했는지 여부를 판단 후 서버에 userinfo를 보낸다.
+  // 서버에서 주는 에러메세지를 출력한다.
   const handleUpdatepassword = () => {
     const { oldPassword, newPassword } = userinfo;
     if (!oldPassword || !newPassword) {
@@ -137,7 +141,8 @@ export default function Updatepro() {
             <button onClick={() => handleUpdatepassword()}>확인</button>
           </div>
         </Btn>
-        <Error>{errorMessage}</Error>
+        {/* 에러메세지가 빈문자열이라면 아무것도 출력하지 않는다. */}
+        {errorMessage === '' ? null : <Error>{errorMessage}</Error>}
       </div>
 
       {check ? <Login /> : null}
