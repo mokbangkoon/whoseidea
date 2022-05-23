@@ -12,7 +12,7 @@ app.use(
     cors({
       origin: ['https://localhost:3000', 'https://whoseidea.ml'],
       credentials: true,
-      methods: ['GET', 'POST','PATCH','DELETE']
+      methods: ['GET','POST','PATCH','DELETE']
     })
   );
 app.use(cookieParser())
