@@ -3,7 +3,7 @@ import { isAuthorized } from "../tokenFunctions";
 import { Request, Response } from 'express'
 
 export async function updatePro (req: Request, res: Response) {
-
+    
     // 요청받은 쿠키가 잘못되거나 없는 경우 오류 처리
     if (!req.headers.cookie) {
         return res.status(401).send('no cookies')

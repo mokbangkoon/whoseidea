@@ -9,7 +9,7 @@ export async function signout(req: Request, res: Response) {
         return res.status(405).send('Mismatched Cookies')
     }
 
-    // 이메일로 users 테이블에서 이메일
+    // 이메일값과 패스워드값으로 users 테이블에서 유저정보를 가져온다
     const userInfo = await prisma.users.findFirst({
         where: {
             email: req.body.email,
