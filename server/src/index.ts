@@ -12,7 +12,7 @@ app.use(
     cors({
       origin: ['https://localhost:3000', 'https://whoseidea.ml'],
       credentials: true,
-      methods: ['GET', 'POST','PATCH','DELETE']
+      methods: ['GET','POST','PATCH','DELETE']
     })
   );
 app.use(cookieParser())
@@ -51,6 +51,8 @@ app.delete('/comment', controllers.deleteComment);
 const HTTPS_PORT = process.env.HTTPS_PORT || 8080
 
 let server;
+
+// privateKey 인증서와 certificate 인증서가 존재하는 경우 https 서버로 실행
 if (fs.existsSync('./key.pem') && fs.existsSync('./cert.pem')) {
     const privateKey = fs.readFileSync('./key.pem', 'utf8')
     const certificate = fs.readFileSync('./cert.pem', 'utf8')
@@ -59,6 +61,8 @@ if (fs.existsSync('./key.pem') && fs.existsSync('./cert.pem')) {
     server = https.createServer(credentials, app)
     server.listen(HTTPS_PORT, () => console.log('https server runnning'))
 } else {
+
+  // 인증서가 존재하지 않는 경우 http 서버로 실행
     server = app.listen(HTTPS_PORT, () => console.log('http server runnning'))
 }
 module.exports = server;

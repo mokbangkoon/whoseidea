@@ -63,6 +63,7 @@ export async function viewPost(req: Request, res: Response) {
         created_at: posts.created_at
     })
 
+    // 이미 좋아요를 누른 유저인 경우, boolean값을 참으로 전달
     if (isAuthorized(req) && await prisma.likes.findFirst({
         where:{
             nickname:userInfo?.id,
