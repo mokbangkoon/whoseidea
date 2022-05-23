@@ -5,7 +5,7 @@ export async function myPost(req: Request, res: Response) {
 
     // 인자가 없으면 오류 처리
     if (!req.query.nickname) {
-        return res.status(406).send('nickname is empty')
+        return res.status(400).send('nickname is empty')
     }
     const userInfo = await prisma.users.findFirst({
         where: {
@@ -15,7 +15,7 @@ export async function myPost(req: Request, res: Response) {
 
     // 요청한 아이디가 가입되어있지 않으면 오류 처리
     if(!userInfo)
-        return res.status(406).send('user id not exist')
+        return res.status(401).send('user id not exist')
 
     const posts = await prisma.posts.findMany({
         where: {
@@ -26,8 +26,13 @@ export async function myPost(req: Request, res: Response) {
     // 검색 결과가 없으면 빈 배열 보냄
     if(!posts)
         return res.status(200).json([])
+    interface NicknameAndPosts {
+        nickname: string,
+        caption: string,
+        id: number
+    }
 
-    const nicknameAndPosts: any[] = []
+    const nicknameAndPosts: NicknameAndPosts[] = []
     for(let item of posts){
         const nickname = await prisma.users.findFirst({
             where:{
@@ -35,7 +40,7 @@ export async function myPost(req: Request, res: Response) {
             }
         })
         nicknameAndPosts.push({
-            nickname: nickname?.nickname,
+            nickname: nickname?.nickname || '',
             caption: item.caption,
             id: item.id
         })

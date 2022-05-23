@@ -62,7 +62,10 @@ const Innertext = styled.div`
   left: 4%;
   color: white;
 `;
+// 쪽지 보내기 페이지
 export default function Chat({ writerdata, postDatas }: any) {
+  // 글쓴이와 보내는 사람의 데이터는 포스트를 열때, 쪽지보내기를 클릭시 정해진다.
+  // nickname 은 보내는 사람의 닉네임 , target은 해당 포스트의 글쓴이이다.
   const [userinfo, setuserinfo] = useState({
     nickname: '',
     context: '',

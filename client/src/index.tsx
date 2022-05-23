@@ -12,6 +12,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
+  // provider로 묶어줘야 store에서 state꺼내쓰기 가능
   <BrowserRouter>
     <Provider store={store}>
       <App />

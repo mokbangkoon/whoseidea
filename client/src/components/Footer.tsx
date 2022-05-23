@@ -1,8 +1,11 @@
 import styled from 'styled-components';
 import { useMediaQuery } from 'react-responsive';
 const All = styled.div`
+  position: relative;
+  display: flex;
+  justify-content: center;
   background-color: #f0ffff;
-  height: 200vw;
+  height: 450px;
   align-items: center;
   margin-top: 12%;
 `;
@@ -10,7 +13,7 @@ const Member = styled.div`
   color: #6d0202;
   font-weight: bold;
   position: absolute;
-  top: 300%;
+  top: 10%;
   left: 60%;
   & img {
     position: relative;
@@ -28,7 +31,7 @@ const Logo = styled.div`
     width: 400px;
     height: 400px;
     position: absolute;
-    top: 300%;
+    top: 10%;
     left: 20%;
   }
 `;
@@ -61,12 +64,14 @@ const MemberM = styled.div`
 `;
 
 export default function Footer() {
+  // 반응형 웹 부분 : 최소 너비가 768px아래로 가면 반응형웹 시작.
   const isPc = useMediaQuery({
     query: '(min-width:768px)',
   });
   return (
     <div>
       <All>
+        {/* isPc가 true이면 데스크톱화면 , false이면 모바일 화면 */}
         {isPc ? (
           <div>
             <Logo>
