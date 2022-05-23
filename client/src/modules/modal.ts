@@ -2,7 +2,7 @@ import { deprecated, ActionType, createReducer } from 'typesafe-actions';
 const { createStandardAction } = deprecated;
 
 const OPENMODAL = 'modal/openModal';
-
+// Modal창을 띄울건지 안띄울건지 체크해주는 state
 export const openModal = createStandardAction(OPENMODAL)();
 
 const actions = { openModal };

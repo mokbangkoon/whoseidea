@@ -48,6 +48,8 @@ export default function Headerbar({ handleLogout }: any): React.ReactElement {
   const handleModal = () => {
     dispatch(openModal());
   };
+  // Modal창을 체크해서 페이지가 바뀌면 안나오는 함수
+  // 로그인이 안되있으면 페이지이동불가
   const checkedModal = () => {
     check ? dispatch(openModal()) : null;
     isgooglelogin || islogincheck ? null : alert('로그인을 먼저 해주세요');
@@ -62,6 +64,7 @@ export default function Headerbar({ handleLogout }: any): React.ReactElement {
         </Link>
       </Button>
       <Button>
+        {/* 구글로그인이나 일반로그인이 안되있으면 눌러도 메인으로 돌아옴 */}
         {isgooglelogin || islogincheck ? (
           <Link to="/rank" className="link">
             <div onClick={checkedModal}>Ranking</div>
@@ -90,7 +93,7 @@ export default function Headerbar({ handleLogout }: any): React.ReactElement {
           </Link>
         </Button>
       ) : null}
-
+      {/* 일반로그인이 되면 로그아웃버튼이 나오고 구글로그인이 되면 구글로그아웃 버튼이 나옴 */}
       <Button>
         {isgooglelogin ? (
           <Googlelogout />

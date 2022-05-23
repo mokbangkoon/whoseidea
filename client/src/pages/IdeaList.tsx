@@ -194,7 +194,10 @@ export default function IdeaList({ handleToView }: any) {
   const handleIdealist = (post: any) => {
     handleToView(post);
   };
-
+  // pagenum 이 1씩 증가할때마다 서버에 저장된 데이터 9개씩 날라옴
+  // 저장된 데이터를 요청해서 불러올 때 map을 이용해서 데이터를 뿌림
+  // 이미지를 올리지 않았으면 default 이미지를 출력
+  // 게시물 데이터를 post 에 저장
   useEffect(() => {
     axios.get(`https://whoseidea.ml:8080/post?page=${pagenum}`).then(data => {
       Promise.all(
@@ -221,6 +224,9 @@ export default function IdeaList({ handleToView }: any) {
       });
     });
   }, [pagenum]);
+
+  // offset으로 페이지네이션 구현
+  // next버튼 클릭시 9개씩 데이터 출력하고 pagenum 1증가
 
   const handleback = () => {
     setOffset(offset - 9);

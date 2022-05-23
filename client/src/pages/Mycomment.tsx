@@ -46,6 +46,8 @@ const OnlyData = styled.div`
 `;
 
 export default function Mycomment({ commentData }: any) {
+  // 댓글 페이지
+  // commentData를 이용해서 내가 쓴 댓글을 볼 수 있음
   const check = useSelector((state: RootState) => state.modal.check);
   return (
     <div>
