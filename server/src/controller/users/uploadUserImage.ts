@@ -4,11 +4,11 @@ import { prisma } from '../db'
 export async function uploadUserImage(req: any, res: any) {
     // 인자가 없으면 오류 처리
     if (!req.query.nickname)
-        return res.status(406).send('postId is empty')
+        return res.status(400).send('postId is empty')
 
     // 토큰이 맞지 않으면 오류 처리
     if(!isAuthorized(req))
-        return res.status(405).send('Mismatched Cookies')
+        return res.status(401).send('Mismatched Cookies')
     
     try {
         await prisma.users.updateMany({

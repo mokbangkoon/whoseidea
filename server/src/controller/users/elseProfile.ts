@@ -5,7 +5,7 @@ export async function elseProfile (req: Request, res: Response) {
     
     // 인자가 없으면 오류 처리
     if (!req.query.nickname) {
-        res.status(423).send('undefined user')
+        res.status(400).send('nickname is empty')
     } else {
 
         // 요청한 닉네임으로 users 테이블에서 유저정보를 가져온다

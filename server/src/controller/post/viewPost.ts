@@ -24,14 +24,14 @@ export async function viewPost(req: Request, res: Response) {
         }
     })
 
-    const posts = await prisma.posts.findFirst({
+    const post = await prisma.posts.findFirst({
         where:{
             id:Number(req.query.postId)
         }
     })
 
     // 검색 결과가 없으면 빈 객체를 보냄
-    if(!posts)
+    if(!post)
         return res.status(200).json({})
 
     // 조회수 증가
@@ -49,18 +49,18 @@ export async function viewPost(req: Request, res: Response) {
     const nicknameAndViewPosts: any[] = []
     const nickname = await prisma.users.findFirst({
         where: {
-            id: posts.nickname || undefined
+            id: post.nickname || undefined
         }
     })
     nicknameAndViewPosts.push({
         nickname: nickname?.nickname,
-        id: posts.id,
-        caption: posts.caption,
-        file: posts.file,
-        likes: posts.likes,
-        view: posts.view,
-        context: posts.context,
-        created_at: posts.created_at
+        id: post.id,
+        caption: post.caption,
+        file: post.file,
+        likes: post.likes,
+        view: post.view,
+        context: post.context,
+        created_at: post.created_at
     })
 
     // 이미 좋아요를 누른 유저인 경우, boolean값을 참으로 전달
