@@ -16,18 +16,24 @@ export async function postAll(req: Request, res: Response) {
     if (!['desc','asc'].includes(req.query.order as string))
         return res.status(406).send('order is not "desc" or "asc"')
 
+    const order = req.query.order as 'desc'|'asc' 
     const posts = await prisma.posts.findMany({
         take: Number(req.query.limit),
         orderBy: {
-            likes:req.query.order as any
+            likes:order
         },
     })
 
     // 검색 결과가 없으면 빈 배열 보냄
     if(!posts)
         return res.status(200).json([])
-
-    const nicknameAndPosts: any[] = []
+    interface NicknameAndPosts {
+        nickname: string,
+        caption: string,
+        likes: number ,
+        id: number,
+    }
+    const nicknameAndPosts: NicknameAndPosts [] = []
     for(let item of posts){
         const nickname = await prisma.users.findFirst({
             where:{
@@ -35,7 +41,7 @@ export async function postAll(req: Request, res: Response) {
             }
         })
         nicknameAndPosts.push({
-            nickname: nickname?.nickname,
+            nickname: nickname?.nickname || '',
             caption: item.caption,
             likes: item.likes,
             id: item.id

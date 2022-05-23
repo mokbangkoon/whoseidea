@@ -20,7 +20,7 @@ export async function uploadUserImage(req: Request, res: Response) {
     try {
         await prisma.users.updateMany({
             where: {
-                nickname:req.query.nickname as any
+                nickname:req.query.nickname as string
             },
             data: {
                 profile: `https://whoseidea-image.s3.ap-northeast-2.amazonaws.com/${file.key}`

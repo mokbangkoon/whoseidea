@@ -14,12 +14,16 @@ export async function auth (req: Request, res: Response) {
 
         // 이메일로 users 테이블에 유저정보를 가져온다
         const accsessTokenData: any = isAuthorized(req)
-        const userInfo: any = await prisma.users.findFirst({
-            where: {email: accsessTokenData.email}
+        const userInfo = await prisma.users.findFirst({
+            where: {email: accsessTokenData.email},
+            select: {
+                id:true,
+                email: true,
+                nickname: true,
+                profile: true,
+            }
         })
 
-        // 패스워드 값을 제외한 나머지 유저의 정보를 전달한다
-        delete userInfo?.password
         return res.status(200).send(userInfo)
     }
 }

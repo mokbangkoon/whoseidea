@@ -9,7 +9,7 @@ export async function myComment(req: Request, res: Response) {
     }
     const userInfo = await prisma.users.findFirst({
         where: {
-            nickname: req.query.nickname as any,
+            nickname: req.query.nickname as string,
         }
     })
 
@@ -26,9 +26,12 @@ export async function myComment(req: Request, res: Response) {
     // 검색 결과가 없으면 빈 배열 보냄
     if(!comments)
         return res.status(200).json([])
-
+    interface NicknameAndComments {
+        nickname:string,
+        text:string
+    }
         
-    const nicknameAndComments: any[] = []
+    const nicknameAndComments: NicknameAndComments[] = []
     for(let item of comments){
         const nickname = await prisma.users.findFirst({
             where:{
@@ -36,7 +39,7 @@ export async function myComment(req: Request, res: Response) {
             }
         })
         nicknameAndComments.push({
-            nickname: nickname?.nickname,
+            nickname: nickname?.nickname || '',
             text: item.text,
         })
     }
