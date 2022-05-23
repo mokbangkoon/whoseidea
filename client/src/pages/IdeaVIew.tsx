@@ -20,16 +20,16 @@ const Title = styled.div`
   position: absolute;
   width: 342px;
   height: 60px;
-  left: 745px;
-  top: 581px;
-
+  left: 780px;
+  top: 600px;
+  z-index: 10;
   font-family: 'Inter';
   font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 24px;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 20px;
   /* or 80% */
-
+  text-align: justify;
   display: flex;
   align-items: center;
 
@@ -53,13 +53,13 @@ const ContentNickname = styled.div`
   position: absolute;
   width: 118px;
   height: 32px;
-  left: 947px;
-  top: 662px;
-
+  left: 750px;
+  top: 170px;
+  z-index: 10;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-size: 20px;
+  font-size: 22px;
   line-height: 24px;
   /* or 120% */
 
@@ -68,6 +68,23 @@ const ContentNickname = styled.div`
   text-align: center;
 
   color: #000000;
+`;
+const Contentbox = styled.div`
+  position: absolute;
+  width: 320px;
+  height: 410px;
+  left: -290px;
+  top: -35px;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  /* or 120% */
+  display: flex;
+  align-items: center;
+  color: #000000;
+  background-color: #7fc1e7;
 `;
 const Menu = styled.div`
   position: relative;
@@ -79,8 +96,8 @@ const Writer = styled.div`
     position: absolute;
     width: 353px;
     height: 606px;
-    left: 354px;
-    top: 564px;
+    left: 80px;
+    top: 60px;
     background: url(.jpg), #ffffff;
     border: 1px solid #000000;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -165,24 +182,44 @@ const Chat = styled.span`
     }
   }
 `;
+
 const Context = styled.span`
   position: absolute;
-  width: 330px;
-  height: 381px;
-  left: 749px;
-  top: 691px;
-
+  left: 300px;
+  height: 380px;
+  right: 50px;
+  top: 200px;
+  width: 280px;
+  text-overflow: ellipsis;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
   font-size: 20px;
-  line-height: 24px;
+  line-height: 300px;
   /* or 120% */
-
-  display: flex;
+  display: inline-block;
   align-items: center;
-
   color: #000000;
+  text-align: left;
+  z-index: 10;
+  word-wrap: break-word;
+`;
+const Contextbox = styled.div`
+  box-sizing: border-box;
+  position: absolute;
+  width: 350px;
+  height: 606px;
+  left: 500px;
+  top: 60px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  line-height: 300px;
+  text-overflow: ellipsis;
+  display: inline-block;
+  white-space: pre-line;
+  overflow: hidden;
 `;
 
 const CommentWriter = styled.div`
@@ -197,10 +234,22 @@ const Commentdata = styled.div`
 const Commentbox = styled.div`
   box-sizing: border-box;
   position: absolute;
-  width: 725px;
+  width: 750px;
   height: 284px;
-  left: 356px;
-  top: 1368px;
+  left: -45px;
+  top: 620px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+`;
+const Commentbox1 = styled.div`
+  box-sizing: border-box;
+  position: absolute;
+  width: 750px;
+  height: 76px;
+  left: -45px;
+  top: 530px;
   background: #ffffff;
   border: 1px solid #000000;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -274,7 +323,7 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
         </Title>
         <SubTitle>
           <ContentNickname>
-            <div>글쓴이 : {nickname}</div>
+            <div>{nickname}</div>
           </ContentNickname>
           <Writer>
             {url === undefined || url.length === 0 ? null : (
@@ -285,11 +334,15 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
               </div>
             )}
           </Writer>
-          <Context>
-            <pre>
-              <span>{context}</span>{' '}
-            </pre>
-          </Context>
+          <Contextbox>
+            <Context>
+              <Contentbox>
+                <pre>
+                  <span>{context}</span>{' '}
+                </pre>
+              </Contentbox>
+            </Context>
+          </Contextbox>
           <Menu>
             <Chat>
               <Link to="/chat">
@@ -312,12 +365,14 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
           </Menu>
         </SubTitle>
         <Comment>
-          <input
-            type="text"
-            placeholder="댓글을 입력하세요"
-            onChange={e => handleInputValue('context', e)}
-          ></input>
-          <button onClick={handleComment}>댓글달기</button>
+          <Commentbox1>
+            <input
+              type="text"
+              placeholder="댓글을 입력하세요"
+              onChange={e => handleInputValue('context', e)}
+            ></input>
+            <button onClick={handleComment}>댓글달기</button>
+          </Commentbox1>
           <Commentbox>
             <div>
               {allComment.length === 0 ? null : (
