@@ -15,7 +15,7 @@ export async function myComment(req: Request, res: Response) {
 
     // 요청한 아이디가 가입되어있지 않으면 오류 처리
     if(!userInfo)
-        return res.status(401).send('user id not exist')
+        return res.status(406).send('user id not exist')
 
     const comments = await prisma.comments.findMany({
         where: {
