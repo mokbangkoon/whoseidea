@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../modules';
@@ -235,6 +235,7 @@ function Signup() {
   const navigate = useNavigate();
   const check = useSelector((state: RootState) => state.modal.check);
   const signup = useSelector((state: RootState) => state.signup);
+  const [checkPassword, setCheckPassword] = useState(false);
   const checkedModal = () => {
     check ? dispatch(openModal()) : null;
   };
@@ -286,25 +287,35 @@ function Signup() {
   // 회원가입 누를 시 빈항목 있으면 에러메세지 출력
   // 회원가입 성공, 실패시 alert메세지 출력
   // 에러발생 시 회원가입실패 메세지 출력
+  // 이메일 유효성 검사, 비밀번호 유효성 검사 추가
   const handleSignup = () => {
-    if (!signup.password || !signup.email || !signup.nickname) {
+    const emailRegex =
+      /([\w-.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    if (checkPassword === false) {
+      dispatch(
+        passwordmessage({ passwordmessage: '비밀번호가 서로 다릅니다.' })
+      );
+    } else if (!signup.password || !signup.email || !signup.nickname) {
       dispatch(
         passwordmessage({ passwordmessage: '모든 항목을 입력해주세요.' })
       );
+    } else if (!emailRegex.test(signup.email)) {
+      dispatch(emailmessage({ emailmessage: '이메일 형식이 다릅니다.' }));
     } else {
       dispatch(passwordmessage({ passwordmessage: '' }));
+
+      return axios
+        .post('https://whoseidea.ml:8080/signup', signup)
+        .then(data => {
+          data.status === 200 ? alert('회원가입 완료') : alert('회원가입 실패');
+        })
+        .then(() => navigate('/'))
+        .catch(() =>
+          dispatch(
+            passwordmessage({ passwordmessage: '회원가입이 실패했습니다.' })
+          )
+        );
     }
-    return axios
-      .post('https://whoseidea.ml:8080/signup', signup)
-      .then(data => {
-        data.status === 200 ? alert('회원가입 완료') : alert('회원가입 실패');
-      })
-      .then(() => navigate('/'))
-      .catch(() =>
-        dispatch(
-          passwordmessage({ passwordmessage: '회원가입이 실패했습니다.' })
-        )
-      );
   };
   // 비밀번호 유효성 검사
   // 두 비밀번호가 서로 일치하는지 여부 검사
@@ -315,11 +326,16 @@ function Signup() {
       );
     } else {
       dispatch(passwordmessage({ passwordmessage: '' }));
+      setCheckPassword(true);
     }
   };
+
   // Modal창 검사
   useEffect(() => {
     checkedModal();
+    dispatch(passwordmessage({ passwordmessage: '' }));
+    dispatch(emailmessage({ emailmessage: '' }));
+    dispatch(nicknamemessage({ nicknamemessage: '' }));
   }, []);
 
   return (

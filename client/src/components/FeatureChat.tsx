@@ -1,19 +1,23 @@
 import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
+  align-items: center;
 `;
 const Text = styled.div`
   display: flex;
   flex-direction: column;
   padding: 40px;
   width: 100%;
+  height: 300px;
+  overflow: hidden;
+  justify-content: center;
 `;
 const GifContainer = styled.div`
   img {
     width: 500px;
     height: 300px;
     padding: 50px;
-    margin-left: 100px;
+    margin-left: 140px;
   }
 `;
 export default function FeatureChat() {
