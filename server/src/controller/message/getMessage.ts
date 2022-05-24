@@ -9,7 +9,7 @@ export async function getMessage(req: Request, res: Response) {
 
     // 내 정보 가져오기
     const tokenInfo:TokenData = isAuthorized(req)
-    const [ userInfo ]:any = await prisma.users.findMany({
+    const [ userInfo ] = await prisma.users.findMany({
         where:{
             email:tokenInfo!.email
         }

@@ -13,10 +13,10 @@ export async function changePassword (req: Request, res: Response) {
     }
 
     // 이메일값이랑 이전 패스워드값으로 users 테이블에서 id값을 찾아온다
-    const accsessTokenData: any = isAuthorized(req)
+    const accsessTokenData:TokenData = isAuthorized(req)
     const userInfo = await prisma.users.findFirst({
         where: {
-            email: accsessTokenData.email,
+            email: accsessTokenData!.email,
             password: req.body.oldPassword
         }
     })
@@ -33,7 +33,7 @@ export async function changePassword (req: Request, res: Response) {
 
     // users 테이블에 해당하는 유저의 신규 패스워드값을 업데이트
     await prisma.users.update({
-        where: {id: accsessTokenData.id},
+        where: {id: accsessTokenData!.id},
         data: {password: req.body.newPassword}
     })
     return res.status(200).send('password change ok')
