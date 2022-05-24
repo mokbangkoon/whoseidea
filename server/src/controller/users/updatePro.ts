@@ -1,5 +1,5 @@
 import { prisma } from '../db'
-import { isAuthorized } from "../tokenFunctions";
+import { isAuthorized, TokenData } from '../tokenFunctions'
 import { Request, Response } from 'express'
 
 export async function updatePro (req: Request, res: Response) {
@@ -18,9 +18,9 @@ export async function updatePro (req: Request, res: Response) {
     }
 
     // 입력한 닉네임을 유저정보에 업데이트 한다
-    const accsessTokenData: any = isAuthorized(req)
+    const accsessTokenData:TokenData = isAuthorized(req)
     await prisma.users.updateMany({
-        where: {email: accsessTokenData.email},
+        where: {email: accsessTokenData!.email},
         data: req.body
     })
     return res.status(200).send(`${req.body.nickname} change ok`)

@@ -1,5 +1,5 @@
 import { prisma } from '../db'
-import { isAuthorized } from "../tokenFunctions";
+import { isAuthorized, TokenData } from '../tokenFunctions'
 import { Request, Response } from 'express'
 
 export async function changePassword (req: Request, res: Response) {
