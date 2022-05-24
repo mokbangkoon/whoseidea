@@ -2,6 +2,15 @@ require('dotenv').config()
 import { sign, verify, VerifyCallback } from 'jsonwebtoken'
 import { Request } from 'express'
 
+export type TokenData = {
+    id: number,
+    nickname: string,
+    password: string,
+    email: string,
+    profile: string,
+    iat: number
+} | undefined
+
 export async function generateAccessToken (data: object) {
     return await sign(data, process.env.ACCESS_SECRET as string)
 }
