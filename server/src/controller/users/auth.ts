@@ -1,5 +1,5 @@
 import { prisma } from '../db'
-import { isAuthorized } from '../tokenFunctions'
+import { isAuthorized, TokenData } from '../tokenFunctions'
 import { Request, Response } from 'express'
 
 export async function auth (req: Request, res: Response) {
@@ -10,20 +10,19 @@ export async function auth (req: Request, res: Response) {
     }
     if(!isAuthorized(req)) {
         return res.status(403).json(false)
-    } else {
-
-        // 이메일로 users 테이블에 유저정보를 가져온다
-        const accsessTokenData: any = isAuthorized(req)
-        const userInfo = await prisma.users.findFirst({
-            where: {email: accsessTokenData.email},
-            select: {
-                id:true,
-                email: true,
-                nickname: true,
-                profile: true,
-            }
-        })
-
-        return res.status(200).send(userInfo)
     }
+
+    // 이메일로 users 테이블에 유저정보를 가져온다
+    const accsessTokenData:TokenData = isAuthorized(req)
+    const userInfo = await prisma.users.findFirst({
+        where: {email: accsessTokenData!.email},
+        select: {
+            id:true,
+            email: true,
+            nickname: true,
+            profile: true,
+        }
+    })
+
+    return res.status(200).send(userInfo)
 }

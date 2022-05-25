@@ -1,6 +1,6 @@
 import { prisma } from '../db'
 import { Request, Response } from 'express'
-import { isAuthorized } from '../tokenFunctions'
+import { isAuthorized, TokenData } from '../tokenFunctions'
 
 export async function viewPost(req: Request, res: Response) {
 
@@ -16,11 +16,14 @@ export async function viewPost(req: Request, res: Response) {
     // 인자가 숫자 0 이하면 오류 처리
     if (postId <= 0)
         return res.status(406).send('postId is zero or less.')
+    
+    if (!isAuthorized(req))
+        return res.status(401).send("Mismatched Cookies")
 
-    const accsessTokenData: any = isAuthorized(req)
+    const accsessTokenData:TokenData = isAuthorized(req)
     const userInfo = await prisma.users.findFirst({
         where:{
-            email:accsessTokenData.email
+            email:accsessTokenData!.email
         }
     })
 

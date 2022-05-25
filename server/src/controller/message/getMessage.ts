@@ -1,5 +1,5 @@
 import { prisma } from '../db'
-import { isAuthorized } from '../tokenFunctions'
+import { isAuthorized, TokenData } from '../tokenFunctions'
 import { Request, Response } from 'express'
 
 export async function getMessage(req: Request, res: Response) {
@@ -8,10 +8,10 @@ export async function getMessage(req: Request, res: Response) {
         return res.status(401).send('Mismatched Cookies')
 
     // 내 정보 가져오기
-    const tokenInfo:any = isAuthorized(req)
-    const [ userInfo ]:any = await prisma.users.findMany({
+    const tokenInfo:TokenData = isAuthorized(req)
+    const [ userInfo ] = await prisma.users.findMany({
         where:{
-            email:tokenInfo.email
+            email:tokenInfo!.email
         }
     })
     

@@ -1,5 +1,5 @@
 import { prisma } from '../db'
-import { isAuthorized } from "../tokenFunctions";
+import { isAuthorized, TokenData } from '../tokenFunctions'
 import { Request, Response } from 'express'
 
 export async function writeMessage (req :Request, res: Response) {
@@ -18,10 +18,10 @@ export async function writeMessage (req :Request, res: Response) {
     }
 
     // 내 닉네임 찾기
-    const accsessTokenData: any = isAuthorized(req)
+    const accsessTokenData:TokenData = isAuthorized(req)
     const user1Info = await prisma.users.findFirst({
         where: {
-            email: accsessTokenData?.email
+            email: accsessTokenData!.email
         }
     })
 

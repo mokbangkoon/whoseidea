@@ -19,7 +19,7 @@ export async function signout(req: Request, res: Response) {
 
     // 이메일과 패스워드가 맞지 않으면 오류 처리
     if (!userInfo) {
-        return res.status(401).send('incorrect id or password')
+        return res.status(406).send('incorrect id or password')
     }
 
     // users 테이블에서 유저정보 및 jwt 쿠키를 제거 후 회원탈퇴

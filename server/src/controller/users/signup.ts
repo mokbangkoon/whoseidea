@@ -37,12 +37,12 @@ export async function signup (req: Request, res: Response) {
 
     // 아이디가 있으면 invaild 처리
     if(await prisma.users.findFirst({ where:{ nickname:nickname } })){
-        return res.status(401).send('nickname exists')
+        return res.status(406).send('nickname exists')
     }
 
     // email이 있으면 invaild 처리
     if(await prisma.users.findFirst({ where:{ email:email } })){
-        return res.status(401).send('email exists')
+        return res.status(406).send('email exists')
     }
 
     await prisma.users.create({

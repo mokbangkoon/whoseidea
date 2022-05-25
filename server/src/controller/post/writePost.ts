@@ -1,5 +1,5 @@
 import { prisma } from '../db'
-import { isAuthorized } from "../tokenFunctions";
+import { isAuthorized, TokenData } from '../tokenFunctions'
 import { Request, Response } from 'express'
 
 export async function writePost (req: Request, res: Response) {
@@ -10,10 +10,10 @@ export async function writePost (req: Request, res: Response) {
     }
 
     // 닉네임으로 users 테이블에서 id값을 가져온다.
-    const accsessTokenData: any = isAuthorized(req)
+    const accsessTokenData:TokenData = isAuthorized(req)
     const userInfo = await prisma.users.findFirst({
         where:{
-            email:accsessTokenData.email
+            email:accsessTokenData!.email
         }
     })
 
