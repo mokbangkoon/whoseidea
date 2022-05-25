@@ -7,6 +7,11 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
+const Headeridea = styled.div`
+  font-size: 20px;
+  z-index: 30;
+  left: 30%;
+`;
 const Header = styled.div`
   position: absolute;
   width: 900px;
@@ -20,20 +25,26 @@ const Title = styled.div`
   position: absolute;
   width: 342px;
   height: 60px;
-  left: 780px;
+  left: 820px;
   top: 600px;
-  z-index: 10;
-  font-family: 'Inter';
+  font-family: 'Roboto';
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 22px;
-  line-height: 20px;
-  /* or 80% */
-  text-align: justify;
+  line-height: 130%;
+  /* or 32px */
+  z-index: 10;
   display: flex;
   align-items: center;
+  text-align: center;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
 
   color: #000000;
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
 `;
 const SubTitle = styled.div`
   box-sizing: border-box;
@@ -53,7 +64,7 @@ const ContentNickname = styled.div`
   position: absolute;
   width: 118px;
   height: 32px;
-  left: 750px;
+  left: 770px;
   top: 170px;
   z-index: 10;
   font-family: 'Inter';
@@ -69,23 +80,7 @@ const ContentNickname = styled.div`
 
   color: #000000;
 `;
-const Contentbox = styled.div`
-  position: absolute;
-  width: 320px;
-  height: 410px;
-  left: -290px;
-  top: -35px;
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 24px;
-  /* or 120% */
-  display: flex;
-  align-items: center;
-  color: #000000;
-  background-color: #7fc1e7;
-`;
+const Contentbox = styled.div``;
 const Menu = styled.div`
   position: relative;
   top: -61%;
@@ -119,16 +114,15 @@ const Writer = styled.div`
 
 const View = styled.div`
   position: absolute;
-  left: 40%;
-  top: 750px;
-  background-color: green;
+  left: 60%;
+  top: 1410px;
   width: 100px;
+  font-size: 20px;
 `;
 const Like = styled.div`
   position: absolute;
-  top: 750px;
-  left: 79%;
-  background-color: #f89c51;
+  top: 1450px;
+  left: 100px;
   width: 80px;
   height: 30px;
 
@@ -166,70 +160,119 @@ const Comment = styled.div`
   }
 `;
 const Chat = styled.span`
-  position: absolute;
-  top: 750px;
+  width: 90px;
+  height: 25px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 22px;
+  /* identical to box height, or 125% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.1px;
+
+  /* M3/sys/light/primary */
+
+  color: #6750a4;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
   & button {
-    width: 150px;
-    height: 30px;
-    border-radius: 1rem;
-    background-color: #ffd000;
-    border: none;
-    font-weight: bold;
-    :hover {
-      background-color: blue;
-      transition: 0.5s;
-      color: white;
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 24px;
+    gap: 8px;
+    position: absolute;
+    width: 127px;
+    height: 40px;
+    left: 700px;
+    top: 1440px;
+
+    /* M3/read-only/light/surface1 */
+
+    background: linear-gradient(
+        0deg,
+        rgba(103, 80, 164, 0.05),
+        rgba(103, 80, 164, 0.05)
+      )
+      #fffbfe;
+    /* M3/Elevation Light/1 */
+
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3),
+      0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 100px;
   }
+`;
+const Chat1 = styled.div`
+  border-radius: 50%;
+  background-image: url(Vector.png);
+  background-color: black;
+  width: 50px;
+  top: 350px;
+  left: 300px;
+  z-index: 10;
 `;
 
 const Context = styled.span`
-  position: absolute;
-  left: 300px;
-  height: 380px;
-  right: 50px;
-  top: 200px;
-  width: 280px;
-  text-overflow: ellipsis;
-  font-family: 'Inter';
+  width: 320px;
+  height: 400px;
+  top: 500px;
+  margin-left: 10px;
+  margin-top: 25%;
+  white-space: normal;
+  font-family: 'Roboto';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 20px;
-  line-height: 300px;
-  /* or 120% */
-  display: inline-block;
+  line-height: 130%;
+  /* or 20px */
+  text-align: justify;
+  display: flex;
   align-items: center;
+  letter-spacing: 1px;
   color: #000000;
-  text-align: left;
-  z-index: 10;
-  word-wrap: break-word;
+  /* Inside auto layout */
+  flex: none;
+  order: 2;
+  flex-grow: 0;
 `;
 const Contextbox = styled.div`
   box-sizing: border-box;
   position: absolute;
   width: 350px;
-  height: 606px;
+  height: 600px;
   left: 500px;
   top: 60px;
+  margin-left: 10px;
   background: #ffffff;
   border: 1px solid #000000;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
   line-height: 300px;
   text-overflow: ellipsis;
-  display: inline-block;
-  white-space: pre-line;
-  overflow: hidden;
+  white-space: normal;
 `;
 
 const CommentWriter = styled.div`
   color: red;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 20px;
+  margin-left: 40px;
+  margin-top: 10px;
 `;
 const Commentdata = styled.div`
   color: #0f0f0f;
-  font-size: 20px;
+  font-size: 18px;
+  margin-left: 40px;
+  margin-top: 10px;
 `;
 const Commentbox = styled.div`
   box-sizing: border-box;
@@ -237,7 +280,7 @@ const Commentbox = styled.div`
   width: 750px;
   height: 284px;
   left: -45px;
-  top: 620px;
+  top: 580px;
   background: #ffffff;
   border: 1px solid #000000;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -249,11 +292,44 @@ const Commentbox1 = styled.div`
   width: 750px;
   height: 76px;
   left: -45px;
-  top: 530px;
+  top: 480px;
   background: #ffffff;
   border: 1px solid #000000;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 20px;
+  text-align: center;
+  margin-top: 10px;
+  .comment .comment-box {
+    margin-left: 10px;
+    width: 400px;
+    height: 50px;
+  }
+  & button {
+    z-index: 10;
+    display: flex;
+    font-size: 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 24px;
+    gap: 8px;
+    position: absolute;
+    width: 120px;
+    height: 40px;
+    left: 610px;
+    top: 20px;
+    /* M3/read-only/light/surface1 */
+    background: linear-gradient(
+        0deg,
+        rgba(103, 80, 164, 0.05),
+        rgba(103, 80, 164, 0.05)
+      ),
+      #fffbfe;
+    /* M3/Elevation Light/1 */
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3),
+      0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 100px;
+  }
 `;
 
 export default function IdeaView({ handleIdeaView, usernickname }: any) {
@@ -315,11 +391,13 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
   return (
     <div>
       <div>{check ? <Login /> : null}</div>
-      <div>{id}번째 아이디어</div>
       <div>
         <Header></Header>
+        <Headeridea>
+          <div>{id}번째 아이디어</div>
+        </Headeridea>
         <Title>
-          <h1>{caption}</h1>
+          <h2>{caption}</h2>
         </Title>
         <SubTitle>
           <ContentNickname>
@@ -337,24 +415,25 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
           <Contextbox>
             <Context>
               <Contentbox>
-                <pre>
-                  <span>{context}</span>{' '}
-                </pre>
+                <span>{context}</span>{' '}
               </Contentbox>
             </Context>
           </Contextbox>
           <Menu>
             <Chat>
-              <Link to="/chat">
-                <button onClick={handleWriter}>쪽지보내기</button>
-              </Link>
+              <Chat1>
+                <Link to="/chat">
+                  <button onClick={handleWriter}>쪽지보내기</button>
+                </Link>
+                <img src="Vector1.png" />
+              </Chat1>
             </Chat>
             <View>
               <span>조회수 : {view}</span>
             </View>
             <Like>
               <div>
-                <span>좋아요 : {likes}</span>
+                <span>좋아요 {likes}</span>
                 {isHeart ? (
                   <img src="/images/하트.png" onClick={handleHeart} />
                 ) : (
@@ -366,11 +445,14 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
         </SubTitle>
         <Comment>
           <Commentbox1>
-            <input
-              type="text"
-              placeholder="댓글을 입력하세요"
-              onChange={e => handleInputValue('context', e)}
-            ></input>
+            <div className="commment">
+              <input
+                className="comment-text"
+                type="text"
+                placeholder="댓글을 입력하세요"
+                onChange={e => handleInputValue('context', e)}
+              ></input>
+            </div>
             <button onClick={handleComment}>댓글달기</button>
           </Commentbox1>
           <Commentbox>
