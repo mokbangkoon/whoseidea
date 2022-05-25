@@ -71,7 +71,7 @@ export default function Chat({ writerdata, postDatas }: any) {
     context: '',
     target: '',
   });
-  const handleInputValue = (key: any, e: any) => {
+  const handleInputValue = (key: string, e: any) => {
     setuserinfo({
       ...userinfo,
       nickname: String(writerdata),
