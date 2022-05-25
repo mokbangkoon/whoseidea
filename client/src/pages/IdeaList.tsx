@@ -186,6 +186,66 @@ const Box1 = styled.div`
     width: 100px;
   }
 `;
+const MobileIdeabox = styled.div`
+  .container .card-content {
+    background-color: #ffff;
+    padding: 0px;
+    position: relative;
+    width: 250px;
+    height: 420px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 50px;
+    grid-column-gap: 50px;
+    margin-left: 20%;
+    margin-top: 30%;
+    text-align: center;
+    background-position: center;
+    border: 2px solid #000000;
+    border-radius: 20px;
+  }
+  & img {
+    position: static;
+    width: 250px;
+    height: 200px;
+    left: 0px;
+    top: 0px;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 0px 0px;
+    border-radius: 10px 10px 10px 10px;
+    border: 1px solid #000000;
+  }
+  .main-button {
+    display: block;
+    margin-left: 10%;
+    margin-top: 8%;
+    align-items: center;
+    text-align: center;
+    width: 200px;
+    height: 40px;
+    background: black;
+    color: white;
+    border: 2px solid #ffff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 20px;
+    transition: 0.5s ease;
+  }
+  & button:hover {
+    transition: 0.5s ease;
+    border: 2px solid #0000;
+    background: transparent;
+    color: black;
+  }
+`;
+const MobileContainer = styled.div`
+  position: relative;
+  top: 20%;
+`;
 type UserProps = {
   handleToView(post: string[]): void;
 };
@@ -332,30 +392,67 @@ export default function IdeaList({ handleToView }: UserProps) {
           </div>
         </Main>
       ) : (
-        <Ideabox>
-          <div className="container">
-            <div className="card-content">
-              {post.map((post: any) => {
-                return (
-                  <div>
-                    <img src={post?.url} />
-                    <h3>{post?.caption}</h3>
-                    <p>{post?.nickname}</p>
-                    <p>Like:{post?.likes}</p>
-                    <Link to={`/ideaview/${post?.id}`} className="text">
-                      <button
-                        className="main-button"
-                        onClick={() => handleIdealist(post)}
-                      >
-                        Read more
-                      </button>
-                    </Link>
+        <div>
+          <MobileContainer>
+            <Title>
+              <div>
+                <h1>Newest</h1>
+              </div>
+            </Title>
+
+            <div>
+              <HeaderContainer>
+                <div className="header-container" />
+                <HeaderContainertext>
+                  <div className="headercontainertext">
+                    당신의 아이디어를 보여주세요
                   </div>
-                );
-              })}
+                </HeaderContainertext>
+              </HeaderContainer>
+              <div className="container" />
+              <HeaderContainer1>
+                <HeaderContainertext1>
+                  <div className="header-container" />
+                  <div className="container" />
+                  <div className="headercontainertext1"> 아이디어 작성</div>
+                </HeaderContainertext1>
+              </HeaderContainer1>
             </div>
-          </div>
-        </Ideabox>
+            <div>
+              <Title2>
+                <div className="container">
+                  <Link to="/writeidea">
+                    <img src="add.png"></img>
+                  </Link>
+                </div>
+              </Title2>
+            </div>
+            <MobileIdeabox>
+              <div className="container">
+                <div className="card-content">
+                  {post.map((post: any) => {
+                    return (
+                      <div>
+                        <img src={post?.url} />
+                        <h3>{post?.caption}</h3>
+                        <p>{post?.nickname}</p>
+                        <p>Like:{post?.likes}</p>
+                        <Link to={`/ideaview/${post?.id}`} className="text">
+                          <button
+                            className="main-button"
+                            onClick={() => handleIdealist(post)}
+                          >
+                            Read more
+                          </button>
+                        </Link>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </MobileIdeabox>
+          </MobileContainer>
+        </div>
       )}
     </div>
   );

@@ -152,7 +152,7 @@ export default function WriteIdea() {
       .get('https://whoseidea.ml:8080/auth')
       .then(data => setNickname(data.data.nickname));
   }, []);
-  const handleInputValue = (key: any, e: any) => {
+  const handleInputValue = (key: string, e: any) => {
     setData({
       ...data,
       [key]: e.target.value,
