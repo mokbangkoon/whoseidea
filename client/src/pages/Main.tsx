@@ -277,9 +277,12 @@ const PositionContainerM = styled.div`
   left: 10%;
   background-repeat: no-repeat;
 `;
+type UserProps = {
+  handleResponseSuccess(): void;
+};
 export default function Main({
   handleResponseSuccess,
-}: any): React.ReactElement {
+}: UserProps): React.ReactElement {
   const islogincheck = useSelector(
     (state: RootState) => state.islogincheck.islogin
   );
