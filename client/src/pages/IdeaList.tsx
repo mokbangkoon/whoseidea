@@ -1,7 +1,8 @@
 import axios from 'axios';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 axios.defaults.withCredentials = true;
 
@@ -185,13 +186,16 @@ const Box1 = styled.div`
     width: 100px;
   }
 `;
-export default function IdeaList({ handleToView }: any) {
+type UserProps = {
+  handleToView(post: string[]): void;
+};
+export default function IdeaList({ handleToView }: UserProps) {
   const [offset, setOffset] = useState(0);
   const [hasnext, sethasnext] = useState(false);
-  const [post, setPost] = useState<any[]>([]);
+  const [post, setPost] = useState<string[]>([]);
   const [pagenum, setPageNum] = useState(1);
 
-  const handleIdealist = (post: any) => {
+  const handleIdealist = (post: string[]) => {
     handleToView(post);
   };
   // pagenum 이 1씩 증가할때마다 서버에 저장된 데이터 9개씩 날라옴
@@ -201,7 +205,7 @@ export default function IdeaList({ handleToView }: any) {
   useEffect(() => {
     axios.get(`https://whoseidea.ml:8080/post?page=${pagenum}`).then(data => {
       Promise.all(
-        data.data.map((item: any) =>
+        data.data.map((item: { id: number; data: string[] }) =>
           axios.get(`https://whoseidea.ml:8080/post/image?postId=${item.id}`)
         )
       ).then(requests => {
@@ -236,90 +240,123 @@ export default function IdeaList({ handleToView }: any) {
     setOffset(offset + 9);
     setPageNum(pagenum + 1);
   };
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
 
   return (
     <div>
-      <Main>
-        <div className="wrap">
-          <MainStyle>
-            <Title>
+      {isPc ? (
+        <Main>
+          <div className="wrap">
+            <MainStyle>
+              <Title>
+                <div>
+                  <h1>Newest</h1>
+                </div>
+              </Title>
               <div>
-                <h1>Newest</h1>
-              </div>
-            </Title>
-            <div>
-              <HeaderContainer>
-                <div className="header-container" />
-                <HeaderContainertext>
-                  <div className="headercontainertext">
-                    당신의 아이디어를 보여주세요
-                  </div>
-                </HeaderContainertext>
-              </HeaderContainer>
-              <div className="container" />
-              <HeaderContainer1>
-                <HeaderContainertext1>
+                <HeaderContainer>
                   <div className="header-container" />
-                  <div className="container" />
-                  <div className="headercontainertext1"> 아이디어 작성하기</div>
-                </HeaderContainertext1>
-              </HeaderContainer1>
-            </div>
-            <div>
-              <Title2>
+                  <HeaderContainertext>
+                    <div className="headercontainertext">
+                      당신의 아이디어를 보여주세요
+                    </div>
+                  </HeaderContainertext>
+                </HeaderContainer>
+                <div className="container" />
+                <HeaderContainer1>
+                  <HeaderContainertext1>
+                    <div className="header-container" />
+                    <div className="container" />
+                    <div className="headercontainertext1">
+                      {' '}
+                      아이디어 작성하기
+                    </div>
+                  </HeaderContainertext1>
+                </HeaderContainer1>
+              </div>
+              <div>
+                <Title2>
+                  <div className="container">
+                    <Link to="/writeidea">
+                      <img src="add.png"></img>
+                    </Link>
+                  </div>
+                </Title2>
+              </div>
+              <Box1>
+                <div className="button">
+                  <div className="follow-buttons">
+                    {offset === 0 ? null : (
+                      <button className="follow" onClick={handleback}>
+                        이전
+                      </button>
+                    )}
+                    {hasnext ? (
+                      <button
+                        className="follow follow-option active"
+                        onClick={handlefront}
+                      >
+                        다음
+                      </button>
+                    ) : null}
+                  </div>
+                </div>
+              </Box1>
+              <Ideabox>
                 <div className="container">
-                  <Link to="/writeidea">
-                    <img src="add.png"></img>
-                  </Link>
+                  <div className="card-content">
+                    {post.map((post: any) => {
+                      return (
+                        <div>
+                          <img src={post?.url} />
+                          <h3>{post?.caption}</h3>
+                          <p>{post?.nickname}</p>
+                          <p>Like:{post?.likes}</p>
+                          <Link to={`/ideaview/${post?.id}`} className="text">
+                            <button
+                              className="main-button"
+                              onClick={() => handleIdealist(post)}
+                            >
+                              Read more
+                            </button>
+                          </Link>
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
-              </Title2>
+              </Ideabox>
+            </MainStyle>
+          </div>
+        </Main>
+      ) : (
+        <Ideabox>
+          <div className="container">
+            <div className="card-content">
+              {post.map((post: any) => {
+                return (
+                  <div>
+                    <img src={post?.url} />
+                    <h3>{post?.caption}</h3>
+                    <p>{post?.nickname}</p>
+                    <p>Like:{post?.likes}</p>
+                    <Link to={`/ideaview/${post?.id}`} className="text">
+                      <button
+                        className="main-button"
+                        onClick={() => handleIdealist(post)}
+                      >
+                        Read more
+                      </button>
+                    </Link>
+                  </div>
+                );
+              })}
             </div>
-            <Box1>
-              <div className="button">
-                <div className="follow-buttons">
-                  {offset === 0 ? null : (
-                    <button className="follow" onClick={handleback}>
-                      이전
-                    </button>
-                  )}
-                  {hasnext ? (
-                    <button
-                      className="follow follow-option active"
-                      onClick={handlefront}
-                    >
-                      다음
-                    </button>
-                  ) : null}
-                </div>
-              </div>
-            </Box1>
-            <Ideabox>
-              <div className="container">
-                <div className="card-content">
-                  {post.map((post: any) => {
-                    return (
-                      <div>
-                        <img src={post?.url} />
-                        <h3>{post?.caption}</h3>
-                        <p>{post?.nickname}</p>
-                        <p>Like:{post?.likes}</p>
-                        <Link to={`/ideaview/${post?.id}`} className="text">
-                          <button
-                            className="main-button"
-                            onClick={() => handleIdealist(post)}
-                          >
-                            Read more
-                          </button>
-                        </Link>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </Ideabox>
-          </MainStyle>
-        </div>
-      </Main>
+          </div>
+        </Ideabox>
+      )}
     </div>
   );
 }

@@ -76,12 +76,13 @@ function App() {
     serwriterdata(name);
   };
   // post눌렀을 때 유저 데이터들을 모아주는 postDatas
-  const handleToView = (post: any) => {
+  const handleToView = (post: object) => {
     setpostDatas(post);
   };
   // 첫 화면 렌더링 시 권한요청먼저 함
   useEffect(() => {
     isAuthenticated();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -130,7 +131,6 @@ function App() {
           element={
             <IdeaView
               handleIdeaView={handleIdeaView}
-              postDatas={postDatas}
               usernickname={usernickname}
             />
           }
