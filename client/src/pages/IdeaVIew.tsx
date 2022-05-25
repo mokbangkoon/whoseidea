@@ -9,17 +9,16 @@ import { Link } from 'react-router-dom';
 
 const Headeridea = styled.div`
   font-size: 20px;
-  z-index: 30;
-  left: 30%;
 `;
 const Header = styled.div`
   position: absolute;
   width: 900px;
   height: 300px;
   left: 270px;
-  top: 190px;
+  top: 180px;
   background: url(header.png), #ffffff;
   border-radius: 20px;
+  z-index: 10;
 `;
 const Title = styled.div`
   position: absolute;
@@ -114,23 +113,23 @@ const Writer = styled.div`
 
 const View = styled.div`
   position: absolute;
-  left: 60%;
-  top: 1410px;
-  width: 100px;
+  left: 240px;
+  top: 1472px;
+  width: 250px;
   font-size: 20px;
 `;
 const Like = styled.div`
   position: absolute;
   top: 1450px;
   left: 100px;
-  width: 80px;
+  width: 200px;
   height: 30px;
-
+  font-size: 20px;
   & img {
     width: 40px;
     height: 40px;
     position: relative;
-    left: 100px;
+    left: 50px;
     top: -30px;
     cursor: pointer;
   }
@@ -140,8 +139,13 @@ const Comment = styled.div`
   top: 700px;
   left: 400px;
   & input {
-    width: 500px;
-    height: 40px;
+    width: 580px;
+    height: 45px;
+    z-index: 10;
+    margin-right: 200px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 10px 10px 10px 10px;
   }
   & button {
     width: 100px;
@@ -191,10 +195,12 @@ const Chat = styled.span`
     padding: 10px 24px;
     gap: 8px;
     position: absolute;
-    width: 127px;
+    width: 150px;
     height: 40px;
     left: 700px;
-    top: 1440px;
+    top: 1410px;
+    font-size: 18px;
+    font-weight: 600;
 
     /* M3/read-only/light/surface1 */
 
@@ -213,11 +219,10 @@ const Chat = styled.span`
 `;
 const Chat1 = styled.div`
   border-radius: 50%;
-  background-image: url(Vector.png);
   background-color: black;
   width: 50px;
-  top: 350px;
-  left: 300px;
+  top: 300px;
+  left: 50px;
   z-index: 10;
 `;
 
@@ -433,12 +438,12 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
             </View>
             <Like>
               <div>
-                <span>좋아요 {likes}</span>
                 {isHeart ? (
                   <img src="/images/하트.png" onClick={handleHeart} />
                 ) : (
                   <img src="/images/빈하트.png" onClick={handleHeart} />
                 )}
+                <span>좋아요 {likes}</span>
               </div>
             </Like>
           </Menu>
