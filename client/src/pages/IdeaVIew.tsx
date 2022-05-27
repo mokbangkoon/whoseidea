@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -337,7 +337,15 @@ const Commentbox1 = styled.div`
   }
 `;
 
-export default function IdeaView({ handleIdeaView, usernickname }: any) {
+type UserProps = {
+  handleIdeaView(name: string): void;
+  usernickname: string;
+};
+
+export default function IdeaView({ handleIdeaView, usernickname }: UserProps) {
+  // 아이디어 뷰 페이지
+  // 좋아요, 조회수, 쪽지 기능 , 댓글 기능 제공
+  // params에 몇번째 아이디어인지 넘겨받음.
   const { id } = useParams();
   const check = useSelector((state: RootState) => state.modal.check);
   const [isHeart, setisHeart] = useState(false);
@@ -390,7 +398,11 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
           .then(data => setallComment(data.data))
       );
   };
-  const handleInputValue = (key: any, e: any) => {
+  // userinfo를 객체로 입력받음.
+  const handleInputValue = (
+    key: string,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setuserinfo({ ...userinfo, postId: Number(id), [key]: e.target.value });
   };
   return (

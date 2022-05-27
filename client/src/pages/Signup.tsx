@@ -250,7 +250,10 @@ function Signup() {
   );
   const password = useSelector((state: RootState) => state.signup.password);
   const dispatch = useDispatch();
-  const handleSignupValue = (key: string, event: any) => {
+  const handleSignupValue = (
+    key: string,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     dispatch(signupdata({ [key]: event.target.value }));
   };
   // 이메일 유효성 검사
@@ -319,7 +322,7 @@ function Signup() {
   };
   // 비밀번호 유효성 검사
   // 두 비밀번호가 서로 일치하는지 여부 검사
-  const checkpassword = (event: any) => {
+  const checkpassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.value !== password) {
       dispatch(
         passwordmessage({ passwordmessage: '비밀번호가 서로 같아야 합니다.' })
