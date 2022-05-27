@@ -102,7 +102,7 @@ const Inputtext = styled.div`
     bottom: 17.14%;
     background: #ffffff;
     border-radius: 14px;
-    font-size: 25px;
+    font-size: 24px;
     font-weight: 500;
   }
 `;
