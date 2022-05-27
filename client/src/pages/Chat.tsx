@@ -148,7 +148,6 @@ const ImgContainer = styled.div`
   left: 110px;
   right: 150px;
   top: 200px;
-  background: url(쪽지.png), #d9d9d9;
   width: 600px;
   height: 200px;
 `;
