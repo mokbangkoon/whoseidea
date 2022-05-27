@@ -1,7 +1,7 @@
 import axios from 'axios';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
 axios.defaults.withCredentials = true;
@@ -246,18 +246,48 @@ const MobileContainer = styled.div`
   position: relative;
   top: 20%;
 `;
+const More = styled.div`
+  height: 300px;
+  width: 100px;
+`;
 type UserProps = {
   handleToView(post: string[]): void;
 };
 export default function IdeaList({ handleToView }: UserProps) {
+  const pageEnd = document.querySelector('.more');
   const [offset, setOffset] = useState(0);
   const [hasnext, sethasnext] = useState(false);
   const [post, setPost] = useState<string[]>([]);
   const [pagenum, setPageNum] = useState(1);
+  const [mobilePost, setMobilePost] = useState<string[]>([]);
 
   const handleIdealist = (post: string[]) => {
     handleToView(post);
   };
+
+  // offset으로 페이지네이션 구현
+  // next버튼 클릭시 9개씩 데이터 출력하고 pagenum 1증가
+
+  const handleback = () => {
+    setOffset(offset - 9);
+    setPageNum(pagenum - 1);
+  };
+  const handlefront = () => {
+    setOffset(offset + 9);
+    setPageNum(pagenum + 1);
+  };
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
+
+  const fetchData = (items: any[]) => {
+    setMobilePost([...mobilePost, ...items]);
+  };
+
+  const loadMore = () => {
+    setPageNum(pagenum + 1);
+  };
+
   // pagenum 이 1씩 증가할때마다 서버에 저장된 데이터 9개씩 날라옴
   // 저장된 데이터를 요청해서 불러올 때 map을 이용해서 데이터를 뿌림
   // 이미지를 올리지 않았으면 default 이미지를 출력
@@ -285,24 +315,24 @@ export default function IdeaList({ handleToView }: UserProps) {
         }
         setPost(items);
         sethasnext(!!items);
+        fetchData(items);
       });
     });
   }, [pagenum]);
 
-  // offset으로 페이지네이션 구현
-  // next버튼 클릭시 9개씩 데이터 출력하고 pagenum 1증가
-
-  const handleback = () => {
-    setOffset(offset - 9);
-    setPageNum(pagenum - 1);
-  };
-  const handlefront = () => {
-    setOffset(offset + 9);
-    setPageNum(pagenum + 1);
-  };
-  const isPc = useMediaQuery({
-    query: '(min-width:768px)',
-  });
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries: any) => {
+        if (entries[0].isIntersecting) {
+          loadMore();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    if (pageEnd !== null) {
+      observer.observe(pageEnd);
+    }
+  }, [pageEnd]);
 
   return (
     <div>
@@ -430,7 +460,7 @@ export default function IdeaList({ handleToView }: UserProps) {
             <MobileIdeabox>
               <div className="container">
                 <div className="card-content">
-                  {post.map((post: any) => {
+                  {mobilePost.map((post: any) => {
                     return (
                       <div>
                         <img src={post?.url} />
@@ -448,6 +478,9 @@ export default function IdeaList({ handleToView }: UserProps) {
                       </div>
                     );
                   })}
+                  <More>
+                    <div className="more"> 더보기 </div>
+                  </More>
                 </div>
               </div>
             </MobileIdeabox>
