@@ -246,11 +246,15 @@ const MobileContainer = styled.div`
   position: relative;
   top: 20%;
 `;
+const More = styled.div`
+  height: 300px;
+  width: 100px;
+`;
 type UserProps = {
   handleToView(post: string[]): void;
 };
 export default function IdeaList({ handleToView }: UserProps) {
-  const pageEnd = useRef<any>();
+  const pageEnd = document.querySelector('.more');
   const [offset, setOffset] = useState(0);
   const [hasnext, sethasnext] = useState(false);
   const [post, setPost] = useState<string[]>([]);
@@ -316,6 +320,20 @@ export default function IdeaList({ handleToView }: UserProps) {
     });
   }, [pagenum]);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries: any) => {
+        if (entries[0].isIntersecting) {
+          loadMore();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    if (pageEnd !== null) {
+      observer.observe(pageEnd);
+    }
+  }, [pageEnd]);
+
   return (
     <div>
       {isPc ? (
@@ -379,7 +397,7 @@ export default function IdeaList({ handleToView }: UserProps) {
               <Ideabox>
                 <div className="container">
                   <div className="card-content">
-                    {mobilePost.map((post: any) => {
+                    {post.map((post: any) => {
                       return (
                         <div>
                           <img src={post?.url} />
@@ -442,7 +460,7 @@ export default function IdeaList({ handleToView }: UserProps) {
             <MobileIdeabox>
               <div className="container">
                 <div className="card-content">
-                  {post.map((post: any) => {
+                  {mobilePost.map((post: any) => {
                     return (
                       <div>
                         <img src={post?.url} />
@@ -460,7 +478,9 @@ export default function IdeaList({ handleToView }: UserProps) {
                       </div>
                     );
                   })}
-                  <div ref={pageEnd}> 더 보기 </div>
+                  <More>
+                    <div className="more"> 더보기 </div>
+                  </More>
                 </div>
               </div>
             </MobileIdeabox>
