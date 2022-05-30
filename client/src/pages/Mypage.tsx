@@ -558,7 +558,7 @@ export default function Mypage({
                             handleMypost();
                           }}
                         >
-                          내가 쓴 게시글 보기
+                          나의 아이디어 보기
                         </div>
                       </Link>
                     </div>
@@ -574,7 +574,7 @@ export default function Mypage({
                             handleMycomment();
                           }}
                         >
-                          내가 쓴 댓글 보기
+                          나의 댓글 보기
                         </div>
                       </Link>
                     </div>

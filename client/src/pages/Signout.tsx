@@ -8,28 +8,88 @@ import { useNavigate } from 'react-router-dom';
 import { islogin } from '../modules/islogin';
 import { useMediaQuery } from 'react-responsive';
 
-const Title = styled.div`
-  font-weight: bold;
-  font-size: 100px;
-  text-align: center;
+const All = styled.div`
+  box-sizing: border-box;
   position: absolute;
-  color: black;
-  border-radius: 1rem;
-  left: 25%;
-  font-family: 'Courier New', Courier, monospace;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
-    drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
-    drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  border-radius: 10px;
+  left: 18.75%;
+  right: 18.75%;
+  top: 9.96%;
+  bottom: 21.68%;
+  width: 900px;
+  height: 1150px;
+  top: 204px;
+  left: 270px;
+  background: rgba(13, 52, 112, 0.8);
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  /* Note: backdrop-filter has minimal browser support */
+  border-radius: 20px;
+`;
+const Title = styled.div`
+  position: absolute;
+  width: 500px;
+  height: 72px;
+  left: 65%;
+  top: 30px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+`;
+const Body = styled.div`
+  position: absolute;
+  width: 750px;
+  height: 900px;
+  left: 80px;
+  right: 20px;
+  top: 150px;
+  background: #fafafa;
+  border-radius: 55px;
+`;
+const Headertext = styled.div`
+  position: absolute;
+  width: 500px;
+  height: 72px;
+  left: 50px;
+  top: 30px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+`;
+const Bodytext = styled.div`
+  position: absolute;
+  width: 300px;
+  height: 72px;
+  left: 270px;
+  top: 200px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #000000;
 `;
 const Input1 = styled.div`
   position: absolute;
-  top: 30%;
-  left: 35%;
+  top: 40%;
+  left: 18%;
   & input {
-    width: 300px;
+    width: 500px;
     height: 50px;
-    left: 200px;
     font-size: 20px;
     text-align: center;
     background: rgba(196, 196, 196, 0.09);
@@ -41,12 +101,11 @@ const Input1 = styled.div`
 `;
 const Input2 = styled.div`
   position: absolute;
-  top: 40%;
-  left: 35%;
+  top: 50%;
+  left: 18%;
   & input {
-    width: 300px;
+    width: 500px;
     height: 50px;
-    left: 200px;
     font-size: 20px;
     text-align: center;
     background: rgba(196, 196, 196, 0.09);
@@ -59,19 +118,44 @@ const Input2 = styled.div`
 const Btn = styled.div`
   & button {
     position: absolute;
-    top: 50%;
-    left: 38%;
-    border-radius: 1rem;
-    width: 10%;
+    top: 60%;
+    left: 35%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 24px;
+    gap: 8px;
+    border-radius: 100px;
+    width: 80px;
     height: 40px;
-    border: none;
-    background-color: #e5f056;
-    font-weight: bold;
-    :hover {
-      background-color: #353333;
-      color: white;
-      transition: 0.5s;
-    }
+    margin-top: 20px;
+    border-radius: 1px solid black;
+    background: #eceef3;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
+    width: 200px;
+    height: 40px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 20px;
+    /* identical to box height, or 100% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.1px;
+    color: #5d449d;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    border-radius: 1px solid black;
+    text-decoration: none;
   }
 `;
 const Error = styled.div`
@@ -212,34 +296,43 @@ export default function Signout() {
     <div>
       {check ? <Login /> : null}
       {isPc ? (
-        <div>
-          <Title>
-            <div> 회원탈퇴 페이지</div>
-          </Title>
+        <All>
           <div>
-            <Input1>
-              <input
-                type="text"
-                placeholder="현재 아이디"
-                onChange={e => handleInputValue('email', e)}
-              ></input>
-            </Input1>
-            <Input2>
-              <input
-                type="password"
-                placeholder="현재 비밀번호"
-                onChange={e => handleInputValue('password', e)}
-              ></input>
-            </Input2>
-
-            <Btn>
+            <Headertext>
+              <h1>Whose idea?</h1>
+            </Headertext>
+            <Title>
+              <div> 회원탈퇴 페이지</div>
+            </Title>
+            <Body>
+              <Bodytext>
+                <h1>회원 탈퇴</h1>
+              </Bodytext>
               <div>
-                <button onClick={() => handleSignout()}>확인</button>
+                <Input1>
+                  <input
+                    type="text"
+                    placeholder="현재 아이디"
+                    onChange={e => handleInputValue('email', e)}
+                  ></input>
+                </Input1>
+                <Input2>
+                  <input
+                    type="password"
+                    placeholder="현재 비밀번호"
+                    onChange={e => handleInputValue('password', e)}
+                  ></input>
+                </Input2>
+                <Btn>
+                  <div>
+                    <button onClick={() => handleSignout()}>확인</button>
+                  </div>
+                </Btn>
+                {errorMessage === '' ? null : <Error>{errorMessage}</Error>}
               </div>
-            </Btn>
-            {errorMessage === '' ? null : <Error>{errorMessage}</Error>}
+            </Body>
           </div>
-        </div>
+        </All>
       ) : (
         <div>
           <TitleM>
