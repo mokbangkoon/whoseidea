@@ -38,7 +38,7 @@ const Title = styled.div`
   text-align: center;
   letter-spacing: -0.5px;
   text-transform: uppercase;
-
+  white-space: normal;
   color: #000000;
   /* Inside auto layout */
   flex: none;
