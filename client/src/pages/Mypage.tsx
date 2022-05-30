@@ -7,30 +7,48 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from 'react-responsive';
 
-const Title = styled.div`
-  font-weight: bold;
-  font-size: 100px;
-  text-align: center;
+const All = styled.div`
+  box-sizing: border-box;
   position: absolute;
-  color: black;
-  border-radius: 1rem;
-  left: 20%;
-  font-family: 'Courier New', Courier, monospace;
-  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
-    drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25))
-    drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-  border-radius: 10px;
+  left: 18.75%;
+  right: 18.75%;
+  top: 9.96%;
+  bottom: 21.68%;
+  width: 900px;
+  height: 1400px;
+  top: 204px;
+  left: 270px;
+  background: rgba(13, 52, 112, 0.8);
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  /* Note: backdrop-filter has minimal browser support */
+  border-radius: 20px;
 `;
-const Right = styled.div`
+const Title = styled.div`
   position: absolute;
-  left: 6%;
-  top: 8%;
-  bottom: 0%;
-  background: linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 0.2),
-    rgba(255, 255, 255, 0.2)
-  );
+  width: 500px;
+  height: 72px;
+  left: 75%;
+  top: 30px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+`;
+const Body = styled.div`
+  position: absolute;
+  width: 850px;
+  height: 1270px;
+  left: 20px;
+  right: 20px;
+  top: 100px;
+  background: #ffffff;
+  border-radius: 55px;
 `;
 const Left = styled.div`
   position: absolute;
@@ -41,15 +59,21 @@ const Left = styled.div`
   background: rgba(80, 181, 33, 0.08);
 `;
 
-const Img = styled.div`
-  font-weight: bold;
-  font-size: xx-large;
+const Headertext = styled.div`
+  position: absolute;
+  width: 500px;
+  height: 72px;
+  left: 50px;
+  top: 30px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 30px;
+  display: flex;
+  align-items: center;
   text-align: center;
-  color: #201f1f;
-  & img {
-    height: 100vh;
-    width: 100vh;
-  }
+  color: #ffffff;
 `;
 const UserContainer = styled.div`
   font-weight: bold;
@@ -62,23 +86,219 @@ const UserContainer = styled.div`
 `;
 
 const Line = styled.div`
-  background-color: white;
+  position: absolute;
+  width: 159px;
+  height: 25px;
+  left: 400px;
+  top: 350px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 50px;
+  line-height: 59px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #110229;
 `;
 
 const Button = styled.div`
-  border-radius: 1rem;
-  :hover {
-    background-color: #f1bdbd;
-    transition: 0.5s;
-    cursor: pointer;
-  }
-  .text {
+  .text1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 24px;
+    gap: 8px;
+    border-radius: 100px;
+    width: 80px;
+    height: 40px;
+    margin-left: 120px;
+    margin-top: -200px;
+    border-radius: 1px solid black;
+    background: #0d3470;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
+    width: 500px;
+    height: 60px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 20px;
+    /* identical to box height, or 100% */
+    display: flex;
+    align-items: center;
+    text-align: center;
     text-decoration: none;
-    color: #131212;
-    font-weight: bold;
+    letter-spacing: 0.1px;
+    color: #ffffff;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    border-radius: 1px solid black;
+  }
+  .text2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 24px;
+    gap: 8px;
+    border-radius: 100px;
+    width: 80px;
+    height: 40px;
+    margin-left: 120px;
+    margin-top: 30px;
+    border-radius: 1px solid black;
+    background: #0d3470;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
+    width: 500px;
+    height: 60px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 20px;
+    /* identical to box height, or 100% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 0.1px;
+    color: #ffffff;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    border-radius: 1px solid black;
+  }
+  .text3 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 24px;
+    gap: 8px;
+    border-radius: 100px;
+    width: 80px;
+    height: 40px;
+    margin-left: 120px;
+    margin-top: 30px;
+    border-radius: 1px solid black;
+    background: #0d3470;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
+    width: 500px;
+    height: 60px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 20px;
+    /* identical to box height, or 100% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 0.1px;
+    color: #ffffff;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    border-radius: 1px solid black;
+  }
+  .text4 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 24px;
+    gap: 8px;
+    border-radius: 100px;
+    width: 80px;
+    height: 40px;
+    margin-left: 120px;
+    margin-top: 30px;
+    border-radius: 1px solid black;
+    background: #0d3470;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
+    width: 500px;
+    height: 60px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 20px;
+    /* identical to box height, or 100% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 0.1px;
+    color: #ffffff;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    border-radius: 1px solid black;
+  }
+  .text5 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 24px;
+    gap: 8px;
+    border-radius: 100px;
+    width: 80px;
+    height: 40px;
+    margin-left: 120px;
+    margin-top: 30px;
+    border-radius: 1px solid black;
+    background: #0d3470;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
+    width: 500px;
+    height: 60px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 40px;
+    line-height: 20px;
+    /* identical to box height, or 100% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    letter-spacing: 0.1px;
+    color: #ffffff;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    border-radius: 1px solid black;
   }
 `;
-
 const UserImage = styled.div`
   position: absolute;
   top: 20%;
@@ -87,21 +307,52 @@ const UserImage = styled.div`
 
 const File = styled.div`
   img {
-    position: relative;
-    left: 8%;
-    width: 50%;
-    height: 50%;
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    left: 320px;
+    bottom: 85%;
+    background: url(pngwing.png);
   }
   label {
-    margin: 20px;
-    padding: 6px 25px;
-    background-color: #ff6600;
-    border-radius: 4px;
-    color: white;
-    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 24px;
+    gap: 8px;
+    border-radius: 100px;
+    width: 80px;
+    height: 40px;
+    margin-left: 250px;
+    margin-top: 20px;
+    border-radius: 1px solid black;
+    background: #eceef3;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
+    width: 100px;
+    height: 30px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+    /* identical to box height, or 100% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.1px;
+    color: #5d449d;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    border-radius: 1px solid black;
   }
   .name {
-    margin: 20px;
     display: inline-block;
     height: 40px;
     padding: 0 50px;
@@ -109,6 +360,11 @@ const File = styled.div`
     border: 1px solid #dddddd;
     width: 90%;
     color: #999999;
+    margin-top: 160px;
+    width: 400px;
+    margin-left: 160px;
+    border-radius: 1px solid black;
+    font-size: 16px;
   }
   input[type='file'] {
     position: absolute;
@@ -121,18 +377,40 @@ const File = styled.div`
     border: 0;
   }
   button {
-    margin: 20px;
-    background-color: #ffae00;
-    border-radius: 1rem;
-    font-weight: bold;
-    width: 120px;
-    height: 30px;
-    border: none;
-    :hover {
-      background-color: #d17812;
-      transition: 0.5s;
-      cursor: pointer;
-    }
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 24px;
+    gap: 8px;
+    border-radius: 100px;
+    width: 156px;
+    height: 60px;
+    margin-left: 440px;
+    margin-top: -48px;
+    background: #eceef3;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
+    width: 180px;
+    height: 50px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 20px;
+    /* identical to box height, or 100% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.1px;
+    color: #5d449d;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
   }
 `;
 const Mobileimg = styled.div`
@@ -208,130 +486,18 @@ export default function Mypage({
 
   return (
     <div>
-      <div>{check ? <Login /> : null}</div>
-      <div>
-        {isPc ? (
-          <div>
-            <Left>
-              <Img>
-                <div>당신의 아이디어가 세상을 바꿉니다</div>
-                <img src="mypage.png" />
-              </Img>
-            </Left>
-            <Right>
+      <All>
+        <div>{check ? <Login /> : null}</div>
+        <div>
+          {isPc ? (
+            <div>
+              <Headertext>
+                <h1>Whose idea?</h1>
+              </Headertext>
               <Title>
-                <div>Mypage</div>
+                <div>My Page</div>
               </Title>
-              <UserImage>
-                <File>
-                  <img src={profile} />
-                  <div>
-                    <input
-                      className="name"
-                      readOnly
-                      value={filename}
-                      placeholder="첨부파일"
-                    />
-                    <label htmlFor="inputfile">파일선택</label>
-                    <input
-                      type="file"
-                      name="file"
-                      id="inputfile"
-                      accept="image/*"
-                      onChange={event => handleFileInput(event)}
-                    />
-                    <div>
-                      <button onClick={() => handlePost()}>
-                        프로필 변경하기
-                      </button>
-                    </div>
-                  </div>
-                </File>
-              </UserImage>
-              <UserContainer>
-                <Line>
-                  <div></div>
-                </Line>
-                <div>회원 닉네임 </div>
-                <div>{nickname}</div>
-                <Line>
-                  <div>ㅤ</div>
-                </Line>
-                <Button>
-                  <div>
-                    <Link to="/updatepro" className="text ">
-                      <div>회원정보 수정</div>
-                    </Link>
-                  </div>
-                </Button>
-                <Line>
-                  <div>ㅤ</div>
-                </Line>
-                {isgooglelogin ? null : (
-                  <Button>
-                    <div>
-                      <Link to="/signout" className="text ">
-                        <div>회원 탈퇴</div>
-                      </Link>
-                    </div>
-                  </Button>
-                )}
-                <Line>
-                  <div>ㅤ</div>
-                </Line>
-                <Button>
-                  <div>
-                    <Link to="/mypost" className="text">
-                      <div
-                        onClick={() => {
-                          handleMypost();
-                        }}
-                      >
-                        내가 쓴 게시글 보기
-                      </div>
-                    </Link>
-                  </div>
-                </Button>
-                <Line>
-                  <div>ㅤ</div>
-                </Line>
-                <Button>
-                  <div>
-                    <Link to="/mycomment" className="text">
-                      <div
-                        onClick={() => {
-                          handleMycomment();
-                        }}
-                      >
-                        내가 쓴 댓글 보기
-                      </div>
-                    </Link>
-                  </div>
-                </Button>
-                <Line>
-                  <div>ㅤ</div>
-                </Line>
-                <Button>
-                  <div>
-                    <Link to="/mychat" className="text ">
-                      <div onClick={() => handleMychat()}>쪽지 보관함</div>
-                    </Link>
-                  </div>
-                </Button>
-              </UserContainer>
-            </Right>
-          </div>
-        ) : (
-          <div>
-            <Left>
-              <Mobileimg>
-                <div>당신의 아이디어가 세상을 바꿉니다</div>
-                <img src="mypage.png" />
-              </Mobileimg>
-              <Right>
-                <Title>
-                  <div>Mypage</div>
-                </Title>
+              <Body>
                 <UserImage>
                   <File>
                     <img src={profile} />
@@ -342,7 +508,7 @@ export default function Mypage({
                         value={filename}
                         placeholder="첨부파일"
                       />
-                      <label htmlFor="inputfile">파일선택</label>
+                      <label htmlFor="inputfile">파일 선택</label>
                       <input
                         type="file"
                         name="file"
@@ -358,18 +524,13 @@ export default function Mypage({
                     </div>
                   </File>
                 </UserImage>
+                <Line>
+                  <h2>{nickname}</h2>
+                </Line>
                 <UserContainer>
-                  <Line>
-                    <div></div>
-                  </Line>
-                  <div>회원 닉네임 </div>
-                  <div>{nickname}</div>
-                  <Line>
-                    <div>ㅤ</div>
-                  </Line>
                   <Button>
                     <div>
-                      <Link to="/updatepro" className="text ">
+                      <Link to="/updatepro" className="text1">
                         <div>회원정보 수정</div>
                       </Link>
                     </div>
@@ -380,7 +541,7 @@ export default function Mypage({
                   {isgooglelogin ? null : (
                     <Button>
                       <div>
-                        <Link to="/signout" className="text ">
+                        <Link to="/signout" className="text2">
                           <div>회원 탈퇴</div>
                         </Link>
                       </div>
@@ -391,11 +552,10 @@ export default function Mypage({
                   </Line>
                   <Button>
                     <div>
-                      <Link to="/mypost" className="text">
+                      <Link to="/mypost" className="text3">
                         <div
                           onClick={() => {
                             handleMypost();
-                            handleMycomment();
                           }}
                         >
                           내가 쓴 게시글 보기
@@ -408,17 +568,129 @@ export default function Mypage({
                   </Line>
                   <Button>
                     <div>
-                      <Link to="/mychat" className="text ">
+                      <Link to="/mycomment" className="text4">
+                        <div
+                          onClick={() => {
+                            handleMycomment();
+                          }}
+                        >
+                          내가 쓴 댓글 보기
+                        </div>
+                      </Link>
+                    </div>
+                  </Button>
+                  <Line>
+                    <div>ㅤ</div>
+                  </Line>
+                  <Button>
+                    <div>
+                      <Link to="/mychat" className="text5">
                         <div onClick={() => handleMychat()}>쪽지 보관함</div>
                       </Link>
                     </div>
                   </Button>
                 </UserContainer>
-              </Right>
-            </Left>
-          </div>
-        )}
-      </div>
+              </Body>
+            </div>
+          ) : (
+            <div>
+              <Left>
+                <Mobileimg>
+                  <div>당신의 아이디어가 세상을 바꿉니다</div>
+                  <img src="mypage.png" />
+                </Mobileimg>
+                <Body>
+                  <Title>
+                    <div>Mypage</div>
+                  </Title>
+                  <UserImage>
+                    <File>
+                      <img src={profile} />
+                      <div>
+                        <input
+                          className="name"
+                          readOnly
+                          value={filename}
+                          placeholder="첨부파일"
+                        />
+                        <label htmlFor="inputfile">파일선택</label>
+                        <input
+                          type="file"
+                          name="file"
+                          id="inputfile"
+                          accept="image/*"
+                          onChange={event => handleFileInput(event)}
+                        />
+                        <div>
+                          <button onClick={() => handlePost()}>
+                            프로필 변경하기
+                          </button>
+                        </div>
+                      </div>
+                    </File>
+                  </UserImage>
+                  <UserContainer>
+                    <Line>
+                      <div></div>
+                    </Line>
+                    <div>회원 닉네임 </div>
+                    <div>{nickname}</div>
+                    <Line>
+                      <div>ㅤ</div>
+                    </Line>
+                    <Button>
+                      <div>
+                        <Link to="/updatepro" className="text ">
+                          <div>회원정보 수정</div>
+                        </Link>
+                      </div>
+                    </Button>
+                    <Line>
+                      <div>ㅤ</div>
+                    </Line>
+                    {isgooglelogin ? null : (
+                      <Button>
+                        <div>
+                          <Link to="/signout" className="text ">
+                            <div>회원 탈퇴</div>
+                          </Link>
+                        </div>
+                      </Button>
+                    )}
+                    <Line>
+                      <div>ㅤ</div>
+                    </Line>
+                    <Button>
+                      <div>
+                        <Link to="/mypost" className="text">
+                          <div
+                            onClick={() => {
+                              handleMypost();
+                              handleMycomment();
+                            }}
+                          >
+                            내가 쓴 게시글 보기
+                          </div>
+                        </Link>
+                      </div>
+                    </Button>
+                    <Line>
+                      <div>ㅤ</div>
+                    </Line>
+                    <Button>
+                      <div>
+                        <Link to="/mychat" className="text5">
+                          <div onClick={() => handleMychat()}>쪽지 보관함</div>
+                        </Link>
+                      </div>
+                    </Button>
+                  </UserContainer>
+                </Body>
+              </Left>
+            </div>
+          )}
+        </div>
+      </All>
     </div>
   );
 }
