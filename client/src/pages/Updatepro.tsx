@@ -29,7 +29,7 @@ const Title = styled.div`
   position: absolute;
   width: 500px;
   height: 72px;
-  left: 65%;
+  left: 55%;
   top: 30px;
   font-family: 'Roboto';
   font-style: normal;
@@ -148,7 +148,7 @@ const Btn2 = styled.div`
   & button {
     position: absolute;
     top: 60%;
-    left: 28%;
+    left: 26%;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -166,12 +166,12 @@ const Btn2 = styled.div`
     order: 0;
     align-self: stretch;
     flex-grow: 1;
-    width: 300px;
+    width: 320px;
     height: 50px;
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 700;
-    font-size: 30px;
+    font-size: 25px;
     line-height: 20px;
     /* identical to box height, or 100% */
     display: flex;
