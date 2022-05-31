@@ -82,7 +82,7 @@ const Bodytext = styled.div`
 const Writer = styled.div`
   box-sizing: border-box;
   position: absolute;
-  width: 600px;
+  width: 590px;
   height: 100px;
   background: #0d3470;
   border: 1px solid #000000;
