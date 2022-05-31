@@ -26,7 +26,7 @@ const Title = styled.div`
   position: absolute;
   width: 500px;
   height: 72px;
-  left: 60%;
+  left: 50%;
   top: 30px;
   font-family: 'Roboto';
   font-style: normal;
@@ -68,13 +68,13 @@ const Bodytext = styled.div`
   position: absolute;
   width: 400px;
   height: 72px;
-  left: 220px;
+  left: 240px;
   top: 200px;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
   font-size: 30px;
-  line-height: 30px;
+  line-height: 40px;
   display: flex;
   align-items: center;
   text-align: center;
@@ -82,7 +82,7 @@ const Bodytext = styled.div`
 `;
 const Input1 = styled.div`
   position: absolute;
-  top: 40%;
+  top: 38%;
   left: 18%;
   & input {
     width: 500px;
@@ -98,7 +98,7 @@ const Input1 = styled.div`
 `;
 const Input2 = styled.div`
   position: absolute;
-  top: 50%;
+  top: 48%;
   left: 18%;
   & input {
     width: 500px;
@@ -127,7 +127,7 @@ const Btn = styled.div`
     border-radius: 100px;
     width: 80px;
     height: 40px;
-    margin-top: 20px;
+    margin-top: 30px;
     border-radius: 1px solid black;
     background: #eceef3;
     /* Inside auto layout */
@@ -165,8 +165,8 @@ const Error = styled.div`
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: 0.25rem;
-  top: 60%;
-  left: 38%;
+  top: 57%;
+  left: 35%;
   animation: FadeDown 1s;
   font-size: large;
   font-weight: bold;
