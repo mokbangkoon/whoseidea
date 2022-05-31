@@ -69,14 +69,14 @@ const Headertext = styled.div`
 `;
 const Bodytext = styled.div`
   position: absolute;
-  width: 300px;
+  width: 400px;
   height: 72px;
   left: 250px;
   top: 200px;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
-  font-size: 30px;
+  font-size: 25px;
   line-height: 30px;
   display: flex;
   align-items: center;
