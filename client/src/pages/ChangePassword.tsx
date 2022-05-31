@@ -4,6 +4,7 @@ import Login from '../components/Login';
 import styled from 'styled-components';
 import { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const All = styled.div`
   box-sizing: border-box;
@@ -156,6 +157,49 @@ const Btn = styled.div`
     text-decoration: none;
   }
 `;
+const Btn2 = styled.div`
+  & button {
+    position: absolute;
+    top: 70%;
+    left: 26%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 24px;
+    gap: 8px;
+    border-radius: 100px;
+    width: 80px;
+    height: 40px;
+    margin-top: 20px;
+    border-radius: 1px solid black;
+    background: #eceef3;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 1;
+    width: 320px;
+    height: 50px;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 20px;
+    /* identical to box height, or 100% */
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.1px;
+    color: #5d449d;
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    border-radius: 1px solid black;
+    text-decoration: none;
+  }
+`;
 const Error = styled.div`
   color: #721c24;
   background-color: #f8d7da;
@@ -233,6 +277,13 @@ export default function Updatepro() {
                 <button onClick={() => handleUpdatepassword()}>확인</button>
               </div>
             </Btn>
+            <Btn2>
+              <div>
+                <Link to="/Mypage">
+                  <button>My Page</button>
+                </Link>
+              </div>
+            </Btn2>
             {/* 에러메세지가 빈문자열이라면 아무것도 출력하지 않는다. */}
             {errorMessage === '' ? null : <Error>{errorMessage}</Error>}
           </div>
