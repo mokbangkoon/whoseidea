@@ -57,7 +57,7 @@ export async function viewPost(req: Request, res: Response) {
         likes: number,
         view: number,
         context: string,
-        created_at: Date,
+        created_at: string,
     }
 
     const nicknameAndViewPosts: NicknameAndViewPosts[] = []
@@ -74,7 +74,10 @@ export async function viewPost(req: Request, res: Response) {
         likes: post.likes,
         view: post.view,
         context: post.context,
-        created_at: post.created_at
+        created_at: new Date( + new Date(post.created_at) + 3240 * 10000)
+        .toISOString()
+        .replace("T", " ")
+        .replace(/\..*/, '')
     })
 
     // 이미 좋아요를 누른 유저인 경우, boolean값을 참으로 전달
