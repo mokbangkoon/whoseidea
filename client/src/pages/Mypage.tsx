@@ -394,7 +394,7 @@ const File = styled.div`
     order: 0;
     align-self: stretch;
     flex-grow: 1;
-    width: 180px;
+    width: 210px;
     height: 50px;
     font-family: 'Roboto';
     font-style: normal;
