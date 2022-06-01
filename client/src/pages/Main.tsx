@@ -54,6 +54,19 @@ const Title = styled.div`
   h1 {
     padding: 100px;
     font-size: 100px;
+    animation: fadein 2s;
+  }
+  p {
+    animation: fadein 3s;
+    animation-duration: 4s;
+  }
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 `;
 const First = styled.div`
@@ -194,8 +207,6 @@ const ChatContainer = styled.div`
   font-weight: bold;
   display: flex;
   margin-top: 100px;
-  img {
-  }
 `;
 const MobileContainer = styled.div`
   position: absolute;

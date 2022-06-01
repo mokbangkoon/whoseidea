@@ -2,22 +2,20 @@ import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-left: 10%;
+
+  margin-left: 100px;
 `;
 const Text = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 40px;
-  width: 100%;
-  height: 300px;
-  overflow: hidden;
-  justify-content: center;
+  padding: 100px;
+  max-width: 80%;
+  min-width: 40%;
 `;
 const GifContainer = styled.div`
   img {
-    width: 500px;
+    max-width: 80%;
+    min-width: 40%;
     height: 400px;
     padding: 20px;
   }

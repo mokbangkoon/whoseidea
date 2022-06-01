@@ -8,6 +8,7 @@ const Text = styled.div`
   flex-direction: column;
   height: 300px;
   padding: 50px;
+  overflow: hidden;
 `;
 const GifContainer = styled.div`
   img {
