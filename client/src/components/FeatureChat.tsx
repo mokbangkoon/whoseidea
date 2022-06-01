@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  margin-left: 10%;
 `;
 const Text = styled.div`
   display: flex;
@@ -15,9 +18,8 @@ const Text = styled.div`
 const GifContainer = styled.div`
   img {
     width: 500px;
-    height: 300px;
-    padding: 50px;
-    margin-left: 140px;
+    height: 400px;
+    padding: 20px;
   }
 `;
 export default function FeatureChat() {

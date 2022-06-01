@@ -67,10 +67,10 @@ export default function Mypost({ postData }: any) {
           </Writer>
           <Data>
             <div>
-              {postData.data.map((el: any) => (
+              {postData.data.map((el: any, index: number) => (
                 <Link to={`/ideaview/${el.id}`}>
                   <OnlyData>
-                    <div>{el.caption}</div>
+                    <div className={`postNum${index}`}>{el.caption}</div>
                   </OnlyData>
                 </Link>
               ))}

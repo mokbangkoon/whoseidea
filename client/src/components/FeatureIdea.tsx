@@ -1,21 +1,17 @@
 import styled from 'styled-components';
 const Container = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: space-between;
 `;
 const Text = styled.div`
-  justify-content: center;
   display: flex;
   flex-direction: column;
-  width: 100%;
   height: 300px;
   padding: 50px;
-  margin-left: 50px;
-  overflow: hidden;
 `;
 const GifContainer = styled.div`
   img {
-    width: 500px;
+    width: 600px;
     height: 300px;
     padding: 50px;
   }

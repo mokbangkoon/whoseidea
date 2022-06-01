@@ -18,7 +18,6 @@ const All = styled.div`
   height: 200vw;
   box-sizing: border-box;
   margin: 0;
-  padding: 100px;
   border: 0;
 `;
 
@@ -26,16 +25,13 @@ const MainStyle = styled.div`
   background-color: #fffafa;
   font-weight: bold;
   text-align: center;
-  display: flex;
-  height: 15%;
-  width: 100%;
-  position: relative;
-  justify-content: center;
-
-  top: 2%;
   font-size: 1rem;
   border-radius: 1rem;
-  grid-column-gap: 2rem;
+  display: flex;
+  height: 500px;
+  justify-content: space-between;
+  margin-top: 50px;
+  padding: 50px;
 `;
 const Title = styled.div`
   position: relative;
@@ -48,13 +44,10 @@ const Title = styled.div`
   border-radius: 1rem;
   font-weight: bold;
   border: 1px solid #fffafa;
-  width: 100%;
-  left: 0%;
   height: 28%;
   text-align: center;
   font-size: 35px;
   color: #2c2222;
-  position: relative;
   line-height: 100px;
   align-items: center;
   flex-direction: column;
@@ -65,7 +58,6 @@ const Title = styled.div`
 `;
 const First = styled.div`
   border: 3px solid black;
-
   border-radius: 1rem;
   color: white;
   background-image: url('아인슈타인.png');
@@ -113,18 +105,17 @@ const Container = styled.div`
   background-color: #ffffff;
 `;
 const PositionContainer = styled.div`
-  position: relative;
   background-repeat: no-repeat;
   padding: 50px;
   width: 60%;
+  position: relative;
   overflow: hidden; // 선을 넘어간 이미지들은 보이지 않도록 처리합니다.
 `;
 
 const Next = styled.button`
   position: absolute;
-  top: 50%;
-  left: 86%;
-
+  top: 80%;
+  left: 70%;
   border: 1px solid coral;
   font-weight: bold;
   padding: 0.5em 2em;
@@ -140,7 +131,7 @@ const Next = styled.button`
 `;
 const Prev = styled.button`
   position: absolute;
-  top: 50%;
+  top: 80%;
 
   border: 1px solid coral;
   padding: 0.5em 2em;
@@ -159,11 +150,9 @@ const SliderContainer = styled.div`
   display: flex; //이미지들을 가로로 나열합니다.
 `;
 const TextContainer = styled.div`
-  position: relative;
   background-color: #000000;
   border-radius: 1rem;
-  left: 2%;
-  top: 50px;
+  margin-top: 50px;
   height: 550px;
   color: white;
   font-weight: bold;
@@ -191,19 +180,22 @@ const TextContainer = styled.div`
 `;
 const IdeaContainer = styled.div`
   background-color: #aaa2a2;
+  background-image: url('mainbulbs.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+
   border-radius: 1rem;
   font-weight: bold;
-  display: flex;
-  position: relative;
-  top: 6%;
+  margin-top: 100px;
 `;
 const ChatContainer = styled.div`
   background-color: #9ca19c;
   border-radius: 1rem;
   font-weight: bold;
   display: flex;
-  position: relative;
-  top: 3%;
+  margin-top: 100px;
+  img {
+  }
 `;
 const MobileContainer = styled.div`
   position: absolute;
@@ -419,6 +411,7 @@ export default function Main({
             ) : null}
           </Container>
           <ChatContainer>
+            <img src="send.jpg" />
             <FeatureChat />
           </ChatContainer>
           <IdeaContainer>
