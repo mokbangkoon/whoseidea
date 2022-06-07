@@ -2,74 +2,134 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../modules';
 import Login from '../components/Login';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-const Title = styled.div`
-  font-weight: bold;
-  font-size: 30px;
-  text-align: center;
+const Headeridea = styled.div`
+  font-size: 20px;
+`;
+const Header = styled.div`
   position: absolute;
+  width: 900px;
+  height: 300px;
+  left: 270px;
+  top: 180px;
+  background: url(header.png), #ffffff;
+  border-radius: 20px;
+  z-index: 10;
+`;
+const Title = styled.div`
+  position: absolute;
+  width: 342px;
+  height: 60px;
+  left: 820px;
+  top: 600px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 130%;
+  /* or 32px */
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: -0.5px;
+  text-transform: uppercase;
+  white-space: normal;
   color: #000000;
-  border-radius: 1rem;
-  left: 40%;
-  font-family: 'Courier New', Courier, monospace;
-  filter: drop-shadow(0px 4px 4px rgba(218, 105, 105, 0.25))
-    drop-shadow(4px 4px 4px rgba(56, 76, 141, 0.25))
-    drop-shadow(0px 4px 4px rgba(134, 51, 51, 0.25));
-  border-radius: 10px;
+  /* Inside auto layout */
+  flex: none;
+  order: 0;
+  flex-grow: 0;
 `;
 const SubTitle = styled.div`
-  font-weight: bold;
+  box-sizing: border-box;
+
   position: absolute;
-  font-size: large;
-  left: 10%;
-  top: 30%;
-  right: 10%;
-  width: 80%;
-  height: 500px;
-  background-color: #99fcff;
+  width: 900px;
+  height: 1200px;
+  left: 270px;
+  top: 520px;
+  background: rgba(239, 240, 243, 0.6);
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(8px);
+  /* Note: backdrop-filter has minimal browser support */
+  border-radius: 20px;
 `;
+const ContentNickname = styled.div`
+  position: absolute;
+  width: 118px;
+  height: 32px;
+  left: 770px;
+  top: 170px;
+  z-index: 10;
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 24px;
+  /* or 120% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #000000;
+`;
+const Contentbox = styled.div``;
 const Menu = styled.div`
   position: relative;
   top: -61%;
 `;
 const Writer = styled.div`
-  position: relative;
   & img {
-    width: 300px;
-    height: 300px;
+    box-sizing: border-box;
     position: absolute;
-    left: 800px;
+    width: 353px;
+    height: 606px;
+    left: 80px;
+    top: 60px;
+    background: url(.jpg), #ffffff;
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
   }
   & span {
-    position: relative;
-    top: -250px;
+    box-sizing: border-box;
+    position: absolute;
+    width: 350px;
+    height: 606px;
+    left: 736px;
+    top: 564px;
+    background: #ffffff;
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 20px;
   }
 `;
 
 const View = styled.div`
   position: absolute;
-  left: 40%;
-  top: 750px;
-  background-color: green;
-  width: 100px;
+  left: 240px;
+  top: 1472px;
+  width: 250px;
+  font-size: 20px;
 `;
 const Like = styled.div`
   position: absolute;
-  top: 750px;
-  left: 79%;
-  background-color: #f89c51;
-  width: 80px;
+  top: 1450px;
+  left: 100px;
+  width: 200px;
   height: 30px;
-
+  font-size: 20px;
   & img {
     width: 40px;
     height: 40px;
     position: relative;
-    left: 100px;
+    left: 50px;
     top: -30px;
     cursor: pointer;
   }
@@ -79,8 +139,13 @@ const Comment = styled.div`
   top: 700px;
   left: 400px;
   & input {
-    width: 500px;
-    height: 40px;
+    width: 580px;
+    height: 45px;
+    z-index: 10;
+    margin-right: 200px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 10px 10px 10px 10px;
   }
   & button {
     width: 100px;
@@ -99,38 +164,188 @@ const Comment = styled.div`
   }
 `;
 const Chat = styled.span`
-  position: absolute;
-  top: 750px;
+  width: 90px;
+  height: 25px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 22px;
+  /* identical to box height, or 125% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.1px;
+
+  /* M3/sys/light/primary */
+
+  color: #6750a4;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
   & button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 24px;
+    gap: 8px;
+    position: absolute;
     width: 150px;
-    height: 30px;
-    border-radius: 1rem;
-    background-color: #ffd000;
-    border: none;
-    font-weight: bold;
-    :hover {
-      background-color: blue;
-      transition: 0.5s;
-      color: white;
-    }
+    height: 40px;
+    left: 700px;
+    top: 1410px;
+    font-size: 18px;
+    font-weight: 600;
+
+    /* M3/read-only/light/surface1 */
+
+    background: linear-gradient(
+        0deg,
+        rgba(103, 80, 164, 0.05),
+        rgba(103, 80, 164, 0.05)
+      )
+      #fffbfe;
+    /* M3/Elevation Light/1 */
+
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3),
+      0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 100px;
   }
 `;
+const Chat1 = styled.div`
+  border-radius: 50%;
+  background-color: black;
+  width: 50px;
+  top: 300px;
+  left: 50px;
+  z-index: 10;
+`;
+
 const Context = styled.span`
+  width: 320px;
+  height: 400px;
+  top: 500px;
+  margin-left: 10px;
+  margin-top: 25%;
+  white-space: normal;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 130%;
+  /* or 20px */
+  text-align: justify;
+  display: flex;
+  align-items: center;
+  letter-spacing: 1px;
+  color: #000000;
+  /* Inside auto layout */
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+`;
+const Contextbox = styled.div`
+  box-sizing: border-box;
   position: absolute;
-  top: 30%;
+  width: 350px;
+  height: 600px;
+  left: 500px;
+  top: 60px;
+  margin-left: 10px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  line-height: 300px;
+  text-overflow: ellipsis;
+  white-space: normal;
 `;
 
 const CommentWriter = styled.div`
   color: red;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 20px;
+  margin-left: 40px;
+  margin-top: 10px;
 `;
 const Commentdata = styled.div`
   color: #0f0f0f;
-  font-size: 20px;
+  font-size: 18px;
+  margin-left: 40px;
+  margin-top: 10px;
+`;
+const Commentbox = styled.div`
+  box-sizing: border-box;
+  position: absolute;
+  width: 750px;
+  height: 284px;
+  left: -45px;
+  top: 580px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+`;
+const Commentbox1 = styled.div`
+  box-sizing: border-box;
+  position: absolute;
+  width: 750px;
+  height: 76px;
+  left: -45px;
+  top: 480px;
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  text-align: center;
+  margin-top: 10px;
+  .comment .comment-box {
+    margin-left: 10px;
+    width: 400px;
+    height: 50px;
+  }
+  & button {
+    z-index: 10;
+    display: flex;
+    font-size: 16px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 24px;
+    gap: 8px;
+    position: absolute;
+    width: 120px;
+    height: 40px;
+    left: 610px;
+    top: 20px;
+    /* M3/read-only/light/surface1 */
+    background: linear-gradient(
+        0deg,
+        rgba(103, 80, 164, 0.05),
+        rgba(103, 80, 164, 0.05)
+      ),
+      #fffbfe;
+    /* M3/Elevation Light/1 */
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3),
+      0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    border-radius: 100px;
+  }
 `;
 
-export default function IdeaView({ handleIdeaView, usernickname }: any) {
+type UserProps = {
+  handleIdeaView(name: string): void;
+  usernickname: string;
+};
+
+export default function IdeaView({ handleIdeaView, usernickname }: UserProps) {
+  // 아이디어 뷰 페이지
+  // 좋아요, 조회수, 쪽지 기능 , 댓글 기능 제공
+  // params에 몇번째 아이디어인지 넘겨받음.
   const { id } = useParams();
   const check = useSelector((state: RootState) => state.modal.check);
   const [isHeart, setisHeart] = useState(false);
@@ -183,19 +398,28 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
           .then(data => setallComment(data.data))
       );
   };
-  const handleInputValue = (key: any, e: any) => {
+  // userinfo를 객체로 입력받음.
+  const handleInputValue = (
+    key: string,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setuserinfo({ ...userinfo, postId: Number(id), [key]: e.target.value });
   };
   return (
     <div>
       <div>{check ? <Login /> : null}</div>
-      <div>{id}번째 아이디어</div>
       <div>
+        <Header></Header>
+        <Headeridea>
+          <div>{id}번째 아이디어</div>
+        </Headeridea>
         <Title>
-          <h1>{caption}</h1>
+          <h2>{caption}</h2>
         </Title>
         <SubTitle>
-          <div>글쓴이 : {nickname}</div>
+          <ContentNickname>
+            <div>{nickname}</div>
+          </ContentNickname>
           <Writer>
             {url === undefined || url.length === 0 ? null : (
               <div>
@@ -205,56 +429,68 @@ export default function IdeaView({ handleIdeaView, usernickname }: any) {
               </div>
             )}
           </Writer>
-          <Context>
-            <pre>
-              <span>{context}</span>{' '}
-            </pre>
-          </Context>
+          <Contextbox>
+            <Context>
+              <Contentbox>
+                <span>{context}</span>{' '}
+              </Contentbox>
+            </Context>
+          </Contextbox>
           <Menu>
             <Chat>
-              <Link to="/chat">
-                <button onClick={handleWriter}>쪽지보내기</button>
-              </Link>
+              <Chat1>
+                <Link to="/chat">
+                  <button onClick={handleWriter}>쪽지보내기</button>
+                </Link>
+                <img src="Vector1.png" />
+              </Chat1>
             </Chat>
             <View>
               <span>조회수 : {view}</span>
             </View>
             <Like>
               <div>
-                <span>좋아요 : {likes}</span>
                 {isHeart ? (
                   <img src="/images/하트.png" onClick={handleHeart} />
                 ) : (
                   <img src="/images/빈하트.png" onClick={handleHeart} />
                 )}
+                <span>좋아요 {likes}</span>
               </div>
             </Like>
           </Menu>
         </SubTitle>
         <Comment>
-          <input
-            type="text"
-            placeholder="댓글을 입력하세요"
-            onChange={e => handleInputValue('context', e)}
-          ></input>
-          <button onClick={handleComment}>댓글달기</button>
-          <div>
-            {allComment.length === 0 ? null : (
-              <div>
-                {allComment.map(el => (
-                  <div>
-                    <CommentWriter>
-                      {' '}
-                      <div>{el.nickname}</div>{' '}
-                    </CommentWriter>
-                    <Commentdata>
-                      <div>{el.text}</div>{' '}
-                    </Commentdata>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <Commentbox1>
+            <div className="commment">
+              <input
+                className="comment-text"
+                type="text"
+                placeholder="댓글을 입력하세요"
+                onChange={e => handleInputValue('context', e)}
+              ></input>
+            </div>
+            <button onClick={handleComment}>댓글달기</button>
+          </Commentbox1>
+          <Commentbox>
+            <div>
+              {allComment.length === 0 ? null : (
+                <div>
+                  {allComment.map(el => (
+                    <div>
+                      <CommentWriter>
+                        {' '}
+                        <div>{el.nickname}</div>{' '}
+                      </CommentWriter>
+                      <Commentdata>
+                        <div>{el.text}</div>{' '}
+                      </Commentdata>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </Commentbox>
         </Comment>
       </div>
     </div>

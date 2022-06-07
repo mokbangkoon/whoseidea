@@ -21,6 +21,7 @@ import IdeaView from './pages/IdeaVIew';
 import WriteIdea from './pages/WriteIdea';
 
 function App() {
+  // usernickname, postData, commnetData , chatData, writerDAta, postDatas 를 관리하는 곳
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [usernickname, setusernickname] = useState('');
@@ -31,6 +32,8 @@ function App() {
   const [chatData, setchatData] = useState<AxiosResponse | null | void>(null);
   const [writerdata, serwriterdata] = useState('');
   const [postDatas, setpostDatas] = useState({});
+  // 앱 시작시 권한여부 검사
+  // 권한요청 성공시 usernickname에 유저닉네임 저장 , 로그인체크 true로 바꿈
   const isAuthenticated = () => {
     axios.get('https://whoseidea.ml:8080/auth').then(data => {
       setusernickname(data.data.nickname);
@@ -38,41 +41,48 @@ function App() {
       navigate('/');
     });
   };
+  // 권한여부검사 시작해주는 함수
   const handleResponseSuccess = () => {
     isAuthenticated();
   };
 
+  // postData 세팅
   const handleMypost = () => {
     axios
       .get(`https://whoseidea.ml:8080/user/my-post?nickname=${usernickname}`)
       .then(data => setpostData(data));
   };
+  // commentData 세팅
   const handleMycomment = () => {
     axios
       .get(`https://whoseidea.ml:8080/user/my-comment?nickname=${usernickname}`)
       .then(data => setcommentData(data));
   };
+  // chatData 세팅
   const handleMychat = () => {
     axios
       .get(`https://whoseidea.ml:8080/message`)
       .then(data => setchatData(data));
   };
+  // 로그아웃 시 서버에 요청하고 로그인체크 false로 만들고 메인으로 돌아감
   const handleLogout = () => {
     axios.post('https://whoseidea.ml:8080/logout').then(() => {
       dispatch(islogin(false));
       navigate('/');
     });
   };
-
+  // ideaview 페이지 볼 때 글쓴이 이름 고정
   const handleIdeaView = (name: string) => {
     serwriterdata(name);
   };
-  const handleToView = (post: any) => {
+  // post눌렀을 때 유저 데이터들을 모아주는 postDatas
+  const handleToView = (post: object) => {
     setpostDatas(post);
   };
-
+  // 첫 화면 렌더링 시 권한요청먼저 함
   useEffect(() => {
     isAuthenticated();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -121,7 +131,6 @@ function App() {
           element={
             <IdeaView
               handleIdeaView={handleIdeaView}
-              postDatas={postDatas}
               usernickname={usernickname}
             />
           }

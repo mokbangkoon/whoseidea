@@ -1,7 +1,8 @@
 import axios from 'axios';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 
 axios.defaults.withCredentials = true;
 
@@ -185,20 +186,116 @@ const Box1 = styled.div`
     width: 100px;
   }
 `;
-export default function IdeaList({ handleToView }: any) {
+const MobileIdeabox = styled.div`
+  .container .card-content {
+    background-color: #ffff;
+    padding: 0px;
+    position: relative;
+    width: 250px;
+    height: 420px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 50px;
+    grid-column-gap: 50px;
+    margin-left: 20%;
+    margin-top: 30%;
+    text-align: center;
+    background-position: center;
+    border: 2px solid #000000;
+    border-radius: 20px;
+  }
+  & img {
+    position: static;
+    width: 250px;
+    height: 200px;
+    left: 0px;
+    top: 0px;
+    flex: none;
+    order: 0;
+    align-self: stretch;
+    flex-grow: 0;
+    margin: 0px 0px;
+    border-radius: 10px 10px 10px 10px;
+    border: 1px solid #000000;
+  }
+  .main-button {
+    display: block;
+    margin-left: 10%;
+    margin-top: 8%;
+    align-items: center;
+    text-align: center;
+    width: 200px;
+    height: 40px;
+    background: black;
+    color: white;
+    border: 2px solid #ffff;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 20px;
+    transition: 0.5s ease;
+  }
+  & button:hover {
+    transition: 0.5s ease;
+    border: 2px solid #0000;
+    background: transparent;
+    color: black;
+  }
+`;
+const MobileContainer = styled.div`
+  position: relative;
+  top: 20%;
+`;
+const More = styled.div`
+  height: 300px;
+  width: 100px;
+`;
+type UserProps = {
+  handleToView(post: string[]): void;
+};
+export default function IdeaList({ handleToView }: UserProps) {
+  const pageEnd = document.querySelector('.more');
   const [offset, setOffset] = useState(0);
   const [hasnext, sethasnext] = useState(false);
-  const [post, setPost] = useState<any[]>([]);
+  const [post, setPost] = useState<string[]>([]);
   const [pagenum, setPageNum] = useState(1);
+  const [mobilePost, setMobilePost] = useState<string[]>([]);
 
-  const handleIdealist = (post: any) => {
+  const handleIdealist = (post: string[]) => {
     handleToView(post);
   };
 
+  // offset으로 페이지네이션 구현
+  // next버튼 클릭시 9개씩 데이터 출력하고 pagenum 1증가
+
+  const handleback = () => {
+    setOffset(offset - 9);
+    setPageNum(pagenum - 1);
+  };
+  const handlefront = () => {
+    setOffset(offset + 9);
+    setPageNum(pagenum + 1);
+  };
+  const isPc = useMediaQuery({
+    query: '(min-width:768px)',
+  });
+
+  const fetchData = (items: any[]) => {
+    setMobilePost([...mobilePost, ...items]);
+  };
+
+  const loadMore = () => {
+    setPageNum(pagenum + 1);
+  };
+
+  // pagenum 이 1씩 증가할때마다 서버에 저장된 데이터 9개씩 날라옴
+  // 저장된 데이터를 요청해서 불러올 때 map을 이용해서 데이터를 뿌림
+  // 이미지를 올리지 않았으면 default 이미지를 출력
+  // 게시물 데이터를 post 에 저장
   useEffect(() => {
     axios.get(`https://whoseidea.ml:8080/post?page=${pagenum}`).then(data => {
       Promise.all(
-        data.data.map((item: any) =>
+        data.data.map((item: { id: number; data: string[] }) =>
           axios.get(`https://whoseidea.ml:8080/post/image?postId=${item.id}`)
         )
       ).then(requests => {
@@ -218,29 +315,121 @@ export default function IdeaList({ handleToView }: any) {
         }
         setPost(items);
         sethasnext(!!items);
+        fetchData(items);
       });
     });
   }, [pagenum]);
 
-  const handleback = () => {
-    setOffset(offset - 9);
-    setPageNum(pagenum - 1);
-  };
-  const handlefront = () => {
-    setOffset(offset + 9);
-    setPageNum(pagenum + 1);
-  };
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries: any) => {
+        if (entries[0].isIntersecting) {
+          loadMore();
+        }
+      },
+      { threshold: 0.5 }
+    );
+    if (pageEnd !== null) {
+      observer.observe(pageEnd);
+    }
+  }, [pageEnd]);
 
   return (
     <div>
-      <Main>
-        <div className="wrap">
-          <MainStyle>
+      {isPc ? (
+        <Main>
+          <div className="wrap">
+            <MainStyle>
+              <Title>
+                <div>
+                  <h1>Newest</h1>
+                </div>
+              </Title>
+              <div>
+                <HeaderContainer>
+                  <div className="header-container" />
+                  <HeaderContainertext>
+                    <div className="headercontainertext">
+                      당신의 아이디어를 보여주세요
+                    </div>
+                  </HeaderContainertext>
+                </HeaderContainer>
+                <div className="container" />
+                <HeaderContainer1>
+                  <HeaderContainertext1>
+                    <div className="header-container" />
+                    <div className="container" />
+                    <div className="headercontainertext1">
+                      {' '}
+                      아이디어 작성하기
+                    </div>
+                  </HeaderContainertext1>
+                </HeaderContainer1>
+              </div>
+              <div>
+                <Title2>
+                  <div className="container">
+                    <Link to="/writeidea">
+                      <img src="add.png"></img>
+                    </Link>
+                  </div>
+                </Title2>
+              </div>
+              <Box1>
+                <div className="button">
+                  <div className="follow-buttons">
+                    {offset === 0 ? null : (
+                      <button className="follow" onClick={handleback}>
+                        이전
+                      </button>
+                    )}
+                    {hasnext ? (
+                      <button
+                        className="follow follow-option active"
+                        onClick={handlefront}
+                      >
+                        다음
+                      </button>
+                    ) : null}
+                  </div>
+                </div>
+              </Box1>
+              <Ideabox>
+                <div className="container">
+                  <div className="card-content">
+                    {post.map((post: any) => {
+                      return (
+                        <div>
+                          <img src={post?.url} />
+                          <h3>{post?.caption}</h3>
+                          <p>{post?.nickname}</p>
+                          <p>Like:{post?.likes}</p>
+                          <Link to={`/ideaview/${post?.id}`} className="text">
+                            <button
+                              className="main-button"
+                              onClick={() => handleIdealist(post)}
+                            >
+                              Read more
+                            </button>
+                          </Link>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </Ideabox>
+            </MainStyle>
+          </div>
+        </Main>
+      ) : (
+        <div>
+          <MobileContainer>
             <Title>
               <div>
                 <h1>Newest</h1>
               </div>
             </Title>
+
             <div>
               <HeaderContainer>
                 <div className="header-container" />
@@ -255,7 +444,7 @@ export default function IdeaList({ handleToView }: any) {
                 <HeaderContainertext1>
                   <div className="header-container" />
                   <div className="container" />
-                  <div className="headercontainertext1"> 아이디어 작성하기</div>
+                  <div className="headercontainertext1"> 아이디어 작성</div>
                 </HeaderContainertext1>
               </HeaderContainer1>
             </div>
@@ -268,29 +457,10 @@ export default function IdeaList({ handleToView }: any) {
                 </div>
               </Title2>
             </div>
-            <Box1>
-              <div className="button">
-                <div className="follow-buttons">
-                  {offset === 0 ? null : (
-                    <button className="follow" onClick={handleback}>
-                      이전
-                    </button>
-                  )}
-                  {hasnext ? (
-                    <button
-                      className="follow follow-option active"
-                      onClick={handlefront}
-                    >
-                      다음
-                    </button>
-                  ) : null}
-                </div>
-              </div>
-            </Box1>
-            <Ideabox>
+            <MobileIdeabox>
               <div className="container">
                 <div className="card-content">
-                  {post.map((post: any) => {
+                  {mobilePost.map((post: any) => {
                     return (
                       <div>
                         <img src={post?.url} />
@@ -308,12 +478,15 @@ export default function IdeaList({ handleToView }: any) {
                       </div>
                     );
                   })}
+                  <More>
+                    <div className="more"> 더보기 </div>
+                  </More>
                 </div>
               </div>
-            </Ideabox>
-          </MainStyle>
+            </MobileIdeabox>
+          </MobileContainer>
         </div>
-      </Main>
+      )}
     </div>
   );
 }

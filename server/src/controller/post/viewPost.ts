@@ -1,6 +1,6 @@
 import { prisma } from '../db'
 import { Request, Response } from 'express'
-import { isAuthorized } from '../tokenFunctions'
+import { isAuthorized, TokenData } from '../tokenFunctions'
 
 export async function viewPost(req: Request, res: Response) {
 
@@ -16,22 +16,25 @@ export async function viewPost(req: Request, res: Response) {
     // 인자가 숫자 0 이하면 오류 처리
     if (postId <= 0)
         return res.status(406).send('postId is zero or less.')
+    
+    if (!isAuthorized(req))
+        return res.status(401).send("Mismatched Cookies")
 
-    const accsessTokenData: any = isAuthorized(req)
+    const accsessTokenData:TokenData = isAuthorized(req)
     const userInfo = await prisma.users.findFirst({
         where:{
-            email:accsessTokenData.email
+            email:accsessTokenData!.email
         }
     })
 
-    const posts = await prisma.posts.findFirst({
+    const post = await prisma.posts.findFirst({
         where:{
             id:Number(req.query.postId)
         }
     })
 
     // 검색 결과가 없으면 빈 객체를 보냄
-    if(!posts)
+    if(!post)
         return res.status(200).json({})
 
     // 조회수 증가
@@ -46,23 +49,38 @@ export async function viewPost(req: Request, res: Response) {
         }
     })
 
-    const nicknameAndViewPosts: any[] = []
+    interface NicknameAndViewPosts {
+        nickname: string,
+        id: number,
+        caption: string,
+        file: number,
+        likes: number,
+        view: number,
+        context: string,
+        created_at: string,
+    }
+
+    const nicknameAndViewPosts: NicknameAndViewPosts[] = []
     const nickname = await prisma.users.findFirst({
         where: {
-            id: posts.nickname || undefined
+            id: post.nickname || undefined
         }
     })
     nicknameAndViewPosts.push({
-        nickname: nickname?.nickname,
-        id: posts.id,
-        caption: posts.caption,
-        file: posts.file,
-        likes: posts.likes,
-        view: posts.view,
-        context: posts.context,
-        created_at: posts.created_at
+        nickname: nickname?.nickname || '',
+        id: post.id,
+        caption: post.caption,
+        file: post.file,
+        likes: post.likes,
+        view: post.view,
+        context: post.context,
+        created_at: new Date( + new Date(post.created_at) + 3240 * 10000)
+        .toISOString()
+        .replace("T", " ")
+        .replace(/\..*/, '')
     })
 
+    // 이미 좋아요를 누른 유저인 경우, boolean값을 참으로 전달
     if (isAuthorized(req) && await prisma.likes.findFirst({
         where:{
             nickname:userInfo?.id,

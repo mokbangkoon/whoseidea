@@ -136,6 +136,8 @@ const BodyStyle = styled.div`
   }
 `;
 export default function WriteIdea() {
+  // 아이디어 쓰기 페이지
+  // 게시글 , 첨부파일 기능 제공
   const [filename, setFileName] = useState('');
   const [selectedFile, setselectedFile] = useState('');
   const [data, setData] = useState({
@@ -144,22 +146,25 @@ export default function WriteIdea() {
     nickname: '',
   });
   const [nickname, setNickname] = useState('');
+  // 권한을 검사해서 유저 닉네임을 세팅
   useEffect(() => {
     axios
       .get('https://whoseidea.ml:8080/auth')
       .then(data => setNickname(data.data.nickname));
   }, []);
-  const handleInputValue = (key: any, e: any) => {
+  const handleInputValue = (key: string, e: any) => {
     setData({
       ...data,
       [key]: e.target.value,
     });
   };
+  // FormData 에 넣을 파일 이름과 파일을 세팅
   const handleFileInput = (event: any) => {
     setselectedFile(event.target.files[0]);
     setFileName(event.target.files[0].name);
   };
 
+  // FormData와 data를 서버에 보내기
   const handlePost = () => {
     const formData = new FormData();
     formData.append('file', selectedFile);

@@ -63,10 +63,16 @@ const Container = styled.div`
   background-color: gray;
   top: 130px;
 `;
+type UserProps = {
+  handleToView(post: object): void;
+  chatData: any;
+};
 
-export default function Mychat({ chatData, handleToView }: any) {
+export default function Mychat({ chatData, handleToView }: UserProps) {
+  // 쪽지 페이지
+  // chatdata를 통해서 보낸사람, 내용, 답장하기 기능 제공
   const check = useSelector((state: RootState) => state.modal.check);
-  const reverse = (data: any) => {
+  const reverse = (data: string) => {
     handleToView({ nickname: data });
   };
   return (
@@ -77,7 +83,7 @@ export default function Mychat({ chatData, handleToView }: any) {
       {chatData === null || chatData.data.length === 0 ? null : (
         <div>
           <div>
-            {chatData.data.map((el: any) => {
+            {chatData.data.map((el: { source: string; text: string }) => {
               const source = el.source;
               return (
                 <div>

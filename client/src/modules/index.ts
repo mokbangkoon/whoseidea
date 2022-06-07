@@ -8,6 +8,7 @@ import idealist from './idealist';
 import isgooglelogin from './isgooglelogin';
 import googledatas from './googledata';
 import writeidea from './writeidea';
+// combineReducer로 리듀서들 합쳐줌
 const rootReducer = combineReducers({
   modal,
   login,

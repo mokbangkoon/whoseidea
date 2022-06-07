@@ -1,17 +1,17 @@
 import { prisma } from '../db'
-import { isAuthorized } from '../tokenFunctions'
+import { isAuthorized, TokenData } from '../tokenFunctions'
 import { Request, Response } from 'express'
 
 export async function getMessage(req: Request, res: Response) {
 
     if (!isAuthorized(req))
-        return res.status(405).send('Mismatched Cookies')
+        return res.status(401).send('Mismatched Cookies')
 
     // 내 정보 가져오기
-    const tokenInfo:any = isAuthorized(req)
-    const [ userInfo ]:any = await prisma.users.findMany({
+    const tokenInfo:TokenData = isAuthorized(req)
+    const [ userInfo ] = await prisma.users.findMany({
         where:{
-            email:tokenInfo.email
+            email:tokenInfo!.email
         }
     })
     
@@ -37,9 +37,14 @@ export async function getMessage(req: Request, res: Response) {
     if(!messages)
         return res.status(200).json([])
 
-
     // 아이디를 닉네임으로 변환해서 보냄
-    const nicknameAndMessages:any[] = []
+    const nicknameAndMessages:NicknameAndMessages[] = []
+
+    interface NicknameAndMessages {
+        destination:string|undefined,
+        source:string|undefined,
+        text:string,
+    }
 
     for(let item of messages){
         const target = await prisma.users.findFirst({
